@@ -1,0 +1,39 @@
+{
+  "name": "react-native-kinpaku-ui",
+  "version": "0.0.0",
+  "description": "Skip creating elegant atomic UI components.",
+  "main": "./lib/index.js",
+  "types": "./lib/index.d.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "react-native",
+    "react-native-component",
+    "UI",
+    "atomic design",
+    "atom",
+    "design methodology",
+    "ios",
+    "android"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hirokazutei/react-native-kinpaku-ui.git"
+  },
+  "author": "hirokazu.tei@gmail.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hirokazutei/react-native-kinpaku-ui/issues"
+  },
+  "homepage": "https://github.com/hirokazutei/react-native-kinpaku-ui#readme",
+  "peerDependencies": {
+    "react": "^16.8.0",
+    "react-native": "^0.59.0"
+  },
+  "dependencies": {
+    "@types/react": "^16.8.0",
+    "@types/react-native": "^0.60.0",
+    "react-native": "^0.60.0"
+  }
+}
