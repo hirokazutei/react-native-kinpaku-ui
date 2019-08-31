@@ -3,12 +3,12 @@ import {
   TextProperties,
   ViewStyle,
   TextStyle,
-  FlexAlignType
-} from "react-native";
-import { Color, DefaultObject, ThemePalette } from "../types";
+  FlexAlignType,
+} from 'react-native';
+import {Color, DefaultObject, ThemePalette} from '../types';
 
-type ButtonShape = "circular" | "round" | "sharp";
-type ButtonType = "solid" | "clear" | "outline";
+type ButtonShape = 'circular' | 'round' | 'sharp';
+type ButtonType = 'solid' | 'clear' | 'outline';
 
 type ButtonSizeProps = {
   horizontalPadding: number;
@@ -47,13 +47,13 @@ type ButtonProps<ButtonPalette, ButtonSizes> = {
 };
 
 type ButtonSizeKeys =
-  | "tiny"
-  | "small"
-  | "medium"
-  | "default"
-  | "large"
-  | "huge"
-  | "massive";
+  | 'tiny'
+  | 'small'
+  | 'medium'
+  | 'default'
+  | 'large'
+  | 'huge'
+  | 'massive';
 
 export {
   ButtonShape,
@@ -61,5 +61,5 @@ export {
   FactoryProps,
   ButtonProps,
   ButtonSizeKeys,
-  ButtonSizeProps
+  ButtonSizeProps,
 };

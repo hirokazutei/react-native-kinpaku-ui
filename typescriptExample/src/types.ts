@@ -10,6 +10,10 @@ type ThemePalette = {
   text: Color;
 };
 
+type Themes<Themes> = {
+  [ThemesKey in keyof Themes & DefaultObject<ThemePalette>]: ThemePalette;
+};
+
 export { Color, DefaultObject, ThemePalette };
 
 // Palette
