@@ -1,9 +1,10 @@
 /* @flow */
 import * as React from 'react';
-import {StyleSheet, View} from 'react-native';
+import {View} from 'react-native';
+import themes from '../src/themes';
 
 const Provider = ({
-  backgroundColor,
+  backgroundColor = themes.default.background,
   story,
 }: {
   backgroundColor?: string;

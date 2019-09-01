@@ -1,45 +1,35 @@
 // @flow
 import * as React from 'react';
+import {FlexAlignType} from 'react-native';
 import Provider from '../../../../storybook/Provider';
-import {ButtonProps, ButtonType} from '../../Button/types';
+import {ButtonProps, ButtonType} from '../types';
 import {storiesOf} from '@storybook/react-native';
 import {action} from '@storybook/addon-actions';
 import {boolean, select, text, withKnobs} from '@storybook/addon-knobs';
+import themes from '../../../themes';
+import buttonFactory from '../index';
+import {DEFAULT_BUTTON_SIZES} from '../constants';
 
-import {UIFactory} from '..';
-const themes = {
-  test: {
-    primary: 'yellow',
-    secondary: 'yellow',
-    tertiary: 'yellow',
-    disabled: 'black',
-    background: 'white',
-    text: 'black',
-  },
-  default: {
-    primary: '#88EEBB',
-    secondary: '#55AADD',
-    tertiary: '#116688',
-    disabled: 'black',
-    background: 'white',
-    text: 'black',
-  },
-};
+type ButtonSizes = typeof DEFAULT_BUTTON_SIZES;
+type ThemeType = typeof themes;
 
-const {Sharp, Round, Circular} = UIFactory<typeof themes>(themes);
+const {Sharp, Round, Circular} = buttonFactory<ThemeType, null, ButtonSizes>({
+  themes,
+  buttonSizes: DEFAULT_BUTTON_SIZES,
+});
 
 const DEFAULT_PROPS = {
   color: 'primary',
   isDisabled: false,
   isStretched: false,
-  align: 'center',
+  align: 'center' as FlexAlignType,
   title: 'PRESS HERE',
-  size: 'large',
+  size: 'large' as keyof ButtonSizes,
 };
 
 const BUTTON_TYPES = ['solid', 'outline', 'clear'];
 
-const getRequiredProps = (overrides = {}): ButtonProps<any, any> => {
+const getRequiredProps = (overrides = {}): ButtonProps<null, ButtonSizes> => {
   const {color, isDisabled, isStretched, align, title, size} = {
     ...DEFAULT_PROPS,
     ...overrides,
@@ -68,14 +58,14 @@ storiesOf('UI', module)
   .addDecorator(withKnobs)
   .add('Button', () => (
     <>
-      {BUTTON_TYPES.map((type: ButtonType) => {
-        return <Sharp {...getRequiredProps()} type={type} />;
+      {BUTTON_TYPES.map((type: ButtonType, index: number) => {
+        return <Sharp key={index} {...getRequiredProps()} type={type} />;
       })}
-      {BUTTON_TYPES.map((type: ButtonType) => {
-        return <Round {...getRequiredProps()} type={type} />;
+      {BUTTON_TYPES.map((type: ButtonType, index: number) => {
+        return <Round key={index} {...getRequiredProps()} type={type} />;
       })}
-      {BUTTON_TYPES.map((type: ButtonType) => {
-        return <Circular {...getRequiredProps()} type={type} />;
+      {BUTTON_TYPES.map((type: ButtonType, index: number) => {
+        return <Circular key={index} {...getRequiredProps()} type={type} />;
       })}
     </>
   ));
