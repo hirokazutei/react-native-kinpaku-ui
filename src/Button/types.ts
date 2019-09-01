@@ -7,13 +7,14 @@ import {
 } from "react-native";
 import { Color, DefaultObject, ThemePalette } from "../types";
 
-type ButtonShape = "circular" | "round" | "sharp";
+type ButtonShapes = "circular" | "round" | "sharp";
 type ButtonType = "solid" | "clear" | "outline";
 
 type ButtonSizeProps = {
   horizontalPadding: number;
   verticalPaddding: number;
   fontSize: number;
+  borderRadius: number;
 };
 
 type FactoryProps<Themes, ButtonPalette, ButtonSizes> = {
@@ -27,7 +28,7 @@ type FactoryProps<Themes, ButtonPalette, ButtonSizes> = {
     [SizeKey in keyof ButtonSizes &
       DefaultObject<ButtonSizeProps>]: ButtonSizeProps;
   };
-  defaultButtonShape?: keyof ButtonShape;
+  defaultButtonShape?: keyof ButtonShapes;
   defaultButtonType?: ButtonType;
 };
 
@@ -56,7 +57,7 @@ type ButtonSizeKeys =
   | "massive";
 
 export {
-  ButtonShape,
+  ButtonShapes,
   ButtonType,
   FactoryProps,
   ButtonProps,

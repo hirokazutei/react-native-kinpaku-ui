@@ -35,7 +35,7 @@ const App = () => {
             console.log(size);
             return (
               <>
-                <Sharp title="EXAMPLE" size={size} onPress={() => {}} />
+                <Round title="EXAMPLE" size={size} onPress={() => {}} />
                 <Stack size="small" />
               </>
             );
@@ -46,7 +46,7 @@ const App = () => {
             console.log(size);
             return (
               <>
-                <Sharp
+                <Round
                   title="EXAMPLE"
                   color="secondary"
                   size={size}
@@ -65,7 +65,7 @@ const App = () => {
           console.log(size);
           return (
             <>
-              <Sharp
+              <Circular
                 title="EXAMPLE"
                 color="tertiary"
                 size={size}

@@ -1,6 +1,11 @@
 import React, { useContext } from "react";
 import { TouchableOpacity, Text, FlexAlignType } from "react-native";
-import { FactoryProps, ButtonProps as Props, ButtonSizeProps } from "./types";
+import {
+  FactoryProps,
+  ButtonProps as Props,
+  ButtonSizeProps,
+  ButtonShapes
+} from "./types";
 import { DefaultObject, ThemePalette } from "../types";
 import {
   DEFAULT_BUTTON_SIZES,
@@ -20,8 +25,10 @@ function buttonFactory<PaletteObjectType, ButtonPalette, ButtonSizes>({
   const paletteContext: React.Context<
     keyof PaletteObjectType
   > = React.createContext("default" as keyof PaletteObjectType);
-  const buttons = {};
-  BUTTON_SHAPE_KEY.map(shape => {
+  const buttons: {
+    [key in ButtonShapes]?: React.FC<Props<ButtonPalette, ButtonSizes>>;
+  } = {};
+  BUTTON_SHAPE_KEY.forEach((shape: ButtonShapes) => {
     const Button: React.FC<Props<ButtonPalette, ButtonSizes>> = ({
       color = "primary",
       size = "default",
@@ -70,11 +77,17 @@ function buttonFactory<PaletteObjectType, ButtonPalette, ButtonSizes>({
           : {};
 
       // TouchableOpacity Style
+      let borderRadius = 0;
+      if (buttonSizeProperty) {
+        borderRadius =
+          BORDER_RADIUS_MULTIPLIERS[shape as ButtonShapes] *
+          buttonSizeProperty.borderRadius;
+      } else {
+        borderRadius = DEFAULT_BUTTON_SIZES.default.horizontalPadding;
+      }
+
       const touchableStyle = {
-        borderRadius:
-          BORDER_RADIUS_MULTIPLIERS[shape] *
-            (buttonSizeProperty && buttonSizeProperty.horizontalPadding) ||
-          DEFAULT_BUTTON_SIZES.default.horizontalPadding,
+        borderRadius: borderRadius,
         backgroundColor: !isDisabled ? buttonColor : currentTheme.disabled,
         paddingHorizontal:
           (buttonSizeProperty && buttonSizeProperty.horizontalPadding) ||
@@ -113,7 +126,7 @@ function buttonFactory<PaletteObjectType, ButtonPalette, ButtonSizes>({
         </TouchableOpacity>
       );
     };
-    buttons[shape] = Button;
+    buttons[shape as ButtonShapes] = Button;
   });
   return {
     Circular: buttons.circular,
