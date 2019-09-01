@@ -8,7 +8,7 @@ function UIFactory<ThemeObject>(themes: Themes<ThemeObject>) {
   const Button = buttonFactory<Themes<ThemeObject>, null, ButtonSizes>({
     themes,
     buttonSizes: DEFAULT_BUTTON_SIZES,
-  }); // Button Sizes
+  });
   return Button;
 }
 

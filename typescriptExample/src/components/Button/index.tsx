@@ -6,7 +6,7 @@ import {
   ButtonSizeProps,
   ButtonShapes,
 } from './types';
-import {DefaultObject, ThemePalette} from '../types';
+import {DefaultObject, ThemePalette} from '../../types';
 import {
   DEFAULT_BUTTON_SIZES,
   DEFAULT_BUTTON_ALIGN,
@@ -52,9 +52,10 @@ function buttonFactory<PaletteObjectType, ButtonPalette, ButtonSizes>({
         ];
 
       // Color
-      const primaryColor =
-        (buttonPalettes && buttonPalettes[color as keyof ButtonPalette]) ||
-        currentTheme[color as keyof ThemePalette];
+      const primaryColor = !isDisabled
+        ? (buttonPalettes && buttonPalettes[color as keyof ButtonPalette]) ||
+          currentTheme[color as keyof ThemePalette]
+        : currentTheme.disabled;
       const buttonColor =
         type === 'solid' ? primaryColor : currentTheme.background;
       const fontColor =
@@ -88,7 +89,7 @@ function buttonFactory<PaletteObjectType, ButtonPalette, ButtonSizes>({
 
       const touchableStyle = {
         borderRadius: borderRadius,
-        backgroundColor: !isDisabled ? buttonColor : currentTheme.disabled,
+        backgroundColor: buttonColor,
         paddingHorizontal:
           (buttonSizeProperty && buttonSizeProperty.horizontalPadding) ||
           DEFAULT_BUTTON_SIZES.default.horizontalPadding,
