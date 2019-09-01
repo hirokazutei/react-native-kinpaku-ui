@@ -1,9 +1,10 @@
 import React, {Fragment} from 'react';
 import {View} from 'react-native';
-import {UIFactory} from './Theme';
-import {buttonSizeKeys} from './Button/constants';
-import {DEFAULT_BUTTON_SIZES} from './Button/constants';
-import Stack from './Stack';
+import {UIFactory} from './components/Theme';
+import {buttonSizeKeys} from './components/Button/constants';
+import {DEFAULT_BUTTON_SIZES} from './components/Button/constants';
+import Stack from './components/Stack';
+import Inset from './components/Inset';
 
 const themes = {
   test: {
@@ -28,11 +29,10 @@ const App = () => {
   const {Sharp, Round, Circular} = UIFactory<typeof themes>(themes);
 
   return (
-    <Fragment>
-      <View style={{paddingVertical: 40, flexDirection: 'row'}}>
+    <Inset vertical="massive">
+      <View style={{flexDirection: 'row', justifyContent: 'space-around'}}>
         <View>
           {buttonSizeKeys.map((size: keyof typeof DEFAULT_BUTTON_SIZES) => {
-            console.log(size);
             return (
               <>
                 <Round title="EXAMPLE" size={size} onPress={() => {}} />
@@ -43,7 +43,6 @@ const App = () => {
         </View>
         <View>
           {buttonSizeKeys.map((size: keyof typeof DEFAULT_BUTTON_SIZES) => {
-            console.log(size);
             return (
               <>
                 <Round
@@ -59,10 +58,8 @@ const App = () => {
           })}
         </View>
       </View>
-
       <View>
         {buttonSizeKeys.map((size: keyof typeof DEFAULT_BUTTON_SIZES) => {
-          console.log(size);
           return (
             <>
               <Circular
@@ -77,7 +74,7 @@ const App = () => {
           );
         })}
       </View>
-    </Fragment>
+    </Inset>
   );
 };
 
