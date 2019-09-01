@@ -5,7 +5,7 @@ import {
   TextStyle,
   FlexAlignType,
 } from 'react-native';
-import {Color, DefaultObject, ThemePalette} from '../types';
+import {Color, DefaultObject, ThemePalette} from '../../types';
 
 type ButtonShapes = 'circular' | 'round' | 'sharp';
 type ButtonType = 'solid' | 'clear' | 'outline';
