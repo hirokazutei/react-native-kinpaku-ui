@@ -6,7 +6,8 @@ import {
   ButtonSizeProps,
   ButtonShapes
 } from "./types";
-import { DefaultObject, ThemePalette } from "../types";
+import { DefaultObject } from "../types";
+import { ThemePalette } from "../Theme/types";
 import {
   DEFAULT_BUTTON_SIZES,
   DEFAULT_BUTTON_ALIGN,
@@ -16,20 +17,20 @@ import {
   BUTTON_SHAPE_KEY
 } from "./constants";
 
-function buttonFactory<PaletteObjectType, ButtonPalette, ButtonSizes>({
+function buttonFactory<PaletteObjectType, AdditionalPalettes, ButtonSizes>({
   themes,
   buttonSizes,
-  buttonPalettes,
+  additionalPalettes,
   defaultButtonType = "solid"
-}: FactoryProps<PaletteObjectType, ButtonPalette, ButtonSizes>) {
+}: FactoryProps<PaletteObjectType, AdditionalPalettes, ButtonSizes>) {
   const paletteContext: React.Context<
     keyof PaletteObjectType
   > = React.createContext("default" as keyof PaletteObjectType);
   const buttons: {
-    [key in ButtonShapes]?: React.FC<Props<ButtonPalette, ButtonSizes>>;
+    [key in ButtonShapes]?: React.FC<Props<AdditionalPalettes, ButtonSizes>>;
   } = {};
   BUTTON_SHAPE_KEY.forEach((shape: ButtonShapes) => {
-    const Button: React.FC<Props<ButtonPalette, ButtonSizes>> = ({
+    const Button: React.FC<Props<AdditionalPalettes, ButtonSizes>> = ({
       color = "primary",
       size = "default",
       isDisabled,
@@ -42,7 +43,7 @@ function buttonFactory<PaletteObjectType, ButtonPalette, ButtonSizes>({
       additionalButtonStyle,
       additionalTextProps,
       additionalTextStyle
-    }: Props<ButtonPalette, ButtonSizes>): React.ReactElement => {
+    }: Props<AdditionalPalettes, ButtonSizes>): React.ReactElement => {
       // Palettes
       const currentThemeKey = useContext(paletteContext) || "default";
       const currentTheme =
@@ -53,7 +54,8 @@ function buttonFactory<PaletteObjectType, ButtonPalette, ButtonSizes>({
 
       // Color
       const primaryColor = !isDisabled
-        ? (buttonPalettes && buttonPalettes[color as keyof ButtonPalette]) ||
+        ? (additionalPalettes &&
+            additionalPalettes[color as keyof AdditionalPalettes]) ||
           currentTheme[color as keyof ThemePalette]
         : currentTheme.disabled;
       const buttonColor =
@@ -129,11 +131,12 @@ function buttonFactory<PaletteObjectType, ButtonPalette, ButtonSizes>({
     };
     buttons[shape as ButtonShapes] = Button;
   });
-  return {
+  const Button = {
     Circular: buttons.circular,
     Round: buttons.round,
     Sharp: buttons.sharp
   };
+  return Button;
 }
 
 export default buttonFactory;

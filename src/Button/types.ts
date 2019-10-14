@@ -5,7 +5,8 @@ import {
   TextStyle,
   FlexAlignType
 } from "react-native";
-import { Color, DefaultObject, ThemePalette } from "../types";
+import { Color, DefaultObject } from "../types";
+import { ThemePalette } from "../Theme/types";
 
 type ButtonShapes = "circular" | "round" | "sharp";
 type ButtonType = "solid" | "clear" | "outline";
@@ -17,34 +18,33 @@ type ButtonSizeProps = {
   borderRadius: number;
 };
 
-type FactoryProps<Themes, ButtonPalette, ButtonSizes> = {
+type FactoryProps<Themes, AdditionalPalettes, ButtonSizes> = {
   themes: {
     [ThemeKeys in keyof Themes & DefaultObject<ThemePalette>]: ThemePalette;
   };
-  buttonPalettes?: {
-    [ButtonPaletteKeys in keyof ButtonPalette]: Color;
+  additionalPalettes?: {
+    [AdditionalPaletteKeys in keyof AdditionalPalettes]: Color;
   };
   buttonSizes?: {
     [SizeKey in keyof ButtonSizes &
       DefaultObject<ButtonSizeProps>]: ButtonSizeProps;
   };
-  defaultButtonShape?: keyof ButtonShapes;
   defaultButtonType?: ButtonType;
 };
 
-type ButtonProps<ButtonPalette, ButtonSizes> = {
-  color?: keyof ThemePalette | keyof ButtonPalette;
-  size?: keyof ButtonSizes | keyof DefaultObject<number>;
-  isDisabled?: boolean;
-  isStretched?: boolean;
-  align?: FlexAlignType;
-  onPress: (args: any) => any;
-  title: string;
-  type?: ButtonType;
+type ButtonProps<AdditionalPalettes, ButtonSizes> = {
   additionalButtonProps?: TouchableOpacityProps;
   additionalButtonStyle?: ViewStyle;
   additionalTextProps?: TextProperties;
   additionalTextStyle?: TextStyle;
+  align?: FlexAlignType;
+  color?: keyof ThemePalette | keyof AdditionalPalettes;
+  isDisabled?: boolean;
+  isStretched?: boolean;
+  size?: keyof ButtonSizes | keyof DefaultObject<number>;
+  title: string;
+  type?: ButtonType;
+  onPress: (args: any) => any;
 };
 
 type ButtonSizeKeys =

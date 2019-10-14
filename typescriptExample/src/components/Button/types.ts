@@ -17,23 +17,23 @@ type ButtonSizeProps = {
   borderRadius: number;
 };
 
-type FactoryProps<Themes, ButtonPalette, ButtonSizes> = {
+type FactoryProps<Themes, AdditionalPalettes, ButtonSizes> = {
   themes: {
     [ThemeKeys in keyof Themes & DefaultObject<ThemePalette>]: ThemePalette;
   };
-  buttonPalettes?: {
-    [ButtonPaletteKeys in keyof ButtonPalette]: Color;
+  additionalPalettes?: {
+    [ButtonPaletteKeys in keyof AdditionalPalettes]: Color;
   };
   buttonSizes?: {
     [SizeKey in keyof ButtonSizes &
       DefaultObject<ButtonSizeProps>]: ButtonSizeProps;
   };
-  defaultButtonShape?: keyof ButtonShapes;
+  defaultButtonShape?: ButtonShapes;
   defaultButtonType?: ButtonType;
 };
 
-type ButtonProps<ButtonPalette, ButtonSizes> = {
-  color?: keyof ThemePalette | keyof ButtonPalette;
+type ButtonProps<AdditionalPalettes, ButtonSizes> = {
+  color?: keyof ThemePalette | keyof AdditionalPalettes;
   size?: keyof ButtonSizes | keyof DefaultObject<number>;
   isDisabled?: boolean;
   isStretched?: boolean;
