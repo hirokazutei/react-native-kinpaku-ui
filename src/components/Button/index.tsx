@@ -1,7 +1,7 @@
 import React, {useContext} from 'react';
 import {TouchableOpacity, Text, FlexAlignType} from 'react-native';
 import {
-  FactoryProps,
+  ButtonFactoryProps,
   ButtonProps as Props,
   ButtonSizeProps,
   ButtonShapeOptions,
@@ -15,7 +15,7 @@ import {
   DEFAULT_BUTTON_FONT_WEIGHT,
   DEFAULT_BUTTON_BORDER_WIDTH,
   BORDER_RADIUS_MULTIPLIERS,
-  BUTTON_SHAPE_KEY,
+  buttonShapeKeys,
 } from './constants';
 
 function buttonFactory<PaletteObjectType, AdditionalPalettes, ButtonSizes>({
@@ -23,7 +23,7 @@ function buttonFactory<PaletteObjectType, AdditionalPalettes, ButtonSizes>({
   buttonSizes,
   additionalPalettes,
   defaultButtonType = 'solid',
-}: FactoryProps<PaletteObjectType, AdditionalPalettes, ButtonSizes>): {
+}: ButtonFactoryProps<PaletteObjectType, AdditionalPalettes, ButtonSizes>): {
   [key in ButtonShapeOptions]: React.FunctionComponent<
     Props<AdditionalPalettes, ButtonSizes>
   >;
@@ -34,13 +34,13 @@ function buttonFactory<PaletteObjectType, AdditionalPalettes, ButtonSizes>({
   const buttons: {
     [key in ButtonShapes]?: React.FC<Props<AdditionalPalettes, ButtonSizes>>;
   } = {};
-  BUTTON_SHAPE_KEY.forEach((shape: ButtonShapes) => {
+  buttonShapeKeys.forEach((shape: ButtonShapes) => {
     const Button: React.FC<Props<AdditionalPalettes, ButtonSizes>> = ({
       color = 'primary',
       size = 'default',
       isDisabled,
       isStretched,
-      align = 'center',
+      align = DEFAULT_BUTTON_ALIGN,
       onPress,
       title,
       type = defaultButtonType,
@@ -84,7 +84,7 @@ function buttonFactory<PaletteObjectType, AdditionalPalettes, ButtonSizes>({
             }
           : {};
 
-      // TouchableOpacity Style
+      // BorderRadius
       let borderRadius = 0;
       if (buttonSizeProperty) {
         borderRadius =
