@@ -5,7 +5,10 @@
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest",
+    "start": "react-native start",
+    "prestorybook": "rnstl",
+    "storybook": "start-storybook -p 7007 -c storybook"
   },
   "keywords": [
     "react-native",
@@ -27,13 +30,44 @@
     "url": "https://github.com/hirokazutei/react-native-kinpaku-ui/issues"
   },
   "homepage": "https://github.com/hirokazutei/react-native-kinpaku-ui#readme",
-  "peerDependencies": {
-    "react": "^16.8.0",
-    "react-native": "^0.59.0"
+  "config": {
+    "react-native-storybook-loader": {
+      "searchDir": [
+        "./src"
+      ],
+      "pattern": "**/*.stories.tsx",
+      "outputFile": "./storybook/storyLoader.js"
+    }
   },
   "dependencies": {
     "@types/react": "^16.8.0",
-    "@types/react-native": "^0.60.0",
-    "react-native": "^0.60.0"
+    "@types/react-native": "^0.60.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.5.0",
+    "@babel/runtime": "^7.5.0",
+    "@react-native-community/eslint-config": "^0.0.3",
+    "@storybook/addon-actions": "^5.2.3",
+    "@storybook/addon-knobs": "^5.2.3",
+    "@storybook/addon-links": "^5.2.3",
+    "@storybook/addons": "^5.2.3",
+    "@storybook/react-native": "^5.2.3",
+    "@storybook/react-native-server": "^5.2.3",
+    "babel-jest": "^24.1.0",
+    "babel-loader": "^8.0.6",
+    "cross-env": "^5.2.1",
+    "jest": "^24.1.0",
+    "metro-react-native-babel-preset": "0.54.1",
+    "prop-types": "^15.7.2",
+    "react": "16.8.6",
+    "react-dom": "16.8.6",
+    "react-native": "^0.60.0",
+    "react-native-config": "^0.11.7",
+    "react-native-spacing-system": "^0.3.1",
+    "react-native-storybook-loader": "^1.8.0",
+    "react-test-renderer": "16.8.6"
+  },
+  "jest": {
+    "preset": "react-native"
   }
 }

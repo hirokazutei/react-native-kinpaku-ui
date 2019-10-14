@@ -1,4 +1,4 @@
-import { DefaultObject, Color } from "../types";
+import {DefaultObject, Color} from '../types';
 
 type Themes<ThemeObject> = {
   [ThemesKey in keyof (ThemeObject &
@@ -14,4 +14,4 @@ type ThemePalette = {
   text: Color;
 };
 
-export { Themes, ThemePalette };
+export {Themes, ThemePalette};

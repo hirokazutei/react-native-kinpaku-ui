@@ -1,4 +1,4 @@
 type Color = string;
-type DefaultObject<Type> = { default: Type };
+type DefaultObject<Type> = {default: Type};
 
-export { Color, DefaultObject };
+export {Color, DefaultObject};
