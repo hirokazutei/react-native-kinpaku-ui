@@ -1,4 +1,4 @@
-import {FlexAlignType, TextStyle} from 'react-native';
+import {FlexAlignType} from 'react-native';
 import {
   TouchablePaddingKeys,
   TouchableAllPaddingProps,

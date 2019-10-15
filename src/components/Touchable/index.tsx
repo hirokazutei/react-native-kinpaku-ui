@@ -147,4 +147,4 @@ function touchableFactory<
   return Touchable;
 }
 
-export default buttonFactory;
+export default touchableFactory;
