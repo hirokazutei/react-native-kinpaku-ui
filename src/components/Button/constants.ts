@@ -58,7 +58,7 @@ const BORDER_RADIUS_MULTIPLIERS: {[key in ButtonShapes]: number} = {
   sharp: 0,
 };
 
-const BUTTON_SHAPE_KEY: Array<ButtonShapes> = ['circular', 'round', 'sharp'];
+const buttonShapeKeys: Array<ButtonShapes> = ['circular', 'round', 'sharp'];
 
 const buttonSizeKeys: Array<ButtonSizeKeys> = [
   'default',
@@ -76,6 +76,6 @@ export {
   DEFAULT_BUTTON_FONT_WEIGHT,
   DEFAULT_BUTTON_BORDER_WIDTH,
   BORDER_RADIUS_MULTIPLIERS,
-  BUTTON_SHAPE_KEY,
+  buttonShapeKeys,
   buttonSizeKeys,
 };

@@ -8,7 +8,10 @@
     "test": "jest",
     "start": "react-native start",
     "prestorybook": "rnstl",
-    "storybook": "start-storybook -p 7007 -c storybook"
+    "storybook": "start-storybook -p 7007 -c storybook",
+    "build": "npm run build:clean && npm run build:typescript",
+    "build:clean": "rimraf lib",
+    "build:typescript": "tsc --skipLibCheck"
   },
   "keywords": [
     "react-native",
@@ -41,7 +44,8 @@
   },
   "dependencies": {
     "@types/react": "^16.8.0",
-    "@types/react-native": "^0.60.0"
+    "@types/react-native": "^0.60.0",
+    "rimraf": "^3.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.5.0",

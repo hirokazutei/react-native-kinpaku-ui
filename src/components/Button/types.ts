@@ -19,7 +19,7 @@ type ButtonSizeProps = {
   borderRadius: number;
 };
 
-type FactoryProps<Themes, AdditionalPalettes, ButtonSizes> = {
+type ButtonFactoryProps<Themes, AdditionalPalettes, ButtonSizes> = {
   themes: {
     [ThemeKeys in keyof Themes & DefaultObject<ThemePalette>]: ThemePalette;
   };
@@ -42,7 +42,7 @@ type ButtonProps<AdditionalPalettes, ButtonSizes> = {
   color?: keyof ThemePalette | keyof AdditionalPalettes;
   isDisabled?: boolean;
   isStretched?: boolean;
-  size?: keyof ButtonSizes | keyof DefaultObject<number>;
+  size?: keyof ButtonSizes | keyof DefaultObject<ButtonSizeProps>;
   title: string;
   type?: ButtonType;
   onPress: (args: any) => any;
@@ -64,5 +64,5 @@ export {
   ButtonSizeKeys,
   ButtonSizeProps,
   ButtonType,
-  FactoryProps,
+  ButtonFactoryProps,
 };
