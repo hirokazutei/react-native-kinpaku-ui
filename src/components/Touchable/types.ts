@@ -41,8 +41,8 @@ type TouchableProps<AdditionalPalettes, TouchablePaddingSizes> = {
   additionalProps?: TouchableOpacityProps;
   additionalStyle?: ViewStyle;
   align?: FlexAlignType;
-  children: React.ReactChildren;
-  color?: keyof ThemePalette | keyof AdditionalPalettes;
+  children: React.ReactElement;
+  color?: keyof ThemePalette | AdditionalPalettes;
   isDisabled?: boolean;
   isStretched?: boolean;
   size?:
