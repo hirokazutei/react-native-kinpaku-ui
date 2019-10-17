@@ -4,8 +4,6 @@ import {
   TouchableFactoryProps,
   TouchableProps as Props,
   TouchablePaddingProps,
-  TouchableType,
-  TouchableTypeOptions,
   TouchableVerHorPaddingProps,
   TouchableAllPaddingProps,
 } from './types';
@@ -15,7 +13,6 @@ import {
   DEFAULT_TOUCHABLE_SIZES,
   DEFAULT_TOUCHABLE_ALIGN,
   DEFAULT_TOUCHABLE_BORDER_WIDTH,
-  touchableTypeKeys,
 } from './constants';
 
 function touchableFactory<

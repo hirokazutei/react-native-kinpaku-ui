@@ -3,7 +3,6 @@ import {Color, DefaultObject} from '../../types';
 import {ThemePalette} from '../../Theme/types';
 
 type TouchableType = 'filled' | 'bordered';
-type TouchableTypeOptions = 'Filled' | 'Bordered';
 
 type VerHor = {horizontalPadding: number; verticalPadding: number};
 type Padding = {padding: number};
@@ -63,7 +62,6 @@ type TouchablePaddingKeys =
 
 export {
   TouchableType,
-  TouchableTypeOptions,
   TouchablePaddingKeys,
   TouchableProps,
   TouchablePaddingProps,

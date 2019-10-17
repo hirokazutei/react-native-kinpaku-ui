@@ -13,7 +13,6 @@ import {
 import touchableFactory from './components/Touchable';
 import {
   TouchableType,
-  TouchableTypeOptions,
   TouchablePaddingKeys,
   TouchableProps,
   TouchablePaddingProps,
@@ -35,7 +34,6 @@ export {
   Themes,
   touchableFactory,
   TouchableType,
-  TouchableTypeOptions,
   TouchablePaddingKeys,
   TouchableProps,
   TouchablePaddingProps,
