@@ -50,8 +50,9 @@ function touchableFactory<
     const currentThemeKey = useContext(paletteContext) || 'default';
     const currentTheme =
       themes[
-        `${currentThemeKey}` as keyof PaletteObjectType &
-          DefaultObject<ThemePalette>
+        `${currentThemeKey}` as
+          | keyof PaletteObjectType
+          | keyof DefaultObject<ThemePalette>
       ];
 
     // Color
@@ -68,8 +69,9 @@ function touchableFactory<
     const TouchablePaddingProperty =
       touchablePaddingSizes &&
       touchablePaddingSizes[
-        size as keyof TouchablePaddingSizes &
-          DefaultObject<TouchablePaddingProps>
+        size as
+          | keyof TouchablePaddingSizes
+          | keyof DefaultObject<TouchablePaddingProps>
       ];
 
     // BorderStyles

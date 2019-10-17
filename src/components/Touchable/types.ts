@@ -24,14 +24,17 @@ type TouchableFactoryProps<
   TouchablePaddingSizes
 > = {
   themes: {
-    [ThemeKeys in keyof Themes & DefaultObject<ThemePalette>]: ThemePalette;
+    [ThemeKeys in
+      | keyof Themes
+      | keyof DefaultObject<ThemePalette>]: ThemePalette;
   };
   additionalPalettes?: {
     [AdditionalPaletteKeys in keyof AdditionalPalettes]: Color;
   };
   touchablePaddingSizes?: {
-    [SizeKey in keyof TouchablePaddingSizes &
-      DefaultObject<TouchablePaddingProps>]: TouchablePaddingProps;
+    [SizeKey in
+      | keyof TouchablePaddingSizes
+      | keyof DefaultObject<TouchablePaddingProps>]: TouchablePaddingProps;
   };
   defaultTouchableType?: TouchableType;
 };
@@ -41,7 +44,7 @@ type TouchableProps<AdditionalPalettes, TouchablePaddingSizes> = {
   additionalStyle?: ViewStyle;
   align?: FlexAlignType;
   children: React.ReactElement;
-  color?: keyof ThemePalette | AdditionalPalettes;
+  color?: keyof ThemePalette | keyof AdditionalPalettes;
   isDisabled?: boolean;
   isStretched?: boolean;
   size?:
