@@ -30,6 +30,14 @@ export default function UIFactory<ThemeObject>(themes: Themes<ThemeObject>): {
             massive: import("./components/Button/types").ButtonSizeProps;
         }>>;
     };
-    Touchable: any;
+    Touchable: import("react").FunctionComponent<import("./components/Touchable/types").TouchableProps<null, {
+        default: import("./components/Touchable/types").TouchableAllPaddingProps;
+        small: import("./components/Touchable/types").TouchableAllPaddingProps;
+        tiny: import("./components/Touchable/types").TouchableAllPaddingProps;
+        medium: import("./components/Touchable/types").TouchableAllPaddingProps;
+        large: import("./components/Touchable/types").TouchableAllPaddingProps;
+        huge: import("./components/Touchable/types").TouchableAllPaddingProps;
+        massive: import("./components/Touchable/types").TouchableAllPaddingProps;
+    }>>;
 };
 //# sourceMappingURL=uiFactory.d.ts.map
