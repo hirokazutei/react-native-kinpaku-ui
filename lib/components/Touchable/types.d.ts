@@ -3,7 +3,6 @@ import { TouchableOpacityProps, ViewStyle, FlexAlignType } from 'react-native';
 import { Color, DefaultObject } from '../../types';
 import { ThemePalette } from '../../Theme/types';
 declare type TouchableType = 'filled' | 'bordered';
-declare type TouchableTypeOptions = 'Filled' | 'Bordered';
 declare type VerHor = {
     horizontalPadding: number;
     verticalPadding: number;
@@ -20,13 +19,13 @@ declare type TouchableAllPaddingProps = {
 declare type TouchablePaddingProps = TouchableVerHorPaddingProps | TouchableAllPaddingProps;
 declare type TouchableFactoryProps<Themes, AdditionalPalettes, TouchablePaddingSizes> = {
     themes: {
-        [ThemeKeys in keyof Themes & DefaultObject<ThemePalette>]: ThemePalette;
+        [ThemeKeys in keyof Themes | keyof DefaultObject<ThemePalette>]: ThemePalette;
     };
     additionalPalettes?: {
         [AdditionalPaletteKeys in keyof AdditionalPalettes]: Color;
     };
     touchablePaddingSizes?: {
-        [SizeKey in keyof TouchablePaddingSizes & DefaultObject<TouchablePaddingProps>]: TouchablePaddingProps;
+        [SizeKey in keyof TouchablePaddingSizes | keyof DefaultObject<TouchablePaddingProps>]: TouchablePaddingProps;
     };
     defaultTouchableType?: TouchableType;
 };
@@ -34,7 +33,7 @@ declare type TouchableProps<AdditionalPalettes, TouchablePaddingSizes> = {
     additionalProps?: TouchableOpacityProps;
     additionalStyle?: ViewStyle;
     align?: FlexAlignType;
-    children: React.ReactChildren;
+    children: React.ReactElement;
     color?: keyof ThemePalette | keyof AdditionalPalettes;
     isDisabled?: boolean;
     isStretched?: boolean;
@@ -43,5 +42,5 @@ declare type TouchableProps<AdditionalPalettes, TouchablePaddingSizes> = {
     onPress: (args: any) => any;
 };
 declare type TouchablePaddingKeys = 'tiny' | 'small' | 'medium' | 'default' | 'large' | 'huge' | 'massive';
-export { TouchableType, TouchableTypeOptions, TouchablePaddingKeys, TouchableProps, TouchablePaddingProps, TouchableFactoryProps, TouchableVerHorPaddingProps, TouchableAllPaddingProps, };
+export { TouchableType, TouchablePaddingKeys, TouchableProps, TouchablePaddingProps, TouchableFactoryProps, TouchableVerHorPaddingProps, TouchableAllPaddingProps, };
 //# sourceMappingURL=types.d.ts.map

@@ -30,9 +30,6 @@ export default function UIFactory<ThemeObject>(themes: Themes<ThemeObject>): {
             massive: import("./components/Button/types").ButtonSizeProps;
         }>>;
     };
-    Touchable: {
-        Filled: import("react").FunctionComponent<import("./components/Touchable/types").TouchableProps<null, import("./components/Button/types").ButtonSizeKeys>>;
-        Bordered: import("react").FunctionComponent<import("./components/Touchable/types").TouchableProps<null, import("./components/Button/types").ButtonSizeKeys>>;
-    };
+    Touchable: any;
 };
 //# sourceMappingURL=uiFactory.d.ts.map
