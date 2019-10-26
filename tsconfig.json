@@ -58,13 +58,7 @@
     // "emitDecoratorMetadata": true,         /* Enables experimental support for emitting type metadata for decorators. */
   },
   "include": ["src"],
-  "exclude": [
-    "src/storybook",
-    "lib",
-    "node_modules",
-    "__storybook__",
-    "*.stories.tsx"
-  ],
+  "exclude": ["lib", "node_modules", "*.stories.tsx"],
 
   "typedocOptions": {
     "mode": "modules",

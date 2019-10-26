@@ -23,7 +23,7 @@ function touchableFactory<
   themes,
   touchablePaddingSizes,
   additionalPalettes,
-  defaultTouchableType = 'filled',
+  defaultTouchableType = 'solid',
 }: TouchableFactoryProps<
   PaletteObjectType,
   AdditionalPalettes,
@@ -62,8 +62,7 @@ function touchableFactory<
         currentTheme[color as keyof ThemePalette]
       : currentTheme.disabled;
     const borderColor = primaryColor;
-    const fillColor =
-      type === 'filled' ? primaryColor : currentTheme.background;
+    const fillColor = type === 'solid' ? primaryColor : currentTheme.background;
 
     // Size
     const TouchablePaddingProperty =

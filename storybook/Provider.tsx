@@ -1,7 +1,7 @@
 /* @flow */
 import * as React from 'react';
 import {View} from 'react-native';
-import themes from '../themes';
+import themes from '../src/themes';
 
 const Provider = ({
   backgroundColor = themes.default.background,

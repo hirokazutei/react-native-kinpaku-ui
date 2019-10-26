@@ -1,15 +1,15 @@
 // @flow
 import * as React from 'react';
 import {FlexAlignType} from 'react-native';
-import Provider from '../../../storybook/Provider';
-import {ThemePalette} from '../../../Theme/types';
-import {ButtonProps, ButtonType} from '../types';
 import {storiesOf} from '@storybook/react-native';
 import {action} from '@storybook/addon-actions';
+import Provider from '../../../Provider';
+import themes from '../../../../src/themes';
+import {ThemePalette} from '../../../../src/Theme/types';
+import {ButtonProps, ButtonType} from '../../../../src/components/Button/types';
 import {boolean, select, text, withKnobs} from '@storybook/addon-knobs';
-import themes from '../../../themes';
-import buttonFactory from '../index';
-import {DEFAULT_BUTTON_SIZES} from '../constants';
+import buttonFactory from '../../../../src/components/Button';
+import {DEFAULT_BUTTON_SIZES} from '../../../../src/components/Button/constants';
 
 type ButtonSizes = typeof DEFAULT_BUTTON_SIZES;
 type ThemeType = typeof themes;

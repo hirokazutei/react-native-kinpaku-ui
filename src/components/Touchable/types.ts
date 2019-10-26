@@ -2,7 +2,7 @@ import {TouchableOpacityProps, ViewStyle, FlexAlignType} from 'react-native';
 import {Color, DefaultObject} from '../../types';
 import {ThemePalette} from '../../Theme/types';
 
-type TouchableType = 'filled' | 'bordered';
+type TouchableType = 'solid' | 'outline';
 
 type VerHor = {horizontalPadding: number; verticalPadding: number};
 type Padding = {padding: number};
