@@ -1,9 +1,8 @@
 import { TouchableOpacityProps, TextProperties, ViewStyle, TextStyle, FlexAlignType } from 'react-native';
 import { Color, DefaultObject } from '../../types';
 import { ThemePalette } from '../../Theme/types';
-declare type ButtonShapes = 'circular' | 'round' | 'sharp';
-declare type ButtonShapeOptions = 'Circular' | 'Round' | 'Sharp';
-declare type ButtonType = 'solid' | 'clear' | 'outline';
+declare type ButtonVariations = 'Circular' | 'Round' | 'Sharp';
+declare type ButtonTypes = 'solid' | 'clear' | 'outline';
 declare type ButtonSizeProps = {
     horizontalPadding: number;
     verticalPaddding: number;
@@ -12,30 +11,31 @@ declare type ButtonSizeProps = {
 };
 declare type ButtonFactoryProps<Themes, AdditionalPalettes, ButtonSizes> = {
     themes: {
-        [ThemeKeys in keyof Themes & DefaultObject<ThemePalette>]: ThemePalette;
+        [ThemeKey in keyof Themes & DefaultObject<ThemePalette>]: ThemePalette;
     };
     additionalPalettes?: {
-        [AdditionalPaletteKeys in keyof AdditionalPalettes]: Color;
+        [AdditionalPaletteKey in keyof AdditionalPalettes]: Color;
     };
-    buttonSizes?: {
+    sizes?: {
         [SizeKey in keyof ButtonSizes & DefaultObject<ButtonSizeProps>]: ButtonSizeProps;
     };
-    defaultButtonType?: ButtonType;
+    defaultType?: ButtonTypes;
+    allowAdditionalPalettes?: boolean;
 };
-declare type ButtonProps<AdditionalPalettes, ButtonSizes> = {
-    additionalButtonProps?: TouchableOpacityProps;
-    additionalButtonStyle?: ViewStyle;
-    additionalTextProps?: TextProperties;
-    additionalTextStyle?: TextStyle;
+declare type ButtonProps<AdditionalPalettes, ButtonSizes, AllowAdditionalPalettes> = {
+    additionalButtonProps?: AllowAdditionalPalettes extends true ? never : TouchableOpacityProps;
+    additionalButtonStyle?: AllowAdditionalPalettes extends true ? never : ViewStyle;
+    additionalTextProps?: AllowAdditionalPalettes extends true ? never : TextProperties;
+    additionalTextStyle?: AllowAdditionalPalettes extends true ? never : TextStyle;
     align?: FlexAlignType;
     color?: keyof ThemePalette | keyof AdditionalPalettes;
     isDisabled?: boolean;
     isStretched?: boolean;
     size?: keyof ButtonSizes | keyof DefaultObject<ButtonSizeProps>;
     title: string;
-    type?: ButtonType;
+    type?: ButtonTypes;
     onPress: (args: any) => any;
 };
-declare type ButtonSizeKeys = 'tiny' | 'small' | 'medium' | 'default' | 'large' | 'huge' | 'massive';
-export { ButtonProps, ButtonShapeOptions, ButtonShapes, ButtonSizeKeys, ButtonSizeProps, ButtonType, ButtonFactoryProps, };
+declare type ButtonSizes = 'tiny' | 'small' | 'medium' | 'default' | 'large' | 'huge' | 'massive';
+export { ButtonProps, ButtonVariations, ButtonSizes, ButtonSizeProps, ButtonTypes, ButtonFactoryProps, };
 //# sourceMappingURL=types.d.ts.map
