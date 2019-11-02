@@ -3,20 +3,21 @@ import * as React from 'react';
 import {FlexAlignType} from 'react-native';
 import {storiesOf} from '@storybook/react-native';
 import {action} from '@storybook/addon-actions';
-import Provider from '../../../Provider';
-import themes from '../../../../src/themes';
-import {ThemePalette} from '../../../../src/Theme/types';
-import {ButtonProps, ButtonType} from '../../../../src/components/Button/types';
 import {boolean, select, text, withKnobs} from '@storybook/addon-knobs';
-import buttonFactory from '../../../../src/components/Button';
-import {DEFAULT_BUTTON_SIZES} from '../../../../src/components/Button/constants';
+import Provider from '../Provider';
+import themes from '../../src/themes';
+import {ThemePalette} from '../../src/Theme/types';
+import {ButtonProps, ButtonTypes} from '../.././src/components/Button/types';
+import buttonFactory from '../.././src/components/Button';
+import {DEFAULT_BUTTON_SIZES} from '../../src/components/Button/constants';
 
-type ButtonSizes = typeof DEFAULT_BUTTON_SIZES;
-type ThemeType = typeof themes;
-
-const {Sharp, Round, Circular} = buttonFactory<ThemeType, null, ButtonSizes>({
+const {Sharp, Round, Circular} = buttonFactory<
+  typeof themes,
+  null,
+  typeof DEFAULT_BUTTON_SIZES
+>({
   themes,
-  buttonSizes: DEFAULT_BUTTON_SIZES,
+  sizes: DEFAULT_BUTTON_SIZES,
 });
 
 const DEFAULT_PROPS = {
@@ -25,10 +26,10 @@ const DEFAULT_PROPS = {
   isStretched: false,
   align: 'center' as FlexAlignType,
   title: 'PRESS HERE',
-  size: 'large' as keyof ButtonSizes,
+  size: 'large' as keyof typeof DEFAULT_BUTTON_SIZES,
 };
 
-const BUTTON_TYPES: Array<ButtonType> = ['solid', 'outline', 'clear'];
+const BUTTON_TYPES: Array<ButtonTypes> = ['solid', 'outline', 'clear'];
 
 const colorSelect: {[key in keyof ThemePalette]?: keyof ThemePalette} = {
   primary: 'primary',
@@ -36,7 +37,9 @@ const colorSelect: {[key in keyof ThemePalette]?: keyof ThemePalette} = {
   tertiary: 'tertiary',
 };
 
-const getRequiredProps = (overrides = {}): ButtonProps<null, ButtonSizes> => {
+const getRequiredProps = (
+  overrides = {},
+): ButtonProps<null, typeof DEFAULT_BUTTON_SIZES, false> => {
   const {color, isDisabled, isStretched, align, title, size} = {
     ...DEFAULT_PROPS,
     ...overrides,
@@ -58,14 +61,14 @@ storiesOf('UI/Button')
   .add('Default', () => (
     <>
       {BUTTON_TYPES.map(
-        (type: ButtonType, index: number): React.ReactElement => {
+        (type: ButtonTypes, index: number): React.ReactElement => {
           return <Sharp key={index} {...getRequiredProps()} type={type} />;
         },
       )}
-      {BUTTON_TYPES.map((type: ButtonType, index: number) => {
+      {BUTTON_TYPES.map((type: ButtonTypes, index: number) => {
         return <Round key={index} {...getRequiredProps()} type={type} />;
       })}
-      {BUTTON_TYPES.map((type: ButtonType, index: number) => {
+      {BUTTON_TYPES.map((type: ButtonTypes, index: number) => {
         return <Circular key={index} {...getRequiredProps()} type={type} />;
       })}
     </>
