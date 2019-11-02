@@ -2,8 +2,7 @@ import {TouchableOpacityProps, ViewStyle} from 'react-native';
 import {Color, DefaultObject} from '../../types';
 import {ThemePalette} from '../../Theme/types';
 
-type RadioButtonVariations = 'dot' | 'reverse' | 'fill';
-type RadioButtonVariationOptions = 'Dot' | 'Reverse' | 'Fill';
+type RadioButtonVariations = 'Dot' | 'Reverse' | 'Fill';
 
 type RadioButtonSizeProps = {
   size: number;
@@ -11,7 +10,12 @@ type RadioButtonSizeProps = {
   borderThickness: number;
 };
 
-type RadioButtonFactoryProps<Themes, AdditionalPalettes, RadioButtonSizes> = {
+type RadioButtonFactoryProps<
+  Themes,
+  AdditionalPalettes,
+  RadioButtonSizes,
+  AllowAdditionalProps
+> = {
   themes: {
     [ThemeKeys in keyof Themes & DefaultObject<ThemePalette>]: ThemePalette;
   };
@@ -49,5 +53,4 @@ export {
   RadioButtonProps,
   RadioButtonSizeProps,
   RadioButtonVariations,
-  RadioButtonVariationOptions,
 };
