@@ -1,6 +1,21 @@
 platform :ios, '9.0'
 require_relative '../node_modules/@react-native-community/cli-platform-ios/native_modules'
 
+post_install do |installer|
+  installer.pods_project.targets.each do |target|
+    if target.name == 'react-native-config'
+      phase = target.project.new(Xcodeproj::Project::Object::PBXShellScriptBuildPhase)
+      phase.shell_script = "cd ../../"\
+      " && RNC_ROOT=./node_modules/react-native-config/"\
+      " && export SYMROOT=$RNC_ROOT/ios/ReactNativeConfig"\
+      " && ruby $RNC_ROOT/ios/ReactNativeConfig/BuildDotenvConfig.ruby"
+      
+      target.build_phases << phase
+      target.build_phases.move(phase,0)
+    end
+  end
+ end
+
 target 'KinpakuUI' do
   # Pods for KinpakuUI
   pod 'React', :path => '../node_modules/react-native/'
@@ -26,6 +41,8 @@ target 'KinpakuUI' do
   pod 'DoubleConversion', :podspec => '../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec'
   pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
+
+  pod 'react-native-config', :path => '../node_modules/react-native-config'
 
   target 'KinpakuUITests' do
     inherit! :search_paths
