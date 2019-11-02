@@ -22,10 +22,12 @@ type RadioButtonFactoryProps<
   additionalPalettes?: {
     [AdditionalPaletteKeys in keyof AdditionalPalettes]: Color;
   };
-  sizes?: {
-    [SizeKey in keyof RadioButtonSizes &
-      DefaultObject<RadioButtonSizeProps>]: RadioButtonSizeProps;
-  };
+  sizes?: RadioButtonSizes extends null | RadioButtonSizeProps
+    ? RadioButtonSizeProps
+    : {
+        [SizeKey in keyof RadioButtonSizes &
+          DefaultObject<RadioButtonSizeProps>]: RadioButtonSizeProps;
+      };
   defaultVariation?: RadioButtonVariations;
 };
 
