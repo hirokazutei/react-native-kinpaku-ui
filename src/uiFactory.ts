@@ -4,13 +4,16 @@ import touchableFactory from './components/Touchable';
 import {DEFAULT_BUTTON_SIZES} from './components/Button/constants';
 import {DEFAULT_TOUCHABLE_SIZES} from './components/Touchable/constants';
 
-type ButtonSizes = typeof DEFAULT_BUTTON_SIZES;
 type TouchableSizes = typeof DEFAULT_TOUCHABLE_SIZES;
 
 export default function UIFactory<ThemeObject>(themes: Themes<ThemeObject>) {
-  const Button = buttonFactory<Themes<ThemeObject>, null, ButtonSizes>({
+  const Button = buttonFactory<
+    Themes<ThemeObject>,
+    null,
+    typeof DEFAULT_BUTTON_SIZES
+  >({
     themes,
-    buttonSizes: DEFAULT_BUTTON_SIZES,
+    sizes: DEFAULT_BUTTON_SIZES,
   }); // Button Sizes
   const Touchable = touchableFactory<Themes<ThemeObject>, null, TouchableSizes>(
     {

@@ -3,11 +3,10 @@ import {Themes, ThemePalette} from './Theme/types';
 import buttonFactory from './components/Button';
 import {
   ButtonProps,
-  ButtonShapeOptions,
-  ButtonShapes,
-  ButtonSizeKeys,
+  ButtonVariations,
+  ButtonSizes,
   ButtonSizeProps,
-  ButtonType,
+  ButtonTypes,
   ButtonFactoryProps,
 } from './components/Button/types';
 import touchableFactory from './components/Touchable';
@@ -24,11 +23,10 @@ import {
 export {
   buttonFactory,
   ButtonProps,
-  ButtonShapeOptions,
-  ButtonShapes,
-  ButtonSizeKeys,
+  ButtonVariations,
+  ButtonSizes,
   ButtonSizeProps,
-  ButtonType,
+  ButtonTypes,
   ButtonFactoryProps,
   ThemePalette,
   Themes,

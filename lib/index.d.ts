@@ -1,8 +1,8 @@
 import UIFactory from './uiFactory';
 import { Themes, ThemePalette } from './Theme/types';
 import buttonFactory from './components/Button';
-import { ButtonProps, ButtonShapeOptions, ButtonShapes, ButtonSizeKeys, ButtonSizeProps, ButtonType, ButtonFactoryProps } from './components/Button/types';
+import { ButtonProps, ButtonVariations, ButtonSizes, ButtonSizeProps, ButtonTypes, ButtonFactoryProps } from './components/Button/types';
 import touchableFactory from './components/Touchable';
 import { TouchableType, TouchablePaddingKeys, TouchableProps, TouchablePaddingProps, TouchableFactoryProps, TouchableVerHorPaddingProps, TouchableAllPaddingProps } from './components/Touchable/types';
-export { buttonFactory, ButtonProps, ButtonShapeOptions, ButtonShapes, ButtonSizeKeys, ButtonSizeProps, ButtonType, ButtonFactoryProps, ThemePalette, Themes, touchableFactory, TouchableType, TouchablePaddingKeys, TouchableProps, TouchablePaddingProps, TouchableFactoryProps, TouchableVerHorPaddingProps, TouchableAllPaddingProps, UIFactory, };
+export { buttonFactory, ButtonProps, ButtonVariations, ButtonSizes, ButtonSizeProps, ButtonTypes, ButtonFactoryProps, ThemePalette, Themes, touchableFactory, TouchableType, TouchablePaddingKeys, TouchableProps, TouchablePaddingProps, TouchableFactoryProps, TouchableVerHorPaddingProps, TouchableAllPaddingProps, UIFactory, };
 //# sourceMappingURL=index.d.ts.map

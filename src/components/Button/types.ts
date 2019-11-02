@@ -8,9 +8,8 @@ import {
 import {Color, DefaultObject} from '../../types';
 import {ThemePalette} from '../../Theme/types';
 
-type ButtonShapes = 'circular' | 'round' | 'sharp';
-type ButtonShapeOptions = 'Circular' | 'Round' | 'Sharp';
-type ButtonType = 'solid' | 'clear' | 'outline';
+type ButtonVariations = 'Circular' | 'Round' | 'Sharp';
+type ButtonTypes = 'solid' | 'clear' | 'outline';
 
 type ButtonSizeProps = {
   horizontalPadding: number;
@@ -21,34 +20,43 @@ type ButtonSizeProps = {
 
 type ButtonFactoryProps<Themes, AdditionalPalettes, ButtonSizes> = {
   themes: {
-    [ThemeKeys in keyof Themes & DefaultObject<ThemePalette>]: ThemePalette;
+    [ThemeKey in keyof Themes & DefaultObject<ThemePalette>]: ThemePalette;
   };
   additionalPalettes?: {
-    [AdditionalPaletteKeys in keyof AdditionalPalettes]: Color;
+    [AdditionalPaletteKey in keyof AdditionalPalettes]: Color;
   };
-  buttonSizes?: {
+  sizes?: {
     [SizeKey in keyof ButtonSizes &
       DefaultObject<ButtonSizeProps>]: ButtonSizeProps;
   };
-  defaultButtonType?: ButtonType;
+  defaultType?: ButtonTypes;
+  allowAdditionalPalettes?: boolean;
 };
 
-type ButtonProps<AdditionalPalettes, ButtonSizes> = {
-  additionalButtonProps?: TouchableOpacityProps;
-  additionalButtonStyle?: ViewStyle;
-  additionalTextProps?: TextProperties;
-  additionalTextStyle?: TextStyle;
+type ButtonProps<AdditionalPalettes, ButtonSizes, AllowAdditionalPalettes> = {
+  additionalButtonProps?: AllowAdditionalPalettes extends true
+    ? never
+    : TouchableOpacityProps;
+  additionalButtonStyle?: AllowAdditionalPalettes extends true
+    ? never
+    : ViewStyle;
+  additionalTextProps?: AllowAdditionalPalettes extends true
+    ? never
+    : TextProperties;
+  additionalTextStyle?: AllowAdditionalPalettes extends true
+    ? never
+    : TextStyle;
   align?: FlexAlignType;
   color?: keyof ThemePalette | keyof AdditionalPalettes;
   isDisabled?: boolean;
   isStretched?: boolean;
   size?: keyof ButtonSizes | keyof DefaultObject<ButtonSizeProps>;
   title: string;
-  type?: ButtonType;
+  type?: ButtonTypes;
   onPress: (args: any) => any;
 };
 
-type ButtonSizeKeys =
+type ButtonSizes =
   | 'tiny'
   | 'small'
   | 'medium'
@@ -59,10 +67,9 @@ type ButtonSizeKeys =
 
 export {
   ButtonProps,
-  ButtonShapeOptions,
-  ButtonShapes,
-  ButtonSizeKeys,
+  ButtonVariations,
+  ButtonSizes,
   ButtonSizeProps,
-  ButtonType,
+  ButtonTypes,
   ButtonFactoryProps,
 };

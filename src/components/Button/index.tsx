@@ -4,8 +4,7 @@ import {
   ButtonFactoryProps,
   ButtonProps as Props,
   ButtonSizeProps,
-  ButtonShapeOptions,
-  ButtonShapes,
+  ButtonVariations,
 } from './types';
 import {DefaultObject} from '../../types';
 import {ThemePalette} from '../../Theme/types';
@@ -15,27 +14,32 @@ import {
   DEFAULT_BUTTON_FONT_WEIGHT,
   DEFAULT_BUTTON_BORDER_WIDTH,
   BORDER_RADIUS_MULTIPLIERS,
-  buttonShapeKeys,
+  BUTTON_VARIATION_KEYS,
 } from './constants';
 
-function buttonFactory<PaletteObjectType, AdditionalPalettes, ButtonSizes>({
+function buttonFactory<Themes, AdditionalPalettes, ButtonSizes>({
   themes,
-  buttonSizes,
+  sizes,
   additionalPalettes,
-  defaultButtonType = 'solid',
-}: ButtonFactoryProps<PaletteObjectType, AdditionalPalettes, ButtonSizes>): {
-  [key in ButtonShapeOptions]: React.FunctionComponent<
-    Props<AdditionalPalettes, ButtonSizes>
+  defaultType = 'solid',
+  allowAdditionalPalettes,
+}: ButtonFactoryProps<Themes, AdditionalPalettes, ButtonSizes>): {
+  [key in ButtonVariations]: React.FunctionComponent<
+    Props<AdditionalPalettes, ButtonSizes, typeof allowAdditionalPalettes>
   >;
 } {
-  const paletteContext: React.Context<
-    keyof PaletteObjectType
-  > = React.createContext('default' as keyof PaletteObjectType);
+  const paletteContext: React.Context<keyof Themes> = React.createContext(
+    'default' as keyof Themes,
+  );
   const buttons: {
-    [key in ButtonShapes]?: React.FC<Props<AdditionalPalettes, ButtonSizes>>;
+    [key in ButtonVariations]?: React.FC<
+      Props<AdditionalPalettes, ButtonSizes, typeof allowAdditionalPalettes>
+    >;
   } = {};
-  buttonShapeKeys.forEach((shape: ButtonShapes) => {
-    const Button: React.FC<Props<AdditionalPalettes, ButtonSizes>> = ({
+  BUTTON_VARIATION_KEYS.forEach((variation: ButtonVariations) => {
+    const Button: React.FC<
+      Props<AdditionalPalettes, ButtonSizes, typeof allowAdditionalPalettes>
+    > = ({
       color = 'primary',
       size = 'default',
       isDisabled,
@@ -43,18 +47,21 @@ function buttonFactory<PaletteObjectType, AdditionalPalettes, ButtonSizes>({
       align = DEFAULT_BUTTON_ALIGN,
       onPress,
       title,
-      type = defaultButtonType,
+      type = defaultType,
       additionalButtonProps,
       additionalButtonStyle,
       additionalTextProps,
       additionalTextStyle,
-    }: Props<AdditionalPalettes, ButtonSizes>): React.ReactElement => {
+    }: Props<
+      AdditionalPalettes,
+      ButtonSizes,
+      typeof allowAdditionalPalettes
+    >): React.ReactElement => {
       // Palettes
       const currentThemeKey = useContext(paletteContext) || 'default';
       const currentTheme =
         themes[
-          `${currentThemeKey}` as keyof PaletteObjectType &
-            DefaultObject<ThemePalette>
+          `${currentThemeKey}` as keyof Themes & DefaultObject<ThemePalette>
         ];
 
       // Color
@@ -70,10 +77,8 @@ function buttonFactory<PaletteObjectType, AdditionalPalettes, ButtonSizes>({
 
       // Size
       const buttonSizeProperty =
-        buttonSizes &&
-        buttonSizes[
-          `${size}` as keyof ButtonSizes & DefaultObject<ButtonSizeProps>
-        ];
+        sizes &&
+        sizes[`${size}` as keyof ButtonSizes & DefaultObject<ButtonSizeProps>];
 
       // BorderStyles
       const borderStyles =
@@ -88,7 +93,7 @@ function buttonFactory<PaletteObjectType, AdditionalPalettes, ButtonSizes>({
       let borderRadius = 0;
       if (buttonSizeProperty) {
         borderRadius =
-          BORDER_RADIUS_MULTIPLIERS[shape as ButtonShapes] *
+          BORDER_RADIUS_MULTIPLIERS[variation as ButtonVariations] *
           buttonSizeProperty.borderRadius;
       } else {
         borderRadius = DEFAULT_BUTTON_SIZES.default.horizontalPadding;
@@ -107,7 +112,7 @@ function buttonFactory<PaletteObjectType, AdditionalPalettes, ButtonSizes>({
           (buttonSizeProperty && buttonSizeProperty.verticalPaddding) ||
           DEFAULT_BUTTON_SIZES.default.verticalPaddding,
         ...borderStyles,
-        ...additionalButtonStyle,
+        ...(additionalButtonStyle || {}),
       };
 
       // Text Style
@@ -118,7 +123,7 @@ function buttonFactory<PaletteObjectType, AdditionalPalettes, ButtonSizes>({
           (buttonSizeProperty && buttonSizeProperty.fontSize) ||
           DEFAULT_BUTTON_SIZES.default.fontSize,
         fontWeight: DEFAULT_BUTTON_FONT_WEIGHT,
-        ...additionalTextStyle,
+        ...(additionalTextStyle || {}),
       };
       return (
         <TouchableOpacity
@@ -126,24 +131,24 @@ function buttonFactory<PaletteObjectType, AdditionalPalettes, ButtonSizes>({
           disabled={isDisabled}
           onPress={onPress}
           accessibilityLabel={title}
-          {...additionalButtonProps}>
-          <Text style={textStyle} {...additionalTextProps}>
+          {...(additionalButtonProps || {})}>
+          <Text style={textStyle} {...(additionalTextProps || {})}>
             {title}
           </Text>
         </TouchableOpacity>
       );
     };
-    buttons[shape as ButtonShapes] = Button;
+    buttons[variation as ButtonVariations] = Button;
   });
   const Button = {
-    Circular: buttons.circular as React.FunctionComponent<
-      Props<AdditionalPalettes, ButtonSizes>
+    Circular: buttons.Circular as React.FunctionComponent<
+      Props<AdditionalPalettes, ButtonSizes, typeof allowAdditionalPalettes>
     >,
-    Round: buttons.round as React.FunctionComponent<
-      Props<AdditionalPalettes, ButtonSizes>
+    Round: buttons.Round as React.FunctionComponent<
+      Props<AdditionalPalettes, ButtonSizes, typeof allowAdditionalPalettes>
     >,
-    Sharp: buttons.sharp as React.FunctionComponent<
-      Props<AdditionalPalettes, ButtonSizes>
+    Sharp: buttons.Sharp as React.FunctionComponent<
+      Props<AdditionalPalettes, ButtonSizes, typeof allowAdditionalPalettes>
     >,
   };
   return Button;

@@ -1,7 +1,7 @@
 import {FlexAlignType, TextStyle} from 'react-native';
-import {ButtonSizeKeys, ButtonSizeProps, ButtonShapes} from './types';
+import {ButtonSizes, ButtonSizeProps, ButtonVariations} from './types';
 
-const DEFAULT_BUTTON_SIZES: {[key in ButtonSizeKeys]: ButtonSizeProps} = {
+const DEFAULT_BUTTON_SIZES: {[key in ButtonSizes]: ButtonSizeProps} = {
   default: {
     verticalPaddding: 6,
     horizontalPadding: 12,
@@ -52,15 +52,19 @@ const DEFAULT_BUTTON_FONT_WEIGHT: TextStyle['fontWeight'] = 'bold';
 
 const DEFAULT_BUTTON_BORDER_WIDTH: number = 2;
 
-const BORDER_RADIUS_MULTIPLIERS: {[key in ButtonShapes]: number} = {
-  circular: 4,
-  round: 1,
-  sharp: 0,
+const BORDER_RADIUS_MULTIPLIERS: {[key in ButtonVariations]: number} = {
+  Circular: 4,
+  Round: 1,
+  Sharp: 0,
 };
 
-const buttonShapeKeys: Array<ButtonShapes> = ['circular', 'round', 'sharp'];
+const BUTTON_VARIATION_KEYS: Array<ButtonVariations> = [
+  'Circular',
+  'Round',
+  'Sharp',
+];
 
-const buttonSizeKeys: Array<ButtonSizeKeys> = [
+const buttonSizeKeys: Array<ButtonSizes> = [
   'default',
   'tiny',
   'small',
@@ -76,6 +80,6 @@ export {
   DEFAULT_BUTTON_FONT_WEIGHT,
   DEFAULT_BUTTON_BORDER_WIDTH,
   BORDER_RADIUS_MULTIPLIERS,
-  buttonShapeKeys,
+  BUTTON_VARIATION_KEYS,
   buttonSizeKeys,
 };
