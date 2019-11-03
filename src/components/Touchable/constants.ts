@@ -1,8 +1,8 @@
 import {FlexAlignType} from 'react-native';
-import {TouchablePaddingKeys, TouchableAllPaddingProps} from './types';
+import {TouchableSizes, TouchableAllSizeProps} from './types';
 
 const DEFAULT_TOUCHABLE_SIZES: {
-  [key in TouchablePaddingKeys]: TouchableAllPaddingProps;
+  [key in TouchableSizes]: TouchableAllSizeProps;
 } = {
   default: {
     padding: 4,
@@ -38,7 +38,7 @@ const DEFAULT_TOUCHABLE_ALIGN: FlexAlignType = 'center';
 
 const DEFAULT_TOUCHABLE_BORDER_WIDTH: number = 2;
 
-const touchableSizeKeys: Array<TouchablePaddingKeys> = [
+const touchableSizeKeys: Array<TouchableSizes> = [
   'default',
   'tiny',
   'small',

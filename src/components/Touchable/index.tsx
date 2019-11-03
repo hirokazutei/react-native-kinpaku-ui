@@ -3,9 +3,9 @@ import {TouchableOpacity, FlexAlignType} from 'react-native';
 import {
   TouchableFactoryProps,
   TouchableProps as Props,
-  TouchablePaddingProps,
-  TouchableVerHorPaddingProps,
-  TouchableAllPaddingProps,
+  TouchableSizeProps,
+  TouchableVerHorSizeProps,
+  TouchableAllSizeProps,
 } from './types';
 import {DefaultObject} from '../../types';
 import {ThemePalette} from '../../Theme/types';
@@ -18,22 +18,25 @@ import {
 function touchableFactory<
   PaletteObjectType,
   AdditionalPalettes,
-  TouchablePaddingSizes
+  TouchableSizes
 >({
   themes,
-  touchablePaddingSizes,
+  sizes,
   additionalPalettes,
-  defaultTouchableType = 'solid',
+  defaultType = 'solid',
+  allowCustomProps,
 }: TouchableFactoryProps<
   PaletteObjectType,
   AdditionalPalettes,
-  TouchablePaddingSizes
->): React.FunctionComponent<Props<AdditionalPalettes, TouchablePaddingSizes>> {
+  TouchableSizes
+>): React.FunctionComponent<
+  Props<AdditionalPalettes, TouchableSizes, typeof allowCustomProps>
+> {
   const paletteContext: React.Context<
     keyof PaletteObjectType
   > = React.createContext('default' as keyof PaletteObjectType);
   const Touchable: React.FC<
-    Props<AdditionalPalettes, TouchablePaddingSizes>
+    Props<AdditionalPalettes, TouchableSizes, typeof allowCustomProps>
   > = ({
     color = 'primary',
     size = 'default',
@@ -42,10 +45,14 @@ function touchableFactory<
     isStretched,
     align = DEFAULT_TOUCHABLE_ALIGN,
     onPress,
-    type = defaultTouchableType,
+    type = defaultType,
     additionalProps,
     additionalStyle,
-  }: Props<AdditionalPalettes, TouchablePaddingSizes>): React.ReactElement => {
+  }: Props<
+    AdditionalPalettes,
+    TouchableSizes,
+    typeof allowCustomProps
+  >): React.ReactElement => {
     // Palettes
     const currentThemeKey = useContext(paletteContext) || 'default';
     const currentTheme =
@@ -65,13 +72,7 @@ function touchableFactory<
     const fillColor = type === 'solid' ? primaryColor : currentTheme.background;
 
     // Size
-    const TouchablePaddingProperty =
-      touchablePaddingSizes &&
-      touchablePaddingSizes[
-        size as
-          | keyof TouchablePaddingSizes
-          | keyof DefaultObject<TouchablePaddingProps>
-      ];
+    const touchablePaddingProperty = sizes && sizes[size];
 
     // BorderStyles
     const borderStyles = {
@@ -81,22 +82,22 @@ function touchableFactory<
 
     // Border Radius
     let borderRadius = 0;
-    if (TouchablePaddingProperty) {
-      borderRadius = TouchablePaddingProperty.borderRadius;
+    if (touchablePaddingProperty) {
+      borderRadius = touchablePaddingProperty.borderRadius;
     } else {
       borderRadius = DEFAULT_TOUCHABLE_SIZES.default.borderRadius;
     }
 
     const touchableVerticalPadding =
-      (TouchablePaddingProperty &&
-        (TouchablePaddingProperty as TouchableVerHorPaddingProps)
+      (touchablePaddingProperty &&
+        (touchablePaddingProperty as TouchableVerHorSizeProps)
           .verticalPadding) ||
-      (TouchablePaddingProperty as TouchableAllPaddingProps).padding;
+      (touchablePaddingProperty as TouchableAllSizeProps).padding;
     const touchableHorizontalPadding =
-      (TouchablePaddingProperty &&
-        (TouchablePaddingProperty as TouchableVerHorPaddingProps)
+      (touchablePaddingProperty &&
+        (touchablePaddingProperty as TouchableVerHorSizeProps)
           .horizontalPadding) ||
-      (TouchablePaddingProperty as TouchableAllPaddingProps).padding;
+      (touchablePaddingProperty as TouchableAllSizeProps).padding;
 
     const touchableStyle = {
       alignSelf: !isStretched ? align : ('stretch' as FlexAlignType),
