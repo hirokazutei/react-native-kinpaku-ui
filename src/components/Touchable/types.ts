@@ -2,27 +2,22 @@ import {TouchableOpacityProps, ViewStyle, FlexAlignType} from 'react-native';
 import {Color, DefaultObject} from '../../types';
 import {ThemePalette} from '../../Theme/types';
 
-type TouchableType = 'solid' | 'outline';
+type TouchableTypes = 'solid' | 'outline';
 
 type VerHor = {horizontalPadding: number; verticalPadding: number};
 type Padding = {padding: number};
 
-type TouchableVerHorPaddingProps = {
+type TouchableVerHorSizeProps = {
   borderRadius: number;
 } & VerHor;
-type TouchableAllPaddingProps = {
+
+type TouchableAllSizeProps = {
   borderRadius: number;
 } & Padding;
 
-type TouchablePaddingProps =
-  | TouchableVerHorPaddingProps
-  | TouchableAllPaddingProps;
+type TouchableSizeProps = TouchableVerHorSizeProps | TouchableAllSizeProps;
 
-type TouchableFactoryProps<
-  Themes,
-  AdditionalPalettes,
-  TouchablePaddingSizes
-> = {
+type TouchableFactoryProps<Themes, AdditionalPalettes, TouchableSizes> = {
   themes: {
     [ThemeKeys in
       | keyof Themes
@@ -31,30 +26,30 @@ type TouchableFactoryProps<
   additionalPalettes?: {
     [AdditionalPaletteKeys in keyof AdditionalPalettes]: Color;
   };
-  touchablePaddingSizes?: {
-    [SizeKey in
-      | keyof TouchablePaddingSizes
-      | keyof DefaultObject<TouchablePaddingProps>]: TouchablePaddingProps;
-  };
-  defaultTouchableType?: TouchableType;
+  sizes?: {
+    [SizeKey in keyof TouchableSizes]: TouchableSizeProps;
+  } &
+    DefaultObject<TouchableSizeProps>;
+  defaultType?: TouchableTypes;
+  allowCustomProps?: boolean;
 };
 
-type TouchableProps<AdditionalPalettes, TouchablePaddingSizes> = {
-  additionalProps?: TouchableOpacityProps;
-  additionalStyle?: ViewStyle;
+type TouchableProps<AdditionalPalettes, TouchableSizes, AllowCustomProps> = {
+  additionalProps?: AllowCustomProps extends true
+    ? TouchableOpacityProps
+    : never;
+  additionalStyle?: AllowCustomProps extends true ? ViewStyle : never;
   align?: FlexAlignType;
-  children: React.ReactElement;
+  children: React.ReactNode;
   color?: keyof ThemePalette | keyof AdditionalPalettes;
   isDisabled?: boolean;
   isStretched?: boolean;
-  size?:
-    | keyof TouchablePaddingSizes
-    | keyof DefaultObject<TouchablePaddingProps>;
-  type?: TouchableType;
+  size?: keyof (TouchableSizes & DefaultObject<TouchableSizeProps>);
+  type?: TouchableTypes;
   onPress: (args: any) => any;
 };
 
-type TouchablePaddingKeys =
+type TouchableSizes =
   | 'tiny'
   | 'small'
   | 'medium'
@@ -64,11 +59,11 @@ type TouchablePaddingKeys =
   | 'massive';
 
 export {
-  TouchableType,
-  TouchablePaddingKeys,
+  TouchableTypes,
+  TouchableSizes,
   TouchableProps,
-  TouchablePaddingProps,
+  TouchableSizeProps,
   TouchableFactoryProps,
-  TouchableVerHorPaddingProps,
-  TouchableAllPaddingProps,
+  TouchableVerHorSizeProps,
+  TouchableAllSizeProps,
 };
