@@ -3,29 +3,24 @@ import {TouchableOpacity, View, ViewStyle} from 'react-native';
 import {
   RadioButtonFactoryProps,
   RadioButtonProps as Props,
+  RadioButtonSizeProps,
   RadioButtonVariations,
 } from './types';
 import {DefaultObject} from '../../types';
 import {ThemePalette} from '../../Theme/types';
-import {RADIO_BUTTON_VARIATION_KEYS} from './constants';
+import {
+  RADIO_BUTTON_VARIATION_KEYS,
+  DEFAULT_RADIO_BUTTON_SIZE,
+} from './constants';
 
-function buttonFactory<
-  Themes,
-  AdditionalPalettes,
-  RadioButtonSizes,
-  AllowAdditionalProps
->({
+function buttonFactory<Themes, AdditionalPalettes, RadioButtonSizes>({
   themes,
   sizes,
   additionalPalettes,
-}: RadioButtonFactoryProps<
-  Themes,
-  AdditionalPalettes,
-  RadioButtonSizes,
-  AllowAdditionalProps
->): {
+  allowCustomProps,
+}: RadioButtonFactoryProps<Themes, AdditionalPalettes, RadioButtonSizes>): {
   [key in RadioButtonVariations]: React.FunctionComponent<
-    Props<AdditionalPalettes, RadioButtonSizes, AllowAdditionalProps>
+    Props<AdditionalPalettes, RadioButtonSizes, typeof allowCustomProps>
   >;
 } {
   const themeContext: React.Context<keyof Themes> = React.createContext(
@@ -33,23 +28,26 @@ function buttonFactory<
   );
   const radioButtons: {
     [key in RadioButtonVariations]?: React.FC<
-      Props<AdditionalPalettes, RadioButtonSizes, AllowAdditionalProps>
+      Props<AdditionalPalettes, RadioButtonSizes, typeof allowCustomProps>
     >;
   } = {};
   RADIO_BUTTON_VARIATION_KEYS.forEach((variation: RadioButtonVariations) => {
     const Button: React.FC<
-      Props<AdditionalPalettes, RadioButtonSizes, AllowAdditionalProps>
+      Props<AdditionalPalettes, RadioButtonSizes, typeof allowCustomProps>
     > = ({
+      active,
       color,
       isDisabled,
       onPress,
       size,
-      additionalRadioButtonProps,
-      additionalRadioButtonStyle,
+      _customInnerViewProps,
+      _customInnerViewStyle,
+      _customOuterViewProps,
+      _customOuterViewStyle,
     }: Props<
       AdditionalPalettes,
       RadioButtonSizes,
-      AllowAdditionalProps
+      typeof allowCustomProps
     >): React.ReactElement => {
       // Palettes
       const currentThemeKey = useContext(themeContext) || 'default';
@@ -64,33 +62,65 @@ function buttonFactory<
             additionalPalettes[color as keyof AdditionalPalettes]) ||
           currentTheme[color as keyof ThemePalette]
         : currentTheme.disabled;
+      const activeColor =
+        variation === 'Reverse' ? currentTheme.background : primaryColor;
+      const deactiveColor =
+        variation === 'Reverse' ? primaryColor : currentTheme.background;
       const outerRingColor = primaryColor;
-      const dotColor =
-        variation !== 'Reverse' ? primaryColor : currentTheme.background;
+      const dotColor = active ? activeColor : deactiveColor;
       const innerRingColor =
-        variation !== 'Reverse' ? currentTheme.background : primaryColor;
+        variation === 'Reverse' ? primaryColor : currentTheme.background;
 
       // Size
-      const sizeProperty = sizes['default'] ? sizes[`${size}`] : size;
+
+      const sizeProperty = ((): RadioButtonSizeProps => {
+        if (
+          sizes &&
+          (sizes as {
+            [SizeKey in keyof RadioButtonSizes]: RadioButtonSizeProps;
+          } &
+            DefaultObject<RadioButtonSizeProps>).default
+        ) {
+          return (sizes as {
+            [SizeKey in keyof RadioButtonSizes]: RadioButtonSizeProps;
+          } &
+            DefaultObject<RadioButtonSizeProps>)[
+            `${size}` as keyof (RadioButtonSizes &
+              DefaultObject<RadioButtonSizeProps>)
+          ];
+        } else if (sizes && (sizes as RadioButtonSizeProps).size) {
+          return sizes as RadioButtonSizeProps;
+        } else {
+          return DEFAULT_RADIO_BUTTON_SIZE;
+        }
+      })();
+
+      const dotSize =
+        variation === 'Fill'
+          ? sizeProperty.size - sizeProperty.borderThickness * 2
+          : sizeProperty.dotSize;
 
       // BorderStyles
       const borderStyles = sizeProperty.borderThickness;
 
       const outerRingStyle: ViewStyle = {
+        alignItems: 'center',
+        backgroundColor: innerRingColor,
+        borderColor: outerRingColor,
         borderRadius: 100,
-        backgroundColor: outerRingColor,
+        borderWidth: borderStyles,
+        justifyContent: 'center',
         width: sizeProperty.size,
         height: sizeProperty.size,
-        borderWidth: sizeProperty.borderThickness,
-        ...(additionalRadioButtonStyle || {}),
+        ...(_customOuterViewStyle || {}),
       };
 
       const dotStyle: ViewStyle = {
         borderRadius: 100,
         backgroundColor: dotColor,
-        width: sizeProperty.size / 2,
-        height: sizeProperty.size / 2,
-        ...(additionalRadioButtonStyle || {}),
+        width: dotSize,
+        height: dotSize,
+        ...(_customInnerViewStyle || {}),
       };
 
       return (
@@ -98,8 +128,8 @@ function buttonFactory<
           style={outerRingStyle}
           disabled={isDisabled}
           onPress={onPress}
-          {...additionalRadioButtonProps}>
-          <View style={dotStyle} />
+          {..._customOuterViewProps}>
+          <View style={dotStyle} {..._customInnerViewProps} />
         </TouchableOpacity>
       );
     };
@@ -107,13 +137,13 @@ function buttonFactory<
   });
   const RadioButtons = {
     Dot: radioButtons.Dot as React.FunctionComponent<
-      Props<AdditionalPalettes, RadioButtonSizes, AllowAdditionalProps>
+      Props<AdditionalPalettes, RadioButtonSizes, typeof allowCustomProps>
     >,
     Reverse: radioButtons.Reverse as React.FunctionComponent<
-      Props<AdditionalPalettes, RadioButtonSizes, AllowAdditionalProps>
+      Props<AdditionalPalettes, RadioButtonSizes, typeof allowCustomProps>
     >,
     Fill: radioButtons.Fill as React.FunctionComponent<
-      Props<AdditionalPalettes, RadioButtonSizes, AllowAdditionalProps>
+      Props<AdditionalPalettes, RadioButtonSizes, typeof allowCustomProps>
     >,
   };
   return RadioButtons;
