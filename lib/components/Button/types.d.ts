@@ -17,16 +17,16 @@ declare type ButtonFactoryProps<Themes, AdditionalPalettes, ButtonSizes> = {
         [AdditionalPaletteKey in keyof AdditionalPalettes]: Color;
     };
     sizes?: {
-        [SizeKey in keyof ButtonSizes & DefaultObject<ButtonSizeProps>]: ButtonSizeProps;
-    };
+        [SizeKey in keyof ButtonSizes]: ButtonSizeProps;
+    } & DefaultObject<ButtonSizeProps>;
     defaultType?: ButtonTypes;
-    allowAdditionalPalettes?: boolean;
+    allowCustomProps?: boolean;
 };
-declare type ButtonProps<AdditionalPalettes, ButtonSizes, AllowAdditionalPalettes> = {
-    additionalButtonProps?: AllowAdditionalPalettes extends true ? never : TouchableOpacityProps;
-    additionalButtonStyle?: AllowAdditionalPalettes extends true ? never : ViewStyle;
-    additionalTextProps?: AllowAdditionalPalettes extends true ? never : TextProperties;
-    additionalTextStyle?: AllowAdditionalPalettes extends true ? never : TextStyle;
+declare type ButtonProps<AdditionalPalettes, ButtonSizes, AllowCustomProps> = {
+    additionalButtonProps?: AllowCustomProps extends true ? never : TouchableOpacityProps;
+    additionalButtonStyle?: AllowCustomProps extends true ? never : ViewStyle;
+    additionalTextProps?: AllowCustomProps extends true ? never : TextProperties;
+    additionalTextStyle?: AllowCustomProps extends true ? never : TextStyle;
     align?: FlexAlignType;
     color?: keyof ThemePalette | keyof AdditionalPalettes;
     isDisabled?: boolean;

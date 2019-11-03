@@ -3,7 +3,6 @@ import {TouchableOpacity, FlexAlignType} from 'react-native';
 import {
   TouchableFactoryProps,
   TouchableProps as Props,
-  TouchableSizeProps,
   TouchableVerHorSizeProps,
   TouchableAllSizeProps,
 } from './types';

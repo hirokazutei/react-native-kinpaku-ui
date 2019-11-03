@@ -2,7 +2,7 @@
 import { TouchableOpacityProps, ViewStyle, FlexAlignType } from 'react-native';
 import { Color, DefaultObject } from '../../types';
 import { ThemePalette } from '../../Theme/types';
-declare type TouchableType = 'solid' | 'outline';
+declare type TouchableTypes = 'solid' | 'outline';
 declare type VerHor = {
     horizontalPadding: number;
     verticalPadding: number;
@@ -10,37 +10,38 @@ declare type VerHor = {
 declare type Padding = {
     padding: number;
 };
-declare type TouchableVerHorPaddingProps = {
+declare type TouchableVerHorSizeProps = {
     borderRadius: number;
 } & VerHor;
-declare type TouchableAllPaddingProps = {
+declare type TouchableAllSizeProps = {
     borderRadius: number;
 } & Padding;
-declare type TouchablePaddingProps = TouchableVerHorPaddingProps | TouchableAllPaddingProps;
-declare type TouchableFactoryProps<Themes, AdditionalPalettes, TouchablePaddingSizes> = {
+declare type TouchableSizeProps = TouchableVerHorSizeProps | TouchableAllSizeProps;
+declare type TouchableFactoryProps<Themes, AdditionalPalettes, TouchableSizes> = {
     themes: {
         [ThemeKeys in keyof Themes | keyof DefaultObject<ThemePalette>]: ThemePalette;
     };
     additionalPalettes?: {
         [AdditionalPaletteKeys in keyof AdditionalPalettes]: Color;
     };
-    touchablePaddingSizes?: {
-        [SizeKey in keyof TouchablePaddingSizes | keyof DefaultObject<TouchablePaddingProps>]: TouchablePaddingProps;
-    };
-    defaultTouchableType?: TouchableType;
+    sizes?: {
+        [SizeKey in keyof TouchableSizes]: TouchableSizeProps;
+    } & DefaultObject<TouchableSizeProps>;
+    defaultType?: TouchableTypes;
+    allowCustomProps?: boolean;
 };
-declare type TouchableProps<AdditionalPalettes, TouchablePaddingSizes> = {
-    additionalProps?: TouchableOpacityProps;
-    additionalStyle?: ViewStyle;
+declare type TouchableProps<AdditionalPalettes, TouchableSizes, AllowCustomProps> = {
+    additionalProps?: AllowCustomProps extends true ? TouchableOpacityProps : never;
+    additionalStyle?: AllowCustomProps extends true ? ViewStyle : never;
     align?: FlexAlignType;
-    children: React.ReactElement;
+    children: React.ReactNode;
     color?: keyof ThemePalette | keyof AdditionalPalettes;
     isDisabled?: boolean;
     isStretched?: boolean;
-    size?: keyof TouchablePaddingSizes | keyof DefaultObject<TouchablePaddingProps>;
-    type?: TouchableType;
+    size?: keyof (TouchableSizes & DefaultObject<TouchableSizeProps>);
+    type?: TouchableTypes;
     onPress: (args: any) => any;
 };
-declare type TouchablePaddingKeys = 'tiny' | 'small' | 'medium' | 'default' | 'large' | 'huge' | 'massive';
-export { TouchableType, TouchablePaddingKeys, TouchableProps, TouchablePaddingProps, TouchableFactoryProps, TouchableVerHorPaddingProps, TouchableAllPaddingProps, };
+declare type TouchableSizes = 'tiny' | 'small' | 'medium' | 'default' | 'large' | 'huge' | 'massive';
+export { TouchableTypes, TouchableSizes, TouchableProps, TouchableSizeProps, TouchableFactoryProps, TouchableVerHorSizeProps, TouchableAllSizeProps, };
 //# sourceMappingURL=types.d.ts.map

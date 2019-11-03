@@ -31,13 +31,13 @@ export default function UIFactory<ThemeObject>(themes: Themes<ThemeObject>): {
         }, boolean | undefined>>;
     };
     Touchable: import("react").FunctionComponent<import("./components/Touchable/types").TouchableProps<null, {
-        default: import("./components/Touchable/types").TouchableAllPaddingProps;
-        small: import("./components/Touchable/types").TouchableAllPaddingProps;
-        tiny: import("./components/Touchable/types").TouchableAllPaddingProps;
-        medium: import("./components/Touchable/types").TouchableAllPaddingProps;
-        large: import("./components/Touchable/types").TouchableAllPaddingProps;
-        huge: import("./components/Touchable/types").TouchableAllPaddingProps;
-        massive: import("./components/Touchable/types").TouchableAllPaddingProps;
-    }>>;
+        default: import("./components/Touchable/types").TouchableAllSizeProps;
+        small: import("./components/Touchable/types").TouchableAllSizeProps;
+        tiny: import("./components/Touchable/types").TouchableAllSizeProps;
+        medium: import("./components/Touchable/types").TouchableAllSizeProps;
+        large: import("./components/Touchable/types").TouchableAllSizeProps;
+        huge: import("./components/Touchable/types").TouchableAllSizeProps;
+        massive: import("./components/Touchable/types").TouchableAllSizeProps;
+    }, boolean | undefined>>;
 };
 //# sourceMappingURL=uiFactory.d.ts.map
