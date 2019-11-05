@@ -15,16 +15,16 @@ declare type RadioButtonFactoryProps<Themes, AdditionalPalettes, RadioButtonSize
         [AdditionalPaletteKeys in keyof AdditionalPalettes]: Color;
     };
     sizes?: RadioButtonSizes extends null ? RadioButtonSizeProps : {
-        [SizeKey in keyof RadioButtonSizes]: RadioButtonSizeProps;
-    } & DefaultObject<RadioButtonSizeProps>;
+        [SizeKey in keyof (RadioButtonSizes & DefaultObject<RadioButtonSizeProps>)]: RadioButtonSizeProps;
+    };
     defaultVariation?: RadioButtonVariations;
     allowCustomProps?: boolean;
 };
 declare type RadioButtonProps<AdditionalPalettes, RadioButtonSizes, AllowCustomProps> = {
     active: boolean;
-    color?: keyof ThemePalette | keyof AdditionalPalettes;
+    color?: keyof (ThemePalette & AdditionalPalettes);
     isDisabled?: boolean;
-    size?: keyof RadioButtonSizes extends 'default' ? keyof RadioButtonSizes | keyof DefaultObject<RadioButtonSizes> : never;
+    size?: keyof RadioButtonSizes extends 'default' ? keyof (RadioButtonSizes & DefaultObject<RadioButtonSizes>) : never;
     onPress: (args: any) => any;
     _customOuterViewProps?: AllowCustomProps extends true ? TouchableOpacityProps : never;
     _customOuterViewStyle?: AllowCustomProps extends true ? ViewStyle : never;
