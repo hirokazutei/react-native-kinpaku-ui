@@ -19,6 +19,13 @@ import {
   TouchableVerHorSizeProps,
   TouchableAllSizeProps,
 } from './components/Touchable/types';
+import radioButtonFactory from './components/RadioButton';
+import {
+  RadioButtonFactoryProps,
+  RadioButtonProps,
+  RadioButtonSizeProps,
+  RadioButtonVariations,
+} from './components/RadioButton/types';
 
 export {
   buttonFactory,
@@ -28,6 +35,11 @@ export {
   ButtonSizeProps,
   ButtonTypes,
   ButtonVariations,
+  radioButtonFactory,
+  RadioButtonFactoryProps,
+  RadioButtonProps,
+  RadioButtonSizeProps,
+  RadioButtonVariations,
   ThemePalette,
   Themes,
   TouchableAllSizeProps,

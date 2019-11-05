@@ -13,7 +13,7 @@ import {
   DEFAULT_RADIO_BUTTON_SIZE,
 } from './constants';
 
-function buttonFactory<Themes, AdditionalPalettes, RadioButtonSizes>({
+function radioButtonFactory<Themes, AdditionalPalettes, RadioButtonSizes>({
   themes,
   sizes,
   additionalPalettes,
@@ -149,4 +149,4 @@ function buttonFactory<Themes, AdditionalPalettes, RadioButtonSizes>({
   return RadioButtons;
 }
 
-export default buttonFactory;
+export default radioButtonFactory;
