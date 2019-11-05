@@ -20,31 +20,31 @@ type ButtonSizeProps = {
 
 type ButtonFactoryProps<Themes, AdditionalPalettes, ButtonSizes> = {
   themes: {
-    [ThemeKey in keyof Themes & DefaultObject<ThemePalette>]: ThemePalette;
+    [ThemeKey in keyof (Themes & DefaultObject<ThemePalette>)]: ThemePalette;
   };
   additionalPalettes?: {
     [AdditionalPaletteKey in keyof AdditionalPalettes]: Color;
   };
   sizes?: {
-    [SizeKey in keyof ButtonSizes]: ButtonSizeProps;
-  } &
-    DefaultObject<ButtonSizeProps>;
+    [SizeKey in keyof (ButtonSizes &
+      DefaultObject<ButtonSizeProps>)]: ButtonSizeProps;
+  };
   defaultType?: ButtonTypes;
   allowCustomProps?: boolean;
 };
 
 type ButtonProps<AdditionalPalettes, ButtonSizes, AllowCustomProps> = {
-  additionalButtonProps?: AllowCustomProps extends true
+  _additionalButtonProps?: AllowCustomProps extends true
     ? never
     : TouchableOpacityProps;
-  additionalButtonStyle?: AllowCustomProps extends true ? never : ViewStyle;
-  additionalTextProps?: AllowCustomProps extends true ? never : TextProperties;
-  additionalTextStyle?: AllowCustomProps extends true ? never : TextStyle;
+  _additionalButtonStyle?: AllowCustomProps extends true ? never : ViewStyle;
+  _additionalTextProps?: AllowCustomProps extends true ? never : TextProperties;
+  _additionalTextStyle?: AllowCustomProps extends true ? never : TextStyle;
   align?: FlexAlignType;
-  color?: keyof ThemePalette | keyof AdditionalPalettes;
+  color?: keyof (ThemePalette & DefaultObject<AdditionalPalettes>);
   isDisabled?: boolean;
   isStretched?: boolean;
-  size?: keyof ButtonSizes | keyof DefaultObject<ButtonSizeProps>;
+  size?: keyof (ButtonSizes & DefaultObject<ButtonSizeProps>);
   title: string;
   type?: ButtonTypes;
   onPress: (args: any) => any;

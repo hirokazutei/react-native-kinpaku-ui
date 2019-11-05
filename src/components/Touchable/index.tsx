@@ -45,8 +45,8 @@ function touchableFactory<
     align = DEFAULT_TOUCHABLE_ALIGN,
     onPress,
     type = defaultType,
-    additionalProps,
-    additionalStyle,
+    _additionalProps,
+    _additionalStyle,
   }: Props<
     AdditionalPalettes,
     TouchableSizes,
@@ -56,9 +56,8 @@ function touchableFactory<
     const currentThemeKey = useContext(paletteContext) || 'default';
     const currentTheme =
       themes[
-        `${currentThemeKey}` as
-          | keyof PaletteObjectType
-          | keyof DefaultObject<ThemePalette>
+        `${currentThemeKey}` as keyof (PaletteObjectType &
+          DefaultObject<ThemePalette>)
       ];
 
     // Color
@@ -107,14 +106,14 @@ function touchableFactory<
       paddingVertical:
         touchableVerticalPadding || DEFAULT_TOUCHABLE_SIZES.default.padding,
       ...borderStyles,
-      ...additionalStyle,
+      ..._additionalStyle,
     };
     return (
       <TouchableOpacity
         style={touchableStyle}
         disabled={isDisabled}
         onPress={onPress}
-        {...additionalProps}>
+        {..._additionalProps}>
         {children}
       </TouchableOpacity>
     );

@@ -19,29 +19,27 @@ type TouchableSizeProps = TouchableVerHorSizeProps | TouchableAllSizeProps;
 
 type TouchableFactoryProps<Themes, AdditionalPalettes, TouchableSizes> = {
   themes: {
-    [ThemeKeys in
-      | keyof Themes
-      | keyof DefaultObject<ThemePalette>]: ThemePalette;
+    [ThemeKeys in keyof (Themes & DefaultObject<ThemePalette>)]: ThemePalette;
   };
   additionalPalettes?: {
     [AdditionalPaletteKeys in keyof AdditionalPalettes]: Color;
   };
   sizes?: {
-    [SizeKey in keyof TouchableSizes]: TouchableSizeProps;
-  } &
-    DefaultObject<TouchableSizeProps>;
+    [SizeKey in keyof (TouchableSizes &
+      DefaultObject<TouchableSizeProps>)]: TouchableSizeProps;
+  };
   defaultType?: TouchableTypes;
   allowCustomProps?: boolean;
 };
 
 type TouchableProps<AdditionalPalettes, TouchableSizes, AllowCustomProps> = {
-  additionalProps?: AllowCustomProps extends true
+  _additionalProps?: AllowCustomProps extends true
     ? TouchableOpacityProps
     : never;
-  additionalStyle?: AllowCustomProps extends true ? ViewStyle : never;
+  _additionalStyle?: AllowCustomProps extends true ? ViewStyle : never;
   align?: FlexAlignType;
   children: React.ReactNode;
-  color?: keyof ThemePalette | keyof AdditionalPalettes;
+  color?: keyof (ThemePalette & AdditionalPalettes);
   isDisabled?: boolean;
   isStretched?: boolean;
   size?: keyof (TouchableSizes & DefaultObject<TouchableSizeProps>);

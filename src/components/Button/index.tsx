@@ -48,10 +48,10 @@ function buttonFactory<Themes, AdditionalPalettes, ButtonSizes>({
       onPress,
       title,
       type = defaultType,
-      additionalButtonProps,
-      additionalButtonStyle,
-      additionalTextProps,
-      additionalTextStyle,
+      _additionalButtonProps,
+      _additionalButtonStyle,
+      _additionalTextProps,
+      _additionalTextStyle,
     }: Props<
       AdditionalPalettes,
       ButtonSizes,
@@ -61,7 +61,7 @@ function buttonFactory<Themes, AdditionalPalettes, ButtonSizes>({
       const currentThemeKey = useContext(paletteContext) || 'default';
       const currentTheme =
         themes[
-          `${currentThemeKey}` as keyof Themes & DefaultObject<ThemePalette>
+          `${currentThemeKey}` as keyof (Themes & DefaultObject<ThemePalette>)
         ];
 
       // Color
@@ -114,7 +114,7 @@ function buttonFactory<Themes, AdditionalPalettes, ButtonSizes>({
           (buttonSizeProperty && buttonSizeProperty.verticalPaddding) ||
           DEFAULT_BUTTON_SIZES.default.verticalPaddding,
         ...borderStyles,
-        ...(additionalButtonStyle || {}),
+        ...(_additionalButtonStyle || {}),
       };
 
       // Text Style
@@ -125,7 +125,7 @@ function buttonFactory<Themes, AdditionalPalettes, ButtonSizes>({
           (buttonSizeProperty && buttonSizeProperty.fontSize) ||
           DEFAULT_BUTTON_SIZES.default.fontSize,
         fontWeight: DEFAULT_BUTTON_FONT_WEIGHT,
-        ...(additionalTextStyle || {}),
+        ...(_additionalTextStyle || {}),
       };
       return (
         <TouchableOpacity
@@ -133,8 +133,8 @@ function buttonFactory<Themes, AdditionalPalettes, ButtonSizes>({
           disabled={isDisabled}
           onPress={onPress}
           accessibilityLabel={title}
-          {...(additionalButtonProps || {})}>
-          <Text style={textStyle} {...(additionalTextProps || {})}>
+          {...(_additionalButtonProps || {})}>
+          <Text style={textStyle} {...(_additionalTextProps || {})}>
             {title}
           </Text>
         </TouchableOpacity>
