@@ -44,4 +44,6 @@ workflows:
       - test_storyshots:
           requires:
             - checkout_code
-      - test_ts_build
+      - test_ts_build:
+          requires:
+            - checkout_code
