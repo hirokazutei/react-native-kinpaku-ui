@@ -7,11 +7,11 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: yarn-cache-{{checksum "yarn.lock"}}
+          key: yarn-cache-{{checksum "yarn.lock"}}-{{checksum "package.json"}}
       - run: yarn
       - run: yarn global add typescript@3.5.3
       - save_cache:
-          key: yarn-cache-{{checksum "yarn.lock"}}
+          key: yarn-cache-{{checksum "yarn.lock"}}-{{checksum "package.json"}}
           paths:
             - node_modules
             - yarn_cache
