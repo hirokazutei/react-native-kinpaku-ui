@@ -14,7 +14,6 @@ jobs:
           paths:
             - node_modules
             - yarn_cache
-      - run: yarn pretest
       - persist_to_workspace:
           root: .
           paths:
