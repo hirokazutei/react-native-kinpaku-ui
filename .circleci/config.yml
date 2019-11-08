@@ -3,7 +3,7 @@ version: 2
 jobs:
   checkout_code:
     docker:
-      - image: chakracore-10.13.0
+      - image: circleci/node:10.16
     steps:
       - checkout
       - restore_cache:
@@ -21,7 +21,7 @@ jobs:
             - .
   test_storyshots:
     docker:
-      - image: chakracore-10.13.0
+      - image: circleci/node:10.16
     steps:
       - attach_workspace:
           at: .
