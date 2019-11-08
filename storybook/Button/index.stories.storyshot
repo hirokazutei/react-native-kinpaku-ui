@@ -1,0 +1,347 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots UI/Button Default 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "#FEFFFF",
+      "flex": 1,
+      "flexDirection": "column",
+      "justifyContent": "space-evenly",
+      "padding": 40,
+    }
+  }
+>
+  <View
+    accessibilityLabel="PRESS HERE"
+    accessible={true}
+    clickable={true}
+    isTVSelectable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "alignSelf": "center",
+        "backgroundColor": "#88EEBB",
+        "borderRadius": 0,
+        "opacity": 1,
+        "paddingHorizontal": 12,
+        "paddingVertical": 6,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "alignSelf": "center",
+          "color": "#FEFFFF",
+          "fontSize": 20,
+          "fontWeight": "bold",
+        }
+      }
+    >
+      PRESS HERE
+    </Text>
+  </View>
+  <View
+    accessibilityLabel="PRESS HERE"
+    accessible={true}
+    clickable={true}
+    isTVSelectable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "alignSelf": "center",
+        "backgroundColor": "#FEFFFF",
+        "borderColor": "#88EEBB",
+        "borderRadius": 0,
+        "borderWidth": 2,
+        "opacity": 1,
+        "paddingHorizontal": 12,
+        "paddingVertical": 6,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "alignSelf": "center",
+          "color": "#88EEBB",
+          "fontSize": 20,
+          "fontWeight": "bold",
+        }
+      }
+    >
+      PRESS HERE
+    </Text>
+  </View>
+  <View
+    accessibilityLabel="PRESS HERE"
+    accessible={true}
+    clickable={true}
+    isTVSelectable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "alignSelf": "center",
+        "backgroundColor": "#FEFFFF",
+        "borderRadius": 0,
+        "opacity": 1,
+        "paddingHorizontal": 12,
+        "paddingVertical": 6,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "alignSelf": "center",
+          "color": "#88EEBB",
+          "fontSize": 20,
+          "fontWeight": "bold",
+        }
+      }
+    >
+      PRESS HERE
+    </Text>
+  </View>
+  <View
+    accessibilityLabel="PRESS HERE"
+    accessible={true}
+    clickable={true}
+    isTVSelectable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "alignSelf": "center",
+        "backgroundColor": "#88EEBB",
+        "borderRadius": 8,
+        "opacity": 1,
+        "paddingHorizontal": 12,
+        "paddingVertical": 6,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "alignSelf": "center",
+          "color": "#FEFFFF",
+          "fontSize": 20,
+          "fontWeight": "bold",
+        }
+      }
+    >
+      PRESS HERE
+    </Text>
+  </View>
+  <View
+    accessibilityLabel="PRESS HERE"
+    accessible={true}
+    clickable={true}
+    isTVSelectable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "alignSelf": "center",
+        "backgroundColor": "#FEFFFF",
+        "borderColor": "#88EEBB",
+        "borderRadius": 8,
+        "borderWidth": 2,
+        "opacity": 1,
+        "paddingHorizontal": 12,
+        "paddingVertical": 6,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "alignSelf": "center",
+          "color": "#88EEBB",
+          "fontSize": 20,
+          "fontWeight": "bold",
+        }
+      }
+    >
+      PRESS HERE
+    </Text>
+  </View>
+  <View
+    accessibilityLabel="PRESS HERE"
+    accessible={true}
+    clickable={true}
+    isTVSelectable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "alignSelf": "center",
+        "backgroundColor": "#FEFFFF",
+        "borderRadius": 8,
+        "opacity": 1,
+        "paddingHorizontal": 12,
+        "paddingVertical": 6,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "alignSelf": "center",
+          "color": "#88EEBB",
+          "fontSize": 20,
+          "fontWeight": "bold",
+        }
+      }
+    >
+      PRESS HERE
+    </Text>
+  </View>
+  <View
+    accessibilityLabel="PRESS HERE"
+    accessible={true}
+    clickable={true}
+    isTVSelectable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "alignSelf": "center",
+        "backgroundColor": "#88EEBB",
+        "borderRadius": 32,
+        "opacity": 1,
+        "paddingHorizontal": 12,
+        "paddingVertical": 6,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "alignSelf": "center",
+          "color": "#FEFFFF",
+          "fontSize": 20,
+          "fontWeight": "bold",
+        }
+      }
+    >
+      PRESS HERE
+    </Text>
+  </View>
+  <View
+    accessibilityLabel="PRESS HERE"
+    accessible={true}
+    clickable={true}
+    isTVSelectable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "alignSelf": "center",
+        "backgroundColor": "#FEFFFF",
+        "borderColor": "#88EEBB",
+        "borderRadius": 32,
+        "borderWidth": 2,
+        "opacity": 1,
+        "paddingHorizontal": 12,
+        "paddingVertical": 6,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "alignSelf": "center",
+          "color": "#88EEBB",
+          "fontSize": 20,
+          "fontWeight": "bold",
+        }
+      }
+    >
+      PRESS HERE
+    </Text>
+  </View>
+  <View
+    accessibilityLabel="PRESS HERE"
+    accessible={true}
+    clickable={true}
+    isTVSelectable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "alignSelf": "center",
+        "backgroundColor": "#FEFFFF",
+        "borderRadius": 32,
+        "opacity": 1,
+        "paddingHorizontal": 12,
+        "paddingVertical": 6,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "alignSelf": "center",
+          "color": "#88EEBB",
+          "fontSize": 20,
+          "fontWeight": "bold",
+        }
+      }
+    >
+      PRESS HERE
+    </Text>
+  </View>
+</View>
+`;

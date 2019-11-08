@@ -1,0 +1,125 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots UI/RadioButton Default 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "#FEFFFF",
+      "flex": 1,
+      "flexDirection": "column",
+      "justifyContent": "space-evenly",
+      "padding": 40,
+    }
+  }
+>
+  <View
+    accessible={true}
+    clickable={true}
+    isTVSelectable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#FEFFFF",
+        "borderColor": "#88EEBB",
+        "borderRadius": 100,
+        "borderWidth": 2,
+        "height": 16,
+        "justifyContent": "center",
+        "opacity": 1,
+        "width": 16,
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "backgroundColor": "#FEFFFF",
+          "borderRadius": 100,
+          "height": 8,
+          "width": 8,
+        }
+      }
+    />
+  </View>
+  <View
+    accessible={true}
+    clickable={true}
+    isTVSelectable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#88EEBB",
+        "borderColor": "#88EEBB",
+        "borderRadius": 100,
+        "borderWidth": 2,
+        "height": 16,
+        "justifyContent": "center",
+        "opacity": 1,
+        "width": 16,
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "backgroundColor": "#88EEBB",
+          "borderRadius": 100,
+          "height": 8,
+          "width": 8,
+        }
+      }
+    />
+  </View>
+  <View
+    accessible={true}
+    clickable={true}
+    isTVSelectable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#FEFFFF",
+        "borderColor": "#88EEBB",
+        "borderRadius": 100,
+        "borderWidth": 2,
+        "height": 16,
+        "justifyContent": "center",
+        "opacity": 1,
+        "width": 16,
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "backgroundColor": "#FEFFFF",
+          "borderRadius": 100,
+          "height": 12,
+          "width": 12,
+        }
+      }
+    />
+  </View>
+</View>
+`;
