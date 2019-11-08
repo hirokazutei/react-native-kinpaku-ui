@@ -14,6 +14,8 @@ type TextVariationProps<FontSizes> = {
   fontFamily?: string;
   fontSizes?: FontSizeProps<FontSizes>;
   fontWeight?: TextStyle['fontWeight'];
+  isBold?: boolean;
+  isItalic?: boolean;
   letterSpacing?: number;
   lineHeight?: number;
 };
