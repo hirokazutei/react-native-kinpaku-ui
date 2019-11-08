@@ -1,0 +1,38 @@
+version: 2
+
+jobs:
+  checkout_code:
+    docker:
+      - image: chakracore-10.13.0
+    steps:
+      - checkout
+      - restore_cache:
+          key: yarn-cache-{{checksum "yarn.lock"}}
+      - run: yarn
+      - save_cache:
+          key: yarn-cache-{{checksum "yarn.lock"}}
+          paths:
+            - node_modules
+            - yarn_cache
+      - run: yarn pretest
+      - persist_to_workspace:
+          root: .
+          paths:
+            - .
+  test_storyshots:
+    docker:
+      - image: chakracore-10.13.0
+    steps:
+      - attach_workspace:
+          at: .
+      - run: yarn story-loader
+      - run: yarn test:storyshots
+
+workflows:
+  version: 2
+  test:
+    jobs:
+      - checkout_code
+      - test_storyshots:
+          requires:
+            - checkout_code
