@@ -7,6 +7,6 @@ configure(() => {
   loadStories();
 }, module);
 
-const StorybookUI = getStorybookUI({port: 7007, onDeviceUI: true});
+const StorybookUI = getStorybookUI({});
 AppRegistry.registerComponent('KinpakuUI', () => StorybookUI);
 export default StorybookUI;

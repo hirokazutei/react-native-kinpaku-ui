@@ -55,7 +55,7 @@ const getRequiredProps = (
   };
 };
 
-storiesOf('UI/Button')
+storiesOf('UI/Button', module)
   .addDecorator((story: () => React.ReactElement) => <Provider story={story} />)
   .addDecorator(withKnobs)
   .add('Default', () => (

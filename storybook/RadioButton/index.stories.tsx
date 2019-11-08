@@ -47,7 +47,7 @@ const getRequiredProps = (
   };
 };
 
-storiesOf('UI/RadioButton')
+storiesOf('UI/RadioButton', module)
   .addDecorator((story: () => React.ReactElement) => <Provider story={story} />)
   .addDecorator(withKnobs)
   .add('Default', () => (
