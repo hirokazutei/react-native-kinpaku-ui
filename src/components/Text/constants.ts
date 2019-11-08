@@ -1,6 +1,4 @@
-import {FontSizeProps, TextVariationProps} from './types';
-
-type TextVariations =
+export type TextVariations =
   | 'Title'
   | 'SubTitle'
   | 'Heading'
@@ -8,7 +6,7 @@ type TextVariations =
   | 'Caption'
   | 'Quote';
 
-const textVariations = {
+export const textVariations = {
   Title: {},
 };
 
