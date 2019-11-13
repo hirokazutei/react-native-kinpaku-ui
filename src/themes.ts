@@ -1,4 +1,8 @@
-const themes = {
+import {Themes} from './Theme/types';
+
+type ThemePalettes = 'test';
+
+const themes: Themes<ThemePalettes> = {
   test: {
     primary: 'yellow',
     secondary: 'yellow',

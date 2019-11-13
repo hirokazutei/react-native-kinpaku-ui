@@ -2,17 +2,22 @@ import {TextStyle} from 'react-native';
 import {Color, DefaultObject} from '../../types';
 import {ThemePalette} from '../../Theme/types';
 
-type FontSizeProps<FontSizes> = {[SizeKey in keyof FontSizes]: number};
+type FontSizeProps<FontSizes> = {[key in keyof FontSizes]: number};
 
-type TextVariationProps<FontSizes> = {
+type TextVariationProps<FontSizes, Themes, AdditionalPalettes> = {
   allowBold?: boolean;
-  alloqItalic?: boolean;
+  allowItalic?: boolean;
   allowLineThrough?: boolean;
   allowUnderline?: boolean;
   allowNumericFontSize?: boolean;
-  defaultFontSize: number;
+  defaultColor?: keyof (Themes & AdditionalPalettes);
+  defaultFontSize: FontSizes extends null | undefined
+    ? number
+    : keyof FontSizes;
   fontFamily?: string;
-  fontSizes?: FontSizeProps<FontSizes>;
+  fontSizes: FontSizes extends null | undefined
+    ? never
+    : Required<FontSizeProps<FontSizes>>;
   fontWeight?: TextStyle['fontWeight'];
   isBold?: boolean;
   isItalic?: boolean;
@@ -29,9 +34,9 @@ type TextFactoryProps<Themes, AdditionalPalettes, TextVariations, FontSizes> = {
   };
   textVariations: {
     [VariationKeys in keyof (TextVariations &
-      DefaultObject<TextVariationProps<FontSizes>>)]: TextVariationProps<
-      FontSizes
-    >;
+      DefaultObject<
+        TextVariationProps<FontSizes, Themes, AdditionalPalettes>
+      >)]: TextVariationProps<FontSizes, Themes, AdditionalPalettes>;
   };
 };
 
@@ -53,4 +58,4 @@ type TextProps<
   underline?: AllowUnderline extends true ? boolean : never;
 };
 
-export {TextVariationProps, TextFactoryProps, TextProps};
+export {FontSizeProps, TextVariationProps, TextFactoryProps, TextProps};
