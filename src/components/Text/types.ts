@@ -9,15 +9,14 @@ type TextVariationProps<FontSizes, Themes, AdditionalPalettes> = {
   allowItalic?: boolean;
   allowLineThrough?: boolean;
   allowUnderline?: boolean;
-  allowNumericFontSize?: boolean;
   defaultColor?: keyof (Themes & AdditionalPalettes);
-  defaultFontSize: FontSizes extends null | undefined
-    ? number
-    : keyof FontSizes;
+  defaultFontSize?: FontSizes extends null | undefined
+    ? NonNullable<number>
+    : never;
   fontFamily?: string;
-  fontSizes: FontSizes extends null | undefined
+  fontSizes?: FontSizes extends null | undefined
     ? never
-    : Required<FontSizeProps<FontSizes>>;
+    : NonNullable<FontSizeProps<FontSizes>>;
   fontWeight?: TextStyle['fontWeight'];
   isBold?: boolean;
   isItalic?: boolean;
@@ -32,15 +31,20 @@ type TextFactoryProps<Themes, AdditionalPalettes, TextVariations, FontSizes> = {
   additionalPalettes?: {
     [AdditionalPaletteKey in keyof AdditionalPalettes]: Color;
   };
+  defaultFontSizeKey: FontSizes extends null | undefined
+    ? never
+    : keyof FontSizes;
   textVariations: {
-    [VariationKeys in keyof (TextVariations &
-      DefaultObject<
-        TextVariationProps<FontSizes, Themes, AdditionalPalettes>
-      >)]: TextVariationProps<FontSizes, Themes, AdditionalPalettes>;
+    [VariationKeys in keyof TextVariations]: TextVariationProps<
+      FontSizes,
+      Themes,
+      AdditionalPalettes
+    >;
   };
 };
 
 type TextProps<
+  Themes,
   AdditionalPalettes,
   FontSizes,
   AllowBold,
@@ -50,11 +54,11 @@ type TextProps<
 > = {
   align?: TextStyle['textAlign'];
   bold?: AllowBold extends true ? boolean : never;
-  color?: keyof (ThemePalette & DefaultObject<AdditionalPalettes>);
+  color?: keyof (Themes & AdditionalPalettes);
   children: string;
   italic?: AllowItalic extends true ? boolean : never;
-  size?: keyof (FontSizes & DefaultObject<number>);
-  strikeThrough?: AllowStrikeThrough extends true ? boolean : never;
+  size?: FontSizes extends null | undefined ? number : keyof FontSizes;
+  lineThrough?: AllowStrikeThrough extends true ? boolean : never;
   underline?: AllowUnderline extends true ? boolean : never;
 };
 

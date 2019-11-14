@@ -1,7 +1,7 @@
 import themes from '../../themes';
-import {TextVariationProps, FontSizeProps} from './types';
+import {TextVariationProps} from './types';
 
-export type TextVariations =
+type TextVariations =
   | 'Title'
   | 'Heading'
   | 'SubHeading'
@@ -9,17 +9,16 @@ export type TextVariations =
   | 'Caption'
   | 'Quote';
 
-type FontSizes = {[key in 'small' | 'medium' | 'large']: number};
+type FontSizes = 'small' | 'medium' | 'large';
 
-export const textVariations: {
+const DEFAULT_TEXT_VARIATIONS: {
   [textVariation in TextVariations]: TextVariationProps<
-    FontSizes,
+    {[key in FontSizes]: number},
     typeof themes,
     null
   >;
 } = {
   Title: {
-    defaultFontSize: 'medium',
     fontWeight: 'bold',
     fontSizes: {
       small: 20,
@@ -28,7 +27,6 @@ export const textVariations: {
     },
   },
   Heading: {
-    defaultFontSize: 'medium',
     fontWeight: 'bold',
     fontSizes: {
       small: 18,
@@ -37,7 +35,6 @@ export const textVariations: {
     },
   },
   SubHeading: {
-    defaultFontSize: 'medium',
     fontWeight: 'bold',
     fontSizes: {
       small: 15,
@@ -50,7 +47,6 @@ export const textVariations: {
     allowItalic: true,
     allowLineThrough: true,
     allowUnderline: true,
-    defaultFontSize: 'medium',
     fontSizes: {
       small: 11,
       medium: 12,
@@ -61,7 +57,6 @@ export const textVariations: {
     allowBold: true,
     allowItalic: true,
     allowUnderline: true,
-    defaultFontSize: 'medium',
     fontSizes: {
       small: 13,
       medium: 14,
@@ -71,7 +66,6 @@ export const textVariations: {
   Quote: {
     allowLineThrough: true,
     allowUnderline: true,
-    defaultFontSize: 'medium',
     fontSizes: {
       small: 13,
       medium: 14,
@@ -80,3 +74,5 @@ export const textVariations: {
     isItalic: true,
   },
 };
+
+export {TextVariations, DEFAULT_TEXT_VARIATIONS};
