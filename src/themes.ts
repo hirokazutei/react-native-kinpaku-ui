@@ -1,6 +1,6 @@
-import {Themes} from './Theme/types';
+import {Themes, ThemePalette} from './Theme/types';
 
-type ThemePalettes = 'test';
+type ThemePalettes = {[key in 'test']: ThemePalette};
 
 const themes: Themes<ThemePalettes> = {
   test: {

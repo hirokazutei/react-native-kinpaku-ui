@@ -1,7 +1,8 @@
 import {DefaultObject, Color} from '../types';
 
 type Themes<ThemeObject> = {
-  [ThemesKey in ThemeObject & keyof DefaultObject<ThemePalette>]: ThemePalette;
+  [ThemesKey in keyof (ThemeObject &
+    DefaultObject<ThemePalette>)]: ThemePalette;
 };
 
 type ThemePalette = {
