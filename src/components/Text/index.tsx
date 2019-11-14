@@ -1,14 +1,8 @@
 import React, {useContext} from 'react';
-import {TouchableOpacity, Text, FlexAlignType, TextStyle} from 'react-native';
-import {
-  FontSizeProps,
-  TextVariationProps,
-  TextFactoryProps,
-  TextProps as Props,
-} from './types';
+import {Text, TextStyle} from 'react-native';
+import {TextFactoryProps, TextProps as Props} from './types';
 import {DefaultObject} from '../../types';
 import {ThemePalette} from '../../Theme/types';
-import {DEFAULT_TEXT_VARIATIONS} from './constants';
 
 function textFactory<Themes, AdditionalPalettes, TextVariations, FontSizes>({
   themes,
