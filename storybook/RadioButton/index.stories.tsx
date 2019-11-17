@@ -24,8 +24,6 @@ const DEFAULT_PROPS = {
   isDisabled: false,
 };
 
-const BUTTON_TYPES: Array<RadioButtonVariations> = ['Dot', 'Reverse', 'Fill'];
-
 const colorSelect: {[key in keyof ThemePalette]?: keyof ThemePalette} = {
   primary: 'primary',
   secondary: 'secondary',

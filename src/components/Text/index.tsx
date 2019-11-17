@@ -15,7 +15,6 @@ function textFactory<
   additionalPalettes,
   defaultFontSizeKey,
   textVariations,
-  emphasisToggleable,
 }: TextFactoryProps<
   Themes,
   AdditionalPalettes,
@@ -24,7 +23,7 @@ function textFactory<
   EmphasisToggleable
 >): {
   [Variation in keyof TextVariations]: React.FunctionComponent<
-    Props<Themes, AdditionalPalettes, FontSizes, EmphasisToggleable>
+    Props<AdditionalPalettes, FontSizes, EmphasisToggleable>
   >;
 } {
   const paletteContext: React.Context<keyof Themes> = React.createContext(
@@ -33,13 +32,13 @@ function textFactory<
 
   const TextComponents: {
     [Variation in keyof TextVariations]?: React.FC<
-      Props<Themes, AdditionalPalettes, FontSizes, EmphasisToggleable>
+      Props<AdditionalPalettes, FontSizes, EmphasisToggleable>
     >;
   } = {};
 
   for (const variationName in textVariations) {
     const {
-      defaultColor,
+      defaultColor = 'text',
       defaultFontSize,
       fontFamily,
       fontSizes,
@@ -51,7 +50,6 @@ function textFactory<
     } = textVariations[variationName];
 
     const text: React.FC<Props<
-      Themes,
       AdditionalPalettes,
       FontSizes,
       EmphasisToggleable
@@ -65,7 +63,6 @@ function textFactory<
       lineThrough,
       underline,
     }: Props<
-      Themes,
       AdditionalPalettes,
       FontSizes,
       EmphasisToggleable
@@ -90,30 +87,24 @@ function textFactory<
 
       // DecorationLine
       let textDecorationLine: TextStyle['textDecorationLine'] = 'none';
-      if (emphasisToggleable) {
-        if (underline && lineThrough) {
-          textDecorationLine = 'underline line-through';
-        } else if (underline) {
-          textDecorationLine = 'underline';
-        } else if (lineThrough) {
-          textDecorationLine = 'line-through';
-        }
+      if (underline && lineThrough) {
+        textDecorationLine = 'underline line-through';
+      } else if (underline) {
+        textDecorationLine = 'underline';
+      } else if (lineThrough) {
+        textDecorationLine = 'line-through';
       }
 
       // FontStyle
       let fontStyle: TextStyle['fontStyle'] = isItalic ? 'italic' : 'normal';
-      if (emphasisToggleable) {
-        fontStyle = !italic && italic !== undefined ? 'normal' : fontStyle;
-      }
+      fontStyle = !italic && italic !== undefined ? 'normal' : fontStyle;
 
       // Bold
       let fontWeightStyle: TextStyle['fontWeight'] = isBold ? 'bold' : 'normal';
-      if (emphasisToggleable) {
-        fontWeightStyle =
-          fontWeight && fontWeight !== undefined ? fontWeight : fontWeightStyle;
-        fontWeightStyle =
-          !bold && bold !== undefined ? 'normal' : fontWeightStyle;
-      }
+      fontWeightStyle =
+        fontWeight && fontWeight !== undefined ? fontWeight : fontWeightStyle;
+      fontWeightStyle =
+        !bold && bold !== undefined ? 'normal' : fontWeightStyle;
       // Text Style
       const textStyle: TextStyle = {
         color: fontColor,
@@ -134,7 +125,7 @@ function textFactory<
 
   return TextComponents as {
     [Variation in keyof TextVariations]: React.FC<
-      Props<Themes, AdditionalPalettes, FontSizes, EmphasisToggleable>
+      Props<AdditionalPalettes, FontSizes, EmphasisToggleable>
     >;
   };
 }

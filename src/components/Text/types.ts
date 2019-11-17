@@ -8,10 +8,9 @@ type FontSizeProps<FontSizes extends string | string> = {
 
 type TextVariationProps<
   FontSizes extends string | string,
-  Themes,
   AdditionalPalettes
 > = {
-  defaultColor?: keyof (Themes & AdditionalPalettes);
+  defaultColor?: keyof (ThemePalette & AdditionalPalettes);
   defaultFontSize?: FontSizes extends null | undefined
     ? NonNullable<number>
     : never;
@@ -43,22 +42,26 @@ type TextFactoryProps<
   textVariations: {
     [VariationKeys in keyof TextVariations]: TextVariationProps<
       FontSizes,
-      Themes,
       AdditionalPalettes
     >;
   };
-  emphasisToggleable?: EmphasisToggleable extends true ? Required<true> : never;
 };
 
-type TextProps<Themes, AdditionalPalettes, FontSizes, EmphasisToggleable> = {
+type OptionalTrueCheck<T, R> = T extends undefined | null | false
+  ? never
+  : T extends true
+  ? R
+  : never;
+
+type TextProps<AdditionalPalettes, FontSizes, EmphasisToggleable> = {
   align?: TextStyle['textAlign'];
-  bold?: EmphasisToggleable extends true ? boolean : never;
-  color?: keyof (Themes & AdditionalPalettes);
+  bold?: OptionalTrueCheck<EmphasisToggleable, boolean>;
+  color?: keyof (ThemePalette & AdditionalPalettes);
   children: string;
-  italic?: EmphasisToggleable extends true ? boolean : never;
+  italic?: OptionalTrueCheck<EmphasisToggleable, boolean>;
   size?: FontSizes extends null | undefined ? number : FontSizes;
-  lineThrough?: EmphasisToggleable extends true ? boolean : never;
-  underline?: EmphasisToggleable extends true ? boolean : never;
+  lineThrough?: OptionalTrueCheck<EmphasisToggleable, boolean>;
+  underline?: OptionalTrueCheck<EmphasisToggleable, boolean>;
 };
 
 export {FontSizeProps, TextVariationProps, TextFactoryProps, TextProps};

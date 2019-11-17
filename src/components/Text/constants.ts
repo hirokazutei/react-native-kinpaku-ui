@@ -12,11 +12,7 @@ type TextVariations =
 type FontSizes = 'small' | 'medium' | 'large';
 
 const DEFAULT_TEXT_VARIATIONS: {
-  [textVariation in TextVariations]: TextVariationProps<
-    FontSizes,
-    typeof themes,
-    null
-  >;
+  [textVariation in TextVariations]: TextVariationProps<FontSizes, null>;
 } = {
   Title: {
     fontWeight: 'bold',
