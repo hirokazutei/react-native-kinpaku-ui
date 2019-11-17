@@ -1,0 +1,136 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots UI/Text Default 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "#FEFFFF",
+      "flex": 1,
+      "flexDirection": "column",
+      "justifyContent": "space-evenly",
+      "padding": 40,
+    }
+  }
+>
+  <Text
+    style={
+      Object {
+        "color": "#111122",
+        "fontFamily": undefined,
+        "fontSize": 28,
+        "fontStyle": "normal",
+        "fontWeight": "bold",
+        "letterSpacing": undefined,
+        "lineHeight": undefined,
+        "textAlign": undefined,
+        "textDecorationLine": "none",
+      }
+    }
+  >
+    Sample Text
+  </Text>
+  <Text
+    style={
+      Object {
+        "color": "#111122",
+        "fontFamily": undefined,
+        "fontSize": 28,
+        "fontStyle": "normal",
+        "fontWeight": "bold",
+        "letterSpacing": undefined,
+        "lineHeight": undefined,
+        "textAlign": undefined,
+        "textDecorationLine": "none",
+      }
+    }
+  >
+    Sample Text
+  </Text>
+  <Text
+    style={
+      Object {
+        "color": "#111122",
+        "fontFamily": undefined,
+        "fontSize": 24,
+        "fontStyle": "normal",
+        "fontWeight": "bold",
+        "letterSpacing": undefined,
+        "lineHeight": undefined,
+        "textAlign": undefined,
+        "textDecorationLine": "none",
+      }
+    }
+  >
+    Sample Text
+  </Text>
+  <Text
+    style={
+      Object {
+        "color": "#111122",
+        "fontFamily": undefined,
+        "fontSize": 20,
+        "fontStyle": "normal",
+        "fontWeight": "bold",
+        "letterSpacing": undefined,
+        "lineHeight": undefined,
+        "textAlign": undefined,
+        "textDecorationLine": "none",
+      }
+    }
+  >
+    Sample Text
+  </Text>
+  <Text
+    style={
+      Object {
+        "color": "#111122",
+        "fontFamily": undefined,
+        "fontSize": 14,
+        "fontStyle": "normal",
+        "fontWeight": "normal",
+        "letterSpacing": undefined,
+        "lineHeight": undefined,
+        "textAlign": undefined,
+        "textDecorationLine": "none",
+      }
+    }
+  >
+    Sample Text
+  </Text>
+  <Text
+    style={
+      Object {
+        "color": "#111122",
+        "fontFamily": undefined,
+        "fontSize": 16,
+        "fontStyle": "normal",
+        "fontWeight": "normal",
+        "letterSpacing": undefined,
+        "lineHeight": undefined,
+        "textAlign": undefined,
+        "textDecorationLine": "none",
+      }
+    }
+  >
+    Sample Text
+  </Text>
+  <Text
+    style={
+      Object {
+        "color": "#111122",
+        "fontFamily": undefined,
+        "fontSize": 16,
+        "fontStyle": "italic",
+        "fontWeight": "normal",
+        "letterSpacing": undefined,
+        "lineHeight": undefined,
+        "textAlign": undefined,
+        "textDecorationLine": "none",
+      }
+    }
+  >
+    Sample Text
+  </Text>
+</View>
+`;
