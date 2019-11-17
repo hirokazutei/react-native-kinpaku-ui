@@ -2,13 +2,15 @@ import {TextStyle} from 'react-native';
 import {Color, DefaultObject} from '../../types';
 import {ThemePalette} from '../../Theme/types';
 
-type FontSizeProps<FontSizes> = {[key in keyof FontSizes]: number};
+type FontSizeProps<FontSizes extends string | string> = {
+  [key in FontSizes]: number;
+};
 
-type TextVariationProps<FontSizes, Themes, AdditionalPalettes> = {
-  allowBold?: boolean;
-  allowItalic?: boolean;
-  allowLineThrough?: boolean;
-  allowUnderline?: boolean;
+type TextVariationProps<
+  FontSizes extends string | string,
+  Themes,
+  AdditionalPalettes
+> = {
   defaultColor?: keyof (Themes & AdditionalPalettes);
   defaultFontSize?: FontSizes extends null | undefined
     ? NonNullable<number>
@@ -24,16 +26,20 @@ type TextVariationProps<FontSizes, Themes, AdditionalPalettes> = {
   lineHeight?: number;
 };
 
-type TextFactoryProps<Themes, AdditionalPalettes, TextVariations, FontSizes> = {
+type TextFactoryProps<
+  Themes,
+  AdditionalPalettes,
+  TextVariations,
+  FontSizes extends string | string,
+  EmphasisToggleable
+> = {
   themes: {
     [ThemeKey in keyof (Themes & DefaultObject<ThemePalette>)]: ThemePalette;
   };
   additionalPalettes?: {
     [AdditionalPaletteKey in keyof AdditionalPalettes]: Color;
   };
-  defaultFontSizeKey: FontSizes extends null | undefined
-    ? never
-    : keyof FontSizes;
+  defaultFontSizeKey: FontSizes extends null | undefined ? never : FontSizes;
   textVariations: {
     [VariationKeys in keyof TextVariations]: TextVariationProps<
       FontSizes,
@@ -41,25 +47,18 @@ type TextFactoryProps<Themes, AdditionalPalettes, TextVariations, FontSizes> = {
       AdditionalPalettes
     >;
   };
+  emphasisToggleable?: EmphasisToggleable extends true ? Required<true> : never;
 };
 
-type TextProps<
-  Themes,
-  AdditionalPalettes,
-  FontSizes,
-  AllowBold,
-  AllowItalic,
-  AllowStrikeThrough,
-  AllowUnderline
-> = {
+type TextProps<Themes, AdditionalPalettes, FontSizes, EmphasisToggleable> = {
   align?: TextStyle['textAlign'];
-  bold?: AllowBold extends true ? boolean : never;
+  bold?: EmphasisToggleable extends true ? boolean : never;
   color?: keyof (Themes & AdditionalPalettes);
   children: string;
-  italic?: AllowItalic extends true ? boolean : never;
-  size?: FontSizes extends null | undefined ? number : keyof FontSizes;
-  lineThrough?: AllowStrikeThrough extends true ? boolean : never;
-  underline?: AllowUnderline extends true ? boolean : never;
+  italic?: EmphasisToggleable extends true ? boolean : never;
+  size?: FontSizes extends null | undefined ? number : FontSizes;
+  lineThrough?: EmphasisToggleable extends true ? boolean : never;
+  underline?: EmphasisToggleable extends true ? boolean : never;
 };
 
 export {FontSizeProps, TextVariationProps, TextFactoryProps, TextProps};

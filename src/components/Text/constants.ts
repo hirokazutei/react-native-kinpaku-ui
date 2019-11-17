@@ -13,7 +13,7 @@ type FontSizes = 'small' | 'medium' | 'large';
 
 const DEFAULT_TEXT_VARIATIONS: {
   [textVariation in TextVariations]: TextVariationProps<
-    {[key in FontSizes]: number},
+    FontSizes,
     typeof themes,
     null
   >;
@@ -21,12 +21,20 @@ const DEFAULT_TEXT_VARIATIONS: {
   Title: {
     fontWeight: 'bold',
     fontSizes: {
-      small: 20,
-      medium: 24,
-      large: 28,
+      small: 24,
+      medium: 28,
+      large: 32,
     },
   },
   Heading: {
+    fontWeight: 'bold',
+    fontSizes: {
+      small: 22,
+      medium: 24,
+      large: 26,
+    },
+  },
+  SubHeading: {
     fontWeight: 'bold',
     fontSizes: {
       small: 18,
@@ -34,45 +42,28 @@ const DEFAULT_TEXT_VARIATIONS: {
       large: 22,
     },
   },
-  SubHeading: {
-    fontWeight: 'bold',
+  Body: {
+    fontSizes: {
+      small: 13,
+      medium: 14,
+      large: 15,
+    },
+  },
+  Caption: {
     fontSizes: {
       small: 15,
       medium: 16,
       large: 17,
     },
   },
-  Body: {
-    allowBold: true,
-    allowItalic: true,
-    allowLineThrough: true,
-    allowUnderline: true,
-    fontSizes: {
-      small: 11,
-      medium: 12,
-      large: 13,
-    },
-  },
-  Caption: {
-    allowBold: true,
-    allowItalic: true,
-    allowUnderline: true,
-    fontSizes: {
-      small: 13,
-      medium: 14,
-      large: 15,
-    },
-  },
   Quote: {
-    allowLineThrough: true,
-    allowUnderline: true,
     fontSizes: {
-      small: 13,
-      medium: 14,
-      large: 15,
+      small: 15,
+      medium: 16,
+      large: 17,
     },
     isItalic: true,
   },
 };
 
-export {TextVariations, DEFAULT_TEXT_VARIATIONS};
+export {FontSizes, TextVariations, DEFAULT_TEXT_VARIATIONS};

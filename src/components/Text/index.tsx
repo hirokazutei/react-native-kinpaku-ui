@@ -4,47 +4,41 @@ import {TextFactoryProps, TextProps as Props} from './types';
 import {DefaultObject} from '../../types';
 import {ThemePalette} from '../../Theme/types';
 
-function textFactory<Themes, AdditionalPalettes, TextVariations, FontSizes>({
+function textFactory<
+  Themes,
+  AdditionalPalettes,
+  TextVariations,
+  FontSizes extends string | string,
+  EmphasisToggleable
+>({
   themes,
   additionalPalettes,
   defaultFontSizeKey,
   textVariations,
-}: TextFactoryProps<Themes, AdditionalPalettes, TextVariations, FontSizes>): {
+  emphasisToggleable,
+}: TextFactoryProps<
+  Themes,
+  AdditionalPalettes,
+  TextVariations,
+  FontSizes,
+  EmphasisToggleable
+>): {
   [Variation in keyof TextVariations]: React.FunctionComponent<
-    Props<
-      Themes,
-      AdditionalPalettes,
-      FontSizes,
-      undefined | boolean,
-      undefined | boolean,
-      undefined | boolean,
-      undefined | boolean
-    >
+    Props<Themes, AdditionalPalettes, FontSizes, EmphasisToggleable>
   >;
 } {
   const paletteContext: React.Context<keyof Themes> = React.createContext(
     'default' as keyof Themes,
   );
+
   const TextComponents: {
     [Variation in keyof TextVariations]?: React.FC<
-      Props<
-        Themes,
-        AdditionalPalettes,
-        FontSizes,
-        undefined | boolean,
-        undefined | boolean,
-        undefined | boolean,
-        undefined | boolean
-      >
+      Props<Themes, AdditionalPalettes, FontSizes, EmphasisToggleable>
     >;
   } = {};
 
   for (const variationName in textVariations) {
     const {
-      allowBold,
-      allowItalic,
-      allowLineThrough,
-      allowUnderline,
       defaultColor,
       defaultFontSize,
       fontFamily,
@@ -60,10 +54,7 @@ function textFactory<Themes, AdditionalPalettes, TextVariations, FontSizes>({
       Themes,
       AdditionalPalettes,
       FontSizes,
-      typeof allowBold,
-      typeof allowItalic,
-      typeof allowLineThrough,
-      typeof allowUnderline
+      EmphasisToggleable
     >> = ({
       align,
       bold,
@@ -77,10 +68,7 @@ function textFactory<Themes, AdditionalPalettes, TextVariations, FontSizes>({
       Themes,
       AdditionalPalettes,
       FontSizes,
-      typeof allowBold,
-      typeof allowItalic,
-      typeof allowLineThrough,
-      typeof allowUnderline
+      EmphasisToggleable
     >): React.ReactElement => {
       // Palettes
       const currentThemeKey = useContext(paletteContext) || 'default';
@@ -97,30 +85,35 @@ function textFactory<Themes, AdditionalPalettes, TextVariations, FontSizes>({
 
       // Size
       const fontSize = fontSizes
-        ? fontSizes[size as keyof FontSizes]
+        ? fontSizes[size as FontSizes]
         : (size as number);
 
       // DecorationLine
       let textDecorationLine: TextStyle['textDecorationLine'] = 'none';
-      if (underline && lineThrough) {
-        textDecorationLine = 'underline line-through';
-      } else if (underline) {
-        textDecorationLine = 'underline';
-      } else if (lineThrough) {
-        textDecorationLine = 'line-through';
+      if (emphasisToggleable) {
+        if (underline && lineThrough) {
+          textDecorationLine = 'underline line-through';
+        } else if (underline) {
+          textDecorationLine = 'underline';
+        } else if (lineThrough) {
+          textDecorationLine = 'line-through';
+        }
       }
 
       // FontStyle
       let fontStyle: TextStyle['fontStyle'] = isItalic ? 'italic' : 'normal';
-      fontStyle = !italic && italic !== undefined ? 'normal' : fontStyle;
+      if (emphasisToggleable) {
+        fontStyle = !italic && italic !== undefined ? 'normal' : fontStyle;
+      }
 
       // Bold
       let fontWeightStyle: TextStyle['fontWeight'] = isBold ? 'bold' : 'normal';
-      fontWeightStyle =
-        fontWeight && fontWeight !== undefined ? fontWeight : fontWeightStyle;
-      fontWeightStyle =
-        !bold && bold !== undefined ? 'normal' : fontWeightStyle;
-
+      if (emphasisToggleable) {
+        fontWeightStyle =
+          fontWeight && fontWeight !== undefined ? fontWeight : fontWeightStyle;
+        fontWeightStyle =
+          !bold && bold !== undefined ? 'normal' : fontWeightStyle;
+      }
       // Text Style
       const textStyle: TextStyle = {
         color: fontColor,
@@ -141,15 +134,7 @@ function textFactory<Themes, AdditionalPalettes, TextVariations, FontSizes>({
 
   return TextComponents as {
     [Variation in keyof TextVariations]: React.FC<
-      Props<
-        Themes,
-        AdditionalPalettes,
-        FontSizes,
-        undefined | boolean,
-        undefined | boolean,
-        undefined | boolean,
-        undefined | boolean
-      >
+      Props<Themes, AdditionalPalettes, FontSizes, EmphasisToggleable>
     >;
   };
 }
