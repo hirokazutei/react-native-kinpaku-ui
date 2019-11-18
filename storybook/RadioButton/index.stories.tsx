@@ -13,7 +13,12 @@ import {
 import radioButtonFactory from '../../src/components/RadioButton';
 import {DEFAULT_RADIO_BUTTON_SIZE} from '../../src/components/RadioButton/constants';
 
-const {Dot, Reverse, Fill} = radioButtonFactory<typeof themes, null, null>({
+const {Dot, Reverse, Fill} = radioButtonFactory<
+  typeof themes,
+  null,
+  null,
+  false
+>({
   themes,
   sizes: DEFAULT_RADIO_BUTTON_SIZE,
 });

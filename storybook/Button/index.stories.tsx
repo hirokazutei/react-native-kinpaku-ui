@@ -14,7 +14,8 @@ import {DEFAULT_BUTTON_SIZES} from '../../src/components/Button/constants';
 const {Sharp, Round, Circular} = buttonFactory<
   typeof themes,
   null,
-  typeof DEFAULT_BUTTON_SIZES
+  typeof DEFAULT_BUTTON_SIZES,
+  false
 >({
   themes,
   sizes: DEFAULT_BUTTON_SIZES,

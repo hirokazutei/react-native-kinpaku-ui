@@ -1,5 +1,5 @@
 import {TouchableOpacityProps, ViewStyle, ViewProps} from 'react-native';
-import {Color, DefaultObject} from '../../types';
+import {Color, DefaultObject, OptionalTrueCheck} from '../../types';
 import {ThemePalette} from '../../Theme/types';
 
 type RadioButtonVariations = 'Dot' | 'Reverse' | 'Fill';
@@ -10,7 +10,13 @@ type RadioButtonSizeProps = {
   borderThickness: number;
 };
 
-type RadioButtonFactoryProps<Themes, AdditionalPalettes, RadioButtonSizes> = {
+type RadioButtonFactoryProps<
+  Themes,
+  AdditionalPalettes,
+  RadioButtonSizes,
+  //@ts-ignore: TS6133 Unused Variable
+  AllowCustomProps
+> = {
   themes: {
     [ThemeKeys in keyof Themes & DefaultObject<ThemePalette>]: ThemePalette;
   };
@@ -24,7 +30,6 @@ type RadioButtonFactoryProps<Themes, AdditionalPalettes, RadioButtonSizes> = {
           DefaultObject<RadioButtonSizeProps>)]: RadioButtonSizeProps;
       };
   defaultVariation?: RadioButtonVariations;
-  allowCustomProps?: boolean;
 };
 
 type RadioButtonProps<
@@ -39,12 +44,13 @@ type RadioButtonProps<
     ? keyof (RadioButtonSizes & DefaultObject<RadioButtonSizes>)
     : never;
   onPress: (args: any) => any;
-  _customOuterViewProps?: AllowCustomProps extends true
-    ? TouchableOpacityProps
-    : never;
-  _customOuterViewStyle?: AllowCustomProps extends true ? ViewStyle : never;
-  _customInnerViewProps?: AllowCustomProps extends true ? ViewProps : never;
-  _customInnerViewStyle?: AllowCustomProps extends true ? ViewStyle : never;
+  _customOuterViewProps?: OptionalTrueCheck<
+    AllowCustomProps,
+    TouchableOpacityProps
+  >;
+  _customOuterViewStyle?: OptionalTrueCheck<AllowCustomProps, ViewStyle>;
+  _customInnerViewProps?: OptionalTrueCheck<AllowCustomProps, ViewProps>;
+  _customInnerViewStyle?: OptionalTrueCheck<AllowCustomProps, ViewStyle>;
 };
 
 export {

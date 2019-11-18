@@ -17,15 +17,24 @@ import {
   BUTTON_VARIATION_KEYS,
 } from './constants';
 
-function buttonFactory<Themes, AdditionalPalettes, ButtonSizes>({
+function buttonFactory<
+  Themes,
+  AdditionalPalettes,
+  ButtonSizes,
+  AllowCustomProps
+>({
   themes,
   sizes,
   additionalPalettes,
   defaultType = 'solid',
-  allowCustomProps,
-}: ButtonFactoryProps<Themes, AdditionalPalettes, ButtonSizes>): {
+}: ButtonFactoryProps<
+  Themes,
+  AdditionalPalettes,
+  ButtonSizes,
+  AllowCustomProps
+>): {
   [key in ButtonVariations]: React.FunctionComponent<
-    Props<AdditionalPalettes, ButtonSizes, typeof allowCustomProps>
+    Props<AdditionalPalettes, ButtonSizes, AllowCustomProps>
   >;
 } {
   const paletteContext: React.Context<keyof Themes> = React.createContext(
@@ -33,13 +42,15 @@ function buttonFactory<Themes, AdditionalPalettes, ButtonSizes>({
   );
   const buttons: {
     [key in ButtonVariations]?: React.FC<
-      Props<AdditionalPalettes, ButtonSizes, typeof allowCustomProps>
+      Props<AdditionalPalettes, ButtonSizes, AllowCustomProps>
     >;
   } = {};
   BUTTON_VARIATION_KEYS.forEach((variation: ButtonVariations) => {
-    const Button: React.FC<
-      Props<AdditionalPalettes, ButtonSizes, typeof allowCustomProps>
-    > = ({
+    const Button: React.FC<Props<
+      AdditionalPalettes,
+      ButtonSizes,
+      AllowCustomProps
+    >> = ({
       color = 'primary',
       size = 'default',
       isDisabled,
@@ -55,7 +66,7 @@ function buttonFactory<Themes, AdditionalPalettes, ButtonSizes>({
     }: Props<
       AdditionalPalettes,
       ButtonSizes,
-      typeof allowCustomProps
+      AllowCustomProps
     >): React.ReactElement => {
       // Palettes
       const currentThemeKey = useContext(paletteContext) || 'default';
@@ -144,13 +155,13 @@ function buttonFactory<Themes, AdditionalPalettes, ButtonSizes>({
   });
   const Button = {
     Circular: buttons.Circular as React.FunctionComponent<
-      Props<AdditionalPalettes, ButtonSizes, typeof allowCustomProps>
+      Props<AdditionalPalettes, ButtonSizes, AllowCustomProps>
     >,
     Round: buttons.Round as React.FunctionComponent<
-      Props<AdditionalPalettes, ButtonSizes, typeof allowCustomProps>
+      Props<AdditionalPalettes, ButtonSizes, AllowCustomProps>
     >,
     Sharp: buttons.Sharp as React.FunctionComponent<
-      Props<AdditionalPalettes, ButtonSizes, typeof allowCustomProps>
+      Props<AdditionalPalettes, ButtonSizes, AllowCustomProps>
     >,
   };
   return Button;

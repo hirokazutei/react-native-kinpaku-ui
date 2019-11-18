@@ -13,14 +13,23 @@ import {
   DEFAULT_RADIO_BUTTON_SIZE,
 } from './constants';
 
-function radioButtonFactory<Themes, AdditionalPalettes, RadioButtonSizes>({
+function radioButtonFactory<
+  Themes,
+  AdditionalPalettes,
+  RadioButtonSizes,
+  AllowCustomProps
+>({
   themes,
   sizes,
   additionalPalettes,
-  allowCustomProps,
-}: RadioButtonFactoryProps<Themes, AdditionalPalettes, RadioButtonSizes>): {
+}: RadioButtonFactoryProps<
+  Themes,
+  AdditionalPalettes,
+  RadioButtonSizes,
+  AllowCustomProps
+>): {
   [key in RadioButtonVariations]: React.FunctionComponent<
-    Props<AdditionalPalettes, RadioButtonSizes, typeof allowCustomProps>
+    Props<AdditionalPalettes, RadioButtonSizes, AllowCustomProps>
   >;
 } {
   const themeContext: React.Context<keyof Themes> = React.createContext(
@@ -28,13 +37,15 @@ function radioButtonFactory<Themes, AdditionalPalettes, RadioButtonSizes>({
   );
   const radioButtons: {
     [key in RadioButtonVariations]?: React.FC<
-      Props<AdditionalPalettes, RadioButtonSizes, typeof allowCustomProps>
+      Props<AdditionalPalettes, RadioButtonSizes, AllowCustomProps>
     >;
   } = {};
   RADIO_BUTTON_VARIATION_KEYS.forEach((variation: RadioButtonVariations) => {
-    const Button: React.FC<
-      Props<AdditionalPalettes, RadioButtonSizes, typeof allowCustomProps>
-    > = ({
+    const Button: React.FC<Props<
+      AdditionalPalettes,
+      RadioButtonSizes,
+      AllowCustomProps
+    >> = ({
       active,
       color,
       isDisabled,
@@ -47,7 +58,7 @@ function radioButtonFactory<Themes, AdditionalPalettes, RadioButtonSizes>({
     }: Props<
       AdditionalPalettes,
       RadioButtonSizes,
-      typeof allowCustomProps
+      AllowCustomProps
     >): React.ReactElement => {
       // Palettes
       const currentThemeKey = useContext(themeContext) || 'default';
@@ -137,13 +148,13 @@ function radioButtonFactory<Themes, AdditionalPalettes, RadioButtonSizes>({
   });
   const RadioButtons = {
     Dot: radioButtons.Dot as React.FunctionComponent<
-      Props<AdditionalPalettes, RadioButtonSizes, typeof allowCustomProps>
+      Props<AdditionalPalettes, RadioButtonSizes, AllowCustomProps>
     >,
     Reverse: radioButtons.Reverse as React.FunctionComponent<
-      Props<AdditionalPalettes, RadioButtonSizes, typeof allowCustomProps>
+      Props<AdditionalPalettes, RadioButtonSizes, AllowCustomProps>
     >,
     Fill: radioButtons.Fill as React.FunctionComponent<
-      Props<AdditionalPalettes, RadioButtonSizes, typeof allowCustomProps>
+      Props<AdditionalPalettes, RadioButtonSizes, AllowCustomProps>
     >,
   };
   return RadioButtons;
