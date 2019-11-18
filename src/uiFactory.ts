@@ -5,6 +5,11 @@ import {DEFAULT_BUTTON_SIZES} from './components/Button/constants';
 import {DEFAULT_TOUCHABLE_SIZES} from './components/Touchable/constants';
 import radioButtonFactory from './components/RadioButton';
 import {DEFAULT_RADIO_BUTTON_SIZE} from './components/RadioButton/constants';
+import textFactory from './components/Text';
+import {
+  DEFAULT_TEXT_VARIATIONS,
+  DefaultFontSizes,
+} from './components/Text/constants';
 import {Color} from './types';
 
 export default function UIFactory<ThemeObject, AdditionalPalettes>(
@@ -15,7 +20,8 @@ export default function UIFactory<ThemeObject, AdditionalPalettes>(
   const Button = buttonFactory<
     Themes<ThemeObject>,
     AdditionalPalettes,
-    typeof DEFAULT_BUTTON_SIZES
+    typeof DEFAULT_BUTTON_SIZES,
+    false
   >({
     ...commonProps,
     sizes: DEFAULT_BUTTON_SIZES,
@@ -23,7 +29,8 @@ export default function UIFactory<ThemeObject, AdditionalPalettes>(
   const RadioButton = radioButtonFactory<
     Themes<ThemeObject>,
     AdditionalPalettes,
-    null
+    null,
+    false
   >({
     ...commonProps,
     sizes: DEFAULT_RADIO_BUTTON_SIZE,
@@ -36,5 +43,26 @@ export default function UIFactory<ThemeObject, AdditionalPalettes>(
     ...commonProps,
     sizes: DEFAULT_TOUCHABLE_SIZES,
   });
-  return {Button, RadioButton, Touchable};
+  const {Title, Heading, SubHeading, Body, Caption, Quote} = textFactory<
+    typeof themes,
+    null,
+    typeof DEFAULT_TEXT_VARIATIONS,
+    DefaultFontSizes,
+    true
+  >({
+    themes,
+    defaultFontSizeKey: 'medium',
+    textVariations: DEFAULT_TEXT_VARIATIONS,
+  });
+  return {
+    Button,
+    RadioButton,
+    Touchable,
+    Title,
+    Heading,
+    SubHeading,
+    Body,
+    Caption,
+    Quote,
+  };
 }

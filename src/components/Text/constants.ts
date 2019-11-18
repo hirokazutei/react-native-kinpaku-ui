@@ -8,10 +8,10 @@ type TextVariations =
   | 'Caption'
   | 'Quote';
 
-type FontSizes = 'small' | 'medium' | 'large';
+type DefaultFontSizes = 'small' | 'medium' | 'large';
 
 const DEFAULT_TEXT_VARIATIONS: {
-  [textVariation in TextVariations]: TextVariationProps<FontSizes, null>;
+  [textVariation in TextVariations]: TextVariationProps<DefaultFontSizes, null>;
 } = {
   Title: {
     fontWeight: 'bold',
@@ -61,4 +61,4 @@ const DEFAULT_TEXT_VARIATIONS: {
   },
 };
 
-export {FontSizes, TextVariations, DEFAULT_TEXT_VARIATIONS};
+export {DefaultFontSizes, TextVariations, DEFAULT_TEXT_VARIATIONS};

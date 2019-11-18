@@ -16,14 +16,14 @@ import {
 import textFactory from '../.././src/components/Text';
 import {
   DEFAULT_TEXT_VARIATIONS,
-  FontSizes,
+  DefaultFontSizes,
 } from '../../src/components/Text/constants';
 
 const {Title, Heading, SubHeading, Body, Caption, Quote} = textFactory<
   typeof themes,
   null,
   typeof DEFAULT_TEXT_VARIATIONS,
-  FontSizes,
+  DefaultFontSizes,
   true
 >({
   themes,
@@ -42,7 +42,7 @@ const colorSelect: {[key in keyof ThemePalette]?: keyof ThemePalette} = {
   tertiary: 'tertiary',
 };
 
-const sizeSelect: {[key in FontSizes]?: FontSizes} = {
+const sizeSelect: {[key in DefaultFontSizes]?: DefaultFontSizes} = {
   small: 'small',
   medium: 'medium',
   large: 'large',
