@@ -8,7 +8,7 @@ import Provider from '../Provider';
 import themes from '../../src/themes';
 import {ThemePalette} from '../../src/Theme/types';
 import {
-  FontSizeProps,
+  TextSizeProps,
   TextVariationProps,
   TextFactoryProps,
   TextProps,

@@ -2,7 +2,7 @@ import {TextStyle} from 'react-native';
 import {Color, DefaultObject, OptionalTrueCheck} from '../../types';
 import {ThemePalette} from '../../Theme/types';
 
-type FontSizeProps<FontSizes extends string | string> = {
+type TextSizeProps<FontSizes extends string | string> = {
   [key in FontSizes]: number;
 };
 
@@ -17,7 +17,7 @@ type TextVariationProps<
   fontFamily?: string;
   fontSizes?: FontSizes extends null | undefined
     ? never
-    : NonNullable<FontSizeProps<FontSizes>>;
+    : NonNullable<TextSizeProps<FontSizes>>;
   fontWeight?: TextStyle['fontWeight'];
   isBold?: boolean;
   isItalic?: boolean;
@@ -59,4 +59,4 @@ type TextProps<AdditionalPalettes, FontSizes, EmphasisToggleable> = {
   underline?: OptionalTrueCheck<EmphasisToggleable, boolean>;
 };
 
-export {FontSizeProps, TextVariationProps, TextFactoryProps, TextProps};
+export {TextSizeProps, TextVariationProps, TextFactoryProps, TextProps};
