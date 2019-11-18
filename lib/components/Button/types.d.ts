@@ -1,5 +1,5 @@
 import { TouchableOpacityProps, TextProperties, ViewStyle, TextStyle, FlexAlignType } from 'react-native';
-import { Color, DefaultObject } from '../../types';
+import { Color, DefaultObject, OptionalTrueCheck } from '../../types';
 import { ThemePalette } from '../../Theme/types';
 declare type ButtonVariations = 'Circular' | 'Round' | 'Sharp';
 declare type ButtonTypes = 'solid' | 'clear' | 'outline';
@@ -9,7 +9,7 @@ declare type ButtonSizeProps = {
     fontSize: number;
     borderRadius: number;
 };
-declare type ButtonFactoryProps<Themes, AdditionalPalettes, ButtonSizes> = {
+declare type ButtonFactoryProps<Themes, AdditionalPalettes, ButtonSizes, AllowCustomProps> = {
     themes: {
         [ThemeKey in keyof (Themes & DefaultObject<ThemePalette>)]: ThemePalette;
     };
@@ -20,13 +20,12 @@ declare type ButtonFactoryProps<Themes, AdditionalPalettes, ButtonSizes> = {
         [SizeKey in keyof (ButtonSizes & DefaultObject<ButtonSizeProps>)]: ButtonSizeProps;
     };
     defaultType?: ButtonTypes;
-    allowCustomProps?: boolean;
 };
 declare type ButtonProps<AdditionalPalettes, ButtonSizes, AllowCustomProps> = {
-    _additionalButtonProps?: AllowCustomProps extends true ? never : TouchableOpacityProps;
-    _additionalButtonStyle?: AllowCustomProps extends true ? never : ViewStyle;
-    _additionalTextProps?: AllowCustomProps extends true ? never : TextProperties;
-    _additionalTextStyle?: AllowCustomProps extends true ? never : TextStyle;
+    _additionalButtonProps?: OptionalTrueCheck<AllowCustomProps, TouchableOpacityProps>;
+    _additionalButtonStyle?: OptionalTrueCheck<AllowCustomProps, ViewStyle>;
+    _additionalTextProps?: OptionalTrueCheck<AllowCustomProps, TextProperties>;
+    _additionalTextStyle?: OptionalTrueCheck<AllowCustomProps, TextStyle>;
     align?: FlexAlignType;
     color?: keyof (ThemePalette & DefaultObject<AdditionalPalettes>);
     isDisabled?: boolean;

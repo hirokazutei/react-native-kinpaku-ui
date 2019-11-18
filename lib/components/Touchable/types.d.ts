@@ -1,6 +1,6 @@
 /// <reference types="react" />
 import { TouchableOpacityProps, ViewStyle, FlexAlignType } from 'react-native';
-import { Color, DefaultObject } from '../../types';
+import { Color, DefaultObject, OptionalTrueCheck } from '../../types';
 import { ThemePalette } from '../../Theme/types';
 declare type TouchableTypes = 'solid' | 'outline';
 declare type VerHor = {
@@ -17,7 +17,7 @@ declare type TouchableAllSizeProps = {
     borderRadius: number;
 } & Padding;
 declare type TouchableSizeProps = TouchableVerHorSizeProps | TouchableAllSizeProps;
-declare type TouchableFactoryProps<Themes, AdditionalPalettes, TouchableSizes> = {
+declare type TouchableFactoryProps<Themes, AdditionalPalettes, TouchableSizes, AllowCustomProps> = {
     themes: {
         [ThemeKeys in keyof (Themes & DefaultObject<ThemePalette>)]: ThemePalette;
     };
@@ -28,11 +28,10 @@ declare type TouchableFactoryProps<Themes, AdditionalPalettes, TouchableSizes> =
         [SizeKey in keyof (TouchableSizes & DefaultObject<TouchableSizeProps>)]: TouchableSizeProps;
     };
     defaultType?: TouchableTypes;
-    allowCustomProps?: boolean;
 };
 declare type TouchableProps<AdditionalPalettes, TouchableSizes, AllowCustomProps> = {
-    _additionalProps?: AllowCustomProps extends true ? TouchableOpacityProps : never;
-    _additionalStyle?: AllowCustomProps extends true ? ViewStyle : never;
+    _additionalProps?: OptionalTrueCheck<AllowCustomProps, TouchableOpacityProps>;
+    _additionalStyle?: OptionalTrueCheck<AllowCustomProps, ViewStyle>;
     align?: FlexAlignType;
     children: React.ReactNode;
     color?: keyof (ThemePalette & AdditionalPalettes);

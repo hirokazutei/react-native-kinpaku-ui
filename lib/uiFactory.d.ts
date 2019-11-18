@@ -1,5 +1,6 @@
 /// <reference types="react" />
 import { Themes } from './Theme/types';
+import { DefaultFontSizes } from './components/Text/constants';
 import { Color } from './types';
 export default function UIFactory<ThemeObject, AdditionalPalettes>(themes: Themes<ThemeObject>, additionalPalettes?: {
     [key in keyof AdditionalPalettes]: Color;
@@ -13,7 +14,7 @@ export default function UIFactory<ThemeObject, AdditionalPalettes>(themes: Theme
             large: import("./components/Button/types").ButtonSizeProps;
             huge: import("./components/Button/types").ButtonSizeProps;
             massive: import("./components/Button/types").ButtonSizeProps;
-        }, boolean | undefined>>;
+        }, false>>;
         Round: import("react").FunctionComponent<import("./components/Button/types").ButtonProps<AdditionalPalettes, {
             default: import("./components/Button/types").ButtonSizeProps;
             small: import("./components/Button/types").ButtonSizeProps;
@@ -22,7 +23,7 @@ export default function UIFactory<ThemeObject, AdditionalPalettes>(themes: Theme
             large: import("./components/Button/types").ButtonSizeProps;
             huge: import("./components/Button/types").ButtonSizeProps;
             massive: import("./components/Button/types").ButtonSizeProps;
-        }, boolean | undefined>>;
+        }, false>>;
         Sharp: import("react").FunctionComponent<import("./components/Button/types").ButtonProps<AdditionalPalettes, {
             default: import("./components/Button/types").ButtonSizeProps;
             small: import("./components/Button/types").ButtonSizeProps;
@@ -31,12 +32,12 @@ export default function UIFactory<ThemeObject, AdditionalPalettes>(themes: Theme
             large: import("./components/Button/types").ButtonSizeProps;
             huge: import("./components/Button/types").ButtonSizeProps;
             massive: import("./components/Button/types").ButtonSizeProps;
-        }, boolean | undefined>>;
+        }, false>>;
     };
     RadioButton: {
-        Dot: import("react").FunctionComponent<import("./components/RadioButton/types").RadioButtonProps<AdditionalPalettes, null, boolean | undefined>>;
-        Reverse: import("react").FunctionComponent<import("./components/RadioButton/types").RadioButtonProps<AdditionalPalettes, null, boolean | undefined>>;
-        Fill: import("react").FunctionComponent<import("./components/RadioButton/types").RadioButtonProps<AdditionalPalettes, null, boolean | undefined>>;
+        Dot: import("react").FunctionComponent<import("./components/RadioButton/types").RadioButtonProps<AdditionalPalettes, null, false>>;
+        Reverse: import("react").FunctionComponent<import("./components/RadioButton/types").RadioButtonProps<AdditionalPalettes, null, false>>;
+        Fill: import("react").FunctionComponent<import("./components/RadioButton/types").RadioButtonProps<AdditionalPalettes, null, false>>;
     };
     Touchable: import("react").FunctionComponent<import("./components/Touchable/types").TouchableProps<AdditionalPalettes, {
         default: import("./components/Touchable/types").TouchableAllSizeProps;
@@ -46,6 +47,12 @@ export default function UIFactory<ThemeObject, AdditionalPalettes>(themes: Theme
         large: import("./components/Touchable/types").TouchableAllSizeProps;
         huge: import("./components/Touchable/types").TouchableAllSizeProps;
         massive: import("./components/Touchable/types").TouchableAllSizeProps;
-    }, boolean | undefined>>;
+    }, false>>;
+    Title: import("react").FunctionComponent<import("./components/Text/types").TextProps<null, DefaultFontSizes, true>>;
+    Heading: import("react").FunctionComponent<import("./components/Text/types").TextProps<null, DefaultFontSizes, true>>;
+    SubHeading: import("react").FunctionComponent<import("./components/Text/types").TextProps<null, DefaultFontSizes, true>>;
+    Body: import("react").FunctionComponent<import("./components/Text/types").TextProps<null, DefaultFontSizes, true>>;
+    Caption: import("react").FunctionComponent<import("./components/Text/types").TextProps<null, DefaultFontSizes, true>>;
+    Quote: import("react").FunctionComponent<import("./components/Text/types").TextProps<null, DefaultFontSizes, true>>;
 };
 //# sourceMappingURL=uiFactory.d.ts.map

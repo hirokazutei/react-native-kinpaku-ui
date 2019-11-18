@@ -17,26 +17,29 @@ import {
 function touchableFactory<
   PaletteObjectType,
   AdditionalPalettes,
-  TouchableSizes
+  TouchableSizes,
+  AllowCustomProps
 >({
   themes,
   sizes,
   additionalPalettes,
   defaultType = 'solid',
-  allowCustomProps,
 }: TouchableFactoryProps<
   PaletteObjectType,
   AdditionalPalettes,
-  TouchableSizes
+  TouchableSizes,
+  AllowCustomProps
 >): React.FunctionComponent<
-  Props<AdditionalPalettes, TouchableSizes, typeof allowCustomProps>
+  Props<AdditionalPalettes, TouchableSizes, AllowCustomProps>
 > {
-  const paletteContext: React.Context<
-    keyof PaletteObjectType
-  > = React.createContext('default' as keyof PaletteObjectType);
-  const Touchable: React.FC<
-    Props<AdditionalPalettes, TouchableSizes, typeof allowCustomProps>
-  > = ({
+  const paletteContext: React.Context<keyof PaletteObjectType> = React.createContext(
+    'default' as keyof PaletteObjectType,
+  );
+  const Touchable: React.FC<Props<
+    AdditionalPalettes,
+    TouchableSizes,
+    AllowCustomProps
+  >> = ({
     color = 'primary',
     size = 'default',
     children,
@@ -50,7 +53,7 @@ function touchableFactory<
   }: Props<
     AdditionalPalettes,
     TouchableSizes,
-    typeof allowCustomProps
+    AllowCustomProps
   >): React.ReactElement => {
     // Palettes
     const currentThemeKey = useContext(paletteContext) || 'default';

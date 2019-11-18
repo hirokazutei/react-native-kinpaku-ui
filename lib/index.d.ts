@@ -6,5 +6,7 @@ import touchableFactory from './components/Touchable';
 import { TouchableTypes, TouchableSizes, TouchableProps, TouchableSizeProps, TouchableFactoryProps, TouchableVerHorSizeProps, TouchableAllSizeProps } from './components/Touchable/types';
 import radioButtonFactory from './components/RadioButton';
 import { RadioButtonFactoryProps, RadioButtonProps, RadioButtonSizeProps, RadioButtonVariations } from './components/RadioButton/types';
-export { buttonFactory, ButtonFactoryProps, ButtonProps, ButtonSizes, ButtonSizeProps, ButtonTypes, ButtonVariations, radioButtonFactory, RadioButtonFactoryProps, RadioButtonProps, RadioButtonSizeProps, RadioButtonVariations, ThemePalette, Themes, TouchableAllSizeProps, touchableFactory, TouchableFactoryProps, TouchableProps, TouchableSizes, TouchableSizeProps, TouchableTypes, TouchableVerHorSizeProps, UIFactory, };
+import textFactory from './components/Text';
+import { TextSizeProps, TextVariationProps, TextFactoryProps, TextProps } from './components/Text/types';
+export { buttonFactory, ButtonFactoryProps, ButtonProps, ButtonSizes, ButtonSizeProps, ButtonTypes, ButtonVariations, radioButtonFactory, RadioButtonFactoryProps, RadioButtonProps, RadioButtonSizeProps, RadioButtonVariations, ThemePalette, Themes, textFactory, TextFactoryProps, TextProps, TextSizeProps, TextVariationProps, TouchableAllSizeProps, touchableFactory, TouchableFactoryProps, TouchableProps, TouchableSizes, TouchableSizeProps, TouchableTypes, TouchableVerHorSizeProps, UIFactory, };
 //# sourceMappingURL=index.d.ts.map

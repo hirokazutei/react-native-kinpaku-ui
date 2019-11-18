@@ -38,7 +38,8 @@ export default function UIFactory<ThemeObject, AdditionalPalettes>(
   const Touchable = touchableFactory<
     Themes<ThemeObject>,
     AdditionalPalettes,
-    typeof DEFAULT_TOUCHABLE_SIZES
+    typeof DEFAULT_TOUCHABLE_SIZES,
+    false
   >({
     ...commonProps,
     sizes: DEFAULT_TOUCHABLE_SIZES,
