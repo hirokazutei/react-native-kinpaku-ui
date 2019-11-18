@@ -30,6 +30,7 @@ type TextFactoryProps<
   AdditionalPalettes,
   TextVariations,
   FontSizes extends string | string,
+  //@ts-ignore: unused variable
   EmphasisToggleable
 > = {
   themes: {

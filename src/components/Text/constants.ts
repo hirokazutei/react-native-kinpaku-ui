@@ -1,4 +1,3 @@
-import themes from '../../themes';
 import {TextVariationProps} from './types';
 
 type TextVariations =
