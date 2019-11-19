@@ -20,7 +20,7 @@ declare type TextFactoryProps<Themes, AdditionalPalettes, TextVariations, FontSi
         [ThemeKey in keyof (Themes & DefaultObject<ThemePalette>)]: ThemePalette;
     };
     additionalPalettes?: {
-        [AdditionalPaletteKey in keyof AdditionalPalettes]: Color;
+        [AdditionalPaletteKey in keyof (AdditionalPalettes & DefaultObject<Color>)]: Color;
     };
     defaultFontSizeKey: FontSizes extends null | undefined ? never : FontSizes;
     textVariations: {

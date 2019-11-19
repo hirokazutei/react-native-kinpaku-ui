@@ -1,9 +1,9 @@
 /// <reference types="react" />
 import { Themes } from './Theme/types';
 import { DefaultFontSizes } from './components/Text/constants';
-import { Color } from './types';
+import { Color, DefaultObject } from './types';
 export default function UIFactory<ThemeObject, AdditionalPalettes>(themes: Themes<ThemeObject>, additionalPalettes?: {
-    [key in keyof AdditionalPalettes]: Color;
+    [key in keyof (AdditionalPalettes & DefaultObject<Color>)]: Color;
 }): {
     Button: {
         Circular: import("react").FunctionComponent<import("./components/Button/types").ButtonProps<AdditionalPalettes, {

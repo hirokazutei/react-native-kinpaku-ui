@@ -12,7 +12,7 @@ declare type RadioButtonFactoryProps<Themes, AdditionalPalettes, RadioButtonSize
         [ThemeKeys in keyof Themes & DefaultObject<ThemePalette>]: ThemePalette;
     };
     additionalPalettes?: {
-        [AdditionalPaletteKeys in keyof AdditionalPalettes]: Color;
+        [AdditionalPaletteKeys in keyof (AdditionalPalettes & DefaultObject<Color>)]: Color;
     };
     sizes?: RadioButtonSizes extends null ? RadioButtonSizeProps : {
         [SizeKey in keyof (RadioButtonSizes & DefaultObject<RadioButtonSizeProps>)]: RadioButtonSizeProps;

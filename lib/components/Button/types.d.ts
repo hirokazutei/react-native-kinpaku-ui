@@ -14,7 +14,7 @@ declare type ButtonFactoryProps<Themes, AdditionalPalettes, ButtonSizes, AllowCu
         [ThemeKey in keyof (Themes & DefaultObject<ThemePalette>)]: ThemePalette;
     };
     additionalPalettes?: {
-        [AdditionalPaletteKey in keyof AdditionalPalettes]: Color;
+        [AdditionalPaletteKey in keyof (AdditionalPalettes & DefaultObject<Color>)]: Color;
     };
     sizes?: {
         [SizeKey in keyof (ButtonSizes & DefaultObject<ButtonSizeProps>)]: ButtonSizeProps;
