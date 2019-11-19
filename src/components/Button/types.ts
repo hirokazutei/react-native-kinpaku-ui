@@ -5,7 +5,12 @@ import {
   TextStyle,
   FlexAlignType,
 } from 'react-native';
-import {Color, DefaultObject, OptionalTrueCheck} from '../../types';
+import {
+  AddDefaultToObject,
+  Color,
+  OptionalTrueCheck,
+  AddDefaultKey,
+} from '../../types';
 import {ThemePalette} from '../../Theme/types';
 
 type ButtonVariations = 'Circular' | 'Round' | 'Sharp';
@@ -26,15 +31,16 @@ type ButtonFactoryProps<
   AllowCustomProps
 > = {
   themes: {
-    [ThemeKey in keyof (Themes & DefaultObject<ThemePalette>)]: ThemePalette;
+    [ThemeKey in keyof AddDefaultToObject<Themes, ThemePalette>]: ThemePalette;
   };
   additionalPalettes?: {
-    [AdditionalPaletteKey in keyof (AdditionalPalettes &
-      DefaultObject<Color>)]: Color;
+    [AdditionalPaletteKey in keyof AdditionalPalettes]: Color;
   };
   sizes?: {
-    [SizeKey in keyof (ButtonSizes &
-      DefaultObject<ButtonSizeProps>)]: ButtonSizeProps;
+    [SizeKey in keyof AddDefaultToObject<
+      ButtonSizes,
+      ButtonSizeProps
+    >]: ButtonSizeProps;
   };
   defaultType?: ButtonTypes;
 };
@@ -48,28 +54,18 @@ type ButtonProps<AdditionalPalettes, ButtonSizes, AllowCustomProps> = {
   _additionalTextProps?: OptionalTrueCheck<AllowCustomProps, TextProperties>;
   _additionalTextStyle?: OptionalTrueCheck<AllowCustomProps, TextStyle>;
   align?: FlexAlignType;
-  color?: keyof (ThemePalette & DefaultObject<AdditionalPalettes>);
+  color?: keyof (ThemePalette & AdditionalPalettes);
   isDisabled?: boolean;
   isStretched?: boolean;
-  size?: keyof (ButtonSizes & DefaultObject<ButtonSizeProps>);
+  size?: AddDefaultKey<keyof ButtonSizes>;
   title: string;
   type?: ButtonTypes;
   onPress: (args: any) => any;
 };
 
-type ButtonSizes =
-  | 'tiny'
-  | 'small'
-  | 'medium'
-  | 'default'
-  | 'large'
-  | 'huge'
-  | 'massive';
-
 export {
   ButtonProps,
   ButtonVariations,
-  ButtonSizes,
   ButtonSizeProps,
   ButtonTypes,
   ButtonFactoryProps,

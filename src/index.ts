@@ -5,7 +5,6 @@ import buttonFactory from './components/Button';
 import {
   ButtonProps,
   ButtonVariations,
-  ButtonSizes,
   ButtonSizeProps,
   ButtonTypes,
   ButtonFactoryProps,
@@ -14,7 +13,6 @@ import {
 import touchableFactory from './components/Touchable';
 import {
   TouchableTypes,
-  TouchableSizes,
   TouchableProps,
   TouchableSizeProps,
   TouchableFactoryProps,
@@ -42,7 +40,6 @@ export {
   buttonFactory,
   ButtonFactoryProps,
   ButtonProps,
-  ButtonSizes,
   ButtonSizeProps,
   ButtonTypes,
   ButtonVariations,
@@ -62,7 +59,6 @@ export {
   touchableFactory,
   TouchableFactoryProps,
   TouchableProps,
-  TouchableSizes,
   TouchableSizeProps,
   TouchableTypes,
   TouchableVerHorSizeProps,

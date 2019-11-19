@@ -6,12 +6,13 @@ import {
   TouchableVerHorSizeProps,
   TouchableAllSizeProps,
 } from './types';
-import {DefaultObject} from '../../types';
+import {AddDefaultKey, AddDefaultToObject} from '../../types';
 import {ThemePalette} from '../../Theme/types';
 import {
   DEFAULT_TOUCHABLE_SIZES,
   DEFAULT_TOUCHABLE_ALIGN,
   DEFAULT_TOUCHABLE_BORDER_WIDTH,
+  DefaultTouchableSizes,
 } from './constants';
 
 function touchableFactory<
@@ -59,8 +60,10 @@ function touchableFactory<
     const currentThemeKey = useContext(paletteContext) || 'default';
     const currentTheme =
       themes[
-        `${currentThemeKey}` as keyof (PaletteObjectType &
-          DefaultObject<ThemePalette>)
+        `${currentThemeKey}` as keyof AddDefaultToObject<
+          PaletteObjectType,
+          ThemePalette
+        >
       ];
 
     // Color
@@ -73,7 +76,9 @@ function touchableFactory<
     const fillColor = type === 'solid' ? primaryColor : currentTheme.background;
 
     // Size
-    const touchablePaddingProperty = sizes && sizes[size];
+    const touchablePaddingProperty = sizes
+      ? sizes[size]
+      : DEFAULT_TOUCHABLE_SIZES[size as AddDefaultKey<DefaultTouchableSizes>];
 
     // BorderStyles
     const borderStyles = {

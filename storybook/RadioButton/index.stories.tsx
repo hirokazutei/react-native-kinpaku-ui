@@ -11,20 +11,24 @@ import {
   RadioButtonVariations,
 } from '../../src/components/RadioButton/types';
 import radioButtonFactory from '../../src/components/RadioButton';
-import {DEFAULT_RADIO_BUTTON_SIZE} from '../../src/components/RadioButton/constants';
+import {
+  DEFAULT_RADIO_BUTTON_SIZES,
+  DefaultRadioSizes,
+} from '../../src/components/RadioButton/constants';
 
 const {Dot, Reverse, Fill} = radioButtonFactory<
   typeof themes,
   null,
-  null,
+  typeof DEFAULT_RADIO_BUTTON_SIZES,
   false
 >({
   themes,
-  sizes: DEFAULT_RADIO_BUTTON_SIZE,
+  sizes: DEFAULT_RADIO_BUTTON_SIZES,
 });
 
 const DEFAULT_PROPS = {
   active: false,
+  size: undefined,
   color: 'primary' as keyof ThemePalette,
   isDisabled: false,
 };
@@ -35,10 +39,18 @@ const colorSelect: {[key in keyof ThemePalette]?: keyof ThemePalette} = {
   tertiary: 'tertiary',
 };
 
+const sizeSelect: {
+  [key in DefaultRadioSizes]?: DefaultRadioSizes;
+} = {
+  small: 'small',
+  medium: 'medium',
+  large: 'large',
+};
+
 const getRequiredProps = (
   overrides = {},
 ): RadioButtonProps<null, null, null> => {
-  const {active, color, isDisabled} = {
+  const {active, color, isDisabled, size} = {
     ...DEFAULT_PROPS,
     ...overrides,
   };
@@ -47,6 +59,7 @@ const getRequiredProps = (
     color: select('Color Options', colorSelect, color),
     isDisabled: boolean('isDisabled', isDisabled),
     onPress: action('button-pressed'),
+    size: select('Size Options', sizeSelect, size),
   };
 };
 

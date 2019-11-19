@@ -6,11 +6,12 @@ import {
   RadioButtonSizeProps,
   RadioButtonVariations,
 } from './types';
-import {DefaultObject} from '../../types';
+import {AddDefaultKey, AddDefaultToObject} from '../../types';
 import {ThemePalette} from '../../Theme/types';
 import {
   RADIO_BUTTON_VARIATION_KEYS,
-  DEFAULT_RADIO_BUTTON_SIZE,
+  DEFAULT_RADIO_BUTTON_SIZES,
+  DefaultRadioSizes,
 } from './constants';
 
 function radioButtonFactory<
@@ -50,7 +51,10 @@ function radioButtonFactory<
       color,
       isDisabled,
       onPress,
-      size,
+      size = 'default' as keyof AddDefaultToObject<
+        RadioButtonSizes,
+        RadioButtonSizeProps
+      >,
       _customInnerViewProps,
       _customInnerViewStyle,
       _customOuterViewProps,
@@ -61,11 +65,10 @@ function radioButtonFactory<
       AllowCustomProps
     >): React.ReactElement => {
       // Palettes
-      const currentThemeKey = useContext(themeContext) || 'default';
+      const currentThemeKey =
+        useContext(themeContext) || ('default' as AddDefaultKey<Themes>);
       const currentTheme =
-        themes[
-          `${currentThemeKey}` as keyof Themes & DefaultObject<ThemePalette>
-        ];
+        themes[`${currentThemeKey}` as keyof AddDefaultKey<Themes>];
 
       // Color
       const primaryColor = !isDisabled
@@ -83,28 +86,9 @@ function radioButtonFactory<
         variation === 'Reverse' ? primaryColor : currentTheme.background;
 
       // Size
-
-      const sizeProperty = ((): RadioButtonSizeProps => {
-        if (
-          sizes &&
-          (sizes as {
-            [SizeKey in keyof RadioButtonSizes]: RadioButtonSizeProps;
-          } &
-            DefaultObject<RadioButtonSizeProps>).default
-        ) {
-          return (sizes as {
-            [SizeKey in keyof RadioButtonSizes]: RadioButtonSizeProps;
-          } &
-            DefaultObject<RadioButtonSizeProps>)[
-            `${size}` as keyof (RadioButtonSizes &
-              DefaultObject<RadioButtonSizeProps>)
-          ];
-        } else if (sizes && (sizes as RadioButtonSizeProps).size) {
-          return sizes as RadioButtonSizeProps;
-        } else {
-          return DEFAULT_RADIO_BUTTON_SIZE;
-        }
-      })();
+      const sizeProperty = sizes
+        ? sizes[size]
+        : DEFAULT_RADIO_BUTTON_SIZES[size as AddDefaultKey<DefaultRadioSizes>];
 
       const dotSize =
         variation === 'Fill'

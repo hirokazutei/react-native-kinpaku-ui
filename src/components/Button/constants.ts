@@ -1,13 +1,18 @@
 import {FlexAlignType, TextStyle} from 'react-native';
-import {ButtonSizes, ButtonSizeProps, ButtonVariations} from './types';
+import {ButtonSizeProps, ButtonVariations} from './types';
+import {AddDefaultKey} from '../../types';
 
-const DEFAULT_BUTTON_SIZES: {[key in ButtonSizes]: ButtonSizeProps} = {
-  default: {
-    verticalPaddding: 6,
-    horizontalPadding: 12,
-    fontSize: 16,
-    borderRadius: 8,
-  },
+type DefaultButtonSizes =
+  | 'tiny'
+  | 'small'
+  | 'medium'
+  | 'large'
+  | 'huge'
+  | 'massive';
+
+const DEFAULTLESS_BUTTON_SIZES: {
+  [key in DefaultButtonSizes]: ButtonSizeProps;
+} = {
   tiny: {
     verticalPaddding: 4,
     horizontalPadding: 8,
@@ -46,6 +51,13 @@ const DEFAULT_BUTTON_SIZES: {[key in ButtonSizes]: ButtonSizeProps} = {
   },
 };
 
+const DEFAULT_BUTTON_SIZES: {
+  [key in AddDefaultKey<DefaultButtonSizes>]: ButtonSizeProps;
+} = {
+  ...DEFAULTLESS_BUTTON_SIZES,
+  default: DEFAULTLESS_BUTTON_SIZES.medium,
+};
+
 const DEFAULT_BUTTON_ALIGN: FlexAlignType = 'center';
 
 const DEFAULT_BUTTON_FONT_WEIGHT: TextStyle['fontWeight'] = 'bold';
@@ -64,8 +76,7 @@ const BUTTON_VARIATION_KEYS: Array<ButtonVariations> = [
   'Sharp',
 ];
 
-const buttonSizeKeys: Array<ButtonSizes> = [
-  'default',
+const buttonSizeKeys: Array<AddDefaultKey<DefaultButtonSizes>> = [
   'tiny',
   'small',
   'medium',
@@ -82,4 +93,5 @@ export {
   BORDER_RADIUS_MULTIPLIERS,
   BUTTON_VARIATION_KEYS,
   buttonSizeKeys,
+  DefaultButtonSizes,
 };
