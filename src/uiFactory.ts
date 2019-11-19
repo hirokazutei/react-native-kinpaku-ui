@@ -10,11 +10,13 @@ import {
   DEFAULT_TEXT_VARIATIONS,
   DefaultFontSizes,
 } from './components/Text/constants';
-import {Color} from './types';
+import {Color, DefaultObject} from './types';
 
 export default function UIFactory<ThemeObject, AdditionalPalettes>(
   themes: Themes<ThemeObject>,
-  additionalPalettes?: {[key in keyof AdditionalPalettes]: Color},
+  additionalPalettes?: {
+    [key in keyof (AdditionalPalettes & DefaultObject<Color>)]: Color;
+  },
 ) {
   const commonProps = {themes, additionalPalettes};
   const Button = buttonFactory<
@@ -51,7 +53,7 @@ export default function UIFactory<ThemeObject, AdditionalPalettes>(
     DefaultFontSizes,
     true
   >({
-    themes,
+    ...commonProps,
     defaultFontSizeKey: 'medium',
     textVariations: DEFAULT_TEXT_VARIATIONS,
   });
