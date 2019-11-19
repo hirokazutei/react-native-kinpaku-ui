@@ -1,6 +1,5 @@
 /// <reference types="react" />
 import { Themes } from './Theme/types';
-import { DefaultFontSizes } from './components/Text/constants';
 import { Color, DefaultObject } from './types';
 export default function UIFactory<ThemeObject, AdditionalPalettes>(themes: Themes<ThemeObject>, additionalPalettes?: {
     [key in keyof (AdditionalPalettes & DefaultObject<Color>)]: Color;
@@ -48,11 +47,11 @@ export default function UIFactory<ThemeObject, AdditionalPalettes>(themes: Theme
         huge: import("./components/Touchable/types").TouchableAllSizeProps;
         massive: import("./components/Touchable/types").TouchableAllSizeProps;
     }, false>>;
-    Title: import("react").FunctionComponent<import("./components/Text/types").TextProps<null, DefaultFontSizes, true>>;
-    Heading: import("react").FunctionComponent<import("./components/Text/types").TextProps<null, DefaultFontSizes, true>>;
-    SubHeading: import("react").FunctionComponent<import("./components/Text/types").TextProps<null, DefaultFontSizes, true>>;
-    Body: import("react").FunctionComponent<import("./components/Text/types").TextProps<null, DefaultFontSizes, true>>;
-    Caption: import("react").FunctionComponent<import("./components/Text/types").TextProps<null, DefaultFontSizes, true>>;
-    Quote: import("react").FunctionComponent<import("./components/Text/types").TextProps<null, DefaultFontSizes, true>>;
+    Title: import("react").FunctionComponent<import("./components/Text/types").TextProps<null, import("./components/RadioButton/constants").DefaultRadioSizes, true>>;
+    Heading: import("react").FunctionComponent<import("./components/Text/types").TextProps<null, import("./components/RadioButton/constants").DefaultRadioSizes, true>>;
+    SubHeading: import("react").FunctionComponent<import("./components/Text/types").TextProps<null, import("./components/RadioButton/constants").DefaultRadioSizes, true>>;
+    Body: import("react").FunctionComponent<import("./components/Text/types").TextProps<null, import("./components/RadioButton/constants").DefaultRadioSizes, true>>;
+    Caption: import("react").FunctionComponent<import("./components/Text/types").TextProps<null, import("./components/RadioButton/constants").DefaultRadioSizes, true>>;
+    Quote: import("react").FunctionComponent<import("./components/Text/types").TextProps<null, import("./components/RadioButton/constants").DefaultRadioSizes, true>>;
 };
 //# sourceMappingURL=uiFactory.d.ts.map

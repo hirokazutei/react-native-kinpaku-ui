@@ -1,6 +1,6 @@
 /// <reference types="react" />
 import { TouchableOpacityProps, ViewStyle, FlexAlignType } from 'react-native';
-import { Color, DefaultObject, OptionalTrueCheck } from '../../types';
+import { AddDefaultToObject, Color, OptionalTrueCheck, AddDefaultKey } from '../../types';
 import { ThemePalette } from '../../Theme/types';
 declare type TouchableTypes = 'solid' | 'outline';
 declare type VerHor = {
@@ -19,13 +19,13 @@ declare type TouchableAllSizeProps = {
 declare type TouchableSizeProps = TouchableVerHorSizeProps | TouchableAllSizeProps;
 declare type TouchableFactoryProps<Themes, AdditionalPalettes, TouchableSizes, AllowCustomProps> = {
     themes: {
-        [ThemeKeys in keyof (Themes & DefaultObject<ThemePalette>)]: ThemePalette;
+        [ThemeKeys in keyof AddDefaultToObject<Themes, ThemePalette>]: ThemePalette;
     };
     additionalPalettes?: {
         [AdditionalPaletteKeys in keyof AdditionalPalettes]: Color;
     };
     sizes?: {
-        [SizeKey in keyof (TouchableSizes & DefaultObject<TouchableSizeProps>)]: TouchableSizeProps;
+        [SizeKey in keyof AddDefaultToObject<TouchableSizes, TouchableSizeProps>]: TouchableSizeProps;
     };
     defaultType?: TouchableTypes;
 };
@@ -37,10 +37,9 @@ declare type TouchableProps<AdditionalPalettes, TouchableSizes, AllowCustomProps
     color?: keyof (ThemePalette & AdditionalPalettes);
     isDisabled?: boolean;
     isStretched?: boolean;
-    size?: keyof (TouchableSizes & DefaultObject<TouchableSizeProps>);
+    size?: AddDefaultKey<keyof TouchableSizes>;
     type?: TouchableTypes;
     onPress: (args: any) => any;
 };
-declare type TouchableSizes = 'tiny' | 'small' | 'medium' | 'default' | 'large' | 'huge' | 'massive';
-export { TouchableTypes, TouchableSizes, TouchableProps, TouchableSizeProps, TouchableFactoryProps, TouchableVerHorSizeProps, TouchableAllSizeProps, };
+export { TouchableTypes, TouchableProps, TouchableSizeProps, TouchableFactoryProps, TouchableVerHorSizeProps, TouchableAllSizeProps, };
 //# sourceMappingURL=types.d.ts.map

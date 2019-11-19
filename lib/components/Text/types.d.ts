@@ -1,5 +1,5 @@
 import { TextStyle } from 'react-native';
-import { Color, DefaultObject, OptionalTrueCheck } from '../../types';
+import { AddDefaultToObject, Color, OptionalTrueCheck } from '../../types';
 import { ThemePalette } from '../../Theme/types';
 declare type TextSizeProps<FontSizes extends string | string> = {
     [key in FontSizes]: number;
@@ -17,10 +17,10 @@ declare type TextVariationProps<FontSizes extends string | string, AdditionalPal
 };
 declare type TextFactoryProps<Themes, AdditionalPalettes, TextVariations, FontSizes extends string | string, EmphasisToggleable> = {
     themes: {
-        [ThemeKey in keyof (Themes & DefaultObject<ThemePalette>)]: ThemePalette;
+        [ThemeKey in keyof AddDefaultToObject<Themes, ThemePalette>]: ThemePalette;
     };
     additionalPalettes?: {
-        [AdditionalPaletteKey in keyof (AdditionalPalettes & DefaultObject<Color>)]: Color;
+        [AdditionalPaletteKey in keyof AddDefaultToObject<AdditionalPalettes, Color>]: Color;
     };
     defaultFontSizeKey: FontSizes extends null | undefined ? never : FontSizes;
     textVariations: {

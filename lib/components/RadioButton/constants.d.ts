@@ -1,5 +1,9 @@
 import { RadioButtonSizeProps, RadioButtonVariations } from './types';
-declare const DEFAULT_RADIO_BUTTON_SIZE: RadioButtonSizeProps;
+import { AddDefaultKey } from '../../types';
+declare type DefaultRadioSizes = 'small' | 'medium' | 'large';
+declare const DEFAULT_RADIO_BUTTON_SIZES: {
+    [key in AddDefaultKey<DefaultRadioSizes>]: RadioButtonSizeProps;
+};
 declare const RADIO_BUTTON_VARIATION_KEYS: Array<RadioButtonVariations>;
-export { DEFAULT_RADIO_BUTTON_SIZE, RADIO_BUTTON_VARIATION_KEYS };
+export { DEFAULT_RADIO_BUTTON_SIZES, RADIO_BUTTON_VARIATION_KEYS, DefaultRadioSizes, };
 //# sourceMappingURL=constants.d.ts.map

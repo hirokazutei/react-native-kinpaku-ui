@@ -1,6 +1,6 @@
 import {FlexAlignType} from 'react-native';
 import {TouchableAllSizeProps} from './types';
-import {AddDefaultKey, AddDefaultToObject} from '../../types';
+import {AddDefaultKey} from '../../types';
 
 type DefaultTouchableSizes =
   | 'tiny'

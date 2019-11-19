@@ -1,5 +1,5 @@
 import { TouchableOpacityProps, ViewStyle, ViewProps } from 'react-native';
-import { Color, DefaultObject, OptionalTrueCheck } from '../../types';
+import { AddDefaultKey, Color, AddDefaultToObject, OptionalTrueCheck } from '../../types';
 import { ThemePalette } from '../../Theme/types';
 declare type RadioButtonVariations = 'Dot' | 'Reverse' | 'Fill';
 declare type RadioButtonSizeProps = {
@@ -9,13 +9,13 @@ declare type RadioButtonSizeProps = {
 };
 declare type RadioButtonFactoryProps<Themes, AdditionalPalettes, RadioButtonSizes, AllowCustomProps> = {
     themes: {
-        [ThemeKeys in keyof Themes & DefaultObject<ThemePalette>]: ThemePalette;
+        [ThemeKeys in keyof AddDefaultToObject<Themes, ThemePalette>]: ThemePalette;
     };
     additionalPalettes?: {
-        [AdditionalPaletteKeys in keyof (AdditionalPalettes & DefaultObject<Color>)]: Color;
+        [AdditionalPaletteKeys in keyof AdditionalPalettes]: Color;
     };
-    sizes?: RadioButtonSizes extends null ? RadioButtonSizeProps : {
-        [SizeKey in keyof (RadioButtonSizes & DefaultObject<RadioButtonSizeProps>)]: RadioButtonSizeProps;
+    sizes?: {
+        [SizeKey in keyof AddDefaultToObject<RadioButtonSizes, RadioButtonSizeProps>]: RadioButtonSizeProps;
     };
     defaultVariation?: RadioButtonVariations;
 };
@@ -23,7 +23,7 @@ declare type RadioButtonProps<AdditionalPalettes, RadioButtonSizes, AllowCustomP
     active: boolean;
     color?: keyof (ThemePalette & AdditionalPalettes);
     isDisabled?: boolean;
-    size?: keyof RadioButtonSizes extends 'default' ? keyof (RadioButtonSizes & DefaultObject<RadioButtonSizes>) : never;
+    size?: AddDefaultKey<keyof RadioButtonSizes>;
     onPress: (args: any) => any;
     _customOuterViewProps?: OptionalTrueCheck<AllowCustomProps, TouchableOpacityProps>;
     _customOuterViewStyle?: OptionalTrueCheck<AllowCustomProps, ViewStyle>;

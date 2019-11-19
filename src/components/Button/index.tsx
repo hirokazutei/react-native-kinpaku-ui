@@ -3,7 +3,6 @@ import {TouchableOpacity, Text, FlexAlignType} from 'react-native';
 import {
   ButtonFactoryProps,
   ButtonProps as Props,
-  ButtonSizeProps,
   ButtonVariations,
 } from './types';
 import {AddDefaultKey} from '../../types';
