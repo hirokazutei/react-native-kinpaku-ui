@@ -2,8 +2,8 @@ import {TouchableOpacityProps, ViewStyle, FlexAlignType} from 'react-native';
 import {
   AddDefaultToObject,
   Color,
-  OptionalTrueCheck,
-  AddDefaultKey,
+  OptionalTrueCondition,
+  UnionDefaultKey,
 } from '../../types';
 import {ThemePalette} from '../../Theme/types';
 
@@ -45,14 +45,18 @@ type TouchableFactoryProps<
 };
 
 type TouchableProps<AdditionalPalettes, TouchableSizes, AllowCustomProps> = {
-  _additionalProps?: OptionalTrueCheck<AllowCustomProps, TouchableOpacityProps>;
-  _additionalStyle?: OptionalTrueCheck<AllowCustomProps, ViewStyle>;
+  _additionalProps?: OptionalTrueCondition<
+    AllowCustomProps,
+    never,
+    TouchableOpacityProps
+  >;
+  _additionalStyle?: OptionalTrueCondition<AllowCustomProps, never, ViewStyle>;
   align?: FlexAlignType;
   children: React.ReactNode;
   color?: keyof (ThemePalette & AdditionalPalettes);
   isDisabled?: boolean;
   isStretched?: boolean;
-  size?: AddDefaultKey<keyof TouchableSizes>;
+  size?: UnionDefaultKey<keyof TouchableSizes>;
   type?: TouchableTypes;
   onPress: (args: any) => any;
 };

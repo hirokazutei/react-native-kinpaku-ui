@@ -6,18 +6,28 @@ type AddDefaultToObject<T, V> = {
   [K in keyof (T & DefaultObject<V>)]: V;
 };
 
-type AddDefaultKey<T> = T | 'default';
+type UnionDefaultKey<T> = T | 'default';
+type IntersectDefaultKey<T> = T & 'default';
 
-type OptionalTrueCheck<T, R> = T extends undefined | null | false
-  ? never
+type OptionalTrueCondition<T, IfFalse, IfTrue> = T extends
+  | undefined
+  | null
+  | false
+  ? IfFalse
   : T extends true
-  ? R
-  : never;
+  ? IfTrue
+  : IfFalse;
+
+type OptionalExistCondition<T, NonExist, Exist> = T extends undefined | null
+  ? NonExist
+  : Exist;
 
 export {
-  AddDefaultKey,
   AddDefaultToObject,
   Color,
   DefaultObject,
-  OptionalTrueCheck,
+  IntersectDefaultKey,
+  OptionalExistCondition,
+  OptionalTrueCondition,
+  UnionDefaultKey,
 };

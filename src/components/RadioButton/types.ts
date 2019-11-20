@@ -1,9 +1,9 @@
 import {TouchableOpacityProps, ViewStyle, ViewProps} from 'react-native';
 import {
-  AddDefaultKey,
   Color,
   AddDefaultToObject,
-  OptionalTrueCheck,
+  OptionalTrueCondition,
+  UnionDefaultKey,
 } from '../../types';
 import {ThemePalette} from '../../Theme/types';
 
@@ -46,15 +46,28 @@ type RadioButtonProps<
   active: boolean;
   color?: keyof (ThemePalette & AdditionalPalettes);
   isDisabled?: boolean;
-  size?: AddDefaultKey<keyof RadioButtonSizes>;
+  size?: UnionDefaultKey<keyof RadioButtonSizes>;
   onPress: (args: any) => any;
-  _customOuterViewProps?: OptionalTrueCheck<
+  _customOuterViewProps?: OptionalTrueCondition<
     AllowCustomProps,
+    never,
     TouchableOpacityProps
   >;
-  _customOuterViewStyle?: OptionalTrueCheck<AllowCustomProps, ViewStyle>;
-  _customInnerViewProps?: OptionalTrueCheck<AllowCustomProps, ViewProps>;
-  _customInnerViewStyle?: OptionalTrueCheck<AllowCustomProps, ViewStyle>;
+  _customOuterViewStyle?: OptionalTrueCondition<
+    AllowCustomProps,
+    never,
+    ViewStyle
+  >;
+  _customInnerViewProps?: OptionalTrueCondition<
+    AllowCustomProps,
+    never,
+    ViewProps
+  >;
+  _customInnerViewStyle?: OptionalTrueCondition<
+    AllowCustomProps,
+    never,
+    ViewStyle
+  >;
 };
 
 export {

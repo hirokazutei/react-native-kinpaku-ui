@@ -1,5 +1,5 @@
 import {TextStyle} from 'react-native';
-import {AddDefaultToObject, Color, OptionalTrueCheck} from '../../types';
+import {AddDefaultToObject, Color, OptionalTrueCondition} from '../../types';
 import {ThemePalette} from '../../Theme/types';
 
 type TextSizeProps<FontSizes extends string | string> = {
@@ -53,13 +53,13 @@ type TextFactoryProps<
 
 type TextProps<AdditionalPalettes, FontSizes, EmphasisToggleable> = {
   align?: TextStyle['textAlign'];
-  bold?: OptionalTrueCheck<EmphasisToggleable, boolean>;
+  bold?: OptionalTrueCondition<EmphasisToggleable, never, boolean>;
   color?: keyof (ThemePalette & AdditionalPalettes);
   children: string;
-  italic?: OptionalTrueCheck<EmphasisToggleable, boolean>;
+  italic?: OptionalTrueCondition<EmphasisToggleable, never, boolean>;
   size?: FontSizes extends null | undefined ? number : FontSizes;
-  lineThrough?: OptionalTrueCheck<EmphasisToggleable, boolean>;
-  underline?: OptionalTrueCheck<EmphasisToggleable, boolean>;
+  lineThrough?: OptionalTrueCondition<EmphasisToggleable, never, boolean>;
+  underline?: OptionalTrueCondition<EmphasisToggleable, never, boolean>;
 };
 
 export {TextSizeProps, TextVariationProps, TextFactoryProps, TextProps};

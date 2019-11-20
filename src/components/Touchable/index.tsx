@@ -5,8 +5,13 @@ import {
   TouchableProps as Props,
   TouchableVerHorSizeProps,
   TouchableAllSizeProps,
+  TouchableSizeProps,
 } from './types';
-import {AddDefaultKey, AddDefaultToObject} from '../../types';
+import {
+  AddDefaultToObject,
+  OptionalExistCondition,
+  UnionDefaultKey,
+} from '../../types';
 import {ThemePalette} from '../../Theme/types';
 import {
   DEFAULT_TOUCHABLE_SIZES,
@@ -31,14 +36,26 @@ function touchableFactory<
   TouchableSizes,
   AllowCustomProps
 >): React.FunctionComponent<
-  Props<AdditionalPalettes, TouchableSizes, AllowCustomProps>
+  Props<
+    AdditionalPalettes,
+    OptionalExistCondition<
+      TouchableSizes,
+      typeof DEFAULT_TOUCHABLE_SIZES,
+      TouchableSizes
+    >,
+    AllowCustomProps
+  >
 > {
   const paletteContext: React.Context<keyof PaletteObjectType> = React.createContext(
     'default' as keyof PaletteObjectType,
   );
   const Touchable: React.FC<Props<
     AdditionalPalettes,
-    TouchableSizes,
+    OptionalExistCondition<
+      TouchableSizes,
+      typeof DEFAULT_TOUCHABLE_SIZES,
+      TouchableSizes
+    >,
     AllowCustomProps
   >> = ({
     color = 'primary',
@@ -53,7 +70,11 @@ function touchableFactory<
     _additionalStyle,
   }: Props<
     AdditionalPalettes,
-    TouchableSizes,
+    OptionalExistCondition<
+      TouchableSizes,
+      typeof DEFAULT_TOUCHABLE_SIZES,
+      TouchableSizes
+    >,
     AllowCustomProps
   >): React.ReactElement => {
     // Palettes
@@ -77,8 +98,13 @@ function touchableFactory<
 
     // Size
     const touchablePaddingProperty = sizes
-      ? sizes[size]
-      : DEFAULT_TOUCHABLE_SIZES[size as AddDefaultKey<DefaultTouchableSizes>];
+      ? (sizes as {
+          [SizeKey in keyof AddDefaultToObject<
+            TouchableSizes,
+            TouchableSizeProps
+          >]: TouchableSizeProps;
+        })[size as keyof AddDefaultToObject<TouchableSizes, TouchableSizeProps>]
+      : DEFAULT_TOUCHABLE_SIZES[size as UnionDefaultKey<DefaultTouchableSizes>];
 
     // BorderStyles
     const borderStyles = {
@@ -107,6 +133,7 @@ function touchableFactory<
 
     const touchableStyle = {
       alignSelf: !isStretched ? align : ('stretch' as FlexAlignType),
+      alignItems: 'center' as FlexAlignType,
       borderRadius: borderRadius,
       backgroundColor: fillColor,
       paddingHorizontal:

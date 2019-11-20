@@ -6,10 +6,7 @@ import {boolean, select, withKnobs} from '@storybook/addon-knobs';
 import Provider from '../Provider';
 import themes from '../../src/themes';
 import {ThemePalette} from '../../src/Theme/types';
-import {
-  RadioButtonProps,
-  RadioButtonVariations,
-} from '../../src/components/RadioButton/types';
+import {RadioButtonProps} from '../../src/components/RadioButton/types';
 import radioButtonFactory from '../../src/components/RadioButton';
 import {
   DEFAULT_RADIO_BUTTON_SIZES,

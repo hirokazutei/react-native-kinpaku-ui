@@ -8,8 +8,8 @@ import {
 import {
   AddDefaultToObject,
   Color,
-  OptionalTrueCheck,
-  AddDefaultKey,
+  OptionalTrueCondition,
+  UnionDefaultKey,
 } from '../../types';
 import {ThemePalette} from '../../Theme/types';
 
@@ -46,18 +46,31 @@ type ButtonFactoryProps<
 };
 
 type ButtonProps<AdditionalPalettes, ButtonSizes, AllowCustomProps> = {
-  _additionalButtonProps?: OptionalTrueCheck<
+  _additionalButtonProps?: OptionalTrueCondition<
     AllowCustomProps,
+    never,
     TouchableOpacityProps
   >;
-  _additionalButtonStyle?: OptionalTrueCheck<AllowCustomProps, ViewStyle>;
-  _additionalTextProps?: OptionalTrueCheck<AllowCustomProps, TextProperties>;
-  _additionalTextStyle?: OptionalTrueCheck<AllowCustomProps, TextStyle>;
+  _additionalButtonStyle?: OptionalTrueCondition<
+    AllowCustomProps,
+    never,
+    ViewStyle
+  >;
+  _additionalTextProps?: OptionalTrueCondition<
+    AllowCustomProps,
+    never,
+    TextProperties
+  >;
+  _additionalTextStyle?: OptionalTrueCondition<
+    AllowCustomProps,
+    never,
+    TextStyle
+  >;
   align?: FlexAlignType;
   color?: keyof (ThemePalette & AdditionalPalettes);
   isDisabled?: boolean;
   isStretched?: boolean;
-  size?: AddDefaultKey<keyof ButtonSizes>;
+  size?: UnionDefaultKey<keyof ButtonSizes>;
   title: string;
   type?: ButtonTypes;
   onPress: (args: any) => any;

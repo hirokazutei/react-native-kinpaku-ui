@@ -6,7 +6,7 @@ import {
   RadioButtonSizeProps,
   RadioButtonVariations,
 } from './types';
-import {AddDefaultKey, AddDefaultToObject} from '../../types';
+import {AddDefaultToObject, UnionDefaultKey} from '../../types';
 import {ThemePalette} from '../../Theme/types';
 import {
   RADIO_BUTTON_VARIATION_KEYS,
@@ -66,9 +66,9 @@ function radioButtonFactory<
     >): React.ReactElement => {
       // Palettes
       const currentThemeKey =
-        useContext(themeContext) || ('default' as AddDefaultKey<Themes>);
+        useContext(themeContext) || ('default' as UnionDefaultKey<Themes>);
       const currentTheme =
-        themes[`${currentThemeKey}` as keyof AddDefaultKey<Themes>];
+        themes[`${currentThemeKey}` as keyof UnionDefaultKey<Themes>];
 
       // Color
       const primaryColor = !isDisabled
@@ -88,7 +88,9 @@ function radioButtonFactory<
       // Size
       const sizeProperty = sizes
         ? sizes[size]
-        : DEFAULT_RADIO_BUTTON_SIZES[size as AddDefaultKey<DefaultRadioSizes>];
+        : DEFAULT_RADIO_BUTTON_SIZES[
+            size as UnionDefaultKey<DefaultRadioSizes>
+          ];
 
       const dotSize =
         variation === 'Fill'

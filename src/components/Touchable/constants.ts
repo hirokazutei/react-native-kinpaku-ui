@@ -1,6 +1,6 @@
 import {FlexAlignType} from 'react-native';
 import {TouchableAllSizeProps} from './types';
-import {AddDefaultKey} from '../../types';
+import {UnionDefaultKey, IntersectDefaultKey} from '../../types';
 
 type DefaultTouchableSizes =
   | 'tiny'
@@ -40,7 +40,7 @@ const DEFAULTLESSS_TOUCHABLE_SIZES: {
 };
 
 const DEFAULT_TOUCHABLE_SIZES: {
-  [key in AddDefaultKey<DefaultTouchableSizes>]: TouchableAllSizeProps;
+  [key in UnionDefaultKey<DefaultTouchableSizes>]: TouchableAllSizeProps;
 } = {
   ...DEFAULTLESSS_TOUCHABLE_SIZES,
   default: DEFAULTLESSS_TOUCHABLE_SIZES.medium,
@@ -50,7 +50,7 @@ const DEFAULT_TOUCHABLE_ALIGN: FlexAlignType = 'center';
 
 const DEFAULT_TOUCHABLE_BORDER_WIDTH: number = 2;
 
-const touchableSizeKeys: Array<AddDefaultKey<DefaultTouchableSizes>> = [
+const touchableSizeKeys: Array<UnionDefaultKey<DefaultTouchableSizes>> = [
   'default',
   'tiny',
   'small',
