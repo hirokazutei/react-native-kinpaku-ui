@@ -5,7 +5,7 @@ import {
   ButtonProps as Props,
   ButtonVariations,
 } from './types';
-import {AddDefaultKey} from '../../types';
+import {UnionDefaultKey} from '../../types';
 import {ThemePalette} from '../../Theme/types';
 import {
   DEFAULT_BUTTON_SIZES,
@@ -71,7 +71,7 @@ function buttonFactory<
       // Palettes
       const currentThemeKey = useContext(paletteContext) || 'default';
       const currentTheme =
-        themes[`${currentThemeKey}` as keyof AddDefaultKey<Themes>];
+        themes[`${currentThemeKey}` as keyof UnionDefaultKey<Themes>];
 
       // Color
       const primaryColor = !isDisabled
@@ -87,7 +87,7 @@ function buttonFactory<
       // Size
       const buttonSizeProperty = sizes
         ? sizes[size]
-        : DEFAULT_BUTTON_SIZES[size as AddDefaultKey<DefaultButtonSizes>];
+        : DEFAULT_BUTTON_SIZES[size as UnionDefaultKey<DefaultButtonSizes>];
 
       // BorderStyles
       const borderStyles =

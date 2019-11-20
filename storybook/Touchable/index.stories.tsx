@@ -21,7 +21,7 @@ const Touchable = touchableFactory<typeof themes, null, null, null>({
 });
 
 const DEFAULT_PROPS = {
-  children: 'SAMPLE\nTOUCHABLE',
+  children: 'TOUCH',
 };
 
 const colorSelect: {[key in keyof ThemePalette]?: keyof ThemePalette} = {

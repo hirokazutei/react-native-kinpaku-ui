@@ -1,6 +1,6 @@
 import {FlexAlignType, TextStyle} from 'react-native';
 import {ButtonSizeProps, ButtonVariations} from './types';
-import {AddDefaultKey} from '../../types';
+import {UnionDefaultKey} from '../../types';
 
 type DefaultButtonSizes =
   | 'tiny'
@@ -52,7 +52,7 @@ const DEFAULTLESS_BUTTON_SIZES: {
 };
 
 const DEFAULT_BUTTON_SIZES: {
-  [key in AddDefaultKey<DefaultButtonSizes>]: ButtonSizeProps;
+  [key in UnionDefaultKey<DefaultButtonSizes>]: ButtonSizeProps;
 } = {
   ...DEFAULTLESS_BUTTON_SIZES,
   default: DEFAULTLESS_BUTTON_SIZES.medium,
@@ -76,7 +76,7 @@ const BUTTON_VARIATION_KEYS: Array<ButtonVariations> = [
   'Sharp',
 ];
 
-const buttonSizeKeys: Array<AddDefaultKey<DefaultButtonSizes>> = [
+const buttonSizeKeys: Array<UnionDefaultKey<DefaultButtonSizes>> = [
   'tiny',
   'small',
   'medium',
