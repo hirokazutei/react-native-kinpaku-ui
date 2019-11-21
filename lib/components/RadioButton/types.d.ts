@@ -20,7 +20,7 @@ declare type RadioButtonFactoryProps<Themes, AdditionalPalettes, RadioButtonSize
     defaultVariation?: RadioButtonVariations;
 };
 declare type RadioButtonProps<AdditionalPalettes, RadioButtonSizes, AllowCustomProps> = {
-    active: boolean;
+    active?: boolean;
     color?: keyof (ThemePalette & AdditionalPalettes);
     isDisabled?: boolean;
     size?: UnionDefaultKey<keyof RadioButtonSizes>;

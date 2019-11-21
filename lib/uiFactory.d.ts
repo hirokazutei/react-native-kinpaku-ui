@@ -34,9 +34,24 @@ export default function UIFactory<ThemeObject, AdditionalPalettes>(themes: Theme
         }, false>>;
     };
     RadioButton: {
-        Dot: import("react").FunctionComponent<import("./components/RadioButton/types").RadioButtonProps<AdditionalPalettes, null, false>>;
-        Reverse: import("react").FunctionComponent<import("./components/RadioButton/types").RadioButtonProps<AdditionalPalettes, null, false>>;
-        Fill: import("react").FunctionComponent<import("./components/RadioButton/types").RadioButtonProps<AdditionalPalettes, null, false>>;
+        Dot: import("react").FunctionComponent<import("./components/RadioButton/types").RadioButtonProps<AdditionalPalettes, {
+            default: import("./components/RadioButton/types").RadioButtonSizeProps;
+            small: import("./components/RadioButton/types").RadioButtonSizeProps;
+            medium: import("./components/RadioButton/types").RadioButtonSizeProps;
+            large: import("./components/RadioButton/types").RadioButtonSizeProps;
+        }, false>>;
+        Reverse: import("react").FunctionComponent<import("./components/RadioButton/types").RadioButtonProps<AdditionalPalettes, {
+            default: import("./components/RadioButton/types").RadioButtonSizeProps;
+            small: import("./components/RadioButton/types").RadioButtonSizeProps;
+            medium: import("./components/RadioButton/types").RadioButtonSizeProps;
+            large: import("./components/RadioButton/types").RadioButtonSizeProps;
+        }, false>>;
+        Fill: import("react").FunctionComponent<import("./components/RadioButton/types").RadioButtonProps<AdditionalPalettes, {
+            default: import("./components/RadioButton/types").RadioButtonSizeProps;
+            small: import("./components/RadioButton/types").RadioButtonSizeProps;
+            medium: import("./components/RadioButton/types").RadioButtonSizeProps;
+            large: import("./components/RadioButton/types").RadioButtonSizeProps;
+        }, false>>;
     };
     Touchable: import("react").FunctionComponent<import("./components/Touchable/types").TouchableProps<AdditionalPalettes, {
         default: import("./components/Touchable/types").TouchableAllSizeProps;
