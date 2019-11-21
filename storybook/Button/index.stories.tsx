@@ -5,29 +5,25 @@ import {storiesOf} from '@storybook/react-native';
 import {action} from '@storybook/addon-actions';
 import {boolean, select, text, withKnobs} from '@storybook/addon-knobs';
 import Provider from '../Provider';
+import {IntersectDefaultKey, UnionDefaultKey} from '../../src/types';
+import {alignSelect} from '../knobs';
 import themes from '../../src/themes';
 import {ThemePalette} from '../../src/Theme/types';
 import {ButtonProps, ButtonTypes} from '../.././src/components/Button/types';
 import buttonFactory from '../.././src/components/Button';
-import {DEFAULT_BUTTON_SIZES} from '../../src/components/Button/constants';
+import {
+  DEFAULT_BUTTON_SIZES,
+  DefaultButtonSizes,
+} from '../../src/components/Button/constants';
 
-const {Sharp, Round, Circular} = buttonFactory<
-  typeof themes,
-  null,
-  typeof DEFAULT_BUTTON_SIZES,
-  false
->({
-  themes,
-  sizes: DEFAULT_BUTTON_SIZES,
-});
+const {Sharp, Round, Circular} = buttonFactory<typeof themes, null, null, null>(
+  {
+    themes,
+  },
+);
 
 const DEFAULT_PROPS = {
-  color: 'primary' as keyof ThemePalette,
-  isDisabled: false,
-  isStretched: false,
-  align: 'center' as FlexAlignType,
   title: 'PRESS HERE',
-  size: 'large' as keyof typeof DEFAULT_BUTTON_SIZES,
 };
 
 const BUTTON_TYPES: Array<ButtonTypes> = ['solid', 'outline', 'clear'];
@@ -38,21 +34,38 @@ const colorSelect: {[key in keyof ThemePalette]?: keyof ThemePalette} = {
   tertiary: 'tertiary',
 };
 
-const getRequiredProps = (
-  overrides = {},
-): ButtonProps<null, typeof DEFAULT_BUTTON_SIZES, false> => {
-  const {color, isDisabled, isStretched, align, title, size} = {
+const sizeSelect: {
+  [key in IntersectDefaultKey<DefaultButtonSizes>]?: UnionDefaultKey<
+    DefaultButtonSizes
+  >;
+} = {
+  tiny: 'tiny',
+  small: 'small',
+  medium: 'medium',
+  large: 'large',
+  huge: 'huge',
+  massive: 'massive',
+};
+
+const getRequiredProps = (overrides = {}): ButtonProps<null, null, null> => {
+  const {title} = {
     ...DEFAULT_PROPS,
     ...overrides,
   };
   return {
-    color: select('Color Options', colorSelect, color),
-    isDisabled: boolean('isDisabled', isDisabled),
-    isStretched: boolean('isStretched', isStretched),
-    align,
     onPress: action('button-pressed'),
     title: text('Title', title),
-    size,
+  };
+};
+
+const geOptionalProps = (): Partial<ButtonProps<null, null, null>> => {
+  return {
+    color: select('Color Options', colorSelect, undefined),
+    isDisabled: boolean('isDisabled', undefined),
+    isStretched: boolean('isStretched', undefined),
+    align: select('Align Options', alignSelect, undefined),
+    onPress: action('button-pressed'),
+    size: select('Size Options', sizeSelect, undefined),
   };
 };
 
@@ -63,14 +76,35 @@ storiesOf('UI/Button', module)
     <>
       {BUTTON_TYPES.map(
         (type: ButtonTypes, index: number): React.ReactElement => {
-          return <Sharp key={index} {...getRequiredProps()} type={type} />;
+          return (
+            <Sharp
+              key={index}
+              {...getRequiredProps()}
+              type={type}
+              {...geOptionalProps()}
+            />
+          );
         },
       )}
       {BUTTON_TYPES.map((type: ButtonTypes, index: number) => {
-        return <Round key={index} {...getRequiredProps()} type={type} />;
+        return (
+          <Round
+            key={index}
+            {...getRequiredProps()}
+            type={type}
+            {...geOptionalProps()}
+          />
+        );
       })}
       {BUTTON_TYPES.map((type: ButtonTypes, index: number) => {
-        return <Circular key={index} {...getRequiredProps()} type={type} />;
+        return (
+          <Circular
+            key={index}
+            {...getRequiredProps()}
+            type={type}
+            {...geOptionalProps()}
+          />
+        );
       })}
     </>
   ));

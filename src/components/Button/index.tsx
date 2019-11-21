@@ -4,8 +4,13 @@ import {
   ButtonFactoryProps,
   ButtonProps as Props,
   ButtonVariations,
+  ButtonSizeProps,
 } from './types';
-import {UnionDefaultKey} from '../../types';
+import {
+  UnionDefaultKey,
+  OptionalExistCondition,
+  AddDefaultToObject,
+} from '../../types';
 import {ThemePalette} from '../../Theme/types';
 import {
   DEFAULT_BUTTON_SIZES,
@@ -34,7 +39,15 @@ function buttonFactory<
   AllowCustomProps
 >): {
   [key in ButtonVariations]: React.FunctionComponent<
-    Props<AdditionalPalettes, ButtonSizes, AllowCustomProps>
+    Props<
+      AdditionalPalettes,
+      OptionalExistCondition<
+        ButtonSizes,
+        typeof DEFAULT_BUTTON_SIZES,
+        ButtonSizes
+      >,
+      AllowCustomProps
+    >
   >;
 } {
   const paletteContext: React.Context<keyof Themes> = React.createContext(
@@ -42,13 +55,25 @@ function buttonFactory<
   );
   const buttons: {
     [key in ButtonVariations]?: React.FC<
-      Props<AdditionalPalettes, ButtonSizes, AllowCustomProps>
+      Props<
+        AdditionalPalettes,
+        OptionalExistCondition<
+          ButtonSizes,
+          typeof DEFAULT_BUTTON_SIZES,
+          ButtonSizes
+        >,
+        AllowCustomProps
+      >
     >;
   } = {};
   BUTTON_VARIATION_KEYS.forEach((variation: ButtonVariations) => {
     const Button: React.FC<Props<
       AdditionalPalettes,
-      ButtonSizes,
+      OptionalExistCondition<
+        ButtonSizes,
+        typeof DEFAULT_BUTTON_SIZES,
+        ButtonSizes
+      >,
       AllowCustomProps
     >> = ({
       color = 'primary',
@@ -65,7 +90,11 @@ function buttonFactory<
       _additionalTextStyle,
     }: Props<
       AdditionalPalettes,
-      ButtonSizes,
+      OptionalExistCondition<
+        ButtonSizes,
+        typeof DEFAULT_BUTTON_SIZES,
+        ButtonSizes
+      >,
       AllowCustomProps
     >): React.ReactElement => {
       // Palettes
@@ -86,7 +115,12 @@ function buttonFactory<
 
       // Size
       const buttonSizeProperty = sizes
-        ? sizes[size]
+        ? (sizes as {
+            [SizeKey in keyof AddDefaultToObject<
+              ButtonSizes,
+              ButtonSizeProps
+            >]: ButtonSizeProps;
+          })[size as keyof AddDefaultToObject<ButtonSizes, ButtonSizeProps>]
         : DEFAULT_BUTTON_SIZES[size as UnionDefaultKey<DefaultButtonSizes>];
 
       // BorderStyles
@@ -114,6 +148,7 @@ function buttonFactory<
         paddingHorizontal:
           (buttonSizeProperty && buttonSizeProperty.horizontalPadding) ||
           DEFAULT_BUTTON_SIZES.default.horizontalPadding,
+        alignItems: align,
         alignSelf: !isStretched
           ? DEFAULT_BUTTON_ALIGN
           : ('stretch' as FlexAlignType),
@@ -127,7 +162,6 @@ function buttonFactory<
       // Text Style
       const textStyle = {
         color: fontColor,
-        alignSelf: align,
         fontSize:
           (buttonSizeProperty && buttonSizeProperty.fontSize) ||
           DEFAULT_BUTTON_SIZES.default.fontSize,
@@ -151,13 +185,37 @@ function buttonFactory<
   });
   const Button = {
     Circular: buttons.Circular as React.FunctionComponent<
-      Props<AdditionalPalettes, ButtonSizes, AllowCustomProps>
+      Props<
+        AdditionalPalettes,
+        OptionalExistCondition<
+          ButtonSizes,
+          typeof DEFAULT_BUTTON_SIZES,
+          ButtonSizes
+        >,
+        AllowCustomProps
+      >
     >,
     Round: buttons.Round as React.FunctionComponent<
-      Props<AdditionalPalettes, ButtonSizes, AllowCustomProps>
+      Props<
+        AdditionalPalettes,
+        OptionalExistCondition<
+          ButtonSizes,
+          typeof DEFAULT_BUTTON_SIZES,
+          ButtonSizes
+        >,
+        AllowCustomProps
+      >
     >,
     Sharp: buttons.Sharp as React.FunctionComponent<
-      Props<AdditionalPalettes, ButtonSizes, AllowCustomProps>
+      Props<
+        AdditionalPalettes,
+        OptionalExistCondition<
+          ButtonSizes,
+          typeof DEFAULT_BUTTON_SIZES,
+          ButtonSizes
+        >,
+        AllowCustomProps
+      >
     >,
   };
   return Button;
