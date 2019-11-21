@@ -43,7 +43,7 @@ type RadioButtonProps<
   RadioButtonSizes,
   AllowCustomProps
 > = {
-  active: boolean;
+  active?: boolean;
   color?: keyof (ThemePalette & AdditionalPalettes);
   isDisabled?: boolean;
   size?: UnionDefaultKey<keyof RadioButtonSizes>;

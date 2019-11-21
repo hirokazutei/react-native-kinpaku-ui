@@ -1,6 +1,5 @@
 // @flow
 import * as React from 'react';
-import {FlexAlignType} from 'react-native';
 import {storiesOf} from '@storybook/react-native';
 import {action} from '@storybook/addon-actions';
 import {boolean, select, text, withKnobs} from '@storybook/addon-knobs';
@@ -11,10 +10,7 @@ import themes from '../../src/themes';
 import {ThemePalette} from '../../src/Theme/types';
 import {ButtonProps, ButtonTypes} from '../.././src/components/Button/types';
 import buttonFactory from '../.././src/components/Button';
-import {
-  DEFAULT_BUTTON_SIZES,
-  DefaultButtonSizes,
-} from '../../src/components/Button/constants';
+import {DefaultButtonSizes} from '../../src/components/Button/constants';
 
 const {Sharp, Round, Circular} = buttonFactory<typeof themes, null, null, null>(
   {

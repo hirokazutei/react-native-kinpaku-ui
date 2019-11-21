@@ -4,31 +4,21 @@ import {storiesOf} from '@storybook/react-native';
 import {action} from '@storybook/addon-actions';
 import {boolean, select, withKnobs} from '@storybook/addon-knobs';
 import Provider from '../Provider';
+import {IntersectDefaultKey, UnionDefaultKey} from '../../src/types';
 import themes from '../../src/themes';
 import {ThemePalette} from '../../src/Theme/types';
 import {RadioButtonProps} from '../../src/components/RadioButton/types';
 import radioButtonFactory from '../../src/components/RadioButton';
-import {
-  DEFAULT_RADIO_BUTTON_SIZES,
-  DefaultRadioSizes,
-} from '../../src/components/RadioButton/constants';
+import {DefaultRadioSizes} from '../../src/components/RadioButton/constants';
 
 const {Dot, Reverse, Fill} = radioButtonFactory<
   typeof themes,
   null,
-  typeof DEFAULT_RADIO_BUTTON_SIZES,
-  false
+  null,
+  null
 >({
   themes,
-  sizes: DEFAULT_RADIO_BUTTON_SIZES,
 });
-
-const DEFAULT_PROPS = {
-  active: false,
-  size: undefined,
-  color: 'primary' as keyof ThemePalette,
-  isDisabled: false,
-};
 
 const colorSelect: {[key in keyof ThemePalette]?: keyof ThemePalette} = {
   primary: 'primary',
@@ -37,7 +27,9 @@ const colorSelect: {[key in keyof ThemePalette]?: keyof ThemePalette} = {
 };
 
 const sizeSelect: {
-  [key in DefaultRadioSizes]?: DefaultRadioSizes;
+  [key in IntersectDefaultKey<DefaultRadioSizes>]?: UnionDefaultKey<
+    DefaultRadioSizes
+  >;
 } = {
   small: 'small',
   medium: 'medium',
@@ -47,16 +39,17 @@ const sizeSelect: {
 const getRequiredProps = (
   overrides = {},
 ): RadioButtonProps<null, null, null> => {
-  const {active, color, isDisabled, size} = {
-    ...DEFAULT_PROPS,
-    ...overrides,
-  };
   return {
-    active: boolean('Active', active),
-    color: select('Color Options', colorSelect, color),
-    isDisabled: boolean('isDisabled', isDisabled),
     onPress: action('button-pressed'),
-    size: select('Size Options', sizeSelect, size),
+  };
+};
+
+const getOptionalProps = (): Partial<RadioButtonProps<null, null, null>> => {
+  return {
+    active: boolean('Active', undefined),
+    color: select('Color Options', colorSelect, undefined),
+    isDisabled: boolean('isDisabled', undefined),
+    size: select('Size Options', sizeSelect, undefined),
   };
 };
 
@@ -65,8 +58,8 @@ storiesOf('UI/RadioButton', module)
   .addDecorator(withKnobs)
   .add('Default', () => (
     <>
-      <Dot {...getRequiredProps()} />
-      <Reverse {...getRequiredProps()} />
-      <Fill {...getRequiredProps()} />
+      <Dot {...getRequiredProps()} {...getOptionalProps()} />
+      <Reverse {...getRequiredProps()} {...getOptionalProps()} />
+      <Fill {...getRequiredProps()} {...getOptionalProps()} />
     </>
   ));

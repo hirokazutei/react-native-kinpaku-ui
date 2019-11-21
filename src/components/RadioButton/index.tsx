@@ -6,7 +6,11 @@ import {
   RadioButtonSizeProps,
   RadioButtonVariations,
 } from './types';
-import {AddDefaultToObject, UnionDefaultKey} from '../../types';
+import {
+  UnionDefaultKey,
+  OptionalExistCondition,
+  AddDefaultToObject,
+} from '../../types';
 import {ThemePalette} from '../../Theme/types';
 import {
   RADIO_BUTTON_VARIATION_KEYS,
@@ -30,7 +34,15 @@ function radioButtonFactory<
   AllowCustomProps
 >): {
   [key in RadioButtonVariations]: React.FunctionComponent<
-    Props<AdditionalPalettes, RadioButtonSizes, AllowCustomProps>
+    Props<
+      AdditionalPalettes,
+      OptionalExistCondition<
+        RadioButtonSizes,
+        typeof DEFAULT_RADIO_BUTTON_SIZES,
+        RadioButtonSizes
+      >,
+      AllowCustomProps
+    >
   >;
 } {
   const themeContext: React.Context<keyof Themes> = React.createContext(
@@ -38,21 +50,37 @@ function radioButtonFactory<
   );
   const radioButtons: {
     [key in RadioButtonVariations]?: React.FC<
-      Props<AdditionalPalettes, RadioButtonSizes, AllowCustomProps>
+      Props<
+        AdditionalPalettes,
+        OptionalExistCondition<
+          RadioButtonSizes,
+          typeof DEFAULT_RADIO_BUTTON_SIZES,
+          RadioButtonSizes
+        >,
+        AllowCustomProps
+      >
     >;
   } = {};
   RADIO_BUTTON_VARIATION_KEYS.forEach((variation: RadioButtonVariations) => {
     const Button: React.FC<Props<
       AdditionalPalettes,
-      RadioButtonSizes,
+      OptionalExistCondition<
+        RadioButtonSizes,
+        typeof DEFAULT_RADIO_BUTTON_SIZES,
+        RadioButtonSizes
+      >,
       AllowCustomProps
     >> = ({
       active,
-      color,
+      color = 'primary',
       isDisabled,
       onPress,
       size = 'default' as keyof AddDefaultToObject<
-        RadioButtonSizes,
+        OptionalExistCondition<
+          RadioButtonSizes,
+          typeof DEFAULT_RADIO_BUTTON_SIZES,
+          RadioButtonSizes
+        >,
         RadioButtonSizeProps
       >,
       _customInnerViewProps,
@@ -61,7 +89,11 @@ function radioButtonFactory<
       _customOuterViewStyle,
     }: Props<
       AdditionalPalettes,
-      RadioButtonSizes,
+      OptionalExistCondition<
+        RadioButtonSizes,
+        typeof DEFAULT_RADIO_BUTTON_SIZES,
+        RadioButtonSizes
+      >,
       AllowCustomProps
     >): React.ReactElement => {
       // Palettes
@@ -87,7 +119,17 @@ function radioButtonFactory<
 
       // Size
       const sizeProperty = sizes
-        ? sizes[size]
+        ? (sizes as {
+            [SizeKey in keyof AddDefaultToObject<
+              RadioButtonSizes,
+              RadioButtonSizeProps
+            >]: RadioButtonSizeProps;
+          })[
+            size as keyof AddDefaultToObject<
+              RadioButtonSizes,
+              RadioButtonSizeProps
+            >
+          ]
         : DEFAULT_RADIO_BUTTON_SIZES[
             size as UnionDefaultKey<DefaultRadioSizes>
           ];
@@ -134,13 +176,37 @@ function radioButtonFactory<
   });
   const RadioButtons = {
     Dot: radioButtons.Dot as React.FunctionComponent<
-      Props<AdditionalPalettes, RadioButtonSizes, AllowCustomProps>
+      Props<
+        AdditionalPalettes,
+        OptionalExistCondition<
+          RadioButtonSizes,
+          typeof DEFAULT_RADIO_BUTTON_SIZES,
+          RadioButtonSizes
+        >,
+        AllowCustomProps
+      >
     >,
     Reverse: radioButtons.Reverse as React.FunctionComponent<
-      Props<AdditionalPalettes, RadioButtonSizes, AllowCustomProps>
+      Props<
+        AdditionalPalettes,
+        OptionalExistCondition<
+          RadioButtonSizes,
+          typeof DEFAULT_RADIO_BUTTON_SIZES,
+          RadioButtonSizes
+        >,
+        AllowCustomProps
+      >
     >,
     Fill: radioButtons.Fill as React.FunctionComponent<
-      Props<AdditionalPalettes, RadioButtonSizes, AllowCustomProps>
+      Props<
+        AdditionalPalettes,
+        OptionalExistCondition<
+          RadioButtonSizes,
+          typeof DEFAULT_RADIO_BUTTON_SIZES,
+          RadioButtonSizes
+        >,
+        AllowCustomProps
+      >
     >,
   };
   return RadioButtons;
