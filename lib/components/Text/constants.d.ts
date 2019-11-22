@@ -1,8 +1,7 @@
 import { TextVariationProps } from './types';
-declare type TextVariations = 'Title' | 'Heading' | 'SubHeading' | 'Body' | 'Caption' | 'Quote';
-declare type DefaultFontSizes = 'small' | 'medium' | 'large';
+declare type DefaultTextVariations = 'Title' | 'Heading' | 'SubHeading' | 'Body' | 'Caption' | 'Quote';
 declare const DEFAULT_TEXT_VARIATIONS: {
-    [textVariation in TextVariations]: TextVariationProps<DefaultFontSizes, null>;
+    [textVariation in DefaultTextVariations]: TextVariationProps<null, null>;
 };
-export { DefaultFontSizes, TextVariations, DEFAULT_TEXT_VARIATIONS };
+export { DefaultTextVariations, DEFAULT_TEXT_VARIATIONS };
 //# sourceMappingURL=constants.d.ts.map

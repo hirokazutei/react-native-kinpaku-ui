@@ -62,11 +62,11 @@ export default function UIFactory<ThemeObject, AdditionalPalettes>(themes: Theme
         huge: import("./components/Touchable/types").TouchableAllSizeProps;
         massive: import("./components/Touchable/types").TouchableAllSizeProps;
     }, false>>;
-    Title: import("react").FunctionComponent<import("./components/Text/types").TextProps<null, import("./components/RadioButton/constants").DefaultRadioSizes, true>>;
-    Heading: import("react").FunctionComponent<import("./components/Text/types").TextProps<null, import("./components/RadioButton/constants").DefaultRadioSizes, true>>;
-    SubHeading: import("react").FunctionComponent<import("./components/Text/types").TextProps<null, import("./components/RadioButton/constants").DefaultRadioSizes, true>>;
-    Body: import("react").FunctionComponent<import("./components/Text/types").TextProps<null, import("./components/RadioButton/constants").DefaultRadioSizes, true>>;
-    Caption: import("react").FunctionComponent<import("./components/Text/types").TextProps<null, import("./components/RadioButton/constants").DefaultRadioSizes, true>>;
-    Quote: import("react").FunctionComponent<import("./components/Text/types").TextProps<null, import("./components/RadioButton/constants").DefaultRadioSizes, true>>;
+    Title: import("react").FunctionComponent<import("./components/Text/types").TextProps<null, null, true>>;
+    Heading: import("react").FunctionComponent<import("./components/Text/types").TextProps<null, null, true>>;
+    SubHeading: import("react").FunctionComponent<import("./components/Text/types").TextProps<null, null, true>>;
+    Body: import("react").FunctionComponent<import("./components/Text/types").TextProps<null, null, true>>;
+    Caption: import("react").FunctionComponent<import("./components/Text/types").TextProps<null, null, true>>;
+    Quote: import("react").FunctionComponent<import("./components/Text/types").TextProps<null, null, true>>;
 };
 //# sourceMappingURL=uiFactory.d.ts.map
