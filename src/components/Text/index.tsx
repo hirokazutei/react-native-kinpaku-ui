@@ -1,14 +1,19 @@
 import React, {useContext} from 'react';
 import {Text, TextStyle} from 'react-native';
-import {TextFactoryProps, TextProps as Props} from './types';
-import {DefaultObject} from '../../types';
+import {
+  TextFactoryProps,
+  TextProps as Props,
+  TextVariationProps,
+} from './types';
+import {DefaultObject, OptionalExistCondition} from '../../types';
 import {ThemePalette} from '../../Theme/types';
+import {DEFAULT_TEXT_VARIATIONS, DefaultTextVariations} from './constants';
 
 function textFactory<
   Themes,
   AdditionalPalettes,
   TextVariations,
-  FontSizes extends string | string,
+  FontSizes,
   EmphasisToggleable
 >({
   themes,
@@ -18,11 +23,19 @@ function textFactory<
 }: TextFactoryProps<
   Themes,
   AdditionalPalettes,
-  TextVariations,
+  OptionalExistCondition<
+    TextVariations,
+    typeof DEFAULT_TEXT_VARIATIONS,
+    TextVariations
+  >,
   FontSizes,
   EmphasisToggleable
 >): {
-  [Variation in keyof TextVariations]: React.FunctionComponent<
+  [Variation in keyof OptionalExistCondition<
+    TextVariations,
+    typeof DEFAULT_TEXT_VARIATIONS,
+    TextVariations
+  >]: React.FunctionComponent<
     Props<AdditionalPalettes, FontSizes, EmphasisToggleable>
   >;
 } {
@@ -31,12 +44,16 @@ function textFactory<
   );
 
   const TextComponents: {
-    [Variation in keyof TextVariations]?: React.FC<
-      Props<AdditionalPalettes, FontSizes, EmphasisToggleable>
-    >;
+    [Variation in keyof OptionalExistCondition<
+      TextVariations,
+      typeof DEFAULT_TEXT_VARIATIONS,
+      TextVariations
+    >]?: React.FC<Props<AdditionalPalettes, FontSizes, EmphasisToggleable>>;
   } = {};
 
-  for (const variationName in textVariations) {
+  for (const variationName in textVariations
+    ? textVariations
+    : DEFAULT_TEXT_VARIATIONS) {
     const {
       defaultColor = 'text',
       defaultFontSize,
@@ -47,7 +64,14 @@ function textFactory<
       isItalic,
       letterSpacing,
       lineHeight,
-    } = textVariations[variationName];
+    } = textVariations
+      ? (textVariations as {
+          [VariationKey in keyof TextVariations]: TextVariationProps<
+            FontSizes,
+            AdditionalPalettes
+          >;
+        })[variationName as keyof TextVariations]
+      : DEFAULT_TEXT_VARIATIONS[variationName as DefaultTextVariations];
 
     const text: React.FC<Props<
       AdditionalPalettes,
@@ -59,7 +83,7 @@ function textFactory<
       color = defaultColor,
       children,
       italic,
-      size = defaultFontSizeKey || defaultFontSize,
+      size,
       lineThrough,
       underline,
     }: Props<
@@ -81,9 +105,16 @@ function textFactory<
         currentTheme[color as keyof ThemePalette];
 
       // Size
+      // = defaultFontSizeKey || defaultFontSize
+      const sizeKey =
+        (fontSizes && (size as keyof typeof fontSizes | undefined)) ||
+        defaultFontSizeKey;
+      const numericSize = (!fontSizes && size) || defaultFontSize;
       const fontSize = fontSizes
-        ? fontSizes[size as FontSizes]
-        : (size as number);
+        ? (fontSizes as {[SizeKey in keyof typeof fontSizes]: number})[
+            sizeKey as keyof typeof fontSizes
+          ]
+        : (numericSize as number);
 
       // DecorationLine
       let textDecorationLine: TextStyle['textDecorationLine'] = 'none';
@@ -96,15 +127,17 @@ function textFactory<
       }
 
       // FontStyle
-      let fontStyle: TextStyle['fontStyle'] = isItalic ? 'italic' : 'normal';
-      fontStyle = !italic && italic !== undefined ? 'normal' : fontStyle;
+      let fontStyle: TextStyle['fontStyle'] =
+        isItalic || italic ? 'italic' : 'normal';
+      fontStyle = italic === false ? 'normal' : fontStyle;
 
       // Bold
-      let fontWeightStyle: TextStyle['fontWeight'] = isBold ? 'bold' : 'normal';
+      let fontWeightStyle: TextStyle['fontWeight'] =
+        isBold || bold ? 'bold' : 'normal';
       fontWeightStyle =
         fontWeight && fontWeight !== undefined ? fontWeight : fontWeightStyle;
-      fontWeightStyle =
-        !bold && bold !== undefined ? 'normal' : fontWeightStyle;
+      fontWeightStyle = bold === false ? 'normal' : fontWeightStyle;
+
       // Text Style
       const textStyle: TextStyle = {
         color: fontColor,
@@ -120,13 +153,21 @@ function textFactory<
 
       return <Text style={textStyle}>{children}</Text>;
     };
-    TextComponents[`${variationName}` as keyof TextVariations] = text;
+    TextComponents[
+      `${variationName}` as keyof OptionalExistCondition<
+        TextVariations,
+        typeof DEFAULT_TEXT_VARIATIONS,
+        TextVariations
+      >
+    ] = text;
   }
 
   return TextComponents as {
-    [Variation in keyof TextVariations]: React.FC<
-      Props<AdditionalPalettes, FontSizes, EmphasisToggleable>
-    >;
+    [Variation in keyof OptionalExistCondition<
+      TextVariations,
+      typeof DEFAULT_TEXT_VARIATIONS,
+      TextVariations
+    >]: React.FC<Props<AdditionalPalettes, FontSizes, EmphasisToggleable>>;
   };
 }
 

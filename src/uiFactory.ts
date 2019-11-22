@@ -6,10 +6,7 @@ import {DEFAULT_TOUCHABLE_SIZES} from './components/Touchable/constants';
 import radioButtonFactory from './components/RadioButton';
 import {DEFAULT_RADIO_BUTTON_SIZES} from './components/RadioButton/constants';
 import textFactory from './components/Text';
-import {
-  DEFAULT_TEXT_VARIATIONS,
-  DefaultFontSizes,
-} from './components/Text/constants';
+import {DEFAULT_TEXT_VARIATIONS} from './components/Text/constants';
 import {Color, DefaultObject} from './types';
 
 export default function UIFactory<ThemeObject, AdditionalPalettes>(
@@ -50,11 +47,10 @@ export default function UIFactory<ThemeObject, AdditionalPalettes>(
     typeof themes,
     null,
     typeof DEFAULT_TEXT_VARIATIONS,
-    DefaultFontSizes,
+    null,
     true
   >({
     ...commonProps,
-    defaultFontSizeKey: 'medium',
     textVariations: DEFAULT_TEXT_VARIATIONS,
   });
   return {

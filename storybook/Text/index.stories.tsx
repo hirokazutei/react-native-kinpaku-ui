@@ -1,33 +1,23 @@
 // @flow
 import * as React from 'react';
-import {FlexAlignType} from 'react-native';
 import {storiesOf} from '@storybook/react-native';
-import {action} from '@storybook/addon-actions';
-import {boolean, select, text, withKnobs} from '@storybook/addon-knobs';
+import {boolean, select, number, text, withKnobs} from '@storybook/addon-knobs';
 import Provider from '../Provider';
+import {textAlignSelect} from '../knobs';
 import themes from '../../src/themes';
 import {ThemePalette} from '../../src/Theme/types';
-import {
-  TextSizeProps,
-  TextVariationProps,
-  TextFactoryProps,
-  TextProps,
-} from '../.././src/components/Text/types';
+import {TextProps} from '../.././src/components/Text/types';
 import textFactory from '../.././src/components/Text';
-import {
-  DEFAULT_TEXT_VARIATIONS,
-  DefaultFontSizes,
-} from '../../src/components/Text/constants';
+import {DEFAULT_TEXT_VARIATIONS} from '../../src/components/Text/constants';
 
 const {Title, Heading, SubHeading, Body, Caption, Quote} = textFactory<
   typeof themes,
   null,
   typeof DEFAULT_TEXT_VARIATIONS,
-  DefaultFontSizes,
+  null,
   true
 >({
   themes,
-  defaultFontSizeKey: 'medium',
   textVariations: DEFAULT_TEXT_VARIATIONS,
 });
 
@@ -42,16 +32,22 @@ const colorSelect: {[key in keyof ThemePalette]?: keyof ThemePalette} = {
   tertiary: 'tertiary',
 };
 
-const sizeSelect: {[key in DefaultFontSizes]?: DefaultFontSizes} = {
-  small: 'small',
-  medium: 'medium',
-  large: 'large',
+const getRequiredProps = (overrrides = {}): TextProps<null, null, true> => {
+  const {children} = {...DEFAULT_PROPS, ...overrrides};
+  return {
+    children: text('Children', children),
+  };
 };
 
-const getOptionalProps = () => {
+const getOptionalProps = (): Partial<TextProps<null, null, true>> => {
   return {
-    color: select('Color Options', colorSelect, 'text'),
-    size: select('Size Options', sizeSelect, 'medium'),
+    align: select('Align Options', textAlignSelect, undefined),
+    bold: boolean('Bold', undefined),
+    color: select('Color Options', colorSelect, undefined),
+    italic: boolean('Italic', undefined),
+    size: number('Numeric Size', undefined),
+    lineThrough: boolean('Line Though', undefined),
+    underline: boolean('Underline', undefined),
   };
 };
 

@@ -1,4 +1,4 @@
-import {FlexAlignType} from 'react-native';
+import {FlexAlignType, TextStyle} from 'react-native';
 
 type AlignKeys = 'baseline' | 'center' | 'flexStart' | 'flexEnd' | 'stretch';
 
@@ -10,4 +10,14 @@ const alignSelect: {[key in AlignKeys]: FlexAlignType} = {
   stretch: 'stretch',
 };
 
-export {alignSelect};
+const textAlignSelect: {
+  [key in TextStyle['textAlign']]: TextStyle['textAlign'];
+} = {
+  auto: 'auto',
+  left: 'left',
+  right: 'right',
+  center: 'center',
+  justify: 'justify',
+};
+
+export {alignSelect, textAlignSelect};

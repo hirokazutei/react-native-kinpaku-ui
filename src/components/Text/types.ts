@@ -1,23 +1,27 @@
 import {TextStyle} from 'react-native';
-import {AddDefaultToObject, Color, OptionalTrueCondition} from '../../types';
+import {
+  AddDefaultToObject,
+  Color,
+  OptionalTrueCondition,
+  OptionalExistCondition,
+} from '../../types';
 import {ThemePalette} from '../../Theme/types';
 
 type TextSizeProps<FontSizes extends string | string> = {
   [key in FontSizes]: number;
 };
 
-type TextVariationProps<
-  FontSizes extends string | string,
-  AdditionalPalettes
-> = {
+type TextVariationProps<FontSizes, AdditionalPalettes> = {
   defaultColor?: keyof (ThemePalette & AdditionalPalettes);
-  defaultFontSize?: FontSizes extends null | undefined
-    ? NonNullable<number>
-    : never;
+  defaultFontSize?: OptionalExistCondition<
+    FontSizes,
+    NonNullable<number>,
+    undefined
+  >;
   fontFamily?: string;
-  fontSizes?: FontSizes extends null | undefined
-    ? never
-    : NonNullable<TextSizeProps<FontSizes>>;
+  fontSizes?: FontSizes extends string
+    ? NonNullable<TextSizeProps<FontSizes>>
+    : never;
   fontWeight?: TextStyle['fontWeight'];
   isBold?: boolean;
   isItalic?: boolean;
@@ -29,7 +33,7 @@ type TextFactoryProps<
   Themes,
   AdditionalPalettes,
   TextVariations,
-  FontSizes extends string | string,
+  FontSizes,
   //@ts-ignore: TS6133 Unused Variable
   EmphasisToggleable
 > = {
@@ -42,10 +46,14 @@ type TextFactoryProps<
       Color
     >]: Color;
   };
-  defaultFontSizeKey: FontSizes extends null | undefined ? never : FontSizes;
-  textVariations: {
+  defaultFontSizeKey?: OptionalExistCondition<
+    FontSizes,
+    never,
+    keyof FontSizes
+  >;
+  textVariations?: {
     [VariationKeys in keyof TextVariations]: TextVariationProps<
-      FontSizes,
+      OptionalExistCondition<FontSizes, never, FontSizes>,
       AdditionalPalettes
     >;
   };
@@ -57,7 +65,7 @@ type TextProps<AdditionalPalettes, FontSizes, EmphasisToggleable> = {
   color?: keyof (ThemePalette & AdditionalPalettes);
   children: string;
   italic?: OptionalTrueCondition<EmphasisToggleable, never, boolean>;
-  size?: FontSizes extends null | undefined ? number : FontSizes;
+  size?: OptionalExistCondition<FontSizes, number, keyof FontSizes>;
   lineThrough?: OptionalTrueCondition<EmphasisToggleable, never, boolean>;
   underline?: OptionalTrueCondition<EmphasisToggleable, never, boolean>;
 };
