@@ -36,9 +36,7 @@ const sizeSelect: {
   large: 'large',
 };
 
-const getRequiredProps = (
-  overrides = {},
-): RadioButtonProps<null, null, null> => {
+const getRequiredProps = (): RadioButtonProps<null, null, null> => {
   return {
     onPress: action('button-pressed'),
   };
