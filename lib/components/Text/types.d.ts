@@ -8,7 +8,7 @@ declare type TextVariationProps<FontSizes, AdditionalPalettes> = {
     defaultColor?: keyof (ThemePalette & AdditionalPalettes);
     defaultFontSize?: OptionalExistCondition<FontSizes, NonNullable<number>, undefined>;
     fontFamily?: string;
-    fontSizes?: FontSizes extends string ? NonNullable<TextSizeProps<FontSizes>> : never;
+    fontSizes?: FontSizes extends string | string ? NonNullable<TextSizeProps<FontSizes>> : never;
     fontWeight?: TextStyle['fontWeight'];
     isBold?: boolean;
     isItalic?: boolean;
