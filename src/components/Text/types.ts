@@ -1,4 +1,4 @@
-import {TextStyle} from 'react-native';
+import {TextStyle, TextProps as ReactNativeTextProps} from 'react-native';
 import {
   AddDefaultToObject,
   Color,
@@ -12,6 +12,7 @@ type TextSizeProps<FontSizes extends string | string> = {
 };
 
 type TextVariationProps<FontSizes, AdditionalPalettes> = {
+  allowFontScaling?: boolean;
   defaultColor?: keyof (ThemePalette & AdditionalPalettes);
   defaultFontSize?: OptionalExistCondition<
     FontSizes,
@@ -27,6 +28,8 @@ type TextVariationProps<FontSizes, AdditionalPalettes> = {
   isItalic?: boolean;
   letterSpacing?: number;
   lineHeight?: number;
+  maxFontSizeMultiplier?: number;
+  minimumFontScale?: number;
 };
 
 type TextFactoryProps<
@@ -60,7 +63,9 @@ type TextProps<AdditionalPalettes, FontSizes, EmphasisToggleable> = {
   bold?: OptionalTrueCondition<EmphasisToggleable, never, boolean>;
   color?: keyof (ThemePalette & AdditionalPalettes);
   children: string;
+  ellipsizeMode?: ReactNativeTextProps['ellipsizeMode'];
   italic?: OptionalTrueCondition<EmphasisToggleable, never, boolean>;
+  numberOfLines?: number;
   size?: OptionalExistCondition<FontSizes, number, FontSizes>;
   lineThrough?: OptionalTrueCondition<EmphasisToggleable, never, boolean>;
   underline?: OptionalTrueCondition<EmphasisToggleable, never, boolean>;

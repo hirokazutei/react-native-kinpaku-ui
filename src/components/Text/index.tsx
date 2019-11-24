@@ -55,6 +55,7 @@ function textFactory<
     ? textVariations
     : DEFAULT_TEXT_VARIATIONS) {
     const {
+      allowFontScaling,
       defaultColor = 'text',
       defaultFontSize,
       fontFamily,
@@ -64,6 +65,8 @@ function textFactory<
       isItalic,
       letterSpacing,
       lineHeight,
+      maxFontSizeMultiplier,
+      minimumFontScale,
     } = textVariations
       ? (textVariations as {
           [VariationKey in keyof TextVariations]: TextVariationProps<
@@ -82,7 +85,9 @@ function textFactory<
       bold,
       color = defaultColor,
       children,
+      ellipsizeMode,
       italic,
+      numberOfLines,
       size,
       lineThrough,
       underline,
@@ -151,7 +156,20 @@ function textFactory<
         textDecorationLine,
       };
 
-      return <Text style={textStyle}>{children}</Text>;
+      // Text Props
+      const textProps = {
+        allowFontScaling,
+        ellipsizeMode,
+        maxFontSizeMultiplier,
+        minimumFontScale,
+        numberOfLines,
+      };
+
+      return (
+        <Text style={textStyle} {...textProps}>
+          {children}
+        </Text>
+      );
     };
     TextComponents[
       `${variationName}` as keyof OptionalExistCondition<
