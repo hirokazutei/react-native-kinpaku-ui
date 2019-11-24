@@ -22,7 +22,7 @@ declare type TextFactoryProps<Themes, AdditionalPalettes, TextVariations, FontSi
     additionalPalettes?: {
         [AdditionalPaletteKey in keyof AddDefaultToObject<AdditionalPalettes, Color>]: Color;
     };
-    defaultFontSizeKey?: OptionalExistCondition<FontSizes, never, keyof FontSizes>;
+    defaultFontSizeKey?: OptionalExistCondition<FontSizes, never, FontSizes>;
     textVariations?: {
         [VariationKeys in keyof TextVariations]: TextVariationProps<OptionalExistCondition<FontSizes, never, FontSizes>, AdditionalPalettes>;
     };

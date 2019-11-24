@@ -6,19 +6,43 @@ import Provider from '../Provider';
 import {textAlignSelect} from '../knobs';
 import themes from '../../src/themes';
 import {ThemePalette} from '../../src/Theme/types';
-import {TextProps} from '../.././src/components/Text/types';
+import {TextProps, TextVariationProps} from '../.././src/components/Text/types';
 import textFactory from '../.././src/components/Text';
 import {DEFAULT_TEXT_VARIATIONS} from '../../src/components/Text/constants';
 
-const {Title, Heading, SubHeading, Body, Caption, Quote} = textFactory<
+type TextVariations = 'A' | 'B';
+type FontSizes = 'small' | 'medium' | 'large';
+
+const textVariations: {
+  [variation in TextVariations]: TextVariationProps<FontSizes, false>;
+} = {
+  A: {
+    fontWeight: 'bold',
+    fontSizes: {
+      small: 24,
+      medium: 28,
+      large: 32,
+    },
+  },
+  B: {
+    fontWeight: 'bold',
+    fontSizes: {
+      small: 22,
+      medium: 24,
+      large: 26,
+    },
+  },
+};
+
+const {A, B} = textFactory<
   typeof themes,
   null,
-  typeof DEFAULT_TEXT_VARIATIONS,
-  null,
+  typeof textVariations,
+  FontSizes,
   true
 >({
   themes,
-  textVariations: DEFAULT_TEXT_VARIATIONS,
+  textVariations,
 });
 
 const DEFAULT_PROPS = {
@@ -45,7 +69,11 @@ const getOptionalProps = (): Partial<TextProps<null, null, true>> => {
     bold: boolean('Bold', undefined),
     color: select('Color Options', colorSelect, undefined),
     italic: boolean('Italic', undefined),
-    size: number('Numeric Size', undefined),
+    size: select(
+      'Numeric Size',
+      {small: 15, medium: 13, large: 323},
+      undefined,
+    ),
     lineThrough: boolean('Line Though', undefined),
     underline: boolean('Underline', undefined),
   };
@@ -56,12 +84,6 @@ storiesOf('UI/Text', module)
   .addDecorator(withKnobs)
   .add('Default', () => (
     <>
-      <Title {...DEFAULT_PROPS} {...getOptionalProps()} />
-      <Title {...DEFAULT_PROPS} {...getOptionalProps()} />
-      <Heading {...DEFAULT_PROPS} {...getOptionalProps()} />
-      <SubHeading {...DEFAULT_PROPS} {...getOptionalProps()} />
-      <Body {...DEFAULT_PROPS} {...getOptionalProps()} />
-      <Caption {...DEFAULT_PROPS} {...getOptionalProps()} />
-      <Quote {...DEFAULT_PROPS} {...getOptionalProps()} />
+      <A {...DEFAULT_PROPS} {...getOptionalProps()} />
     </>
   ));
