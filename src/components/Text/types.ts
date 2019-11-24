@@ -61,7 +61,7 @@ type TextProps<AdditionalPalettes, FontSizes, EmphasisToggleable> = {
   color?: keyof (ThemePalette & AdditionalPalettes);
   children: string;
   italic?: OptionalTrueCondition<EmphasisToggleable, never, boolean>;
-  size?: OptionalExistCondition<FontSizes, number, keyof FontSizes>;
+  size?: OptionalExistCondition<FontSizes, number, FontSizes>;
   lineThrough?: OptionalTrueCondition<EmphasisToggleable, never, boolean>;
   underline?: OptionalTrueCondition<EmphasisToggleable, never, boolean>;
 };
