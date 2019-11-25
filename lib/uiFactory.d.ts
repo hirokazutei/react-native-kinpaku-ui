@@ -34,7 +34,7 @@ export default function UIFactory<ThemeObject, AdditionalPalettes>(themes: Theme
         }, false>>;
     };
     RadioButton: {
-        Dot: import("react").FunctionComponent<import("./components/RadioButton/types").RadioButtonProps<AdditionalPalettes, {
+        Outline: import("react").FunctionComponent<import("./components/RadioButton/types").RadioButtonProps<AdditionalPalettes, {
             default: import("./components/RadioButton/types").RadioButtonSizeProps;
             small: import("./components/RadioButton/types").RadioButtonSizeProps;
             medium: import("./components/RadioButton/types").RadioButtonSizeProps;
