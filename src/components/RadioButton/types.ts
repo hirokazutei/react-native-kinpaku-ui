@@ -7,7 +7,7 @@ import {
 } from '../../types';
 import {ThemePalette} from '../../Theme/types';
 
-type RadioButtonVariations = 'Dot' | 'Reverse' | 'Fill';
+type RadioButtonVariations = 'Outline' | 'Reverse' | 'Fill';
 
 type RadioButtonSizeProps = {
   size: number;

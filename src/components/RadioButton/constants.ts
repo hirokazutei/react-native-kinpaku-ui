@@ -31,7 +31,7 @@ const DEFAULT_RADIO_BUTTON_SIZES: {
 };
 
 const RADIO_BUTTON_VARIATION_KEYS: Array<RadioButtonVariations> = [
-  'Dot',
+  'Outline',
   'Reverse',
   'Fill',
 ];

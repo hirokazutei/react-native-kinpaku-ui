@@ -110,10 +110,10 @@ function radioButtonFactory<
         : currentTheme.disabled;
       const activeColor =
         variation === 'Reverse' ? currentTheme.background : primaryColor;
-      const deactiveColor =
+      const inactiveColor =
         variation === 'Reverse' ? primaryColor : currentTheme.background;
       const outerRingColor = primaryColor;
-      const dotColor = active ? activeColor : deactiveColor;
+      const dotColor = active ? activeColor : inactiveColor;
       const innerRingColor =
         variation === 'Reverse' ? primaryColor : currentTheme.background;
 
@@ -175,7 +175,7 @@ function radioButtonFactory<
     radioButtons[variation as RadioButtonVariations] = Button;
   });
   const RadioButtons = {
-    Dot: radioButtons.Dot as React.FunctionComponent<
+    Outline: radioButtons.Outline as React.FunctionComponent<
       Props<
         AdditionalPalettes,
         OptionalExistCondition<
