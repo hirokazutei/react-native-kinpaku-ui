@@ -34,8 +34,6 @@ type RadioButtonFactoryProps<
       RadioButtonSizeProps
     >]: RadioButtonSizeProps;
   };
-
-  defaultVariation?: RadioButtonVariations;
 };
 
 type RadioButtonProps<
