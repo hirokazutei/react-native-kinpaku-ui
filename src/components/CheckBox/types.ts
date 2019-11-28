@@ -12,7 +12,6 @@ type CheckBoxShapes = 'Sharp' | 'Rounded' | 'Circular';
 
 type CheckBoxSizeProps = {
   size: number;
-  markSize: number;
   borderThickness: number;
 };
 
@@ -56,4 +55,9 @@ type CheckBoxProps<AdditionalPalettes, CheckBoxSizes, AllowCustomProps> = {
   >;
 };
 
-export {CheckBoxProps, CheckBoxVariations, CheckBoxFactoryProps};
+export {
+  CheckBoxProps,
+  CheckBoxSizeProps,
+  CheckBoxVariations,
+  CheckBoxFactoryProps,
+};
