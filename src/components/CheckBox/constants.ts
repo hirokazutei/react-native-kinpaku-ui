@@ -7,16 +7,13 @@ const DEFAULTLESS_CHECK_BOX_SIZES: {
   [key in DefaultCheckBoxSizes]: CheckBoxSizeProps;
 } = {
   small: {
-    size: 12,
-    borderThickness: 2,
+    size: 16,
   },
   medium: {
-    size: 16,
-    borderThickness: 2,
+    size: 20,
   },
   large: {
-    size: 20,
-    borderThickness: 2,
+    size: 24,
   },
 };
 

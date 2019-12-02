@@ -1,10 +1,10 @@
 import {RadioButtonSizeProps, RadioButtonVariations} from './types';
 import {UnionDefaultKey} from '../../types';
 
-type DefaultRadioSizes = 'small' | 'medium' | 'large';
+type DefaultRadioButtonSizes = 'small' | 'medium' | 'large';
 
 const DEFAULTLESS_RADIO_BUTTON_SIZES: {
-  [key in DefaultRadioSizes]: RadioButtonSizeProps;
+  [key in DefaultRadioButtonSizes]: RadioButtonSizeProps;
 } = {
   small: {
     size: 12,
@@ -24,7 +24,7 @@ const DEFAULTLESS_RADIO_BUTTON_SIZES: {
 };
 
 const DEFAULT_RADIO_BUTTON_SIZES: {
-  [key in UnionDefaultKey<DefaultRadioSizes>]: RadioButtonSizeProps;
+  [key in UnionDefaultKey<DefaultRadioButtonSizes>]: RadioButtonSizeProps;
 } = {
   ...DEFAULTLESS_RADIO_BUTTON_SIZES,
   default: DEFAULTLESS_RADIO_BUTTON_SIZES.medium,
@@ -39,5 +39,5 @@ const RADIO_BUTTON_VARIATION_KEYS: Array<RadioButtonVariations> = [
 export {
   DEFAULT_RADIO_BUTTON_SIZES,
   RADIO_BUTTON_VARIATION_KEYS,
-  DefaultRadioSizes,
+  DefaultRadioButtonSizes,
 };

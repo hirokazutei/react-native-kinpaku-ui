@@ -15,7 +15,7 @@ import {ThemePalette} from '../../Theme/types';
 import {
   RADIO_BUTTON_VARIATION_KEYS,
   DEFAULT_RADIO_BUTTON_SIZES,
-  DefaultRadioSizes,
+  DefaultRadioButtonSizes,
 } from './constants';
 
 function radioButtonFactory<
@@ -131,7 +131,7 @@ function radioButtonFactory<
             >
           ]
         : DEFAULT_RADIO_BUTTON_SIZES[
-            size as UnionDefaultKey<DefaultRadioSizes>
+            size as UnionDefaultKey<DefaultRadioButtonSizes>
           ];
 
       const dotSize =
