@@ -1,6 +1,6 @@
 import UIFactory from './uiFactory';
 import {Themes, ThemePalette} from './Theme/types';
-// Buttons
+// Button
 import buttonFactory from './components/Button';
 import {
   ButtonProps,
@@ -9,6 +9,15 @@ import {
   ButtonTypes,
   ButtonFactoryProps,
 } from './components/Button/types';
+// CheckBox
+import checkBoxFactory from './components/CheckBox';
+import {
+  CheckBoxProps,
+  CheckBoxShapes,
+  CheckBoxSizeProps,
+  CheckBoxVariations,
+  CheckBoxFactoryProps,
+} from './components/CheckBox/types';
 // Touchable
 import touchableFactory from './components/Touchable';
 import {
@@ -43,6 +52,12 @@ export {
   ButtonSizeProps,
   ButtonTypes,
   ButtonVariations,
+  checkBoxFactory,
+  CheckBoxProps,
+  CheckBoxShapes,
+  CheckBoxSizeProps,
+  CheckBoxVariations,
+  CheckBoxFactoryProps,
   radioButtonFactory,
   RadioButtonFactoryProps,
   RadioButtonProps,

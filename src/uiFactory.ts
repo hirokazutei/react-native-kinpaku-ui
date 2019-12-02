@@ -1,5 +1,6 @@
 import {Themes} from './Theme/types';
 import buttonFactory from './components/Button';
+import checkBoxFactory from './components/CheckBox';
 import touchableFactory from './components/Touchable';
 import radioButtonFactory from './components/RadioButton';
 import textFactory from './components/Text';
@@ -20,6 +21,15 @@ export default function UIFactory<ThemeObject, AdditionalPalettes>(
     false
   >({
     ...commonProps,
+  });
+  const CheckBox = checkBoxFactory<
+    Themes<ThemeObject>,
+    AdditionalPalettes,
+    null,
+    false
+  >({
+    themes,
+    checkBoxShape: 'Sharp',
   });
   const RadioButton = radioButtonFactory<
     Themes<ThemeObject>,
@@ -49,6 +59,7 @@ export default function UIFactory<ThemeObject, AdditionalPalettes>(
   });
   return {
     Button,
+    CheckBox,
     RadioButton,
     Touchable,
     Title,
