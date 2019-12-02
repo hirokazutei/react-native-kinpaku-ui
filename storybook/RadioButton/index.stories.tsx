@@ -9,7 +9,7 @@ import themes from '../../src/themes';
 import {ThemePalette} from '../../src/Theme/types';
 import {RadioButtonProps} from '../../src/components/RadioButton/types';
 import radioButtonFactory from '../../src/components/RadioButton';
-import {DefaultRadioSizes} from '../../src/components/RadioButton/constants';
+import {DefaultRadioButtonSizes} from '../../src/components/RadioButton/constants';
 
 const {Outline, Reverse, Fill} = radioButtonFactory<
   typeof themes,
@@ -27,8 +27,8 @@ const colorSelect: {[key in keyof ThemePalette]?: keyof ThemePalette} = {
 };
 
 const sizeSelect: {
-  [key in IntersectDefaultKey<DefaultRadioSizes>]?: UnionDefaultKey<
-    DefaultRadioSizes
+  [key in IntersectDefaultKey<DefaultRadioButtonSizes>]?: UnionDefaultKey<
+    DefaultRadioButtonSizes
   >;
 } = {
   small: 'small',
