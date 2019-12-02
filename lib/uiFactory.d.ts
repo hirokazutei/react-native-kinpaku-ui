@@ -33,6 +33,26 @@ export default function UIFactory<ThemeObject, AdditionalPalettes>(themes: Theme
             massive: import("./components/Button/types").ButtonSizeProps;
         }, false>>;
     };
+    CheckBox: {
+        Outline: import("react").FunctionComponent<import("./components/CheckBox/types").CheckBoxProps<AdditionalPalettes, {
+            default: import("./components/CheckBox/types").CheckBoxSizeProps;
+            small: import("./components/CheckBox/types").CheckBoxSizeProps;
+            medium: import("./components/CheckBox/types").CheckBoxSizeProps;
+            large: import("./components/CheckBox/types").CheckBoxSizeProps;
+        }, false>>;
+        Fill: import("react").FunctionComponent<import("./components/CheckBox/types").CheckBoxProps<AdditionalPalettes, {
+            default: import("./components/CheckBox/types").CheckBoxSizeProps;
+            small: import("./components/CheckBox/types").CheckBoxSizeProps;
+            medium: import("./components/CheckBox/types").CheckBoxSizeProps;
+            large: import("./components/CheckBox/types").CheckBoxSizeProps;
+        }, false>>;
+        Reverse: import("react").FunctionComponent<import("./components/CheckBox/types").CheckBoxProps<AdditionalPalettes, {
+            default: import("./components/CheckBox/types").CheckBoxSizeProps;
+            small: import("./components/CheckBox/types").CheckBoxSizeProps;
+            medium: import("./components/CheckBox/types").CheckBoxSizeProps;
+            large: import("./components/CheckBox/types").CheckBoxSizeProps;
+        }, false>>;
+    };
     RadioButton: {
         Outline: import("react").FunctionComponent<import("./components/RadioButton/types").RadioButtonProps<AdditionalPalettes, {
             default: import("./components/RadioButton/types").RadioButtonSizeProps;
@@ -40,13 +60,13 @@ export default function UIFactory<ThemeObject, AdditionalPalettes>(themes: Theme
             medium: import("./components/RadioButton/types").RadioButtonSizeProps;
             large: import("./components/RadioButton/types").RadioButtonSizeProps;
         }, false>>;
-        Reverse: import("react").FunctionComponent<import("./components/RadioButton/types").RadioButtonProps<AdditionalPalettes, {
+        Fill: import("react").FunctionComponent<import("./components/RadioButton/types").RadioButtonProps<AdditionalPalettes, {
             default: import("./components/RadioButton/types").RadioButtonSizeProps;
             small: import("./components/RadioButton/types").RadioButtonSizeProps;
             medium: import("./components/RadioButton/types").RadioButtonSizeProps;
             large: import("./components/RadioButton/types").RadioButtonSizeProps;
         }, false>>;
-        Fill: import("react").FunctionComponent<import("./components/RadioButton/types").RadioButtonProps<AdditionalPalettes, {
+        Reverse: import("react").FunctionComponent<import("./components/RadioButton/types").RadioButtonProps<AdditionalPalettes, {
             default: import("./components/RadioButton/types").RadioButtonSizeProps;
             small: import("./components/RadioButton/types").RadioButtonSizeProps;
             medium: import("./components/RadioButton/types").RadioButtonSizeProps;
