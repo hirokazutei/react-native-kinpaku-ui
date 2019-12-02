@@ -17,7 +17,6 @@ declare type RadioButtonFactoryProps<Themes, AdditionalPalettes, RadioButtonSize
     sizes?: {
         [SizeKey in keyof AddDefaultToObject<RadioButtonSizes, RadioButtonSizeProps>]: RadioButtonSizeProps;
     };
-    defaultVariation?: RadioButtonVariations;
 };
 declare type RadioButtonProps<AdditionalPalettes, RadioButtonSizes, AllowCustomProps> = {
     active?: boolean;
