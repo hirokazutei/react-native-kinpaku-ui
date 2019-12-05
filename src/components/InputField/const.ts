@@ -9,20 +9,24 @@ type InputTypes =
   | 'number'
   | 'oneTimeNumberCode'
   | 'oneTimeCode'
+  | 'paragragh'
   | 'passcode'
   | 'password'
   | 'phone'
   | 'url'
   | 'username';
 
-// SearchField, Paragarph,
+// SearchField,
 
 const INPUT_TYPE_DEFAULT_SETTINGS: {[key in InputTypes]?: TextInputProps} = {
   creditCardNumber: {
     autoCapitalize: 'none',
     autoCorrect: false,
+    caretHidden: false,
     keyboardType: 'number-pad',
+    multiline: false,
     secureTextEntry: false,
+    selectTextOnFocus: false,
     ...Platform.select({
       ios: {
         dataDetectorTypes: 'none',
@@ -37,8 +41,11 @@ const INPUT_TYPE_DEFAULT_SETTINGS: {[key in InputTypes]?: TextInputProps} = {
   decimal: {
     autoCapitalize: 'none',
     autoCorrect: false,
+    caretHidden: false,
     keyboardType: 'decimal-pad',
+    multiline: false,
     secureTextEntry: false,
+    selectTextOnFocus: true,
     ...Platform.select({
       ios: {
         dataDetectorTypes: 'none',
@@ -53,8 +60,11 @@ const INPUT_TYPE_DEFAULT_SETTINGS: {[key in InputTypes]?: TextInputProps} = {
   email: {
     autoCapitalize: 'none',
     autoCorrect: false,
+    caretHidden: false,
     keyboardType: 'email-address',
+    multiline: false,
     secureTextEntry: false,
+    selectTextOnFocus: true,
     ...Platform.select({
       ios: {
         dataDetectorTypes: 'none',
@@ -69,7 +79,9 @@ const INPUT_TYPE_DEFAULT_SETTINGS: {[key in InputTypes]?: TextInputProps} = {
   freeField: {
     autoCapitalize: 'sentences',
     autoCorrect: true,
+    caretHidden: false,
     keyboardType: 'default',
+    multiline: false,
     secureTextEntry: false,
     ...Platform.select({
       ios: {
@@ -85,8 +97,11 @@ const INPUT_TYPE_DEFAULT_SETTINGS: {[key in InputTypes]?: TextInputProps} = {
   name: {
     autoCapitalize: 'words',
     autoCorrect: false,
+    caretHidden: false,
     keyboardType: 'default',
+    multiline: false,
     secureTextEntry: false,
+    selectTextOnFocus: true,
     ...Platform.select({
       ios: {
         dataDetectorTypes: 'none',
@@ -101,8 +116,11 @@ const INPUT_TYPE_DEFAULT_SETTINGS: {[key in InputTypes]?: TextInputProps} = {
   number: {
     autoCapitalize: 'none',
     autoCorrect: false,
+    caretHidden: false,
     keyboardType: 'number-pad',
+    multiline: false,
     secureTextEntry: false,
+    selectTextOnFocus: true,
     ...Platform.select({
       ios: {
         dataDetectorTypes: 'none',
@@ -117,8 +135,11 @@ const INPUT_TYPE_DEFAULT_SETTINGS: {[key in InputTypes]?: TextInputProps} = {
   oneTimeNumberCode: {
     autoCapitalize: 'none',
     autoCorrect: false,
+    caretHidden: true,
     keyboardType: 'number-pad',
+    multiline: false,
     secureTextEntry: false,
+    selectTextOnFocus: true,
     ...Platform.select({
       ios: {
         dataDetectorTypes: 'none',
@@ -133,8 +154,11 @@ const INPUT_TYPE_DEFAULT_SETTINGS: {[key in InputTypes]?: TextInputProps} = {
   oneTimeCode: {
     autoCapitalize: 'none',
     autoCorrect: false,
+    caretHidden: true,
     keyboardType: 'default',
+    multiline: false,
     secureTextEntry: false,
+    selectTextOnFocus: true,
     ...Platform.select({
       ios: {
         dataDetectorTypes: 'none',
@@ -146,11 +170,32 @@ const INPUT_TYPE_DEFAULT_SETTINGS: {[key in InputTypes]?: TextInputProps} = {
       },
     }),
   },
+  paragragh: {
+    autoCapitalize: 'sentences',
+    autoCorrect: true,
+    caretHidden: false,
+    keyboardType: 'default',
+    multiline: true,
+    secureTextEntry: false,
+    ...Platform.select({
+      ios: {
+        dataDetectorTypes: 'all',
+        spellCheck: true,
+        textContentType: 'none',
+      },
+      android: {
+        autoCompleteType: 'off',
+      },
+    }),
+  },
   passcode: {
     autoCapitalize: 'none',
     autoCorrect: false,
+    caretHidden: true,
     keyboardType: 'number-pad',
+    multiline: false,
     secureTextEntry: true,
+    selectTextOnFocus: true,
     ...Platform.select({
       ios: {
         dataDetectorTypes: 'none',
@@ -165,8 +210,11 @@ const INPUT_TYPE_DEFAULT_SETTINGS: {[key in InputTypes]?: TextInputProps} = {
   password: {
     autoCapitalize: 'none',
     autoCorrect: false,
+    caretHidden: true,
     keyboardType: 'default',
+    multiline: false,
     secureTextEntry: true,
+    selectTextOnFocus: true,
     ...Platform.select({
       ios: {
         dataDetectorTypes: 'none',
@@ -182,7 +230,9 @@ const INPUT_TYPE_DEFAULT_SETTINGS: {[key in InputTypes]?: TextInputProps} = {
     autoCapitalize: 'none',
     autoCorrect: false,
     keyboardType: 'phone-pad',
+    multiline: false,
     secureTextEntry: false,
+    selectTextOnFocus: true,
     ...Platform.select({
       ios: {
         dataDetectorTypes: 'phoneNumber',
@@ -197,7 +247,9 @@ const INPUT_TYPE_DEFAULT_SETTINGS: {[key in InputTypes]?: TextInputProps} = {
   url: {
     autoCapitalize: 'none',
     autoCorrect: false,
+    multiline: false,
     secureTextEntry: false,
+    selectTextOnFocus: true,
     ...Platform.select({
       ios: {
         dataDetectorTypes: 'link',
@@ -215,7 +267,9 @@ const INPUT_TYPE_DEFAULT_SETTINGS: {[key in InputTypes]?: TextInputProps} = {
     autoCapitalize: 'none',
     autoCorrect: false,
     keyboardType: 'default',
+    multiline: false,
     secureTextEntry: false,
+    selectTextOnFocus: false,
     ...Platform.select({
       ios: {
         dataDetectorTypes: 'none',
@@ -229,6 +283,8 @@ const INPUT_TYPE_DEFAULT_SETTINGS: {[key in InputTypes]?: TextInputProps} = {
   },
 };
 
+type InputFieldSizes = 'small' | 'medium' | 'large';
+
 // selectionColor
 // placeholderTextColor
 
@@ -239,4 +295,4 @@ const INPUT_TYPE_DEFAULT_SETTINGS: {[key in InputTypes]?: TextInputProps} = {
 // - clear()
 // - isFocused()
 
-export {INPUT_TYPE_DEFAULT_SETTINGS};
+export {INPUT_TYPE_DEFAULT_SETTINGS, InputFieldSizes};
