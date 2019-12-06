@@ -49,7 +49,7 @@ function radioButtonFactory<
     'default' as keyof Themes,
   );
   const radioButtons: {
-    [key in RadioButtonVariations]?: React.FC<
+    [key in RadioButtonVariations]?: React.FunctionComponent<
       Props<
         AdditionalPalettes,
         OptionalExistCondition<
@@ -62,7 +62,7 @@ function radioButtonFactory<
     >;
   } = {};
   RADIO_BUTTON_VARIATION_KEYS.forEach((variation: RadioButtonVariations) => {
-    const Button: React.FC<Props<
+    const Button: React.FunctionComponent<Props<
       AdditionalPalettes,
       OptionalExistCondition<
         RadioButtonSizes,

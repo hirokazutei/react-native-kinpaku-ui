@@ -46,10 +46,10 @@ function touchableFactory<
     AllowCustomProps
   >
 > {
-  const paletteContext: React.Context<keyof PaletteObjectType> = React.createContext(
+  const themeContext: React.Context<keyof PaletteObjectType> = React.createContext(
     'default' as keyof PaletteObjectType,
   );
-  const Touchable: React.FC<Props<
+  const Touchable: React.FunctionComponent<Props<
     AdditionalPalettes,
     OptionalExistCondition<
       TouchableSizes,
@@ -78,7 +78,7 @@ function touchableFactory<
     AllowCustomProps
   >): React.ReactElement => {
     // Palettes
-    const currentThemeKey = useContext(paletteContext) || 'default';
+    const currentThemeKey = useContext(themeContext) || 'default';
     const currentTheme =
       themes[
         `${currentThemeKey}` as keyof AddDefaultToObject<

@@ -39,7 +39,7 @@ function textFactory<
     Props<AdditionalPalettes, FontSizes, EmphasisToggleable>
   >;
 } {
-  const paletteContext: React.Context<keyof Themes> = React.createContext(
+  const themeContext: React.Context<keyof Themes> = React.createContext(
     'default' as keyof Themes,
   );
 
@@ -48,7 +48,9 @@ function textFactory<
       TextVariations,
       typeof DEFAULT_TEXT_VARIATIONS,
       TextVariations
-    >]?: React.FC<Props<AdditionalPalettes, FontSizes, EmphasisToggleable>>;
+    >]?: React.FunctionComponent<
+      Props<AdditionalPalettes, FontSizes, EmphasisToggleable>
+    >;
   } = {};
 
   for (const variationName in textVariations
@@ -76,7 +78,7 @@ function textFactory<
         })[variationName as keyof TextVariations]
       : DEFAULT_TEXT_VARIATIONS[variationName as DefaultTextVariations];
 
-    const text: React.FC<Props<
+    const text: React.FunctionComponent<Props<
       AdditionalPalettes,
       FontSizes,
       EmphasisToggleable
@@ -97,7 +99,7 @@ function textFactory<
       EmphasisToggleable
     >): React.ReactElement => {
       // Palettes
-      const currentThemeKey = useContext(paletteContext) || 'default';
+      const currentThemeKey = useContext(themeContext) || 'default';
       const currentTheme =
         themes[
           `${currentThemeKey}` as keyof (Themes & DefaultObject<ThemePalette>)
@@ -185,7 +187,9 @@ function textFactory<
       TextVariations,
       typeof DEFAULT_TEXT_VARIATIONS,
       TextVariations
-    >]: React.FC<Props<AdditionalPalettes, FontSizes, EmphasisToggleable>>;
+    >]: React.FunctionComponent<
+      Props<AdditionalPalettes, FontSizes, EmphasisToggleable>
+    >;
   };
 }
 

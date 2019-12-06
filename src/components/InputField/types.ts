@@ -2,12 +2,13 @@ import {TextInputProps} from 'react-native';
 import {AddDefaultToObject, Color, OptionalExistCondition} from '../../types';
 import {ThemePalette} from '../../Theme/types';
 
-type InputFieldTypes = 'Undeline' | 'Outline' | 'Fill' | 'UnderlinedFill';
+type InputFieldTypes = 'Underline' | 'Outline' | 'Fill' | 'UnderlinedFill';
 
 type InputFieldShapes = 'Sharp' | 'Rounded' | 'Circular';
 
 type InputFieldSizeProps = {
   fontSize: number;
+  isBold: boolean;
 };
 
 type InputFieldVariationProps = {
@@ -49,7 +50,7 @@ type InputFieldFactoryProps<
   };
   customInputVariations?: OptionalExistCondition<
     CustomInputVariations,
-    InputFieldVariationProps,
+    never,
     {[Variation in CustomInputVariations]: InputFieldVariationProps}
   >;
   inputFieldType?: InputFieldTypes;
@@ -70,6 +71,23 @@ type InputFieldProps = {
   palceholder: string;
   value: string;
 };
+
+/*
+allowFontScaling?: boolean; // Factory
+defaultColor?: keyof (ThemePalette & AdditionalPalettes);  // Set-Up
+fontFamily?: string; // Variation
+isBold?: boolean; // Variation
+isItalic?: boolean;  // Variation
+letterSpacing?: number; // Variation
+lineHeight?: number; // Variation
+maxFontSizeMultiplier?: number; // Variation
+minimumFontScale?: number; // Variation
+
+align?: TextStyle['textAlign']; // Variation
+backgroundColor?: keyof (ThemePalette & AdditionalPalettes); // Prop
+textColor?: keyof (ThemePalette & AdditionalPalettes); // Prop
+color?: keyof (ThemePalette & AdditionalPalettes); // Prop
+*/
 
 export {
   InputFieldFactoryProps,

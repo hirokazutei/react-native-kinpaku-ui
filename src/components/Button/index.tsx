@@ -50,11 +50,11 @@ function buttonFactory<
     >
   >;
 } {
-  const paletteContext: React.Context<keyof Themes> = React.createContext(
+  const themeContext: React.Context<keyof Themes> = React.createContext(
     'default' as keyof Themes,
   );
   const buttons: {
-    [key in ButtonVariations]?: React.FC<
+    [key in ButtonVariations]?: React.FunctionComponent<
       Props<
         AdditionalPalettes,
         OptionalExistCondition<
@@ -67,7 +67,7 @@ function buttonFactory<
     >;
   } = {};
   BUTTON_VARIATION_KEYS.forEach((variation: ButtonVariations) => {
-    const Button: React.FC<Props<
+    const Button: React.FunctionComponent<Props<
       AdditionalPalettes,
       OptionalExistCondition<
         ButtonSizes,
@@ -98,7 +98,7 @@ function buttonFactory<
       AllowCustomProps
     >): React.ReactElement => {
       // Palettes
-      const currentThemeKey = useContext(paletteContext) || 'default';
+      const currentThemeKey = useContext(themeContext) || 'default';
       const currentTheme =
         themes[`${currentThemeKey}` as keyof UnionDefaultKey<Themes>];
 

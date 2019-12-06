@@ -1,6 +1,6 @@
 import {TextInputProps, Platform} from 'react-native';
 
-type InputTypes =
+type InputVariations =
   | 'creditCardNumber'
   | 'decimal'
   | 'email'
@@ -18,7 +18,9 @@ type InputTypes =
 
 // SearchField,
 
-const INPUT_TYPE_DEFAULT_SETTINGS: {[key in InputTypes]?: TextInputProps} = {
+const INPUT_VARIATION_DEFAULT_SETTINGS: {
+  [key in InputVariations]: TextInputProps;
+} = {
   creditCardNumber: {
     autoCapitalize: 'none',
     autoCorrect: false,
@@ -295,4 +297,4 @@ type InputFieldSizes = 'small' | 'medium' | 'large';
 // - clear()
 // - isFocused()
 
-export {INPUT_TYPE_DEFAULT_SETTINGS, InputFieldSizes};
+export {INPUT_VARIATION_DEFAULT_SETTINGS, InputVariations, InputFieldSizes};
