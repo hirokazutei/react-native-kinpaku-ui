@@ -6,8 +6,9 @@ import {
   TextVariationProps,
 } from './types';
 import {DefaultObject, OptionalExistCondition} from '../../types';
-import {ThemePalette} from '../../Theme/types';
+import {ThemePalette} from '../../theme/types';
 import {DEFAULT_TEXT_VARIATIONS, DefaultTextVariations} from './constants';
+import {colorResolverFactory} from '../../helper';
 
 function textFactory<
   Themes,
@@ -58,7 +59,7 @@ function textFactory<
     : DEFAULT_TEXT_VARIATIONS) {
     const {
       allowFontScaling,
-      defaultColor = 'text',
+      defaultColor,
       defaultFontSize,
       fontFamily,
       fontSizes,
@@ -85,7 +86,7 @@ function textFactory<
     >> = ({
       align,
       bold,
-      color = defaultColor,
+      color,
       children,
       ellipsizeMode,
       italic,
@@ -104,12 +105,19 @@ function textFactory<
         themes[
           `${currentThemeKey}` as keyof (Themes & DefaultObject<ThemePalette>)
         ];
+      const colorResolver = colorResolverFactory<AdditionalPalettes>({
+        currentTheme,
+        additionalPalettes,
+      });
 
       // Color
-      const fontColor =
-        (additionalPalettes &&
-          additionalPalettes[color as keyof AdditionalPalettes]) ||
-        currentTheme[color as keyof ThemePalette];
+      const fontColor = colorResolver({
+        color,
+        defaultColor: colorResolver({
+          color: defaultColor,
+          defaultColor: currentTheme.text,
+        }),
+      });
 
       // Size
       // = defaultFontSizeKey || defaultFontSize

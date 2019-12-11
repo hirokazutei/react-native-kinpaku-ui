@@ -12,13 +12,14 @@ import {
   OptionalExistCondition,
   UnionDefaultKey,
 } from '../../types';
-import {ThemePalette} from '../../Theme/types';
+import {ThemePalette} from '../../theme/types';
 import {
   DEFAULT_TOUCHABLE_SIZES,
   DEFAULT_TOUCHABLE_ALIGN,
   DEFAULT_TOUCHABLE_BORDER_WIDTH,
   DefaultTouchableSizes,
 } from './constants';
+import {colorResolverFactory} from '../../helper';
 
 function touchableFactory<
   PaletteObjectType,
@@ -58,7 +59,7 @@ function touchableFactory<
     >,
     AllowCustomProps
   >> = ({
-    color = 'primary',
+    color,
     size = 'default',
     children,
     isDisabled = false,
@@ -86,13 +87,15 @@ function touchableFactory<
           ThemePalette
         >
       ];
+    const colorResolver = colorResolverFactory<AdditionalPalettes>({
+      currentTheme,
+      additionalPalettes,
+    });
 
     // Color
-    const primaryColor = !isDisabled
-      ? (additionalPalettes &&
-          additionalPalettes[color as keyof AdditionalPalettes]) ||
-        currentTheme[color as keyof ThemePalette]
-      : currentTheme.disabled;
+    const primaryColor = isDisabled
+      ? currentTheme.disabled
+      : colorResolver({color, defaultColor: currentTheme.primary});
     const borderColor = primaryColor;
     const fillColor = type === 'solid' ? primaryColor : currentTheme.background;
 

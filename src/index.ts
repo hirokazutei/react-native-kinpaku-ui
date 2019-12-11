@@ -1,5 +1,5 @@
 import UIFactory from './uiFactory';
-import {Themes, ThemePalette} from './Theme/types';
+import {Themes, ThemePalette} from './theme/types';
 // Button
 import buttonFactory from './components/Button';
 import {

@@ -11,12 +11,13 @@ import {
   OptionalExistCondition,
   AddDefaultToObject,
 } from '../../types';
-import {ThemePalette} from '../../Theme/types';
+import {ThemePalette} from '../../theme/types';
 import {
   RADIO_BUTTON_VARIATION_KEYS,
   DEFAULT_RADIO_BUTTON_SIZES,
   DefaultRadioButtonSizes,
 } from './constants';
+import {colorResolverFactory} from '../../helper';
 
 function radioButtonFactory<
   Themes,
@@ -101,9 +102,15 @@ function radioButtonFactory<
         useContext(themeContext) || ('default' as UnionDefaultKey<Themes>);
       const currentTheme =
         themes[`${currentThemeKey}` as keyof UnionDefaultKey<Themes>];
+      const colorResolver = colorResolverFactory<AdditionalPalettes>({
+        currentTheme,
+        additionalPalettes,
+      });
 
       // Color
-      const primaryColor = !isDisabled
+      const primaryColor = isDisabled
+        ? currentTheme.disabled
+        : colorResolver({color, defaultColor: currentTheme.primary})
         ? (additionalPalettes &&
             additionalPalettes[color as keyof AdditionalPalettes]) ||
           currentTheme[color as keyof ThemePalette]

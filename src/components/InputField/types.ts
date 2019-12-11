@@ -5,7 +5,7 @@ import {
   Falsy,
   OptionalExistCondition,
 } from '../../types';
-import {ThemePalette} from '../../Theme/types';
+import {ThemePalette} from '../../theme/types';
 
 type InputFieldTypes = 'Underline' | 'Outline' | 'Fill' | 'UnderlinedFill';
 

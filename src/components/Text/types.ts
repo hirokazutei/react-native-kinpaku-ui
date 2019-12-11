@@ -5,7 +5,7 @@ import {
   OptionalTrueCondition,
   OptionalExistCondition,
 } from '../../types';
-import {ThemePalette} from '../../Theme/types';
+import {ThemePalette} from '../../theme/types';
 
 type TextSizeProps<FontSizes extends string | string> = {
   [key in FontSizes]: number;
