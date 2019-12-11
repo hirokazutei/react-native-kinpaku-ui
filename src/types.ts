@@ -9,16 +9,17 @@ type AddDefaultToObject<T, V> = {
 type UnionDefaultKey<T> = T | 'default';
 type IntersectDefaultKey<T> = T & 'default';
 
-type OptionalTrueCondition<T, IfFalse, IfTrue> = T extends
-  | undefined
-  | null
-  | false
+type Falsy = undefined | null | false;
+
+type NonExistent = undefined | null;
+
+type OptionalTrueCondition<T, IfFalse, IfTrue> = T extends Falsy
   ? IfFalse
   : T extends true
   ? IfTrue
   : IfFalse;
 
-type OptionalExistCondition<T, NonExist, Exist> = T extends undefined | null
+type OptionalExistCondition<T, NonExist, Exist> = T extends NonExistent
   ? NonExist
   : Exist;
 
@@ -26,6 +27,8 @@ export {
   AddDefaultToObject,
   Color,
   DefaultObject,
+  Falsy,
+  NonExistent,
   IntersectDefaultKey,
   OptionalExistCondition,
   OptionalTrueCondition,

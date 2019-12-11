@@ -287,6 +287,8 @@ const INPUT_VARIATION_DEFAULT_SETTINGS: {
 
 type InputFieldSizes = 'small' | 'medium' | 'large';
 
+const DEFAULT_BORDER_WIDTH = 2;
+
 // selectionColor
 // placeholderTextColor
 
@@ -296,5 +298,12 @@ type InputFieldSizes = 'small' | 'medium' | 'large';
 // Methods
 // - clear()
 // - isFocused()
+const INPUT_FIELD_TYPES = ['Underline', 'Outline', 'Fill', 'UnderlinedFill'];
 
-export {INPUT_VARIATION_DEFAULT_SETTINGS, InputVariations, InputFieldSizes};
+export {
+  DEFAULT_BORDER_WIDTH,
+  InputFieldSizes,
+  INPUT_FIELD_TYPES,
+  INPUT_VARIATION_DEFAULT_SETTINGS,
+  InputVariations,
+};

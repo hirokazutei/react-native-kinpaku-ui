@@ -1,5 +1,5 @@
 import React, {useContext} from 'react';
-import {TextInput} from 'react-native';
+import {TextInput, View, ViewStyle} from 'react-native';
 import {
   InputFieldFactoryProps,
   InputFieldProps as Props,
@@ -9,21 +9,24 @@ import {
   InputFieldVariationProps,
 } from './types';
 import {
+  DEFAULT_BORDER_WIDTH,
   INPUT_VARIATION_DEFAULT_SETTINGS,
   InputVariations,
   InputFieldSizes,
-} from './const';
+} from './constants';
 import {
   UnionDefaultKey,
   OptionalExistCondition,
   AddDefaultToObject,
 } from '../../types';
+import {ThemePalette} from '../../theme/types';
+import {colorResolverFactory} from '../../helper';
 
-function InputFieldFactory<
+function inputFieldFactory<
   Themes,
   AdditionalPalettes,
   InputFieldSizes,
-  CustomInputVariations extends string | string
+  CustomInputVariations
 >({
   themes,
   additionalPalettes,
@@ -41,7 +44,7 @@ function InputFieldFactory<
   [key in OptionalExistCondition<
     typeof customInputVariations,
     InputVariations,
-    CustomInputVariations
+    CustomInputVariations extends string ? string : 'undefined'
   >]: React.FunctionComponent<Props<AdditionalPalettes>>;
 } {
   const themeContext: React.Context<keyof Themes> = React.createContext(
@@ -52,13 +55,15 @@ function InputFieldFactory<
     [key in OptionalExistCondition<
       typeof customInputVariations,
       InputVariations,
-      CustomInputVariations
+      CustomInputVariations extends string ? string : 'undefined'
     >]?: React.FunctionComponent<Props<AdditionalPalettes>>;
   } = {};
 
   const variations = customInputVariations
     ? (customInputVariations as {
-        [Variation in CustomInputVariations]: InputFieldVariationProps;
+        [Variation in CustomInputVariations extends string
+          ? string
+          : 'undefined']: InputFieldVariationProps;
       })
     : INPUT_VARIATION_DEFAULT_SETTINGS;
 
@@ -67,9 +72,9 @@ function InputFieldFactory<
       const InputField: React.FunctionComponent<Props<AdditionalPalettes>> = ({
         autoFocus,
         backgroundColor,
-        color,
+        borderColor,
         defaultValue,
-        disabled,
+        isDisabled,
         maxLength,
         onBlur,
         onChange,
@@ -85,16 +90,82 @@ function InputFieldFactory<
           useContext(themeContext) || ('default' as UnionDefaultKey<Themes>);
         const currentTheme =
           themes[`${currentThemeKey}` as keyof UnionDefaultKey<Themes>];
-
+        const colorResolver = colorResolverFactory<AdditionalPalettes>({
+          currentTheme,
+          additionalPalettes,
+        });
         // variation ->
+
+        // Type
+        const isOutline = inputFieldType === 'Outline';
+        const isFill = inputFieldType === 'Fill';
+        const isUnderline = inputFieldType === 'Underline';
+        const isUnderlinedFill = inputFieldType === 'UnderlinedFill';
+
+        // Set-Up Color
+        const primaryBackgroundColor = colorResolver({
+          color: backgroundColor,
+          defaultColor: currentTheme.background,
+        });
+        const textPrimaryColor = colorResolver({
+          color: textColor,
+          defaultColor: currentTheme.primary,
+        });
+        const primaryBorderColor = colorResolver({
+          color: borderColor,
+          defaultColor: currentTheme.primary,
+        });
+
+        // borderWidth
+        const borderWidth = 2 || DEFAULT_BORDER_WIDTH; // Kaz
+
         // Color
+        const backgroundColorProp =
+          isFill || isUnderlinedFill
+            ? {backgroundColor: primaryBackgroundColor}
+            : {};
+
+        // Border
+        const borderWidthProp = isOutline ? {borderWidth: borderWidth} : {};
+        const borderColorProp = !isFill
+          ? {borderColor: primaryBorderColor}
+          : {};
+        const borderBottomWidthProp =
+          isUnderline || isUnderlinedFill
+            ? {borderBottomWidth: borderWidth}
+            : {};
+
+        // Font
+        const fontColorProp = isDisabled
+          ? {color: currentTheme.text}
+          : {color: textPrimaryColor};
+
         // Shape
         // FontSize
+
+        // WrappedStyle
+        const wrapperStyleProps = {
+          flexDirection: 'row' as ViewStyle['flexDirection'],
+          ...(isDisabled
+            ? {borderColor: currentTheme.disabled}
+            : borderColorProp),
+          ...(isDisabled
+            ? {backgroundColor: currentTheme.disabled}
+            : backgroundColorProp),
+          ...borderWidthProp, // Add that to set-up
+          ...borderBottomWidthProp,
+        };
+
+        // FieldStyle
+        const fieldStyleProps = {
+          flex: 1,
+          height: 40,
+        };
 
         // AllTextStyles are supported
         const autoFocusProp = autoFocus ? {autoFocus} : {};
         const defaultValueProp = defaultValue ? {defaultValue} : {};
-        const editableProp = disabled ? {editable: !disabled} : {};
+        const editableProp = isDisabled ? {editable: !isDisabled} : {};
         const maxLengthProp = maxLength ? {maxLength} : {};
         const onBlurProp = onBlur ? {onBlur} : {};
         const onChangeProp = onChange ? {onChange} : {};
@@ -104,34 +175,45 @@ function InputFieldFactory<
         const placeholderProp = placeholder ? {placeholder} : {};
         const valueProp = value ? {value} : {};
 
-        // TextInputProps
-        const textInputProps = {
-          ...autoFocusProp,
-          defaultValueProp,
-          editableProp,
-          maxLengthProp,
-          onBlurProp,
-          onChangeProp,
-          onEndEditingProp,
-          onFocusProp,
-          onKeyPressProp,
-          placeholderProp,
-          valueProp,
-        };
-
-        return <TextInput {...textInputProps} />;
+        return (
+          <View style={wrapperStyleProps}>
+            <TextInput
+              style={fieldStyleProps}
+              {...{
+                ...autoFocusProp,
+                ...defaultValueProp,
+                ...editableProp,
+                ...fontColorProp,
+                ...maxLengthProp,
+                ...onBlurProp,
+                ...onChangeProp,
+                ...onEndEditingProp,
+                ...onFocusProp,
+                ...onKeyPressProp,
+                ...placeholderProp,
+                ...valueProp,
+              }}
+            />
+          </View>
+        );
       };
       inputFields[
         key as OptionalExistCondition<
           typeof customInputVariations,
           InputVariations,
-          CustomInputVariations
+          CustomInputVariations extends string ? string : 'undefined'
         >
       ] = InputField;
     }
   }
 
-  return inputFields;
+  return inputFields as {
+    [key in OptionalExistCondition<
+      typeof customInputVariations,
+      InputVariations,
+      CustomInputVariations extends string ? string : 'undefined'
+    >]: React.FunctionComponent<Props<AdditionalPalettes>>;
+  };
 }
 
-export default InputFieldFactory;
+export default inputFieldFactory;

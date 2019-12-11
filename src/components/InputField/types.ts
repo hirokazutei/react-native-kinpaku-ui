@@ -1,5 +1,10 @@
 import {TextInputProps, TextStyle} from 'react-native';
-import {AddDefaultToObject, Color, OptionalExistCondition} from '../../types';
+import {
+  AddDefaultToObject,
+  Color,
+  Falsy,
+  OptionalExistCondition,
+} from '../../types';
 import {ThemePalette} from '../../Theme/types';
 
 type InputFieldTypes = 'Underline' | 'Outline' | 'Fill' | 'UnderlinedFill';
@@ -44,7 +49,7 @@ type InputFieldFactoryProps<
   Themes,
   AdditionalPalettes,
   InputFieldSizes,
-  CustomInputVariations extends string | string
+  CustomInputVariations
 > = {
   themes: {
     [ThemeKey in keyof AddDefaultToObject<Themes, ThemePalette>]: ThemePalette;
@@ -61,7 +66,11 @@ type InputFieldFactoryProps<
   customInputVariations?: OptionalExistCondition<
     CustomInputVariations,
     never,
-    {[Variation in CustomInputVariations]: InputFieldVariationProps}
+    {
+      [Variation in CustomInputVariations extends string
+        ? string
+        : 'undefined']: InputFieldVariationProps;
+    }
   >;
   defaultColor?: {[key in keyof (ThemePalette & AdditionalPalettes)]: string};
   inputFieldType?: InputFieldTypes;
@@ -70,19 +79,19 @@ type InputFieldFactoryProps<
 };
 
 type InputFieldProps<AdditionalPalettes> = {
-  autoFocus: boolean;
-  backgroundColor: {[key in keyof (ThemePalette & AdditionalPalettes)]: string};
-  color: {[key in keyof (ThemePalette & AdditionalPalettes)]: string};
-  defaultValue: string;
-  disabled: boolean; // editable
-  maxLength: number;
-  onBlur: (args: any) => any;
-  onChange: (args: any) => any;
-  onEndEditing: (args: any) => any;
-  onFocus: (args: any) => any;
-  onKeyPress: (args: any) => any;
-  placeholder: string;
-  textColor: {[key in keyof (ThemePalette & AdditionalPalettes)]: string};
+  autoFocus?: boolean;
+  backgroundColor?: keyof (ThemePalette & AdditionalPalettes);
+  borderColor?: keyof (ThemePalette & AdditionalPalettes);
+  defaultValue?: string;
+  isDisabled?: boolean;
+  maxLength?: number;
+  onBlur?: (args: any) => any;
+  onChange?: (args: any) => any;
+  onEndEditing?: (args: any) => any;
+  onFocus?: (args: any) => any;
+  onKeyPress?: (args: any) => any;
+  placeholder?: string;
+  textColor?: keyof (ThemePalette & AdditionalPalettes);
   value: string;
 };
 
