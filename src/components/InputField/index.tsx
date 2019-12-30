@@ -19,53 +19,29 @@ import {
   OptionalExistCondition,
   AddDefaultToObject,
 } from '../../types';
-import {ThemePalette} from '../../theme/types';
 import {colorResolverFactory} from '../../helper';
 
-function inputFieldFactory<
-  Themes,
-  AdditionalPalettes,
-  InputFieldSizes,
-  CustomInputVariations
->({
+function inputFieldFactory<Themes, AdditionalPalettes, InputFieldSizes>({
   themes,
   additionalPalettes,
   sizes,
-  customInputVariations,
   inputFieldType = 'Underline',
   defaultShape = 'Sharp',
   highlightOnFocus = true,
-}: InputFieldFactoryProps<
-  Themes,
-  AdditionalPalettes,
-  InputFieldSizes,
-  CustomInputVariations
->): {
-  [key in OptionalExistCondition<
-    typeof customInputVariations,
-    InputVariations,
-    CustomInputVariations extends string ? string : 'undefined'
-  >]: React.FunctionComponent<Props<AdditionalPalettes>>;
+}: InputFieldFactoryProps<Themes, AdditionalPalettes, InputFieldSizes>): {
+  [key in InputVariations]: React.FunctionComponent<Props<AdditionalPalettes>>;
 } {
   const themeContext: React.Context<keyof Themes> = React.createContext(
     'default' as keyof Themes,
   );
 
   const inputFields: {
-    [key in OptionalExistCondition<
-      typeof customInputVariations,
-      InputVariations,
-      CustomInputVariations extends string ? string : 'undefined'
-    >]?: React.FunctionComponent<Props<AdditionalPalettes>>;
+    [key in InputVariations]?: React.FunctionComponent<
+      Props<AdditionalPalettes>
+    >;
   } = {};
 
-  const variations = customInputVariations
-    ? (customInputVariations as {
-        [Variation in CustomInputVariations extends string
-          ? string
-          : 'undefined']: InputFieldVariationProps;
-      })
-    : INPUT_VARIATION_DEFAULT_SETTINGS;
+  const variations = INPUT_VARIATION_DEFAULT_SETTINGS;
 
   for (const key in variations) {
     if (variations.hasOwnProperty(key)) {
@@ -166,6 +142,9 @@ function inputFieldFactory<
         const autoFocusProp = autoFocus ? {autoFocus} : {};
         const defaultValueProp = defaultValue ? {defaultValue} : {};
         const editableProp = isDisabled ? {editable: !isDisabled} : {};
+        const selectTextOnFocus = highlightOnFocus
+          ? {selectTextOnFocus: highlightOnFocus}
+          : {};
         const maxLengthProp = maxLength ? {maxLength} : {};
         const onBlurProp = onBlur ? {onBlur} : {};
         const onChangeProp = onChange ? {onChange} : {};
@@ -184,6 +163,7 @@ function inputFieldFactory<
                 ...defaultValueProp,
                 ...editableProp,
                 ...fontColorProp,
+                ...selectTextOnFocus,
                 ...maxLengthProp,
                 ...onBlurProp,
                 ...onChangeProp,
@@ -197,22 +177,14 @@ function inputFieldFactory<
           </View>
         );
       };
-      inputFields[
-        key as OptionalExistCondition<
-          typeof customInputVariations,
-          InputVariations,
-          CustomInputVariations extends string ? string : 'undefined'
-        >
-      ] = InputField;
+      inputFields[key as InputVariations] = InputField;
     }
   }
 
   return inputFields as {
-    [key in OptionalExistCondition<
-      typeof customInputVariations,
-      InputVariations,
-      CustomInputVariations extends string ? string : 'undefined'
-    >]: React.FunctionComponent<Props<AdditionalPalettes>>;
+    [key in InputVariations]: React.FunctionComponent<
+      Props<AdditionalPalettes>
+    >;
   };
 }
 

@@ -1,4 +1,5 @@
 import {TextInputProps, Platform} from 'react-native';
+import {InputFieldTypes} from './types';
 
 type InputVariations =
   | 'creditCardNumber'
@@ -298,7 +299,12 @@ const DEFAULT_BORDER_WIDTH = 2;
 // Methods
 // - clear()
 // - isFocused()
-const INPUT_FIELD_TYPES = ['Underline', 'Outline', 'Fill', 'UnderlinedFill'];
+const INPUT_FIELD_TYPES: Array<InputFieldTypes> = [
+  'Underline',
+  'Outline',
+  'Fill',
+  'UnderlinedFill',
+];
 
 export {
   DEFAULT_BORDER_WIDTH,

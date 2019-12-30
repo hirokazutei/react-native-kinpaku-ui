@@ -1,10 +1,5 @@
 import {TextInputProps, TextStyle} from 'react-native';
-import {
-  AddDefaultToObject,
-  Color,
-  Falsy,
-  OptionalExistCondition,
-} from '../../types';
+import {AddDefaultToObject, Color} from '../../types';
 import {ThemePalette} from '../../theme/types';
 
 type InputFieldTypes = 'Underline' | 'Outline' | 'Fill' | 'UnderlinedFill';
@@ -45,12 +40,7 @@ type InputFieldVariationProps = {
   minimumFontScale?: number;
 };
 
-type InputFieldFactoryProps<
-  Themes,
-  AdditionalPalettes,
-  InputFieldSizes,
-  CustomInputVariations
-> = {
+type InputFieldFactoryProps<Themes, AdditionalPalettes, InputFieldSizes> = {
   themes: {
     [ThemeKey in keyof AddDefaultToObject<Themes, ThemePalette>]: ThemePalette;
   };
@@ -63,15 +53,6 @@ type InputFieldFactoryProps<
       InputFieldSizeProps
     >]: InputFieldSizeProps;
   };
-  customInputVariations?: OptionalExistCondition<
-    CustomInputVariations,
-    never,
-    {
-      [Variation in CustomInputVariations extends string
-        ? string
-        : 'undefined']: InputFieldVariationProps;
-    }
-  >;
   defaultColor?: {[key in keyof (ThemePalette & AdditionalPalettes)]: string};
   inputFieldType?: InputFieldTypes;
   defaultShape?: InputFieldShapes;
