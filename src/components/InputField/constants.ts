@@ -1,5 +1,5 @@
 import {TextInputProps, Platform} from 'react-native';
-import {InputFieldTypes} from './types';
+import {InputFieldTypes, InputFieldSizeProps} from './types';
 
 type InputVariations =
   | 'creditCardNumber'
@@ -286,9 +286,15 @@ const INPUT_VARIATION_DEFAULT_SETTINGS: {
   },
 };
 
-type InputFieldSizes = 'small' | 'medium' | 'large';
+const DEFAULT_INPUT_FIELD_SIZE: InputFieldSizeProps = {
+  borderWidth: 2,
+  fontSize: 12,
+  isBold: false,
+};
 
 const DEFAULT_BORDER_WIDTH = 2;
+
+type InputFieldSizes = 'small' | 'medium' | 'large';
 
 // selectionColor
 // placeholderTextColor
@@ -308,6 +314,7 @@ const INPUT_FIELD_TYPES: Array<InputFieldTypes> = [
 
 export {
   DEFAULT_BORDER_WIDTH,
+  DEFAULT_INPUT_FIELD_SIZE,
   InputFieldSizes,
   INPUT_FIELD_TYPES,
   INPUT_VARIATION_DEFAULT_SETTINGS,

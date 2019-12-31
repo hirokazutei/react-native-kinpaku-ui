@@ -1,5 +1,5 @@
 import {TextInputProps, TextStyle} from 'react-native';
-import {AddDefaultToObject, Color} from '../../types';
+import {AddDefaultToObject, Color, OptionalExistCondition} from '../../types';
 import {ThemePalette} from '../../theme/types';
 
 type InputFieldTypes = 'Underline' | 'Outline' | 'Fill' | 'UnderlinedFill';
@@ -7,8 +7,10 @@ type InputFieldTypes = 'Underline' | 'Outline' | 'Fill' | 'UnderlinedFill';
 type InputFieldShapes = 'Sharp' | 'Rounded' | 'Circular';
 
 type InputFieldSizeProps = {
+  borderWidth?: number;
   fontSize: number;
-  isBold: boolean;
+  isBold?: boolean;
+  // Padding Kaz
 };
 
 type InputFieldVariationProps = {
@@ -59,7 +61,7 @@ type InputFieldFactoryProps<Themes, AdditionalPalettes, InputFieldSizes> = {
   highlightOnFocus?: boolean;
 };
 
-type InputFieldProps<AdditionalPalettes> = {
+type InputFieldProps<AdditionalPalettes, InputFieldSizes> = {
   autoFocus?: boolean;
   backgroundColor?: keyof (ThemePalette & AdditionalPalettes);
   borderColor?: keyof (ThemePalette & AdditionalPalettes);
@@ -72,6 +74,7 @@ type InputFieldProps<AdditionalPalettes> = {
   onFocus?: (args: any) => any;
   onKeyPress?: (args: any) => any;
   placeholder?: string;
+  size?: keyof AddDefaultToObject<InputFieldSizes, InputFieldSizeProps>;
   textColor?: keyof (ThemePalette & AdditionalPalettes);
   value: string;
 };

@@ -1,5 +1,5 @@
 import React, {useContext} from 'react';
-import {TextInput, View, ViewStyle} from 'react-native';
+import {TextInput, View, ViewStyle, TextStyle} from 'react-native';
 import {
   InputFieldFactoryProps,
   InputFieldProps as Props,
@@ -10,6 +10,7 @@ import {
 } from './types';
 import {
   DEFAULT_BORDER_WIDTH,
+  DEFAULT_INPUT_FIELD_SIZE,
   INPUT_VARIATION_DEFAULT_SETTINGS,
   InputVariations,
   InputFieldSizes,
@@ -29,7 +30,9 @@ function inputFieldFactory<Themes, AdditionalPalettes, InputFieldSizes>({
   defaultShape = 'Sharp',
   highlightOnFocus = true,
 }: InputFieldFactoryProps<Themes, AdditionalPalettes, InputFieldSizes>): {
-  [key in InputVariations]: React.FunctionComponent<Props<AdditionalPalettes>>;
+  [key in InputVariations]: React.FunctionComponent<
+    Props<AdditionalPalettes, InputFieldSizes>
+  >;
 } {
   const themeContext: React.Context<keyof Themes> = React.createContext(
     'default' as keyof Themes,
@@ -37,7 +40,7 @@ function inputFieldFactory<Themes, AdditionalPalettes, InputFieldSizes>({
 
   const inputFields: {
     [key in InputVariations]?: React.FunctionComponent<
-      Props<AdditionalPalettes>
+      Props<AdditionalPalettes, InputFieldSizes>
     >;
   } = {};
 
@@ -45,7 +48,10 @@ function inputFieldFactory<Themes, AdditionalPalettes, InputFieldSizes>({
 
   for (const key in variations) {
     if (variations.hasOwnProperty(key)) {
-      const InputField: React.FunctionComponent<Props<AdditionalPalettes>> = ({
+      const InputField: React.FunctionComponent<Props<
+        AdditionalPalettes,
+        InputFieldSizes
+      >> = ({
         autoFocus,
         backgroundColor,
         borderColor,
@@ -58,9 +64,10 @@ function inputFieldFactory<Themes, AdditionalPalettes, InputFieldSizes>({
         onFocus,
         onKeyPress,
         placeholder,
+        size,
         textColor,
         value,
-      }: Props<AdditionalPalettes>): React.ReactElement => {
+      }: Props<AdditionalPalettes, InputFieldSizes>): React.ReactElement => {
         // Palettes
         const currentThemeKey =
           useContext(themeContext) || ('default' as UnionDefaultKey<Themes>);
@@ -92,8 +99,25 @@ function inputFieldFactory<Themes, AdditionalPalettes, InputFieldSizes>({
           defaultColor: currentTheme.primary,
         });
 
-        // borderWidth
-        const borderWidth = 2 || DEFAULT_BORDER_WIDTH; // Kaz
+        // Size
+        const sizeProp = sizes
+          ? sizes[
+              size as keyof AddDefaultToObject<
+                InputFieldSizes,
+                InputFieldSizeProps
+              >
+            ]
+          : DEFAULT_INPUT_FIELD_SIZE;
+
+        const borderWidth = sizeProp.borderWidth
+          ? sizeProp.borderWidth
+          : DEFAULT_BORDER_WIDTH;
+
+        const isBoldProp = sizeProp.isBold
+          ? {fontWeight: 'bold' as TextStyle['fontWeight']}
+          : {};
+
+        const fontSizeProp = {fontSize: sizeProp.fontSize};
 
         // Color
         const backgroundColorProp =
@@ -117,7 +141,6 @@ function inputFieldFactory<Themes, AdditionalPalettes, InputFieldSizes>({
           : {color: textPrimaryColor};
 
         // Shape
-        // FontSize
 
         // WrappedStyle
         const wrapperStyleProps = {
@@ -136,6 +159,8 @@ function inputFieldFactory<Themes, AdditionalPalettes, InputFieldSizes>({
         const fieldStyleProps = {
           flex: 1,
           height: 40,
+          ...isBoldProp,
+          ...fontSizeProp,
         };
 
         // AllTextStyles are supported
@@ -183,7 +208,7 @@ function inputFieldFactory<Themes, AdditionalPalettes, InputFieldSizes>({
 
   return inputFields as {
     [key in InputVariations]: React.FunctionComponent<
-      Props<AdditionalPalettes>
+      Props<AdditionalPalettes, InputFieldSizes>
     >;
   };
 }
