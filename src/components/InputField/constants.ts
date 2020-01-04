@@ -1,5 +1,9 @@
-import {TextInputProps, Platform} from 'react-native';
-import {InputFieldTypes, InputFieldSizeProps} from './types';
+import {Platform} from 'react-native';
+import {
+  InputFieldTypes,
+  InputFieldSizeProps,
+  InputFieldVariationProps,
+} from './types';
 
 type InputVariations =
   | 'creditCardNumber'
@@ -20,7 +24,7 @@ type InputVariations =
 // SearchField,
 
 const INPUT_VARIATION_DEFAULT_SETTINGS: {
-  [key in InputVariations]: TextInputProps;
+  [key in InputVariations]: InputFieldVariationProps;
 } = {
   creditCardNumber: {
     autoCapitalize: 'none',
@@ -289,7 +293,7 @@ const INPUT_VARIATION_DEFAULT_SETTINGS: {
 const DEFAULT_INPUT_FIELD_SIZE: InputFieldSizeProps = {
   borderWidth: 2,
   fontSize: 12,
-  isBold: false,
+  padding: 8,
 };
 
 const DEFAULT_BORDER_WIDTH = 2;

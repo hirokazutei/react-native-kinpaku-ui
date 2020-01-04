@@ -1,16 +1,19 @@
 import {TextInputProps, TextStyle} from 'react-native';
-import {AddDefaultToObject, Color, OptionalExistCondition} from '../../types';
+import {AddDefaultToObject, Color} from '../../types';
 import {ThemePalette} from '../../theme/types';
 
 type InputFieldTypes = 'Underline' | 'Outline' | 'Fill' | 'UnderlinedFill';
 
-type InputFieldShapes = 'Sharp' | 'Rounded' | 'Circular';
+type InputFieldShapes = 'sharp' | 'rounded' | 'circular';
 
 type InputFieldSizeProps = {
+  borderRadiusFontRatio?: number; // Kaz: This depends on the fontSize
   borderWidth?: number;
   fontSize: number;
-  isBold?: boolean;
-  // Padding Kaz
+  paddingHorizontal?: number;
+  paddingVertical?: number;
+  padding?: number;
+  staticBorderRadius?: number;
 };
 
 type InputFieldVariationProps = {
@@ -18,14 +21,15 @@ type InputFieldVariationProps = {
   autoCompleteType?: TextInputProps['autoCompleteType'];
   autoCorrect?: TextInputProps['autoCorrect'];
   clearTextOnFocus?: boolean; // Make yourself
+  caretHidden?: TextInputProps['caretHidden'];
   dataDetectorTypes?: TextInputProps['dataDetectorTypes'];
-  defaultMaxLength?: TextInputProps['maxLength'];
+  maxLength?: TextInputProps['maxLength'];
   hasClearButton?: boolean; // Make Yourself
-  leftIcon?: React.ReactNode;
+  leftIcon?: React.ReactNode; // Implement
   keyboardType?: TextInputProps['keyboardType'];
   multiline?: TextInputProps['multiline'];
   returnKeyType?: TextInputProps['returnKeyType'];
-  rightIcon?: React.ReactNode;
+  rightIcon?: React.ReactNode; // Implement
   secureTextEntry?: TextInputProps['secureTextEntry'];
   selectTextOnFocus?: TextInputProps['selectTextOnFocus'];
   spellCheck?: TextInputProps['spellCheck'];
@@ -75,6 +79,7 @@ type InputFieldProps<AdditionalPalettes, InputFieldSizes> = {
   onKeyPress?: (args: any) => any;
   placeholder?: string;
   size?: keyof AddDefaultToObject<InputFieldSizes, InputFieldSizeProps>;
+  shape?: InputFieldShapes;
   textColor?: keyof (ThemePalette & AdditionalPalettes);
   value: string;
 };

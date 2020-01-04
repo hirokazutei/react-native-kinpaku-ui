@@ -13,13 +13,8 @@ import {
   DEFAULT_INPUT_FIELD_SIZE,
   INPUT_VARIATION_DEFAULT_SETTINGS,
   InputVariations,
-  InputFieldSizes,
 } from './constants';
-import {
-  UnionDefaultKey,
-  OptionalExistCondition,
-  AddDefaultToObject,
-} from '../../types';
+import {UnionDefaultKey, AddDefaultToObject} from '../../types';
 import {colorResolverFactory} from '../../helper';
 
 function inputFieldFactory<Themes, AdditionalPalettes, InputFieldSizes>({
@@ -27,7 +22,7 @@ function inputFieldFactory<Themes, AdditionalPalettes, InputFieldSizes>({
   additionalPalettes,
   sizes,
   inputFieldType = 'Underline',
-  defaultShape = 'Sharp',
+  defaultShape = 'sharp',
   highlightOnFocus = true,
 }: InputFieldFactoryProps<Themes, AdditionalPalettes, InputFieldSizes>): {
   [key in InputVariations]: React.FunctionComponent<
@@ -65,6 +60,7 @@ function inputFieldFactory<Themes, AdditionalPalettes, InputFieldSizes>({
         onKeyPress,
         placeholder,
         size,
+        shape,
         textColor,
         value,
       }: Props<AdditionalPalettes, InputFieldSizes>): React.ReactElement => {
@@ -84,6 +80,14 @@ function inputFieldFactory<Themes, AdditionalPalettes, InputFieldSizes>({
         const isFill = inputFieldType === 'Fill';
         const isUnderline = inputFieldType === 'Underline';
         const isUnderlinedFill = inputFieldType === 'UnderlinedFill';
+
+        // Shape
+        const isRounded = shape
+          ? shape === 'rounded'
+          : defaultShape === 'rounded';
+        const isCircular = shape
+          ? shape === 'circular'
+          : defaultShape === 'circular';
 
         // Set-Up Color
         const primaryBackgroundColor = colorResolver({
@@ -109,15 +113,49 @@ function inputFieldFactory<Themes, AdditionalPalettes, InputFieldSizes>({
             ]
           : DEFAULT_INPUT_FIELD_SIZE;
 
+        // Border Width
         const borderWidth = sizeProp.borderWidth
           ? sizeProp.borderWidth
           : DEFAULT_BORDER_WIDTH;
 
-        const isBoldProp = sizeProp.isBold
-          ? {fontWeight: 'bold' as TextStyle['fontWeight']}
+        // Font Size
+        const fontSizeProp = {fontSize: sizeProp.fontSize};
+
+        // Padding
+        const paddingProp = sizeProp.padding ? {padding: sizeProp.padding} : {};
+        const paddingHorizontalProp = sizeProp.paddingHorizontal
+          ? {padding: sizeProp.paddingHorizontal}
+          : {};
+        const paddingVerticalProp = sizeProp.paddingVertical
+          ? {padding: sizeProp.paddingVertical}
           : {};
 
-        const fontSizeProp = {fontSize: sizeProp.fontSize};
+        // Border Radius
+        const borderRadiusFontRatio = sizeProp.borderRadiusFontRatio
+          ? sizeProp.borderRadiusFontRatio
+          : 0.5;
+
+        const staticBorderRadius = sizeProp.staticBorderRadius
+          ? sizeProp.staticBorderRadius
+          : false;
+
+        const borderRadiusProp = (() => {
+          if (staticBorderRadius) {
+            return staticBorderRadius;
+          }
+          if (isOutline || isFill) {
+            if (isRounded) {
+              const borderRadius = borderRadiusFontRatio * sizeProp.fontSize;
+              return {borderRadius: borderRadius};
+            } else if (isCircular) {
+              const borderRadius = borderRadiusFontRatio
+                ? borderRadiusFontRatio * 256 * sizeProp.fontSize
+                : 256;
+              return {borderRadius: borderRadius};
+            }
+          }
+          return {borderRadius: 0};
+        })();
 
         // Color
         const backgroundColorProp =
@@ -135,30 +173,140 @@ function inputFieldFactory<Themes, AdditionalPalettes, InputFieldSizes>({
             ? {borderBottomWidth: borderWidth}
             : {};
 
+        // Disabled
+        const disabledColor =
+          isFill || isUnderlinedFill
+            ? currentTheme.background
+            : currentTheme.disabled;
+        const disabledBackground =
+          isFill || isUnderlinedFill
+            ? currentTheme.disabled
+            : currentTheme.background;
+
         // Font
         const fontColorProp = isDisabled
-          ? {color: currentTheme.text}
+          ? {color: disabledColor}
           : {color: textPrimaryColor};
 
-        // Shape
+        // Input Field Variation Props
+        const variation = variations[key];
+        const autoCapitalizeProp = variation.autoCapitalize
+          ? {autoCapitalize: variation.autoCapitalize}
+          : {};
+        const autoCompleteTypeProp = variation.autoCompleteType
+          ? {
+              autoCompleteType: variation.autoCompleteType,
+            }
+          : {};
+        const autoCorrectProp = variation.autoCorrect
+          ? {autoCorrect: variation.autoCorrect}
+          : {};
+
+        const caretHiddenProp = variation.caretHidden
+          ? {
+              caretHidden: variation.caretHidden,
+            }
+          : {};
+        const clearTextOnFocusProp = variation.clearTextOnFocus
+          ? {
+              clearTextOnFocus: variation.clearTextOnFocus,
+            }
+          : {};
+        const dataDetectorTypesProp = variation.dataDetectorTypes
+          ? {
+              dataDetectorTypes: variation.dataDetectorTypes,
+            }
+          : {};
+        const defaultMaxLength = variation.maxLength
+          ? {
+              maxLength: variation.maxLength,
+            }
+          : {};
+        const keyboardTypeProp = variation.keyboardType
+          ? {keyboardType: variation.keyboardType}
+          : {};
+        const leftIcon = variation.leftIcon;
+        const multilineProp = variation.multiline
+          ? {multiline: variation.multiline}
+          : {};
+        const returnKeyTypeProp = variation.returnKeyType
+          ? {
+              returnKeyType: variation.returnKeyType,
+            }
+          : {};
+        const rightIcon = variation.rightIcon;
+        const secureTextEntryProp = variation.secureTextEntry
+          ? {
+              secureTextEntry: variation.secureTextEntry,
+            }
+          : {};
+        const selectTextOnFocusProp = variation.selectTextOnFocus
+          ? {
+              selectTextOnFocus: variation.selectTextOnFocus,
+            }
+          : {};
+        const spellCheckProp = variation.spellCheck
+          ? {
+              spellCheck: variation.spellCheck,
+            }
+          : {};
+        const textContentTypeProp = variation.textContentType
+          ? {
+              textContentType: variation.textContentType,
+            }
+          : {};
+        const textAlignProp = variation.align
+          ? {textAlign: variation.align}
+          : {};
+        const allowFontScalingProp = variation.allowFontScaling
+          ? {
+              allowFontScaling: variation.allowFontScaling,
+            }
+          : {};
+        const fontFamilyProp = variation.fontFamily
+          ? {fontFamily: variation.fontFamily}
+          : {};
+        const isBoldProp = variation.isBold
+          ? {fontWeight: 'bold' as TextStyle['fontWeight']}
+          : {};
+        const isItalicProp = variation.isItalic
+          ? {fontStyle: 'italic' as TextStyle['fontStyle']}
+          : {};
+        const letterSpacingProp = variation.letterSpacing
+          ? {letterSpacing: variation.letterSpacing}
+          : {};
+        const lineHeightProp = variation.lineHeight
+          ? {lineHeight: variation.lineHeight}
+          : {};
+        const maxFontSizeMultiplierProp = variation.maxFontSizeMultiplier
+          ? {
+              maxFontSizeMultiplier: variation.maxFontSizeMultiplier,
+            }
+          : {};
+        const minimumFontScaleProp = variation.minimumFontScale
+          ? {
+              minimumFontScale: variation.minimumFontScale,
+            }
+          : {};
 
         // WrappedStyle
         const wrapperStyleProps = {
           flexDirection: 'row' as ViewStyle['flexDirection'],
+          ...(isDisabled ? {borderColor: disabledColor} : borderColorProp),
           ...(isDisabled
-            ? {borderColor: currentTheme.disabled}
-            : borderColorProp),
-          ...(isDisabled
-            ? {backgroundColor: currentTheme.disabled}
+            ? {backgroundColor: disabledBackground}
             : backgroundColorProp),
           ...borderWidthProp, // Add that to set-up
           ...borderBottomWidthProp,
+          ...borderRadiusProp,
+          ...paddingProp,
+          ...paddingHorizontalProp,
+          ...paddingVerticalProp,
         };
 
         // FieldStyle
         const fieldStyleProps = {
           flex: 1,
-          height: 40,
           ...isBoldProp,
           ...fontSizeProp,
         };
@@ -170,7 +318,7 @@ function inputFieldFactory<Themes, AdditionalPalettes, InputFieldSizes>({
         const selectTextOnFocus = highlightOnFocus
           ? {selectTextOnFocus: highlightOnFocus}
           : {};
-        const maxLengthProp = maxLength ? {maxLength} : {};
+        const maxLengthProp = maxLength ? {maxLength} : defaultMaxLength;
         const onBlurProp = onBlur ? {onBlur} : {};
         const onChangeProp = onChange ? {onChange} : {};
         const onEndEditingProp = onEndEditing ? {onEndEditing} : {};
@@ -181,6 +329,7 @@ function inputFieldFactory<Themes, AdditionalPalettes, InputFieldSizes>({
 
         return (
           <View style={wrapperStyleProps}>
+            {leftIcon && leftIcfon}
             <TextInput
               style={fieldStyleProps}
               {...{
@@ -197,12 +346,36 @@ function inputFieldFactory<Themes, AdditionalPalettes, InputFieldSizes>({
                 ...onKeyPressProp,
                 ...placeholderProp,
                 ...valueProp,
+                ...autoCapitalizeProp,
+                ...autoCompleteTypeProp,
+                ...autoCorrectProp,
+                ...caretHiddenProp,
+                ...clearTextOnFocusProp,
+                ...dataDetectorTypesProp,
+                ...maxLengthProp,
+                ...keyboardTypeProp,
+                ...multilineProp,
+                ...returnKeyTypeProp,
+                ...secureTextEntryProp,
+                ...selectTextOnFocusProp,
+                ...spellCheckProp,
+                ...textContentTypeProp,
+                ...textAlignProp,
+                ...allowFontScalingProp,
+                ...fontFamilyProp,
+                ...isBoldProp,
+                ...isItalicProp,
+                ...letterSpacingProp,
+                ...lineHeightProp,
+                ...maxFontSizeMultiplierProp,
+                ...minimumFontScaleProp,
               }}
             />
+            {rightIcon && rightIcon}
           </View>
         );
       };
-      inputFields[key as InputVariations] = InputField;
+      inputField = InputField;
     }
   }
 
