@@ -3,10 +3,7 @@ import {TextInput, View, ViewStyle, TextStyle} from 'react-native';
 import {
   InputFieldFactoryProps,
   InputFieldProps as Props,
-  InputFieldShapes,
   InputFieldSizeProps,
-  InputFieldTypes,
-  InputFieldVariationProps,
 } from './types';
 import {
   DEFAULT_BORDER_WIDTH,
@@ -23,7 +20,6 @@ function inputFieldFactory<Themes, AdditionalPalettes, InputFieldSizes>({
   sizes,
   inputFieldType = 'Underline',
   defaultShape = 'sharp',
-  highlightOnFocus = true,
 }: InputFieldFactoryProps<Themes, AdditionalPalettes, InputFieldSizes>): {
   [key in InputVariations]: React.FunctionComponent<
     Props<AdditionalPalettes, InputFieldSizes>
@@ -39,30 +35,20 @@ function inputFieldFactory<Themes, AdditionalPalettes, InputFieldSizes>({
     >;
   } = {};
 
-  const variations = INPUT_VARIATION_DEFAULT_SETTINGS;
-
-  for (const key in variations) {
-    if (variations.hasOwnProperty(key)) {
+  for (const key in INPUT_VARIATION_DEFAULT_SETTINGS) {
+    if (INPUT_VARIATION_DEFAULT_SETTINGS.hasOwnProperty(key)) {
       const InputField: React.FunctionComponent<Props<
         AdditionalPalettes,
         InputFieldSizes
       >> = ({
-        autoFocus,
         backgroundColor,
         borderColor,
-        defaultValue,
         isDisabled,
         maxLength,
-        onBlur,
-        onChange,
-        onEndEditing,
-        onFocus,
-        onKeyPress,
-        placeholder,
         size,
         shape,
         textColor,
-        value,
+        ...inputFieldProps
       }: Props<AdditionalPalettes, InputFieldSizes>): React.ReactElement => {
         // Palettes
         const currentThemeKey =
@@ -74,7 +60,6 @@ function inputFieldFactory<Themes, AdditionalPalettes, InputFieldSizes>({
           additionalPalettes,
         });
         // variation ->
-
         // Type
         const isOutline = inputFieldType === 'Outline';
         const isFill = inputFieldType === 'Fill';
@@ -117,9 +102,6 @@ function inputFieldFactory<Themes, AdditionalPalettes, InputFieldSizes>({
           ? sizeProp.borderWidth
           : DEFAULT_BORDER_WIDTH;
 
-        // Font Size
-        const fontSizeProp = {fontSize: sizeProp.fontSize};
-
         // Padding
         const paddingProp = sizeProp.padding ? {padding: sizeProp.padding} : {};
         const paddingHorizontalProp = sizeProp.paddingHorizontal
@@ -140,7 +122,7 @@ function inputFieldFactory<Themes, AdditionalPalettes, InputFieldSizes>({
 
         const borderRadiusProp = (() => {
           if (staticBorderRadius) {
-            return staticBorderRadius;
+            return {borderRadius: staticBorderRadius};
           }
           if (isOutline || isFill) {
             if (isRounded) {
@@ -181,111 +163,21 @@ function inputFieldFactory<Themes, AdditionalPalettes, InputFieldSizes>({
             ? currentTheme.disabled
             : currentTheme.background;
 
-        // Font
-        const fontColorProp = isDisabled
-          ? {color: disabledColor}
-          : {color: textPrimaryColor};
-
         // Input Field Variation Props
-        const variation = variations[key];
-        const autoCapitalizeProp = variation.autoCapitalize
-          ? {autoCapitalize: variation.autoCapitalize}
-          : {};
-        const autoCompleteTypeProp = variation.autoCompleteType
-          ? {
-              autoCompleteType: variation.autoCompleteType,
-            }
-          : {};
-        const autoCorrectProp = variation.autoCorrect
-          ? {autoCorrect: variation.autoCorrect}
-          : {};
-
-        const caretHiddenProp = variation.caretHidden
-          ? {
-              caretHidden: variation.caretHidden,
-            }
-          : {};
-        const clearTextOnFocusProp = variation.clearTextOnFocus
-          ? {
-              clearTextOnFocus: variation.clearTextOnFocus,
-            }
-          : {};
-        const dataDetectorTypesProp = variation.dataDetectorTypes
-          ? {
-              dataDetectorTypes: variation.dataDetectorTypes,
-            }
-          : {};
-        const defaultMaxLength = variation.maxLength
-          ? {
-              maxLength: variation.maxLength,
-            }
-          : {};
-        const keyboardTypeProp = variation.keyboardType
-          ? {keyboardType: variation.keyboardType}
-          : {};
-        const leftIcon = variation.leftIcon;
-        const multilineProp = variation.multiline
-          ? {multiline: variation.multiline}
-          : {};
-        const returnKeyTypeProp = variation.returnKeyType
-          ? {
-              returnKeyType: variation.returnKeyType,
-            }
-          : {};
-        const rightIcon = variation.rightIcon;
-        const secureTextEntryProp = variation.secureTextEntry
-          ? {
-              secureTextEntry: variation.secureTextEntry,
-            }
-          : {};
-        const selectTextOnFocusProp = variation.selectTextOnFocus
-          ? {
-              selectTextOnFocus: variation.selectTextOnFocus,
-            }
-          : {};
-        const spellCheckProp = variation.spellCheck
-          ? {
-              spellCheck: variation.spellCheck,
-            }
-          : {};
-        const textContentTypeProp = variation.textContentType
-          ? {
-              textContentType: variation.textContentType,
-            }
-          : {};
-        const textAlignProp = variation.align
-          ? {textAlign: variation.align}
-          : {};
-        const allowFontScalingProp = variation.allowFontScaling
-          ? {
-              allowFontScaling: variation.allowFontScaling,
-            }
-          : {};
-        const fontFamilyProp = variation.fontFamily
-          ? {fontFamily: variation.fontFamily}
-          : {};
-        const isBoldProp = variation.isBold
-          ? {fontWeight: 'bold' as TextStyle['fontWeight']}
-          : {};
-        const isItalicProp = variation.isItalic
-          ? {fontStyle: 'italic' as TextStyle['fontStyle']}
-          : {};
-        const letterSpacingProp = variation.letterSpacing
-          ? {letterSpacing: variation.letterSpacing}
-          : {};
-        const lineHeightProp = variation.lineHeight
-          ? {lineHeight: variation.lineHeight}
-          : {};
-        const maxFontSizeMultiplierProp = variation.maxFontSizeMultiplier
-          ? {
-              maxFontSizeMultiplier: variation.maxFontSizeMultiplier,
-            }
-          : {};
-        const minimumFontScaleProp = variation.minimumFontScale
-          ? {
-              minimumFontScale: variation.minimumFontScale,
-            }
-          : {};
+        const {
+          fontFamily,
+          isBold,
+          isItalic,
+          leftIcon,
+          letterSpacing,
+          lineHeight,
+          maxLength: defaultMaxLength,
+          returnKeyType,
+          rightIcon,
+          textAlign,
+          textContentType,
+          ...inputFieldOptions
+        } = INPUT_VARIATION_DEFAULT_SETTINGS[key as InputVariations];
 
         // WrappedStyle
         const wrapperStyleProps = {
@@ -305,76 +197,31 @@ function inputFieldFactory<Themes, AdditionalPalettes, InputFieldSizes>({
         // FieldStyle
         const fieldStyleProps = {
           flex: 1,
-          ...isBoldProp,
-          ...fontSizeProp,
+          ...(isBold ? {fontWeight: 'bold' as TextStyle['fontWeight']} : {}),
+          ...(isItalic ? {fontStyle: 'italic' as TextStyle['fontStyle']} : {}),
+          ...(fontFamily ? {fontFamily} : {}),
+          ...(isDisabled ? {color: disabledColor} : {color: textPrimaryColor}),
+          ...(textAlign ? {textAlign} : {}),
+          ...{fontSize: sizeProp.fontSize},
+          ...(letterSpacing ? {letterSpacing} : {}),
+          ...(lineHeight ? {lineHeight} : {}),
         };
 
-        // AllTextStyles are supported
-        const autoFocusProp = autoFocus ? {autoFocus} : {};
-        const defaultValueProp = defaultValue ? {defaultValue} : {};
-        const editableProp = isDisabled ? {editable: !isDisabled} : {};
-        const selectTextOnFocus = highlightOnFocus
-          ? {selectTextOnFocus: highlightOnFocus}
-          : {};
-        const maxLengthProp = maxLength ? {maxLength} : defaultMaxLength;
-        const onBlurProp = onBlur ? {onBlur} : {};
-        const onChangeProp = onChange ? {onChange} : {};
-        const onEndEditingProp = onEndEditing ? {onEndEditing} : {};
-        const onFocusProp = onFocus ? {onFocus} : {};
-        const onKeyPressProp = onKeyPress ? {onKeyPress} : {};
-        const placeholderProp = placeholder ? {placeholder} : {};
-        const valueProp = value ? {value} : {};
-
-        // After you Implement the customizable ones, you can take out the icons since the default form doesn't have any
         return (
           <View style={wrapperStyleProps}>
-            {leftIcon && leftIcon}
+            {leftIcon}
             <TextInput
               style={fieldStyleProps}
-              {...{
-                ...autoFocusProp,
-                ...defaultValueProp,
-                ...editableProp,
-                ...fontColorProp,
-                ...selectTextOnFocus,
-                ...maxLengthProp,
-                ...onBlurProp,
-                ...onChangeProp,
-                ...onEndEditingProp,
-                ...onFocusProp,
-                ...onKeyPressProp,
-                ...placeholderProp,
-                ...valueProp,
-                ...autoCapitalizeProp,
-                ...autoCompleteTypeProp,
-                ...autoCorrectProp,
-                ...caretHiddenProp,
-                ...clearTextOnFocusProp,
-                ...dataDetectorTypesProp,
-                ...maxLengthProp,
-                ...keyboardTypeProp,
-                ...multilineProp,
-                ...returnKeyTypeProp,
-                ...secureTextEntryProp,
-                ...selectTextOnFocusProp,
-                ...spellCheckProp,
-                ...textContentTypeProp,
-                ...textAlignProp,
-                ...allowFontScalingProp,
-                ...fontFamilyProp,
-                ...isBoldProp,
-                ...isItalicProp,
-                ...letterSpacingProp,
-                ...lineHeightProp,
-                ...maxFontSizeMultiplierProp,
-                ...minimumFontScaleProp,
-              }}
+              {...(isDisabled ? {editable: !isDisabled} : {})}
+              {...(maxLength ? {maxLength} : defaultMaxLength)}
+              {...inputFieldProps}
+              {...inputFieldOptions}
             />
-            {rightIcon && rightIcon}
+            {rightIcon}
           </View>
         );
       };
-      inputFields[key] = InputField;
+      inputFields[key as InputVariations] = InputField;
     }
   }
   return inputFields as {

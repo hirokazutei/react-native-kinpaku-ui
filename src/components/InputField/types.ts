@@ -20,7 +20,7 @@ type InputFieldVariationProps = {
   autoCapitalize?: TextInputProps['autoCapitalize'];
   autoCompleteType?: TextInputProps['autoCompleteType'];
   autoCorrect?: TextInputProps['autoCorrect'];
-  clearTextOnFocus?: boolean; // Available Only in Custom
+  clearTextOnFocus?: boolean; // Available Only in Custom (Need to Implement)
   caretHidden?: TextInputProps['caretHidden'];
   dataDetectorTypes?: TextInputProps['dataDetectorTypes'];
   maxLength?: TextInputProps['maxLength'];
@@ -35,7 +35,7 @@ type InputFieldVariationProps = {
   spellCheck?: TextInputProps['spellCheck'];
   textContentType?: TextInputProps['textContentType'];
   // Text Props
-  align?: TextStyle['textAlign'];
+  textAlign?: TextStyle['textAlign'];
   allowFontScaling?: boolean;
   fontFamily?: string;
   isBold?: boolean;
@@ -62,7 +62,6 @@ type InputFieldFactoryProps<Themes, AdditionalPalettes, InputFieldSizes> = {
   defaultColor?: {[key in keyof (ThemePalette & AdditionalPalettes)]: string};
   inputFieldType?: InputFieldTypes;
   defaultShape?: InputFieldShapes;
-  highlightOnFocus?: boolean;
 };
 
 type InputFieldProps<AdditionalPalettes, InputFieldSizes> = {
