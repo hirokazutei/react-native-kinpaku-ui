@@ -88,7 +88,6 @@ function inputFieldFactory<Themes, AdditionalPalettes, InputFieldSizes>({
         const isCircular = shape
           ? shape === 'circular'
           : defaultShape === 'circular';
-
         // Set-Up Color
         const primaryBackgroundColor = colorResolver({
           color: backgroundColor,
@@ -156,7 +155,6 @@ function inputFieldFactory<Themes, AdditionalPalettes, InputFieldSizes>({
           }
           return {borderRadius: 0};
         })();
-
         // Color
         const backgroundColorProp =
           isFill || isUnderlinedFill
@@ -327,9 +325,10 @@ function inputFieldFactory<Themes, AdditionalPalettes, InputFieldSizes>({
         const placeholderProp = placeholder ? {placeholder} : {};
         const valueProp = value ? {value} : {};
 
+        // After you Implement the customizable ones, you can take out the icons since the default form doesn't have any
         return (
           <View style={wrapperStyleProps}>
-            {leftIcon && leftIcfon}
+            {leftIcon && leftIcon}
             <TextInput
               style={fieldStyleProps}
               {...{
@@ -375,10 +374,9 @@ function inputFieldFactory<Themes, AdditionalPalettes, InputFieldSizes>({
           </View>
         );
       };
-      inputField = InputField;
+      inputFields[key] = InputField;
     }
   }
-
   return inputFields as {
     [key in InputVariations]: React.FunctionComponent<
       Props<AdditionalPalettes, InputFieldSizes>

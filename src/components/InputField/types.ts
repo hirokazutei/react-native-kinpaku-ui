@@ -7,7 +7,7 @@ type InputFieldTypes = 'Underline' | 'Outline' | 'Fill' | 'UnderlinedFill';
 type InputFieldShapes = 'sharp' | 'rounded' | 'circular';
 
 type InputFieldSizeProps = {
-  borderRadiusFontRatio?: number; // Kaz: This depends on the fontSize
+  borderRadiusFontRatio?: number; // Ratio depends on the fontSize
   borderWidth?: number;
   fontSize: number;
   paddingHorizontal?: number;
@@ -20,16 +20,16 @@ type InputFieldVariationProps = {
   autoCapitalize?: TextInputProps['autoCapitalize'];
   autoCompleteType?: TextInputProps['autoCompleteType'];
   autoCorrect?: TextInputProps['autoCorrect'];
-  clearTextOnFocus?: boolean; // Make yourself
+  clearTextOnFocus?: boolean; // Available Only in Custom
   caretHidden?: TextInputProps['caretHidden'];
   dataDetectorTypes?: TextInputProps['dataDetectorTypes'];
   maxLength?: TextInputProps['maxLength'];
-  hasClearButton?: boolean; // Make Yourself
-  leftIcon?: React.ReactNode; // Implement
+  hasClearButton?: boolean; // Available Only in Custom
+  leftIcon?: React.ReactNode; // Available Only in Custom
   keyboardType?: TextInputProps['keyboardType'];
   multiline?: TextInputProps['multiline'];
   returnKeyType?: TextInputProps['returnKeyType'];
-  rightIcon?: React.ReactNode; // Implement
+  rightIcon?: React.ReactNode; // Available Only in Custom
   secureTextEntry?: TextInputProps['secureTextEntry'];
   selectTextOnFocus?: TextInputProps['selectTextOnFocus'];
   spellCheck?: TextInputProps['spellCheck'];
