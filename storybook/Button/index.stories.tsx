@@ -8,8 +8,8 @@ import {IntersectDefaultKey, UnionDefaultKey} from '../../src/types';
 import {alignSelect} from '../knobs';
 import themes from '../../src/themes';
 import {ThemePalette} from '../../src/Theme/types';
-import {ButtonProps, ButtonTypes} from '../.././src/components/Button/types';
-import buttonFactory from '../.././src/components/Button';
+import {ButtonProps, ButtonTypes} from '../../src/components/Button/types';
+import buttonFactory from '../../src/components/Button';
 import {DefaultButtonSizes} from '../../src/components/Button/constants';
 
 const {Sharp, Round, Circular} = buttonFactory<typeof themes, null, null, null>(

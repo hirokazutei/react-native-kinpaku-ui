@@ -5,9 +5,9 @@ import {boolean, select, number, text, withKnobs} from '@storybook/addon-knobs';
 import Provider from '../Provider';
 import {textAlignSelect} from '../knobs';
 import themes from '../../src/themes';
-import {ThemePalette} from '../../src/Theme/types';
-import {TextProps} from '../.././src/components/Text/types';
-import textFactory from '../.././src/components/Text';
+import {ThemePalette} from '../../src/theme/types';
+import {TextProps} from '../../src/components/Text/types';
+import textFactory from '../../src/components/Text';
 import {DEFAULT_TEXT_VARIATIONS} from '../../src/components/Text/constants';
 
 const {Title, Heading, SubHeading, Body, Caption, Quote} = textFactory<

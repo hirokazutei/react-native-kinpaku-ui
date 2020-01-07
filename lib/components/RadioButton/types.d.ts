@@ -1,6 +1,6 @@
 import { TouchableOpacityProps, ViewStyle, ViewProps } from 'react-native';
 import { Color, AddDefaultToObject, OptionalTrueCondition, UnionDefaultKey } from '../../types';
-import { ThemePalette } from '../../Theme/types';
+import { ThemePalette } from '../../theme/types';
 declare type RadioButtonVariations = 'Outline' | 'Reverse' | 'Fill';
 declare type RadioButtonSizeProps = {
     size: number;

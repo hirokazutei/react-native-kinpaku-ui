@@ -11,7 +11,7 @@ import {
   OptionalExistCondition,
   AddDefaultToObject,
 } from '../../types';
-import {ThemePalette} from '../../Theme/types';
+import {ThemePalette} from '../../theme/types';
 import {
   CHECK_BOX_VARIATION_KEYS,
   DEFAULT_CHECK_BOX_SIZES,
@@ -50,7 +50,7 @@ function checkBoxFactory<
     'default' as keyof Themes,
   );
   const checkBoxes: {
-    [key in CheckBoxVariations]?: React.FC<
+    [key in CheckBoxVariations]?: React.FunctionComponent<
       Props<
         AdditionalPalettes,
         OptionalExistCondition<
@@ -63,7 +63,7 @@ function checkBoxFactory<
     >;
   } = {};
   CHECK_BOX_VARIATION_KEYS.forEach((variation: CheckBoxVariations) => {
-    const Button: React.FC<Props<
+    const Button: React.FunctionComponent<Props<
       AdditionalPalettes,
       OptionalExistCondition<
         CheckBoxSizes,

@@ -11,7 +11,6 @@ import {
   OptionalExistCondition,
   AddDefaultToObject,
 } from '../../types';
-import {ThemePalette} from '../../Theme/types';
 import {
   DEFAULT_BUTTON_SIZES,
   DEFAULT_BUTTON_ALIGN,
@@ -21,6 +20,7 @@ import {
   BUTTON_VARIATION_KEYS,
   DefaultButtonSizes,
 } from './constants';
+import {colorResolverFactory} from '../../helper';
 
 function buttonFactory<
   Themes,
@@ -50,11 +50,11 @@ function buttonFactory<
     >
   >;
 } {
-  const paletteContext: React.Context<keyof Themes> = React.createContext(
+  const themeContext: React.Context<keyof Themes> = React.createContext(
     'default' as keyof Themes,
   );
   const buttons: {
-    [key in ButtonVariations]?: React.FC<
+    [key in ButtonVariations]?: React.FunctionComponent<
       Props<
         AdditionalPalettes,
         OptionalExistCondition<
@@ -67,7 +67,7 @@ function buttonFactory<
     >;
   } = {};
   BUTTON_VARIATION_KEYS.forEach((variation: ButtonVariations) => {
-    const Button: React.FC<Props<
+    const Button: React.FunctionComponent<Props<
       AdditionalPalettes,
       OptionalExistCondition<
         ButtonSizes,
@@ -76,7 +76,7 @@ function buttonFactory<
       >,
       AllowCustomProps
     >> = ({
-      color = 'primary',
+      color,
       size = 'default',
       isDisabled,
       isStretched,
@@ -98,16 +98,17 @@ function buttonFactory<
       AllowCustomProps
     >): React.ReactElement => {
       // Palettes
-      const currentThemeKey = useContext(paletteContext) || 'default';
+      const currentThemeKey = useContext(themeContext) || 'default';
       const currentTheme =
         themes[`${currentThemeKey}` as keyof UnionDefaultKey<Themes>];
-
+      const colorResolver = colorResolverFactory<AdditionalPalettes>({
+        currentTheme,
+        additionalPalettes,
+      });
       // Color
-      const primaryColor = !isDisabled
-        ? (additionalPalettes &&
-            additionalPalettes[color as keyof AdditionalPalettes]) ||
-          currentTheme[color as keyof ThemePalette]
-        : currentTheme.disabled;
+      const primaryColor = isDisabled
+        ? currentTheme.disabled
+        : colorResolver({color, defaultColor: currentTheme.primary});
       const buttonColor =
         type === 'solid' ? primaryColor : currentTheme.background;
       const fontColor =

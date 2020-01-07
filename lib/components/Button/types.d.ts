@@ -1,6 +1,6 @@
 import { TouchableOpacityProps, TextProperties, ViewStyle, TextStyle, FlexAlignType } from 'react-native';
 import { AddDefaultToObject, Color, OptionalTrueCondition, UnionDefaultKey } from '../../types';
-import { ThemePalette } from '../../Theme/types';
+import { ThemePalette } from '../../theme/types';
 declare type ButtonVariations = 'Circular' | 'Round' | 'Sharp';
 declare type ButtonTypes = 'solid' | 'clear' | 'outline';
 declare type ButtonSizeProps = {

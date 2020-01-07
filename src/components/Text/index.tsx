@@ -6,8 +6,9 @@ import {
   TextVariationProps,
 } from './types';
 import {DefaultObject, OptionalExistCondition} from '../../types';
-import {ThemePalette} from '../../Theme/types';
+import {ThemePalette} from '../../theme/types';
 import {DEFAULT_TEXT_VARIATIONS, DefaultTextVariations} from './constants';
+import {colorResolverFactory} from '../../helper';
 
 function textFactory<
   Themes,
@@ -39,7 +40,7 @@ function textFactory<
     Props<AdditionalPalettes, FontSizes, EmphasisToggleable>
   >;
 } {
-  const paletteContext: React.Context<keyof Themes> = React.createContext(
+  const themeContext: React.Context<keyof Themes> = React.createContext(
     'default' as keyof Themes,
   );
 
@@ -48,7 +49,9 @@ function textFactory<
       TextVariations,
       typeof DEFAULT_TEXT_VARIATIONS,
       TextVariations
-    >]?: React.FC<Props<AdditionalPalettes, FontSizes, EmphasisToggleable>>;
+    >]?: React.FunctionComponent<
+      Props<AdditionalPalettes, FontSizes, EmphasisToggleable>
+    >;
   } = {};
 
   for (const variationName in textVariations
@@ -56,7 +59,7 @@ function textFactory<
     : DEFAULT_TEXT_VARIATIONS) {
     const {
       allowFontScaling,
-      defaultColor = 'text',
+      defaultColor,
       defaultFontSize,
       fontFamily,
       fontSizes,
@@ -76,14 +79,14 @@ function textFactory<
         })[variationName as keyof TextVariations]
       : DEFAULT_TEXT_VARIATIONS[variationName as DefaultTextVariations];
 
-    const text: React.FC<Props<
+    const text: React.FunctionComponent<Props<
       AdditionalPalettes,
       FontSizes,
       EmphasisToggleable
     >> = ({
       align,
       bold,
-      color = defaultColor,
+      color,
       children,
       ellipsizeMode,
       italic,
@@ -97,17 +100,24 @@ function textFactory<
       EmphasisToggleable
     >): React.ReactElement => {
       // Palettes
-      const currentThemeKey = useContext(paletteContext) || 'default';
+      const currentThemeKey = useContext(themeContext) || 'default';
       const currentTheme =
         themes[
           `${currentThemeKey}` as keyof (Themes & DefaultObject<ThemePalette>)
         ];
+      const colorResolver = colorResolverFactory<AdditionalPalettes>({
+        currentTheme,
+        additionalPalettes,
+      });
 
       // Color
-      const fontColor =
-        (additionalPalettes &&
-          additionalPalettes[color as keyof AdditionalPalettes]) ||
-        currentTheme[color as keyof ThemePalette];
+      const fontColor = colorResolver({
+        color,
+        defaultColor: colorResolver({
+          color: defaultColor,
+          defaultColor: currentTheme.text,
+        }),
+      });
 
       // Size
       // = defaultFontSizeKey || defaultFontSize
@@ -185,7 +195,9 @@ function textFactory<
       TextVariations,
       typeof DEFAULT_TEXT_VARIATIONS,
       TextVariations
-    >]: React.FC<Props<AdditionalPalettes, FontSizes, EmphasisToggleable>>;
+    >]: React.FunctionComponent<
+      Props<AdditionalPalettes, FontSizes, EmphasisToggleable>
+    >;
   };
 }
 

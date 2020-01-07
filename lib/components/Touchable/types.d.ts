@@ -1,7 +1,7 @@
 /// <reference types="react" />
 import { TouchableOpacityProps, ViewStyle, FlexAlignType } from 'react-native';
 import { AddDefaultToObject, Color, OptionalTrueCondition, UnionDefaultKey } from '../../types';
-import { ThemePalette } from '../../Theme/types';
+import { ThemePalette } from '../../theme/types';
 declare type TouchableTypes = 'solid' | 'outline';
 declare type VerHor = {
     horizontalPadding: number;

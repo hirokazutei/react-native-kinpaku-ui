@@ -5,7 +5,7 @@ import {
   OptionalTrueCondition,
   UnionDefaultKey,
 } from '../../types';
-import {ThemePalette} from '../../Theme/types';
+import {ThemePalette} from '../../theme/types';
 
 type RadioButtonVariations = 'Outline' | 'Reverse' | 'Fill';
 
