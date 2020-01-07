@@ -6,7 +6,7 @@ import {
   TextVariationProps,
 } from './types';
 import {DefaultObject, OptionalExistCondition} from '../../types';
-import {ThemePalette} from '../../theme/types';
+import {ThemePalette} from '../../theme/themeTypes';
 import {DEFAULT_TEXT_VARIATIONS, DefaultTextVariations} from './constants';
 import {colorResolverFactory} from '../../helper';
 

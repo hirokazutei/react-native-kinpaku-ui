@@ -1,6 +1,6 @@
 import {TextInputProps, TextStyle} from 'react-native';
 import {AddDefaultToObject, Color} from '../../types';
-import {ThemePalette} from '../../theme/types';
+import {ThemePalette} from '../../theme/themeTypes';
 
 type InputFieldTypes = 'Underline' | 'Outline' | 'Fill' | 'UnderlinedFill';
 

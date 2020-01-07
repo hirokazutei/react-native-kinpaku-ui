@@ -1,5 +1,5 @@
 import {TouchableOpacityProps, ViewStyle} from 'react-native';
-import {ThemePalette} from '../../theme/types';
+import {ThemePalette} from '../../theme/themeTypes';
 import {
   Color,
   AddDefaultToObject,

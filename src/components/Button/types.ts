@@ -11,7 +11,7 @@ import {
   OptionalTrueCondition,
   UnionDefaultKey,
 } from '../../types';
-import {ThemePalette} from '../../theme/types';
+import {ThemePalette} from '../../theme/themeTypes';
 
 type ButtonVariations = 'Circular' | 'Round' | 'Sharp';
 type ButtonTypes = 'solid' | 'clear' | 'outline';

@@ -1,4 +1,4 @@
-import {Themes} from './theme/types';
+import {Themes} from './theme/themeTypes';
 import buttonFactory from './components/Button';
 import checkBoxFactory from './components/CheckBox';
 import inputFieldFactory from './components/InputField';

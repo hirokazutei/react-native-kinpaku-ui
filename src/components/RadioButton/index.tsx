@@ -11,7 +11,7 @@ import {
   OptionalExistCondition,
   AddDefaultToObject,
 } from '../../types';
-import {ThemePalette} from '../../theme/types';
+import {ThemePalette} from '../../theme/themeTypes';
 import {
   RADIO_BUTTON_VARIATION_KEYS,
   DEFAULT_RADIO_BUTTON_SIZES,

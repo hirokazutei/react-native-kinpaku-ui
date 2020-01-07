@@ -1,4 +1,4 @@
-import {Themes, ThemePalette} from './theme/types';
+import {Themes, ThemePalette} from './theme/themeTypes';
 
 type ThemeKey = 'test';
 type ThemeObject = {[key in ThemeKey]: ThemePalette};
