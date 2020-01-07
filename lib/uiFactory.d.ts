@@ -1,9 +1,10 @@
 /// <reference types="react" />
-import { Themes } from './Theme/types';
+import { Themes } from './theme/types';
 import { Color, DefaultObject } from './types';
 export default function UIFactory<ThemeObject, AdditionalPalettes>(themes: Themes<ThemeObject>, additionalPalettes?: {
     [key in keyof (AdditionalPalettes & DefaultObject<Color>)]: Color;
 }): {
+    Body: import("react").FunctionComponent<import("./components/Text/types").TextProps<null, null, true>>;
     Button: {
         Circular: import("react").FunctionComponent<import("./components/Button/types").ButtonProps<AdditionalPalettes, {
             default: import("./components/Button/types").ButtonSizeProps;
@@ -33,6 +34,7 @@ export default function UIFactory<ThemeObject, AdditionalPalettes>(themes: Theme
             massive: import("./components/Button/types").ButtonSizeProps;
         }, false>>;
     };
+    Caption: import("react").FunctionComponent<import("./components/Text/types").TextProps<null, null, true>>;
     CheckBox: {
         Outline: import("react").FunctionComponent<import("./components/CheckBox/types").CheckBoxProps<AdditionalPalettes, {
             default: import("./components/CheckBox/types").CheckBoxSizeProps;
@@ -52,6 +54,23 @@ export default function UIFactory<ThemeObject, AdditionalPalettes>(themes: Theme
             medium: import("./components/CheckBox/types").CheckBoxSizeProps;
             large: import("./components/CheckBox/types").CheckBoxSizeProps;
         }, false>>;
+    };
+    Heading: import("react").FunctionComponent<import("./components/Text/types").TextProps<null, null, true>>;
+    InputField: {
+        number: import("react").FunctionComponent<import("./components/InputField/types").InputFieldProps<AdditionalPalettes, null>>;
+        email: import("react").FunctionComponent<import("./components/InputField/types").InputFieldProps<AdditionalPalettes, null>>;
+        name: import("react").FunctionComponent<import("./components/InputField/types").InputFieldProps<AdditionalPalettes, null>>;
+        password: import("react").FunctionComponent<import("./components/InputField/types").InputFieldProps<AdditionalPalettes, null>>;
+        username: import("react").FunctionComponent<import("./components/InputField/types").InputFieldProps<AdditionalPalettes, null>>;
+        url: import("react").FunctionComponent<import("./components/InputField/types").InputFieldProps<AdditionalPalettes, null>>;
+        creditCardNumber: import("react").FunctionComponent<import("./components/InputField/types").InputFieldProps<AdditionalPalettes, null>>;
+        oneTimeCode: import("react").FunctionComponent<import("./components/InputField/types").InputFieldProps<AdditionalPalettes, null>>;
+        decimal: import("react").FunctionComponent<import("./components/InputField/types").InputFieldProps<AdditionalPalettes, null>>;
+        freeField: import("react").FunctionComponent<import("./components/InputField/types").InputFieldProps<AdditionalPalettes, null>>;
+        oneTimeNumberCode: import("react").FunctionComponent<import("./components/InputField/types").InputFieldProps<AdditionalPalettes, null>>;
+        paragragh: import("react").FunctionComponent<import("./components/InputField/types").InputFieldProps<AdditionalPalettes, null>>;
+        passcode: import("react").FunctionComponent<import("./components/InputField/types").InputFieldProps<AdditionalPalettes, null>>;
+        phone: import("react").FunctionComponent<import("./components/InputField/types").InputFieldProps<AdditionalPalettes, null>>;
     };
     RadioButton: {
         Outline: import("react").FunctionComponent<import("./components/RadioButton/types").RadioButtonProps<AdditionalPalettes, {
@@ -73,6 +92,8 @@ export default function UIFactory<ThemeObject, AdditionalPalettes>(themes: Theme
             large: import("./components/RadioButton/types").RadioButtonSizeProps;
         }, false>>;
     };
+    SubHeading: import("react").FunctionComponent<import("./components/Text/types").TextProps<null, null, true>>;
+    Title: import("react").FunctionComponent<import("./components/Text/types").TextProps<null, null, true>>;
     Touchable: import("react").FunctionComponent<import("./components/Touchable/types").TouchableProps<AdditionalPalettes, {
         default: import("./components/Touchable/types").TouchableAllSizeProps;
         small: import("./components/Touchable/types").TouchableAllSizeProps;
@@ -82,11 +103,6 @@ export default function UIFactory<ThemeObject, AdditionalPalettes>(themes: Theme
         huge: import("./components/Touchable/types").TouchableAllSizeProps;
         massive: import("./components/Touchable/types").TouchableAllSizeProps;
     }, false>>;
-    Title: import("react").FunctionComponent<import("./components/Text/types").TextProps<null, null, true>>;
-    Heading: import("react").FunctionComponent<import("./components/Text/types").TextProps<null, null, true>>;
-    SubHeading: import("react").FunctionComponent<import("./components/Text/types").TextProps<null, null, true>>;
-    Body: import("react").FunctionComponent<import("./components/Text/types").TextProps<null, null, true>>;
-    Caption: import("react").FunctionComponent<import("./components/Text/types").TextProps<null, null, true>>;
     Quote: import("react").FunctionComponent<import("./components/Text/types").TextProps<null, null, true>>;
 };
 //# sourceMappingURL=uiFactory.d.ts.map

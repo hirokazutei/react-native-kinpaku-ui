@@ -1,6 +1,6 @@
 import { TextStyle, TextProps as ReactNativeTextProps } from 'react-native';
 import { AddDefaultToObject, Color, OptionalTrueCondition, OptionalExistCondition } from '../../types';
-import { ThemePalette } from '../../Theme/types';
+import { ThemePalette } from '../../theme/types';
 declare type TextSizeProps<FontSizes extends string | string> = {
     [key in FontSizes]: number;
 };

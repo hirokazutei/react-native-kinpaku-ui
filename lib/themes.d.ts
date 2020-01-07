@@ -1,7 +1,8 @@
-import { Themes, ThemePalette } from './Theme/types';
-declare type ThemePalettes = {
-    [key in 'test']: ThemePalette;
+import { Themes, ThemePalette } from './theme/types';
+declare type ThemeKey = 'test';
+declare type ThemeObject = {
+    [key in ThemeKey]: ThemePalette;
 };
-declare const themes: Themes<ThemePalettes>;
+declare const themes: Themes<ThemeObject>;
 export default themes;
 //# sourceMappingURL=themes.d.ts.map

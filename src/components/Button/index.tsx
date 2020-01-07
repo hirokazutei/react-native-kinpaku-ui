@@ -11,7 +11,6 @@ import {
   OptionalExistCondition,
   AddDefaultToObject,
 } from '../../types';
-import {ThemePalette} from '../../theme/types';
 import {
   DEFAULT_BUTTON_SIZES,
   DEFAULT_BUTTON_ALIGN,

@@ -1,5 +1,5 @@
 import { TouchableOpacityProps, ViewStyle } from 'react-native';
-import { ThemePalette } from '../../Theme/types';
+import { ThemePalette } from '../../theme/types';
 import { Color, AddDefaultToObject, OptionalTrueCondition, UnionDefaultKey } from '../../types';
 declare type CheckBoxVariations = 'Outline' | 'Fill' | 'Reverse';
 declare type CheckBoxShapes = 'Sharp' | 'Rounded' | 'Circular';
