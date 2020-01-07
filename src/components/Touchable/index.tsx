@@ -12,7 +12,7 @@ import {
   OptionalExistCondition,
   UnionDefaultKey,
 } from '../../types';
-import {ThemePalette} from '../../theme/themeTypes';
+import {ThemePalette} from '../../theme/types';
 import {
   DEFAULT_TOUCHABLE_SIZES,
   DEFAULT_TOUCHABLE_ALIGN,

@@ -1,4 +1,4 @@
-import {ThemePalette} from './theme/themeTypes';
+import {ThemePalette} from './theme/types';
 
 function colorResolverFactory<AdditionalPalettes>({
   additionalPalettes,

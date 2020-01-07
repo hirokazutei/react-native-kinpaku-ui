@@ -5,7 +5,7 @@ import {
   OptionalTrueCondition,
   UnionDefaultKey,
 } from '../../types';
-import {ThemePalette} from '../../theme/themeTypes';
+import {ThemePalette} from '../../theme/types';
 
 type TouchableTypes = 'solid' | 'outline';
 
