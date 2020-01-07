@@ -18,8 +18,8 @@ function inputFieldFactory<Themes, AdditionalPalettes, InputFieldSizes>({
   themes,
   additionalPalettes,
   sizes,
-  inputFieldType = 'Underline',
-  defaultShape = 'sharp',
+  inputFieldType = 'Outline',
+  defaultShape = 'circular',
 }: InputFieldFactoryProps<Themes, AdditionalPalettes, InputFieldSizes>): {
   [key in InputVariations]: React.FunctionComponent<
     Props<AdditionalPalettes, InputFieldSizes>
