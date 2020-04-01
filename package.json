@@ -75,12 +75,12 @@
     "prop-types": "^15.7.2",
     "react": "16.8.6",
     "react-dom": "16.8.6",
-    "react-native": "^0.60.0",
+    "react-native": "0.60.5",
     "react-native-config": "^0.11.7",
     "react-native-spacing-system": "^0.4.3",
     "react-native-storybook-loader": "^1.8.0",
     "react-test-renderer": "16.8.6",
-    "typescript": "3.5.3"
+    "typescript": "^3.5.3"
   },
   "jest": {
     "preset": "react-native"

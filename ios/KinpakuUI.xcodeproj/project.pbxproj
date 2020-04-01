@@ -19,7 +19,7 @@
 		32BAD2233F2BE751A7C55AD9 /* libPods-KinpakuUI-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1ED42A9ED7B406267E0C2FF5 /* libPods-KinpakuUI-tvOS.a */; };
 		427B3B7B9CE55B0816A38585 /* libPods-KinpakuUI.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 13917A931BBF4C2175E8D380 /* libPods-KinpakuUI.a */; };
 		C30D329E186C8ED034C093E8 /* libPods-KinpakuUI-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 223347FFAD79D49C36AB202B /* libPods-KinpakuUI-tvOSTests.a */; };
-		D3D2AA6A8B48BB36B05DF559 /* libPods-KinpakuUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DDB246FC12F2025AB94C75AA /* libPods-KinpakuUITests.a */; };
+		D0E775C6E8D72124DBAD8C87 /* libPods-KinpakuUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F73EC0B44DE8E3B272313667 /* libPods-KinpakuUITests.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,11 +62,13 @@
 		53AA6D8DD364CFA99053C5C6 /* Pods-KinpakuUI.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KinpakuUI.release.xcconfig"; path = "Target Support Files/Pods-KinpakuUI/Pods-KinpakuUI.release.xcconfig"; sourceTree = "<group>"; };
 		72A335F89C06CC64AC185389 /* Pods-KinpakuUI-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KinpakuUI-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-KinpakuUI-tvOSTests/Pods-KinpakuUI-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		91F536660549B46C5ECBD6D1 /* Pods-KinpakuUI-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KinpakuUI-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-KinpakuUI-tvOS/Pods-KinpakuUI-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
+		9427F0809A83BC815378EFDD /* Pods-KinpakuUI-KinpakuUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KinpakuUI-KinpakuUITests.release.xcconfig"; path = "Target Support Files/Pods-KinpakuUI-KinpakuUITests/Pods-KinpakuUI-KinpakuUITests.release.xcconfig"; sourceTree = "<group>"; };
 		C7F7CDE9A6326EDB9EB3B044 /* Pods-KinpakuUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KinpakuUITests.release.xcconfig"; path = "Target Support Files/Pods-KinpakuUITests/Pods-KinpakuUITests.release.xcconfig"; sourceTree = "<group>"; };
+		CC0CE0A716D41229026DAF30 /* Pods-KinpakuUI-KinpakuUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KinpakuUI-KinpakuUITests.debug.xcconfig"; path = "Target Support Files/Pods-KinpakuUI-KinpakuUITests/Pods-KinpakuUI-KinpakuUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		D9CE61F42982133E20CC5C07 /* Pods-KinpakuUI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KinpakuUI.debug.xcconfig"; path = "Target Support Files/Pods-KinpakuUI/Pods-KinpakuUI.debug.xcconfig"; sourceTree = "<group>"; };
-		DDB246FC12F2025AB94C75AA /* libPods-KinpakuUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-KinpakuUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
+		F73EC0B44DE8E3B272313667 /* libPods-KinpakuUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-KinpakuUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,7 +76,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D3D2AA6A8B48BB36B05DF559 /* libPods-KinpakuUITests.a in Frameworks */,
+				D0E775C6E8D72124DBAD8C87 /* libPods-KinpakuUITests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -144,7 +146,7 @@
 				13917A931BBF4C2175E8D380 /* libPods-KinpakuUI.a */,
 				1ED42A9ED7B406267E0C2FF5 /* libPods-KinpakuUI-tvOS.a */,
 				223347FFAD79D49C36AB202B /* libPods-KinpakuUI-tvOSTests.a */,
-				DDB246FC12F2025AB94C75AA /* libPods-KinpakuUITests.a */,
+				F73EC0B44DE8E3B272313667 /* libPods-KinpakuUITests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -160,8 +162,9 @@
 				72A335F89C06CC64AC185389 /* Pods-KinpakuUI-tvOSTests.release.xcconfig */,
 				49CD0B192B1B16E225264DFA /* Pods-KinpakuUITests.debug.xcconfig */,
 				C7F7CDE9A6326EDB9EB3B044 /* Pods-KinpakuUITests.release.xcconfig */,
+				CC0CE0A716D41229026DAF30 /* Pods-KinpakuUI-KinpakuUITests.debug.xcconfig */,
+				9427F0809A83BC815378EFDD /* Pods-KinpakuUI-KinpakuUITests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -308,6 +311,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
