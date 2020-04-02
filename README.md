@@ -37,9 +37,29 @@
 
 [![CircleCI](https://circleci.com/gh/hirokazutei/react-native-kinpaku-ui.svg?style=svg)](https://circleci.com/gh/hirokazutei/react-native-kinpaku-ui)
 
-# Setup
+# Dev Setup
 
-Install dependencies:
-`npm install`
+Install Node Modules:
+```
+$ npm install
+```
 
-Make sure you have Cocoapods installed(?)
+Make sure you have Cocoapods installed:
+https://cocoapods.org/
+
+Install Pods:
+```
+go to your ios directory
+$ pod install
+```
+
+Open workspace with Xcode and build the project:
+```
+$ open ios/KinpakuUI.xcworkspace/
+```
+
+Load `storyLoader.js`:
+`$ npm run story-loader`
+
+Run Storybook:
+`$ npm run storybook`
