@@ -1,6 +1,6 @@
 import {ThemePalette} from './theme/types';
 
-function colorResolverFactory<AdditionalPalettes>({
+const colorResolverFactory = <AdditionalPalettes>({
   additionalPalettes,
   currentTheme,
 }: {
@@ -10,7 +10,7 @@ function colorResolverFactory<AdditionalPalettes>({
   currentTheme: {
     [key in keyof ThemePalette]: string;
   };
-}) {
+}) => {
   const resolver = ({
     color,
     defaultColor,
@@ -31,5 +31,5 @@ function colorResolverFactory<AdditionalPalettes>({
     return defaultColor;
   };
   return resolver;
-}
+};
 export {colorResolverFactory};

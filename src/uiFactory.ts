@@ -8,12 +8,12 @@ import textFactory from './components/Text';
 import {DEFAULT_TEXT_VARIATIONS} from './components/Text/constants';
 import {Color, DefaultObject} from './types';
 
-export default function UIFactory<ThemeObject, AdditionalPalettes>(
+const UIFactory = <ThemeObject, AdditionalPalettes>(
   themes: Themes<ThemeObject>,
   additionalPalettes?: {
     [key in keyof (AdditionalPalettes & DefaultObject<Color>)]: Color;
   },
-) {
+) => {
   const commonProps = {themes, additionalPalettes};
   const Button = buttonFactory<
     Themes<ThemeObject>,
@@ -78,4 +78,6 @@ export default function UIFactory<ThemeObject, AdditionalPalettes>(
     Touchable,
     Quote,
   };
-}
+};
+
+export default UIFactory;
