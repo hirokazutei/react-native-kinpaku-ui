@@ -1,9 +1,7 @@
 /// <reference types="react" />
 import { Themes } from './theme/types';
-import { Color, DefaultObject } from './types';
-export default function UIFactory<ThemeObject, AdditionalPalettes>(themes: Themes<ThemeObject>, additionalPalettes?: {
-    [key in keyof (AdditionalPalettes & DefaultObject<Color>)]: Color;
-}): {
+import { DefaultObject } from './types';
+declare const UIFactory: <ThemeObject, AdditionalPalettes>(themes: Themes<ThemeObject>, additionalPalettes?: { [key in keyof (AdditionalPalettes & DefaultObject<string>)]: string; } | undefined) => {
     Body: import("react").FunctionComponent<import("./components/Text/types").TextProps<null, null, true>>;
     Button: {
         Circular: import("react").FunctionComponent<import("./components/Button/types").ButtonProps<AdditionalPalettes, {
@@ -105,4 +103,5 @@ export default function UIFactory<ThemeObject, AdditionalPalettes>(themes: Theme
     }, false>>;
     Quote: import("react").FunctionComponent<import("./components/Text/types").TextProps<null, null, true>>;
 };
+export default UIFactory;
 //# sourceMappingURL=uiFactory.d.ts.map

@@ -1,12 +1,14 @@
-import { ThemePalette } from './theme/types';
-declare function colorResolverFactory<AdditionalPalettes>({ additionalPalettes, currentTheme, }: {
-    additionalPalettes?: {
-        [key in keyof AdditionalPalettes]: string;
-    };
+declare const colorResolverFactory: <AdditionalPalettes>({ additionalPalettes, currentTheme, }: {
+    additionalPalettes?: { [key in keyof AdditionalPalettes]: string; } | undefined;
     currentTheme: {
-        [key in keyof ThemePalette]: string;
+        primary: string;
+        secondary: string;
+        tertiary: string;
+        disabled: string;
+        background: string;
+        text: string;
     };
-}): ({ color, defaultColor, }: {
+}) => ({ color, defaultColor, }: {
     color?: keyof AdditionalPalettes | "primary" | "secondary" | "tertiary" | "disabled" | "background" | "text" | undefined;
     defaultColor: string;
 }) => string;
