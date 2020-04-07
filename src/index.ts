@@ -27,6 +27,7 @@ import {
   InputFieldSizeProps,
   InputFieldTypes,
   InputFieldVariationProps,
+  InputFieldVariations,
 } from './components/InputField/types';
 // Touchable
 import touchableFactory from './components/Touchable';
@@ -75,6 +76,7 @@ export {
   InputFieldSizeProps,
   InputFieldTypes,
   InputFieldVariationProps,
+  InputFieldVariations,
   inputFieldFactory,
   RadioButtonFactoryProps,
   RadioButtonProps,

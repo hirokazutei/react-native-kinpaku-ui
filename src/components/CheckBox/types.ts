@@ -7,6 +7,7 @@ import {
   UnionDefaultKey,
 } from '../../types';
 
+// FIX: Both Should be taken in as an arg during factory
 type CheckBoxVariations = 'Outline' | 'Fill' | 'Reverse';
 type CheckBoxShapes = 'Sharp' | 'Rounded' | 'Circular';
 
@@ -22,16 +23,16 @@ type CheckBoxFactoryProps<
   AllowCustomProps
 > = {
   themes: {
-    [ThemeKeys in keyof AddDefaultToObject<Themes, ThemePalette>]: ThemePalette;
+    [ThemeKeys in keyof AddDefaultToObject<Themes, ThemePalette>]: ThemePalette
   };
   additionalPalettes?: {
-    [AdditionalPaletteKeys in keyof AdditionalPalettes]: Color;
+    [AdditionalPaletteKeys in keyof AdditionalPalettes]: Color
   };
   sizes?: {
     [SizeKey in keyof AddDefaultToObject<
       CheckBoxSizes,
       CheckBoxSizeProps
-    >]: CheckBoxSizeProps;
+    >]: CheckBoxSizeProps
   };
   checkBoxShape?: CheckBoxShapes;
 };

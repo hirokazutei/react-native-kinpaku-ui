@@ -13,6 +13,7 @@ import {
 } from '../../types';
 import {ThemePalette} from '../../theme/types';
 
+// FIX: This should be ButtonShape and takes in as an arg in factory
 type ButtonVariations = 'Circular' | 'Round' | 'Sharp';
 type ButtonTypes = 'solid' | 'clear' | 'outline';
 
@@ -31,16 +32,16 @@ type ButtonFactoryProps<
   AllowCustomProps
 > = {
   themes: {
-    [ThemeKey in keyof AddDefaultToObject<Themes, ThemePalette>]: ThemePalette;
+    [ThemeKey in keyof AddDefaultToObject<Themes, ThemePalette>]: ThemePalette
   };
   additionalPalettes?: {
-    [AdditionalPaletteKey in keyof AdditionalPalettes]: Color;
+    [AdditionalPaletteKey in keyof AdditionalPalettes]: Color
   };
   sizes?: {
     [SizeKey in keyof AddDefaultToObject<
       ButtonSizes,
       ButtonSizeProps
-    >]: ButtonSizeProps;
+    >]: ButtonSizeProps
   };
   defaultType?: ButtonTypes;
 };

@@ -7,6 +7,7 @@ import {
 } from '../../types';
 import {ThemePalette} from '../../theme/types';
 
+// FIX: This Should Be Variations
 type TouchableTypes = 'solid' | 'outline';
 
 type VerHor = {horizontalPadding: number; verticalPadding: number};
@@ -30,16 +31,16 @@ type TouchableFactoryProps<
   AllowCustomProps
 > = {
   themes: {
-    [ThemeKeys in keyof AddDefaultToObject<Themes, ThemePalette>]: ThemePalette;
+    [ThemeKeys in keyof AddDefaultToObject<Themes, ThemePalette>]: ThemePalette
   };
   additionalPalettes?: {
-    [AdditionalPaletteKeys in keyof AdditionalPalettes]: Color;
+    [AdditionalPaletteKeys in keyof AdditionalPalettes]: Color
   };
   sizes?: {
     [SizeKey in keyof AddDefaultToObject<
       TouchableSizes,
       TouchableSizeProps
-    >]: TouchableSizeProps;
+    >]: TouchableSizeProps
   };
   defaultType?: TouchableTypes;
 };
