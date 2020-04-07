@@ -3,28 +3,11 @@ import {
   InputFieldTypes,
   InputFieldSizeProps,
   InputFieldVariationProps,
+  InputFieldVariations,
 } from './types';
 
-type InputVariations =
-  | 'creditCardNumber'
-  | 'decimal'
-  | 'email'
-  | 'freeField'
-  | 'name'
-  | 'number'
-  | 'oneTimeNumberCode'
-  | 'oneTimeCode'
-  | 'paragragh'
-  | 'passcode'
-  | 'password'
-  | 'phone'
-  | 'url'
-  | 'username';
-
-// SearchField,
-
 const INPUT_VARIATION_DEFAULT_SETTINGS: {
-  [key in InputVariations]: InputFieldVariationProps;
+  [key in InputFieldVariations]: InputFieldVariationProps
 } = {
   creditCardNumber: {
     autoCapitalize: 'none',
@@ -300,15 +283,18 @@ const DEFAULT_BORDER_WIDTH = 2;
 
 type InputFieldSizes = 'small' | 'medium' | 'large';
 
-// selectionColor
-// placeholderTextColor
+/* TODO:
+selectionColor
+placeholderTextColor
 
-// Accessibility Prop
-// - allowFontScaling
+Accessibility Prop
+- allowFontScaling
 
-// Methods
-// - clear()
-// - isFocused()
+Methods
+- clear()
+- isFocused()
+*/
+
 const INPUT_FIELD_TYPES: Array<InputFieldTypes> = [
   'Underline',
   'Outline',
@@ -322,5 +308,5 @@ export {
   InputFieldSizes,
   INPUT_FIELD_TYPES,
   INPUT_VARIATION_DEFAULT_SETTINGS,
-  InputVariations,
+  InputFieldVariations,
 };

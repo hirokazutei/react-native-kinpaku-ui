@@ -4,12 +4,12 @@ import {
   InputFieldFactoryProps,
   InputFieldProps as Props,
   InputFieldSizeProps,
+  InputFieldVariations,
 } from './types';
 import {
   DEFAULT_BORDER_WIDTH,
   DEFAULT_INPUT_FIELD_SIZE,
   INPUT_VARIATION_DEFAULT_SETTINGS,
-  InputVariations,
 } from './constants';
 import {UnionDefaultKey, AddDefaultToObject} from '../../types';
 import {colorResolverFactory} from '../../helper';
@@ -21,26 +21,25 @@ function inputFieldFactory<Themes, AdditionalPalettes, InputFieldSizes>({
   inputFieldType = 'Outline',
   defaultShape = 'circular',
 }: InputFieldFactoryProps<Themes, AdditionalPalettes, InputFieldSizes>): {
-  [key in InputVariations]: React.FunctionComponent<
+  [key in InputFieldVariations]: React.FunctionComponent<
     Props<AdditionalPalettes, InputFieldSizes>
-  >;
+  >
 } {
   const themeContext: React.Context<keyof Themes> = React.createContext(
     'default' as keyof Themes,
   );
 
   const inputFields: {
-    [key in InputVariations]?: React.FunctionComponent<
+    [key in InputFieldVariations]?: React.FunctionComponent<
       Props<AdditionalPalettes, InputFieldSizes>
-    >;
+    >
   } = {};
 
   for (const key in INPUT_VARIATION_DEFAULT_SETTINGS) {
     if (INPUT_VARIATION_DEFAULT_SETTINGS.hasOwnProperty(key)) {
-      const InputField: React.FunctionComponent<Props<
-        AdditionalPalettes,
-        InputFieldSizes
-      >> = ({
+      const InputField: React.FunctionComponent<
+        Props<AdditionalPalettes, InputFieldSizes>
+      > = ({
         backgroundColor,
         borderColor,
         isDisabled,
@@ -177,7 +176,7 @@ function inputFieldFactory<Themes, AdditionalPalettes, InputFieldSizes>({
           textAlign,
           textContentType,
           ...inputFieldOptions
-        } = INPUT_VARIATION_DEFAULT_SETTINGS[key as InputVariations];
+        } = INPUT_VARIATION_DEFAULT_SETTINGS[key as InputFieldVariations];
 
         // WrappedStyle
         const wrapperStyleProps = {
@@ -221,13 +220,13 @@ function inputFieldFactory<Themes, AdditionalPalettes, InputFieldSizes>({
           </View>
         );
       };
-      inputFields[key as InputVariations] = InputField;
+      inputFields[key as InputFieldVariations] = InputField;
     }
   }
   return inputFields as {
-    [key in InputVariations]: React.FunctionComponent<
+    [key in InputFieldVariations]: React.FunctionComponent<
       Props<AdditionalPalettes, InputFieldSizes>
-    >;
+    >
   };
 }
 

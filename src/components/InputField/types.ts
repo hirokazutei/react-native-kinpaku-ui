@@ -6,6 +6,24 @@ type InputFieldTypes = 'Underline' | 'Outline' | 'Fill' | 'UnderlinedFill';
 
 type InputFieldShapes = 'sharp' | 'rounded' | 'circular';
 
+type InputFieldVariations =
+  | 'creditCardNumber'
+  | 'decimal'
+  | 'email'
+  | 'freeField'
+  | 'name'
+  | 'number'
+  | 'oneTimeNumberCode'
+  | 'oneTimeCode'
+  | 'paragragh'
+  | 'passcode'
+  | 'password'
+  | 'phone'
+  | 'url'
+  | 'username';
+
+// SearchField,
+
 type InputFieldSizeProps = {
   borderRadiusFontRatio?: number; // Ratio depends on the fontSize
   borderWidth?: number;
@@ -48,16 +66,16 @@ type InputFieldVariationProps = {
 
 type InputFieldFactoryProps<Themes, AdditionalPalettes, InputFieldSizes> = {
   themes: {
-    [ThemeKey in keyof AddDefaultToObject<Themes, ThemePalette>]: ThemePalette;
+    [ThemeKey in keyof AddDefaultToObject<Themes, ThemePalette>]: ThemePalette
   };
   additionalPalettes?: {
-    [AdditionalPaletteKey in keyof AdditionalPalettes]: Color;
+    [AdditionalPaletteKey in keyof AdditionalPalettes]: Color
   };
   sizes?: {
     [SizeKey in keyof AddDefaultToObject<
       InputFieldSizes,
       InputFieldSizeProps
-    >]: InputFieldSizeProps;
+    >]: InputFieldSizeProps
   };
   defaultColor?: {[key in keyof (ThemePalette & AdditionalPalettes)]: string};
   inputFieldType?: InputFieldTypes;
@@ -90,4 +108,5 @@ export {
   InputFieldSizeProps,
   InputFieldTypes,
   InputFieldVariationProps,
+  InputFieldVariations,
 };
