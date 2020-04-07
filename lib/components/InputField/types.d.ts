@@ -4,6 +4,7 @@ import { AddDefaultToObject, Color } from '../../types';
 import { ThemePalette } from '../../theme/types';
 declare type InputFieldTypes = 'Underline' | 'Outline' | 'Fill' | 'UnderlinedFill';
 declare type InputFieldShapes = 'sharp' | 'rounded' | 'circular';
+declare type InputFieldVariations = 'creditCardNumber' | 'decimal' | 'email' | 'freeField' | 'name' | 'number' | 'oneTimeNumberCode' | 'oneTimeCode' | 'paragragh' | 'passcode' | 'password' | 'phone' | 'url' | 'username';
 declare type InputFieldSizeProps = {
     borderRadiusFontRatio?: number;
     borderWidth?: number;
@@ -75,5 +76,5 @@ declare type InputFieldProps<AdditionalPalettes, InputFieldSizes> = {
     textColor?: keyof (ThemePalette & AdditionalPalettes);
     value: string;
 };
-export { InputFieldFactoryProps, InputFieldProps, InputFieldShapes, InputFieldSizeProps, InputFieldTypes, InputFieldVariationProps, };
+export { InputFieldFactoryProps, InputFieldProps, InputFieldShapes, InputFieldSizeProps, InputFieldTypes, InputFieldVariationProps, InputFieldVariations, };
 //# sourceMappingURL=types.d.ts.map
