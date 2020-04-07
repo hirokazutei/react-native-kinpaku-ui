@@ -9,7 +9,7 @@ import {
 import {
   DEFAULT_BORDER_WIDTH,
   DEFAULT_INPUT_FIELD_SIZE,
-  INPUT_VARIATION_DEFAULT_SETTINGS,
+  DEFAULT_INPUT_VARIATION_SETTINGS,
 } from './constants';
 import {UnionDefaultKey, AddDefaultToObject} from '../../types';
 import {colorResolverFactory} from '../../helper';
@@ -18,6 +18,7 @@ function inputFieldFactory<Themes, AdditionalPalettes, InputFieldSizes>({
   themes,
   additionalPalettes,
   sizes,
+  // TODO: DefaultColor Missing
   inputFieldType = 'Outline',
   defaultShape = 'circular',
 }: InputFieldFactoryProps<Themes, AdditionalPalettes, InputFieldSizes>): {
@@ -35,8 +36,8 @@ function inputFieldFactory<Themes, AdditionalPalettes, InputFieldSizes>({
     >
   } = {};
 
-  for (const key in INPUT_VARIATION_DEFAULT_SETTINGS) {
-    if (INPUT_VARIATION_DEFAULT_SETTINGS.hasOwnProperty(key)) {
+  for (const key in DEFAULT_INPUT_VARIATION_SETTINGS) {
+    if (DEFAULT_INPUT_VARIATION_SETTINGS.hasOwnProperty(key)) {
       const InputField: React.FunctionComponent<
         Props<AdditionalPalettes, InputFieldSizes>
       > = ({
@@ -176,7 +177,7 @@ function inputFieldFactory<Themes, AdditionalPalettes, InputFieldSizes>({
           textAlign,
           textContentType,
           ...inputFieldOptions
-        } = INPUT_VARIATION_DEFAULT_SETTINGS[key as InputFieldVariations];
+        } = DEFAULT_INPUT_VARIATION_SETTINGS[key as InputFieldVariations];
 
         // WrappedStyle
         const wrapperStyleProps = {

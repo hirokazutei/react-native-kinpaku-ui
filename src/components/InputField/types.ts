@@ -77,7 +77,7 @@ type InputFieldFactoryProps<Themes, AdditionalPalettes, InputFieldSizes> = {
       InputFieldSizeProps
     >]: InputFieldSizeProps
   };
-  defaultColor?: {[key in keyof (ThemePalette & AdditionalPalettes)]: string};
+  defaultColor?: {[key in keyof (ThemePalette & AdditionalPalettes)]: Color};
   inputFieldType?: InputFieldTypes;
   defaultShape?: InputFieldShapes;
 };

@@ -4,7 +4,7 @@ import {UnionDefaultKey} from '../../types';
 type DefaultCheckBoxSizes = 'small' | 'medium' | 'large';
 
 const DEFAULTLESS_CHECK_BOX_SIZES: {
-  [key in DefaultCheckBoxSizes]: CheckBoxSizeProps;
+  [key in DefaultCheckBoxSizes]: CheckBoxSizeProps
 } = {
   small: {
     size: 16,
@@ -18,7 +18,7 @@ const DEFAULTLESS_CHECK_BOX_SIZES: {
 };
 
 const DEFAULT_CHECK_BOX_SIZES: {
-  [key in UnionDefaultKey<DefaultCheckBoxSizes>]: CheckBoxSizeProps;
+  [key in UnionDefaultKey<DefaultCheckBoxSizes>]: CheckBoxSizeProps
 } = {
   ...DEFAULTLESS_CHECK_BOX_SIZES,
   default: DEFAULTLESS_CHECK_BOX_SIZES.medium,

@@ -6,7 +6,7 @@ import {
   InputFieldVariations,
 } from './types';
 
-const INPUT_VARIATION_DEFAULT_SETTINGS: {
+const DEFAULT_INPUT_VARIATION_SETTINGS: {
   [key in InputFieldVariations]: InputFieldVariationProps
 } = {
   creditCardNumber: {
@@ -307,6 +307,6 @@ export {
   DEFAULT_INPUT_FIELD_SIZE,
   InputFieldSizes,
   INPUT_FIELD_TYPES,
-  INPUT_VARIATION_DEFAULT_SETTINGS,
+  DEFAULT_INPUT_VARIATION_SETTINGS,
   InputFieldVariations,
 };
