@@ -53,7 +53,7 @@ declare type InputFieldFactoryProps<Themes, AdditionalPalettes, InputFieldSizes>
         [SizeKey in keyof AddDefaultToObject<InputFieldSizes, InputFieldSizeProps>]: InputFieldSizeProps;
     };
     defaultColor?: {
-        [key in keyof (ThemePalette & AdditionalPalettes)]: string;
+        [key in keyof (ThemePalette & AdditionalPalettes)]: Color;
     };
     inputFieldType?: InputFieldTypes;
     defaultShape?: InputFieldShapes;
