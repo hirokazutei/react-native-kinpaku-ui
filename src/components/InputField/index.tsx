@@ -49,7 +49,9 @@ function inputFieldFactory<Themes, AdditionalPalettes, InputFieldSizes>({
         shape,
         textColor,
         ...inputFieldProps
-      }: Props<AdditionalPalettes, InputFieldSizes>): React.ReactElement => {
+      }: Props<AdditionalPalettes, InputFieldSizes>): React.ReactElement<
+        Props<AdditionalPalettes, InputFieldSizes>
+      > => {
         // Palettes
         const currentThemeKey =
           useContext(themeContext) || ('default' as UnionDefaultKey<Themes>);

@@ -84,7 +84,9 @@ const geOptionalProps = (): Partial<InputFieldProps<null, null>> => {
 };
 
 storiesOf('UI/InputField', module)
-  .addDecorator((story: () => React.ReactElement) => <Provider story={story} />)
+  .addDecorator((story: () => React.ReactElement<null>) => (
+    <Provider story={story} />
+  ))
   .addDecorator(withKnobs)
   .add('Default', () => (
     <>

@@ -48,7 +48,7 @@ function buttonFactory<
       >,
       AllowCustomProps
     >
-  >;
+  >
 } {
   const themeContext: React.Context<keyof Themes> = React.createContext(
     'default' as keyof Themes,
@@ -64,18 +64,20 @@ function buttonFactory<
         >,
         AllowCustomProps
       >
-    >;
+    >
   } = {};
   BUTTON_VARIATION_KEYS.forEach((variation: ButtonVariations) => {
-    const Button: React.FunctionComponent<Props<
-      AdditionalPalettes,
-      OptionalExistCondition<
-        ButtonSizes,
-        typeof DEFAULT_BUTTON_SIZES,
-        ButtonSizes
-      >,
-      AllowCustomProps
-    >> = ({
+    const Button: React.FunctionComponent<
+      Props<
+        AdditionalPalettes,
+        OptionalExistCondition<
+          ButtonSizes,
+          typeof DEFAULT_BUTTON_SIZES,
+          ButtonSizes
+        >,
+        AllowCustomProps
+      >
+    > = ({
       color,
       size = 'default',
       isDisabled,
@@ -96,7 +98,17 @@ function buttonFactory<
         ButtonSizes
       >,
       AllowCustomProps
-    >): React.ReactElement => {
+    >): React.ReactElement<
+      Props<
+        AdditionalPalettes,
+        OptionalExistCondition<
+          ButtonSizes,
+          typeof DEFAULT_BUTTON_SIZES,
+          ButtonSizes
+        >,
+        AllowCustomProps
+      >
+    > => {
       // Palettes
       const currentThemeKey = useContext(themeContext) || 'default';
       const currentTheme =
@@ -120,7 +132,7 @@ function buttonFactory<
             [SizeKey in keyof AddDefaultToObject<
               ButtonSizes,
               ButtonSizeProps
-            >]: ButtonSizeProps;
+            >]: ButtonSizeProps
           })[size as keyof AddDefaultToObject<ButtonSizes, ButtonSizeProps>]
         : DEFAULT_BUTTON_SIZES[size as UnionDefaultKey<DefaultButtonSizes>];
 
@@ -175,8 +187,8 @@ function buttonFactory<
           disabled={isDisabled}
           onPress={onPress}
           accessibilityLabel={title}
-          {...(_additionalButtonProps || {})}>
-          <Text style={textStyle} {...(_additionalTextProps || {})}>
+          {..._additionalButtonProps || {}}>
+          <Text style={textStyle} {..._additionalTextProps || {}}>
             {title}
           </Text>
         </TouchableOpacity>

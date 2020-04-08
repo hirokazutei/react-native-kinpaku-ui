@@ -33,7 +33,7 @@ const colorSelect: {[key in keyof ThemePalette]?: keyof ThemePalette} = {
 const sizeSelect: {
   [key in IntersectDefaultKey<DefaultButtonSizes>]?: UnionDefaultKey<
     DefaultButtonSizes
-  >;
+  >
 } = {
   tiny: 'tiny',
   small: 'small',
@@ -66,22 +66,22 @@ const geOptionalProps = (): Partial<ButtonProps<null, null, null>> => {
 };
 
 storiesOf('UI/Button', module)
-  .addDecorator((story: () => React.ReactElement) => <Provider story={story} />)
+  .addDecorator((story: () => React.ReactElement<null>) => (
+    <Provider story={story} />
+  ))
   .addDecorator(withKnobs)
   .add('Default', () => (
     <>
-      {BUTTON_TYPES.map(
-        (type: ButtonTypes, index: number): React.ReactElement => {
-          return (
-            <Sharp
-              key={index}
-              {...getRequiredProps()}
-              type={type}
-              {...geOptionalProps()}
-            />
-          );
-        },
-      )}
+      {BUTTON_TYPES.map((type: ButtonTypes, index: number) => {
+        return (
+          <Sharp
+            key={index}
+            {...getRequiredProps()}
+            type={type}
+            {...geOptionalProps()}
+          />
+        );
+      })}
       {BUTTON_TYPES.map((type: ButtonTypes, index: number) => {
         return (
           <Round

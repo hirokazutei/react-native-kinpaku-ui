@@ -8,7 +8,7 @@ const Provider = ({
   story,
 }: {
   backgroundColor?: string;
-  story: () => React.ReactElement;
+  story: () => React.ReactElement<null>;
 }) => {
   return (
     <View

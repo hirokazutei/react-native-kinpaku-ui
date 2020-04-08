@@ -33,7 +33,7 @@ const colorSelect: {[key in keyof ThemePalette]?: keyof ThemePalette} = {
 const sizeSelect: {
   [key in IntersectDefaultKey<DefaultTouchableSizes>]?: UnionDefaultKey<
     DefaultTouchableSizes
-  >;
+  >
 } = {
   tiny: 'tiny',
   small: 'small',
@@ -71,7 +71,9 @@ const getOptionalProps = (): Partial<TouchableProps<null, null, null>> => {
 };
 
 storiesOf('UI/Touchable', module)
-  .addDecorator((story: () => React.ReactElement) => <Provider story={story} />)
+  .addDecorator((story: () => React.ReactElement<null>) => (
+    <Provider story={story} />
+  ))
   .addDecorator(withKnobs)
   .add('Default', () => (
     <>

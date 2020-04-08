@@ -36,7 +36,7 @@ const colorSelect: {[key in keyof ThemePalette]?: keyof ThemePalette} = {
 const sizeSelect: {
   [key in IntersectDefaultKey<DefaultCheckBoxSizes>]?: UnionDefaultKey<
     DefaultCheckBoxSizes
-  >;
+  >
 } = {
   small: 'small',
   medium: 'medium',
@@ -81,7 +81,9 @@ const styles: Styles = StyleSheet.create<Styles>({
 });
 
 storiesOf('UI/CheckBox', module)
-  .addDecorator((story: () => React.ReactElement) => <Provider story={story} />)
+  .addDecorator((story: () => React.ReactElement<null>) => (
+    <Provider story={story} />
+  ))
   .addDecorator(withKnobs)
   .add('Default', () => (
     <View style={styles.baseView}>
