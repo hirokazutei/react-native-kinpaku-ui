@@ -2,9 +2,7 @@ type Color = string;
 
 type DefaultObject<T> = {default: T};
 
-type AddDefaultToObject<T, V> = {
-  [K in keyof (T & DefaultObject<V>)]: V;
-};
+type AddDefaultToObject<T, V> = {[K in keyof (T & DefaultObject<V>)]: V};
 
 type UnionDefaultKey<T> = T | 'default';
 type IntersectDefaultKey<T> = T & 'default';

@@ -11,7 +11,7 @@ import {Color, DefaultObject} from './types';
 const UIFactory = <ThemeObject, AdditionalPalettes>(
   themes: Themes<ThemeObject>,
   additionalPalettes?: {
-    [key in keyof (AdditionalPalettes & DefaultObject<Color>)]: Color;
+    [key in keyof (AdditionalPalettes & DefaultObject<Color>)]: Color
   },
 ) => {
   const commonProps = {themes, additionalPalettes};

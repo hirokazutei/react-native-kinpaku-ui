@@ -11,7 +11,7 @@ const alignSelect: {[key in AlignKeys]: FlexAlignType} = {
 };
 
 const textAlignSelect: {
-  [key in TextStyle['textAlign']]: TextStyle['textAlign'];
+  [key in TextStyle['textAlign']]: TextStyle['textAlign']
 } = {
   auto: 'auto',
   left: 'left',

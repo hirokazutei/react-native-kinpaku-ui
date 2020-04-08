@@ -9,7 +9,7 @@ type DefaultTextVariations =
   | 'Quote';
 
 const DEFAULT_TEXT_VARIATIONS: {
-  [textVariation in DefaultTextVariations]: TextVariationProps<null, null>;
+  [textVariation in DefaultTextVariations]: TextVariationProps<null, null>
 } = {
   Title: {
     fontWeight: 'bold',

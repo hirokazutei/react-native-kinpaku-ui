@@ -13,7 +13,7 @@ type Themes<ThemeObject> = {
   [ThemesKey in keyof AddDefaultToObject<
     ThemeObject,
     ThemePalette
-  >]: ThemePalette;
+  >]: ThemePalette
 };
 
 export {Themes, ThemePalette};
