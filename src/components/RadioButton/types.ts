@@ -23,16 +23,16 @@ type RadioButtonFactoryProps<
   AllowCustomProps
 > = {
   themes: {
-    [ThemeKeys in keyof AddDefaultToObject<Themes, ThemePalette>]: ThemePalette;
+    [ThemeKeys in keyof AddDefaultToObject<Themes, ThemePalette>]: ThemePalette
   };
   additionalPalettes?: {
-    [AdditionalPaletteKeys in keyof AdditionalPalettes]: Color;
+    [AdditionalPaletteKeys in keyof AdditionalPalettes]: Color
   };
   sizes?: {
     [SizeKey in keyof AddDefaultToObject<
       RadioButtonSizes,
       RadioButtonSizeProps
-    >]: RadioButtonSizeProps;
+    >]: RadioButtonSizeProps
   };
 };
 

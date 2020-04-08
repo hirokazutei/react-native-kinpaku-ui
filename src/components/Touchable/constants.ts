@@ -11,7 +11,7 @@ type DefaultTouchableSizes =
   | 'massive';
 
 const DEFAULTLESSS_TOUCHABLE_SIZES: {
-  [key in DefaultTouchableSizes]: TouchableAllSizeProps;
+  [key in DefaultTouchableSizes]: TouchableAllSizeProps
 } = {
   tiny: {
     padding: 4,
@@ -40,7 +40,7 @@ const DEFAULTLESSS_TOUCHABLE_SIZES: {
 };
 
 const DEFAULT_TOUCHABLE_SIZES: {
-  [key in UnionDefaultKey<DefaultTouchableSizes>]: TouchableAllSizeProps;
+  [key in UnionDefaultKey<DefaultTouchableSizes>]: TouchableAllSizeProps
 } = {
   ...DEFAULTLESSS_TOUCHABLE_SIZES,
   default: DEFAULTLESSS_TOUCHABLE_SIZES.medium,

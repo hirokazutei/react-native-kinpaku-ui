@@ -11,7 +11,7 @@ type DefaultButtonSizes =
   | 'massive';
 
 const DEFAULTLESS_BUTTON_SIZES: {
-  [key in DefaultButtonSizes]: ButtonSizeProps;
+  [key in DefaultButtonSizes]: ButtonSizeProps
 } = {
   tiny: {
     verticalPaddding: 4,
@@ -52,7 +52,7 @@ const DEFAULTLESS_BUTTON_SIZES: {
 };
 
 const DEFAULT_BUTTON_SIZES: {
-  [key in UnionDefaultKey<DefaultButtonSizes>]: ButtonSizeProps;
+  [key in UnionDefaultKey<DefaultButtonSizes>]: ButtonSizeProps
 } = {
   ...DEFAULTLESS_BUTTON_SIZES,
   default: DEFAULTLESS_BUTTON_SIZES.medium,

@@ -8,7 +8,7 @@ import {
 import {ThemePalette} from '../../theme/types';
 
 type TextSizeProps<FontSizes extends string | string> = {
-  [key in FontSizes]: number;
+  [key in FontSizes]: number
 };
 
 type TextVariationProps<FontSizes, AdditionalPalettes> = {
@@ -41,20 +41,20 @@ type TextFactoryProps<
   EmphasisToggleable
 > = {
   themes: {
-    [ThemeKey in keyof AddDefaultToObject<Themes, ThemePalette>]: ThemePalette;
+    [ThemeKey in keyof AddDefaultToObject<Themes, ThemePalette>]: ThemePalette
   };
   additionalPalettes?: {
     [AdditionalPaletteKey in keyof AddDefaultToObject<
       AdditionalPalettes,
       Color
-    >]: Color;
+    >]: Color
   };
   defaultFontSizeKey?: OptionalExistCondition<FontSizes, never, FontSizes>;
   textVariations?: {
     [VariationKeys in keyof TextVariations]: TextVariationProps<
       OptionalExistCondition<FontSizes, never, FontSizes>,
       AdditionalPalettes
-    >;
+    >
   };
 };
 
