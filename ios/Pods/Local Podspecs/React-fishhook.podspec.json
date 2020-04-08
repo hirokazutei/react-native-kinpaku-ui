@@ -1,7 +1,7 @@
 {
-  "name": "React-jsinspector",
+  "name": "React-fishhook",
   "version": "0.60.0",
-  "summary": "-",
+  "summary": "A very simple library that enables dynamically rebinding symbols in Mach-O binaries running on iOS in the simulator and on device.",
   "homepage": "http://facebook.github.io/react-native/",
   "license": "MIT",
   "authors": "Facebook, Inc. and its affiliates",
@@ -13,6 +13,6 @@
     "git": "https://github.com/facebook/react-native.git",
     "tag": "v0.60.0"
   },
-  "source_files": "*.{cpp,h}",
-  "header_dir": "jsinspector"
+  "source_files": "*.{c,h}",
+  "header_dir": "fishhook"
 }
