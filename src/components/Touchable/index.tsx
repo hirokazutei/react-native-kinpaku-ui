@@ -47,18 +47,20 @@ function touchableFactory<
     AllowCustomProps
   >
 > {
-  const themeContext: React.Context<keyof PaletteObjectType> = React.createContext(
-    'default' as keyof PaletteObjectType,
-  );
-  const Touchable: React.FunctionComponent<Props<
-    AdditionalPalettes,
-    OptionalExistCondition<
-      TouchableSizes,
-      typeof DEFAULT_TOUCHABLE_SIZES,
-      TouchableSizes
-    >,
-    AllowCustomProps
-  >> = ({
+  const themeContext: React.Context<
+    keyof PaletteObjectType
+  > = React.createContext('default' as keyof PaletteObjectType);
+  const Touchable: React.FunctionComponent<
+    Props<
+      AdditionalPalettes,
+      OptionalExistCondition<
+        TouchableSizes,
+        typeof DEFAULT_TOUCHABLE_SIZES,
+        TouchableSizes
+      >,
+      AllowCustomProps
+    >
+  > = ({
     color,
     size = 'default',
     children,
@@ -77,7 +79,17 @@ function touchableFactory<
       TouchableSizes
     >,
     AllowCustomProps
-  >): React.ReactElement => {
+  >): React.ReactElement<
+    Props<
+      AdditionalPalettes,
+      OptionalExistCondition<
+        TouchableSizes,
+        typeof DEFAULT_TOUCHABLE_SIZES,
+        TouchableSizes
+      >,
+      AllowCustomProps
+    >
+  > => {
     // Palettes
     const currentThemeKey = useContext(themeContext) || 'default';
     const currentTheme =
@@ -105,7 +117,7 @@ function touchableFactory<
           [SizeKey in keyof AddDefaultToObject<
             TouchableSizes,
             TouchableSizeProps
-          >]: TouchableSizeProps;
+          >]: TouchableSizeProps
         })[size as keyof AddDefaultToObject<TouchableSizes, TouchableSizeProps>]
       : DEFAULT_TOUCHABLE_SIZES[size as UnionDefaultKey<DefaultTouchableSizes>];
 

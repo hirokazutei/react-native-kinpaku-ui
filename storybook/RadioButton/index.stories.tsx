@@ -29,7 +29,7 @@ const colorSelect: {[key in keyof ThemePalette]?: keyof ThemePalette} = {
 const sizeSelect: {
   [key in IntersectDefaultKey<DefaultRadioButtonSizes>]?: UnionDefaultKey<
     DefaultRadioButtonSizes
-  >;
+  >
 } = {
   small: 'small',
   medium: 'medium',
@@ -52,7 +52,9 @@ const getOptionalProps = (): Partial<RadioButtonProps<null, null, null>> => {
 };
 
 storiesOf('UI/RadioButton', module)
-  .addDecorator((story: () => React.ReactElement) => <Provider story={story} />)
+  .addDecorator((story: () => React.ReactElement<null>) => (
+    <Provider story={story} />
+  ))
   .addDecorator(withKnobs)
   .add('Default', () => (
     <>

@@ -44,7 +44,7 @@ function checkBoxFactory<
       >,
       AllowCustomProps
     >
-  >;
+  >
 } {
   const themeContext: React.Context<keyof Themes> = React.createContext(
     'default' as keyof Themes,
@@ -60,18 +60,20 @@ function checkBoxFactory<
         >,
         AllowCustomProps
       >
-    >;
+    >
   } = {};
   CHECK_BOX_VARIATION_KEYS.forEach((variation: CheckBoxVariations) => {
-    const Button: React.FunctionComponent<Props<
-      AdditionalPalettes,
-      OptionalExistCondition<
-        CheckBoxSizes,
-        typeof DEFAULT_CHECK_BOX_SIZES,
-        CheckBoxSizes
-      >,
-      AllowCustomProps
-    >> = ({
+    const Button: React.FunctionComponent<
+      Props<
+        AdditionalPalettes,
+        OptionalExistCondition<
+          CheckBoxSizes,
+          typeof DEFAULT_CHECK_BOX_SIZES,
+          CheckBoxSizes
+        >,
+        AllowCustomProps
+      >
+    > = ({
       active,
       color = 'primary',
       isDisabled,
@@ -94,7 +96,17 @@ function checkBoxFactory<
         CheckBoxSizes
       >,
       AllowCustomProps
-    >): React.ReactElement => {
+    >): React.ReactElement<
+      Props<
+        AdditionalPalettes,
+        OptionalExistCondition<
+          CheckBoxSizes,
+          typeof DEFAULT_CHECK_BOX_SIZES,
+          CheckBoxSizes
+        >,
+        AllowCustomProps
+      >
+    > => {
       // Palettes
       const currentThemeKey =
         useContext(themeContext) || ('default' as UnionDefaultKey<Themes>);
@@ -126,7 +138,7 @@ function checkBoxFactory<
             [SizeKey in keyof AddDefaultToObject<
               CheckBoxSizes,
               CheckBoxSizeProps
-            >]: CheckBoxSizeProps;
+            >]: CheckBoxSizeProps
           })[size as keyof AddDefaultToObject<CheckBoxSizes, CheckBoxSizeProps>]
         : DEFAULT_CHECK_BOX_SIZES[
             size as UnionDefaultKey<DefaultCheckBoxSizes>

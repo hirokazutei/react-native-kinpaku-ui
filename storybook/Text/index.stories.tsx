@@ -52,7 +52,9 @@ const getOptionalProps = (): Partial<TextProps<null, null, true>> => {
 };
 
 storiesOf('UI/Text', module)
-  .addDecorator((story: () => React.ReactElement) => <Provider story={story} />)
+  .addDecorator((story: () => React.ReactElement<null>) => (
+    <Provider story={story} />
+  ))
   .addDecorator(withKnobs)
   .add('Default', () => (
     <>

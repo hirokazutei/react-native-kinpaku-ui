@@ -44,7 +44,7 @@ function radioButtonFactory<
       >,
       AllowCustomProps
     >
-  >;
+  >
 } {
   const themeContext: React.Context<keyof Themes> = React.createContext(
     'default' as keyof Themes,
@@ -60,18 +60,20 @@ function radioButtonFactory<
         >,
         AllowCustomProps
       >
-    >;
+    >
   } = {};
   RADIO_BUTTON_VARIATION_KEYS.forEach((variation: RadioButtonVariations) => {
-    const Button: React.FunctionComponent<Props<
-      AdditionalPalettes,
-      OptionalExistCondition<
-        RadioButtonSizes,
-        typeof DEFAULT_RADIO_BUTTON_SIZES,
-        RadioButtonSizes
-      >,
-      AllowCustomProps
-    >> = ({
+    const Button: React.FunctionComponent<
+      Props<
+        AdditionalPalettes,
+        OptionalExistCondition<
+          RadioButtonSizes,
+          typeof DEFAULT_RADIO_BUTTON_SIZES,
+          RadioButtonSizes
+        >,
+        AllowCustomProps
+      >
+    > = ({
       active,
       color = 'primary',
       isDisabled,
@@ -96,7 +98,17 @@ function radioButtonFactory<
         RadioButtonSizes
       >,
       AllowCustomProps
-    >): React.ReactElement => {
+    >): React.ReactElement<
+      Props<
+        AdditionalPalettes,
+        OptionalExistCondition<
+          RadioButtonSizes,
+          typeof DEFAULT_RADIO_BUTTON_SIZES,
+          RadioButtonSizes
+        >,
+        AllowCustomProps
+      >
+    > => {
       // Palettes
       const currentThemeKey =
         useContext(themeContext) || ('default' as UnionDefaultKey<Themes>);
@@ -130,7 +142,7 @@ function radioButtonFactory<
             [SizeKey in keyof AddDefaultToObject<
               RadioButtonSizes,
               RadioButtonSizeProps
-            >]: RadioButtonSizeProps;
+            >]: RadioButtonSizeProps
           })[
             size as keyof AddDefaultToObject<
               RadioButtonSizes,
