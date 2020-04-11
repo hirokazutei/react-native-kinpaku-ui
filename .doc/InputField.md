@@ -2,6 +2,8 @@
 
 > This doc is on `inputFieldFactory` which creates `InputField` components.
 
+![InputField Image](https://github.com/hirokazutei/react-native-kinpaku-ui/blob/master/.doc/images/InputField.png)
+
 ## Table of Contents
 
 1. Usage
