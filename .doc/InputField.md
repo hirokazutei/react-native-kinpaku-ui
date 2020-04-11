@@ -2,7 +2,9 @@
 
 > This doc is on `inputFieldFactory` which creates `InputField` components.
 
-![InputField Image](https://github.com/hirokazutei/react-native-kinpaku-ui/blob/master/.doc/images/InputField.png)
+<p align="middle">
+  <img src="https://raw.githubusercontent.com/hirokazutei/react-native-kinpaku-ui/master/.doc/images/InputField.png" width="800" />
+</p>
 
 ## Table of Contents
 
@@ -207,6 +209,7 @@ type InputFieldShapes = 'sharp' | 'rounded' | 'circular';
 - @param [props.autoFocus] - if the field should be auto-focused
 - @param [props.backgroundColor] - background color of the field
 - @param [props.borderColor] - border color of the field
+- @param [props.color] - the main color of the field
 - @param [props.defaultValue] - the default value of the field
 - @param [props.isDisabled] - if the input field is disabled
 - @param [props.maxLength] - max length of the field
