@@ -284,9 +284,6 @@ const DEFAULT_BORDER_WIDTH = 2;
 type InputFieldSizes = 'small' | 'medium' | 'large';
 
 /* TODO:
-selectionColor
-placeholderTextColor
-
 Accessibility Prop
 - allowFontScaling
 
@@ -299,7 +296,6 @@ const INPUT_FIELD_TYPES: Array<InputFieldTypes> = [
   'Underline',
   'Outline',
   'Fill',
-  'UnderlinedFill',
 ];
 
 export {

@@ -2,7 +2,7 @@
 import { TextInputProps, TextStyle } from 'react-native';
 import { AddDefaultToObject, Color } from '../../types';
 import { ThemePalette } from '../../theme/types';
-declare type InputFieldTypes = 'Underline' | 'Outline' | 'Fill' | 'UnderlinedFill';
+declare type InputFieldTypes = 'Underline' | 'Outline' | 'Fill';
 declare type InputFieldShapes = 'sharp' | 'rounded' | 'circular';
 declare type InputFieldVariations = 'creditCardNumber' | 'decimal' | 'email' | 'freeField' | 'name' | 'number' | 'oneTimeNumberCode' | 'oneTimeCode' | 'paragragh' | 'passcode' | 'password' | 'phone' | 'url' | 'username';
 declare type InputFieldSizeProps = {
@@ -52,9 +52,7 @@ declare type InputFieldFactoryProps<Themes, AdditionalPalettes, InputFieldSizes>
     sizes?: {
         [SizeKey in keyof AddDefaultToObject<InputFieldSizes, InputFieldSizeProps>]: InputFieldSizeProps;
     };
-    defaultColor?: {
-        [key in keyof (ThemePalette & AdditionalPalettes)]: Color;
-    };
+    defaultColor?: keyof (ThemePalette & AdditionalPalettes);
     inputFieldType?: InputFieldTypes;
     defaultShape?: InputFieldShapes;
 };
@@ -62,6 +60,7 @@ declare type InputFieldProps<AdditionalPalettes, InputFieldSizes> = {
     autoFocus?: boolean;
     backgroundColor?: keyof (ThemePalette & AdditionalPalettes);
     borderColor?: keyof (ThemePalette & AdditionalPalettes);
+    color?: keyof (ThemePalette & AdditionalPalettes);
     defaultValue?: string;
     isDisabled?: boolean;
     maxLength?: number;

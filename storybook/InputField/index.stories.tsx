@@ -60,7 +60,7 @@ const getRequiredProps = (overrides = {}): InputFieldProps<null, null> => {
     ...overrides,
   };
   return {
-    value: text('Text', value),
+    value: text('Value', value),
   };
 };
 
