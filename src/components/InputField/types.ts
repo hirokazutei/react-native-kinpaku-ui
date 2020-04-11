@@ -2,7 +2,7 @@ import {TextInputProps, TextStyle} from 'react-native';
 import {AddDefaultToObject, Color} from '../../types';
 import {ThemePalette} from '../../theme/types';
 
-type InputFieldTypes = 'Underline' | 'Outline' | 'Fill' | 'UnderlinedFill';
+type InputFieldTypes = 'Underline' | 'Outline' | 'Fill';
 
 type InputFieldShapes = 'sharp' | 'rounded' | 'circular';
 
@@ -77,7 +77,7 @@ type InputFieldFactoryProps<Themes, AdditionalPalettes, InputFieldSizes> = {
       InputFieldSizeProps
     >]: InputFieldSizeProps
   };
-  defaultColor?: {[key in keyof (ThemePalette & AdditionalPalettes)]: Color};
+  defaultColor?: keyof (ThemePalette & AdditionalPalettes);
   inputFieldType?: InputFieldTypes;
   defaultShape?: InputFieldShapes;
 };
@@ -86,6 +86,7 @@ type InputFieldProps<AdditionalPalettes, InputFieldSizes> = {
   autoFocus?: boolean;
   backgroundColor?: keyof (ThemePalette & AdditionalPalettes);
   borderColor?: keyof (ThemePalette & AdditionalPalettes);
+  color?: keyof (ThemePalette & AdditionalPalettes);
   defaultValue?: string;
   isDisabled?: boolean;
   maxLength?: number;

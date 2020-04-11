@@ -18,7 +18,7 @@ function inputFieldFactory<Themes, AdditionalPalettes, InputFieldSizes>({
   themes,
   additionalPalettes,
   sizes,
-  // TODO: DefaultColor Missing
+  defaultColor,
   inputFieldType = 'Outline',
   defaultShape = 'circular',
 }: InputFieldFactoryProps<Themes, AdditionalPalettes, InputFieldSizes>): {
@@ -43,6 +43,7 @@ function inputFieldFactory<Themes, AdditionalPalettes, InputFieldSizes>({
       > = ({
         backgroundColor,
         borderColor,
+        color = defaultColor,
         isDisabled,
         maxLength,
         size,
@@ -62,11 +63,11 @@ function inputFieldFactory<Themes, AdditionalPalettes, InputFieldSizes>({
           additionalPalettes,
         });
         // variation ->
+
         // Type
         const isOutline = inputFieldType === 'Outline';
         const isFill = inputFieldType === 'Fill';
         const isUnderline = inputFieldType === 'Underline';
-        const isUnderlinedFill = inputFieldType === 'UnderlinedFill';
 
         // Shape
         const isRounded = shape
@@ -75,14 +76,20 @@ function inputFieldFactory<Themes, AdditionalPalettes, InputFieldSizes>({
         const isCircular = shape
           ? shape === 'circular'
           : defaultShape === 'circular';
+
+        // Type Color
+        const defaultTextColor = isFill
+          ? currentTheme.background
+          : currentTheme.primary;
+
         // Set-Up Color
         const primaryBackgroundColor = colorResolver({
           color: backgroundColor,
-          defaultColor: currentTheme.background,
-        });
-        const textPrimaryColor = colorResolver({
-          color: textColor,
           defaultColor: currentTheme.primary,
+        });
+        const primaryTextColor = colorResolver({
+          color: textColor,
+          defaultColor: defaultTextColor,
         });
         const primaryBorderColor = colorResolver({
           color: borderColor,
@@ -140,30 +147,26 @@ function inputFieldFactory<Themes, AdditionalPalettes, InputFieldSizes>({
           return {borderRadius: 0};
         })();
         // Color
-        const backgroundColorProp =
-          isFill || isUnderlinedFill
-            ? {backgroundColor: primaryBackgroundColor}
-            : {};
+        const backgroundColorProp = isFill
+          ? {backgroundColor: primaryBackgroundColor}
+          : {};
 
         // Border
         const borderWidthProp = isOutline ? {borderWidth: borderWidth} : {};
         const borderColorProp = !isFill
           ? {borderColor: primaryBorderColor}
           : {};
-        const borderBottomWidthProp =
-          isUnderline || isUnderlinedFill
-            ? {borderBottomWidth: borderWidth}
-            : {};
+        const borderBottomWidthProp = isUnderline
+          ? {borderBottomWidth: borderWidth}
+          : {};
 
         // Disabled
-        const disabledColor =
-          isFill || isUnderlinedFill
-            ? currentTheme.background
-            : currentTheme.disabled;
-        const disabledBackground =
-          isFill || isUnderlinedFill
-            ? currentTheme.disabled
-            : currentTheme.background;
+        const disabledColor = isFill
+          ? currentTheme.background
+          : currentTheme.disabled;
+        const disabledBackground = isFill
+          ? currentTheme.disabled
+          : currentTheme.background;
 
         // Input Field Variation Props
         const {
@@ -202,7 +205,7 @@ function inputFieldFactory<Themes, AdditionalPalettes, InputFieldSizes>({
           ...(isBold ? {fontWeight: 'bold' as TextStyle['fontWeight']} : {}),
           ...(isItalic ? {fontStyle: 'italic' as TextStyle['fontStyle']} : {}),
           ...(fontFamily ? {fontFamily} : {}),
-          ...(isDisabled ? {color: disabledColor} : {color: textPrimaryColor}),
+          ...(isDisabled ? {color: disabledColor} : {color: primaryTextColor}),
           ...(textAlign ? {textAlign} : {}),
           ...{fontSize: sizeProp.fontSize},
           ...(letterSpacing ? {letterSpacing} : {}),
