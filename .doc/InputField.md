@@ -1,6 +1,6 @@
 # Input Field
 
-> This doc is on `inputFieldFactory` which creates `InputField` components.
+> This doc is on `InputField` components as well as the `inputFieldFactory` function.
 
 <p align="middle">
   <img src="https://raw.githubusercontent.com/hirokazutei/react-native-kinpaku-ui/master/.doc/images/InputField.png" width="800" />
@@ -32,7 +32,7 @@ const {InputField} = UIFactory<typeof themes, typeof additionalPalettes>({
   additionalPalettes,
 });
 
-const EmailFieldPage: React.FC = (): React.ReactElement<null> => {
+const EmailFieldPage = () => {
   return (
     <View>
       <InputField.email value="" />
@@ -198,7 +198,7 @@ type InputFieldShape = 'sharp' | 'rounded' | 'circular';
 > Just in case having JSDocs on your component declaration comes in handy.
 
 ```ts
-/*
+/**
 - InputField
 -
 - Required:
