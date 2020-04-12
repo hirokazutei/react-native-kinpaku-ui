@@ -136,15 +136,15 @@ function touchableFactory<
       borderRadius = DEFAULT_TOUCHABLE_SIZES.default.borderRadius;
     }
 
-    const touchableVerticalPadding =
+    const touchablePaddingVertical =
       (touchablePaddingProperty &&
         (touchablePaddingProperty as TouchableVerHorSizeProps)
-          .verticalPadding) ||
+          .paddingVertical) ||
       (touchablePaddingProperty as TouchableAllSizeProps).padding;
-    const touchableHorizontalPadding =
+    const touchablePaddingHorizontal =
       (touchablePaddingProperty &&
         (touchablePaddingProperty as TouchableVerHorSizeProps)
-          .horizontalPadding) ||
+          .paddingHorizontal) ||
       (touchablePaddingProperty as TouchableAllSizeProps).padding;
 
     const touchableStyle = {
@@ -153,9 +153,9 @@ function touchableFactory<
       borderRadius: borderRadius,
       backgroundColor: fillColor,
       paddingHorizontal:
-        touchableHorizontalPadding || DEFAULT_TOUCHABLE_SIZES.default.padding,
+        touchablePaddingHorizontal || DEFAULT_TOUCHABLE_SIZES.default.padding,
       paddingVertical:
-        touchableVerticalPadding || DEFAULT_TOUCHABLE_SIZES.default.padding,
+        touchablePaddingVertical || DEFAULT_TOUCHABLE_SIZES.default.padding,
       ...borderStyles,
       ..._additionalStyle,
     };

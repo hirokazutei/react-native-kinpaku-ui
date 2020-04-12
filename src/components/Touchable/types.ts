@@ -10,7 +10,7 @@ import {ThemePalette} from '../../theme/types';
 // FIX: This Should Be Variations
 type TouchableTypes = 'solid' | 'outline';
 
-type VerHor = {horizontalPadding: number; verticalPadding: number};
+type VerHor = {paddingHorizontal: number; paddingVertical: number};
 type Padding = {padding: number};
 
 type TouchableVerHorSizeProps = {

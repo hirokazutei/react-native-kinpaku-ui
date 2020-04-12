@@ -18,7 +18,7 @@ type ButtonVariations = 'Circular' | 'Round' | 'Sharp';
 type ButtonTypes = 'solid' | 'clear' | 'outline';
 
 type ButtonSizeProps = {
-  horizontalPadding: number;
+  paddingHorizontal: number;
   verticalPaddding: number;
   fontSize: number;
   borderRadius: number;

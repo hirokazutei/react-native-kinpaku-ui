@@ -15,37 +15,37 @@ const DEFAULTLESS_BUTTON_SIZES: {
 } = {
   tiny: {
     verticalPaddding: 4,
-    horizontalPadding: 8,
+    paddingHorizontal: 8,
     fontSize: 12,
     borderRadius: 6,
   },
   small: {
     verticalPaddding: 4,
-    horizontalPadding: 8,
+    paddingHorizontal: 8,
     fontSize: 14,
     borderRadius: 6,
   },
   medium: {
     verticalPaddding: 6,
-    horizontalPadding: 12,
+    paddingHorizontal: 12,
     fontSize: 16,
     borderRadius: 8,
   },
   large: {
     verticalPaddding: 6,
-    horizontalPadding: 12,
+    paddingHorizontal: 12,
     fontSize: 20,
     borderRadius: 8,
   },
   huge: {
     verticalPaddding: 8,
-    horizontalPadding: 16,
+    paddingHorizontal: 16,
     fontSize: 24,
     borderRadius: 10,
   },
   massive: {
     verticalPaddding: 8,
-    horizontalPadding: 24,
+    paddingHorizontal: 24,
     fontSize: 32,
     borderRadius: 12,
   },

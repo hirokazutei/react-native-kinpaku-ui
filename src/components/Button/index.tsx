@@ -152,15 +152,15 @@ function buttonFactory<
           BORDER_RADIUS_MULTIPLIERS[variation as ButtonVariations] *
           buttonSizeProperty.borderRadius;
       } else {
-        borderRadius = DEFAULT_BUTTON_SIZES.default.horizontalPadding;
+        borderRadius = DEFAULT_BUTTON_SIZES.default.paddingHorizontal;
       }
 
       const touchableStyle = {
         borderRadius: borderRadius,
         backgroundColor: buttonColor,
         paddingHorizontal:
-          (buttonSizeProperty && buttonSizeProperty.horizontalPadding) ||
-          DEFAULT_BUTTON_SIZES.default.horizontalPadding,
+          (buttonSizeProperty && buttonSizeProperty.paddingHorizontal) ||
+          DEFAULT_BUTTON_SIZES.default.paddingHorizontal,
         alignItems: align,
         alignSelf: !isStretched
           ? DEFAULT_BUTTON_ALIGN
