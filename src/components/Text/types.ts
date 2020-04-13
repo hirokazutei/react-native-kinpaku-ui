@@ -53,7 +53,7 @@ type TextFactoryProps<
   >;
   textVariation?: {
     [VariationKeys in keyof TextVariation]: TextVariationProps<
-      OptionalExistCondition<FontSize, keyof FontSize, undefined>,
+      OptionalExistCondition<FontSize, keyof FontSize, null>,
       AdditionalPalettes
     >
   };
