@@ -59,17 +59,17 @@ function buttonFactory<
     AllowCustomProps
   >;
 
-  type ButtonComponentType = React.FunctionComponent<ButtonProps>;
-
   // Context
   const themeContext: React.Context<keyof Themes> = React.createContext(
     'default' as keyof Themes,
   );
 
   // Button Collections
-  const buttons: {[key in ButtonShapeVariation]?: ButtonComponentType} = {};
+  const buttons: {
+    [key in ButtonShapeVariation]?: React.FunctionComponent<ButtonProps>
+  } = {};
 
-  // Creating Each Button Component
+  // Creating Each Button Componens
   for (const variationKey of BUTTON_SHAPE_VARIATION_KEYS) {
     const Button = ({
       _additionalButtonProps,
@@ -177,7 +177,9 @@ function buttonFactory<
     buttons[variationKey as ButtonShapeVariation] = Button;
   }
 
-  return buttons as {[key in ButtonShapeVariation]: ButtonComponentType};
+  return buttons as {
+    [key in ButtonShapeVariation]: React.FunctionComponent<ButtonProps>
+  };
 }
 
 export default buttonFactory;
