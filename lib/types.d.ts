@@ -9,7 +9,7 @@ declare type UnionDefaultKey<T> = T | 'default';
 declare type IntersectDefaultKey<T> = T & 'default';
 declare type Falsy = undefined | null | false;
 declare type NonExistent = undefined | null;
-declare type OptionalTrueCondition<T, IfFalse, IfTrue> = T extends Falsy ? IfFalse : T extends true ? IfTrue : IfFalse;
-declare type OptionalExistCondition<T, NonExist, Exist> = T extends NonExistent ? NonExist : Exist;
+declare type OptionalTrueCondition<T, IfTrue, IfFalse> = T extends Falsy ? IfFalse : T extends true ? IfTrue : IfFalse;
+declare type OptionalExistCondition<T, IfExist, IfNonExist> = T extends NonExistent ? IfNonExist : IfExist;
 export { AddDefaultToObject, Color, DefaultObject, Falsy, NonExistent, IntersectDefaultKey, OptionalExistCondition, OptionalTrueCondition, UnionDefaultKey, };
 //# sourceMappingURL=types.d.ts.map

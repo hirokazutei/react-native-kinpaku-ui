@@ -1,6 +1,6 @@
 /// <reference types="react" />
-import { TextStyle, TextInputProps } from 'react-native';
-import { AddDefaultToObject, Color } from '../../types';
+import { TextStyle, TextInputProps, ViewProps, ViewStyle } from 'react-native';
+import { AddDefaultToObject, Color, OptionalTrueCondition } from '../../types';
 import { ThemePalette } from '../../theme/types';
 declare type InputFieldVariation = 'creditCardNumber' | 'decimal' | 'email' | 'freeField' | 'name' | 'number' | 'oneTimeNumberCode' | 'oneTimeCode' | 'paragragh' | 'passcode' | 'password' | 'phone' | 'url' | 'username';
 declare type InputFieldShape = 'sharp' | 'rounded' | 'circular';
@@ -21,10 +21,10 @@ declare type InputFieldVariationProps = {
     clearTextOnFocus?: boolean;
     caretHidden?: TextInputProps['caretHidden'];
     dataDetectorTypes?: TextInputProps['dataDetectorTypes'];
-    maxLength?: TextInputProps['maxLength'];
     hasClearButton?: boolean;
-    leftIcon?: React.ReactNode;
     keyboardType?: TextInputProps['keyboardType'];
+    leftIcon?: React.ReactNode;
+    maxLength?: TextInputProps['maxLength'];
     multiline?: TextInputProps['multiline'];
     returnKeyType?: TextInputProps['returnKeyType'];
     rightIcon?: React.ReactNode;
@@ -32,7 +32,6 @@ declare type InputFieldVariationProps = {
     selectTextOnFocus?: TextInputProps['selectTextOnFocus'];
     spellCheck?: TextInputProps['spellCheck'];
     textContentType?: TextInputProps['textContentType'];
-    textAlign?: TextStyle['textAlign'];
     allowFontScaling?: boolean;
     fontFamily?: string;
     isBold?: boolean;
@@ -41,8 +40,9 @@ declare type InputFieldVariationProps = {
     lineHeight?: number;
     maxFontSizeMultiplier?: number;
     minimumFontScale?: number;
+    textAlign?: TextStyle['textAlign'];
 };
-declare type InputFieldFactoryProps<Themes, AdditionalPalettes, InputFieldSize> = {
+declare type InputFieldFactoryProps<Themes, AdditionalPalettes, InputFieldSize, AllowCustomProps> = {
     themes: {
         [ThemeKey in keyof AddDefaultToObject<Themes, ThemePalette>]: ThemePalette;
     };
@@ -56,7 +56,11 @@ declare type InputFieldFactoryProps<Themes, AdditionalPalettes, InputFieldSize> 
     defaultColor?: keyof (ThemePalette & AdditionalPalettes);
     defaultShape?: InputFieldShape;
 };
-declare type InputFieldProps<AdditionalPalettes, InputFieldSize> = {
+declare type InputFieldProps<AdditionalPalettes, InputFieldSize, AllowCustomProps> = {
+    _additionalTextInputProps?: OptionalTrueCondition<AllowCustomProps, TextInputProps, never>;
+    _additionalTextInputStyle?: OptionalTrueCondition<AllowCustomProps, TextStyle, never>;
+    _additionalWrapperProps?: OptionalTrueCondition<AllowCustomProps, ViewProps, never>;
+    _additionalWrapperStyle?: OptionalTrueCondition<AllowCustomProps, ViewStyle, never>;
     autoFocus?: boolean;
     backgroundColor?: keyof (ThemePalette & AdditionalPalettes);
     borderColor?: keyof (ThemePalette & AdditionalPalettes);
