@@ -17,9 +17,9 @@ type OptionalTrueCondition<T, IfTrue, IfFalse> = T extends Falsy
   ? IfTrue
   : IfFalse;
 
-type OptionalExistCondition<T, NonExist, Exist> = T extends NonExistent
-  ? NonExist
-  : Exist;
+type OptionalExistCondition<T, IfExist, IfNonExist> = T extends NonExistent
+  ? IfNonExist
+  : IfExist;
 
 export {
   AddDefaultToObject,

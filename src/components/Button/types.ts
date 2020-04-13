@@ -11,10 +11,10 @@ import {
   OptionalTrueCondition,
   UnionDefaultKey,
 } from '../../types';
-import {ThemePalette} from '../../theme/types';
+import {ThemePalette, Themes as ThemesType} from '../../theme/types';
 
 type ButtonShapeVariation = 'Circular' | 'Round' | 'Sharp';
-type ButtonType = 'solid' | 'clear' | 'outline';
+type ButtonType = 'fill' | 'clear' | 'outline';
 
 type ButtonSizeProps = {
   borderRadius: number;
@@ -30,9 +30,7 @@ type ButtonFactoryProps<
   //@ts-ignore: TS6133 Unused Variable
   AllowCustomProps
 > = {
-  themes: {
-    [ThemeKey in keyof AddDefaultToObject<Themes, ThemePalette>]: ThemePalette
-  };
+  themes: ThemesType<Themes>;
   additionalPalettes?: {
     [AdditionalPaletteKey in keyof AdditionalPalettes]: Color
   };
@@ -72,7 +70,7 @@ type ButtonProps<AdditionalPalettes, ButtonSize, AllowCustomProps> = {
   isDisabled?: boolean;
   isStretched?: boolean;
   size?: UnionDefaultKey<keyof ButtonSize>;
-  title: string;
+  label: string;
   type?: ButtonType;
   onPress: (args: any) => any;
 };

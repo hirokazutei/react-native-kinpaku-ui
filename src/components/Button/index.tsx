@@ -52,35 +52,26 @@ function buttonFactory<
     >
   >
 } {
+  // Types
+  type ButtonProps = Props<
+    AdditionalPalettes,
+    OptionalExistCondition<ButtonSize, ButtonSize, typeof DEFAULT_BUTTON_SIZE>,
+    AllowCustomProps
+  >;
+
+  type ButtonComponentType = React.FunctionComponent<ButtonProps>;
+
+  // Context
   const themeContext: React.Context<keyof Themes> = React.createContext(
     'default' as keyof Themes,
   );
-  const buttons: {
-    [key in ButtonShapeVariation]?: React.FunctionComponent<
-      Props<
-        AdditionalPalettes,
-        OptionalExistCondition<
-          ButtonSize,
-          ButtonSize,
-          typeof DEFAULT_BUTTON_SIZE
-        >,
-        AllowCustomProps
-      >
-    >
-  } = {};
 
+  // Button Collections
+  const buttons: {[key in ButtonShapeVariation]?: ButtonComponentType} = {};
+
+  // Creating Each Button Component
   for (const variationKey of BUTTON_SHAPE_VARIATION_KEYS) {
-    const Button: React.FunctionComponent<
-      Props<
-        AdditionalPalettes,
-        OptionalExistCondition<
-          ButtonSize,
-          ButtonSize,
-          typeof DEFAULT_BUTTON_SIZE
-        >,
-        AllowCustomProps
-      >
-    > = ({
+    const Button = ({
       _additionalButtonProps,
       _additionalButtonStyle,
       _additionalTextProps,
@@ -91,27 +82,9 @@ function buttonFactory<
       isStretched,
       onPress,
       size = 'default',
-      title,
+      label,
       type = defaultType,
-    }: Props<
-      AdditionalPalettes,
-      OptionalExistCondition<
-        ButtonSize,
-        ButtonSize,
-        typeof DEFAULT_BUTTON_SIZE
-      >,
-      AllowCustomProps
-    >): React.ReactElement<
-      Props<
-        AdditionalPalettes,
-        OptionalExistCondition<
-          ButtonSize,
-          ButtonSize,
-          typeof DEFAULT_BUTTON_SIZE
-        >,
-        AllowCustomProps
-      >
-    > => {
+    }: ButtonProps) => {
       // Palettes
       const currentThemeKey = useContext(themeContext) || 'default';
       const currentTheme =
@@ -136,12 +109,7 @@ function buttonFactory<
 
       // Size
       const buttonSizeProperty = sizes
-        ? (sizes as {
-            [SizeKey in keyof AddDefaultToObject<
-              ButtonSize,
-              ButtonSizeProps
-            >]: ButtonSizeProps
-          })[size as keyof AddDefaultToObject<ButtonSize, ButtonSizeProps>]
+        ? sizes[size as keyof AddDefaultToObject<ButtonSize, ButtonSizeProps>]
         : DEFAULT_BUTTON_SIZE[size as UnionDefaultKey<DefaultButtonSize>];
 
       // BorderStyles
@@ -154,14 +122,16 @@ function buttonFactory<
           : {};
 
       // BorderRadius
-      let borderRadius = 0;
-      if (buttonSizeProperty) {
-        borderRadius =
-          BORDER_RADIUS_MULTIPLIER[variationKey as ButtonShapeVariation] *
-          buttonSizeProperty.borderRadius;
-      } else {
-        borderRadius = DEFAULT_BUTTON_SIZE.default.paddingHorizontal;
-      }
+      const borderRadius = (() => {
+        if (buttonSizeProperty) {
+          return (
+            BORDER_RADIUS_MULTIPLIER[variationKey as ButtonShapeVariation] *
+            buttonSizeProperty.borderRadius
+          );
+        } else {
+          return DEFAULT_BUTTON_SIZE.default.paddingHorizontal;
+        }
+      })();
 
       // Touchable Style
       const touchableStyle = {
@@ -196,10 +166,10 @@ function buttonFactory<
           style={touchableStyle}
           disabled={isDisabled}
           onPress={onPress}
-          accessibilityLabel={title}
+          accessibilityLabel={label}
           {..._additionalButtonProps || {}}>
           <Text style={textStyle} {..._additionalTextProps || {}}>
-            {title}
+            {label}
           </Text>
         </TouchableOpacity>
       );
@@ -207,19 +177,7 @@ function buttonFactory<
     buttons[variationKey as ButtonShapeVariation] = Button;
   }
 
-  return buttons as {
-    [key in ButtonShapeVariation]: React.FunctionComponent<
-      Props<
-        AdditionalPalettes,
-        OptionalExistCondition<
-          ButtonSize,
-          ButtonSize,
-          typeof DEFAULT_BUTTON_SIZE
-        >,
-        AllowCustomProps
-      >
-    >
-  };
+  return buttons as {[key in ButtonShapeVariation]: ButtonComponentType};
 }
 
 export default buttonFactory;

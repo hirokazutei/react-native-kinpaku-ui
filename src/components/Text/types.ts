@@ -53,7 +53,7 @@ type TextFactoryProps<
   >;
   textVariation?: {
     [VariationKeys in keyof TextVariation]: TextVariationProps<
-      OptionalExistCondition<FontSize, FontSize, undefined>,
+      OptionalExistCondition<FontSize, keyof FontSize, undefined>,
       AdditionalPalettes
     >
   };
@@ -67,7 +67,7 @@ type TextProps<AdditionalPalettes, FontSize, EmphasisToggleable> = {
   ellipsizeMode?: ReactNativeTextProps['ellipsizeMode'];
   italic?: OptionalTrueCondition<EmphasisToggleable, boolean, never>;
   numberOfLines?: number;
-  size?: OptionalExistCondition<FontSize, keyof FontSize, number>;
+  size?: OptionalExistCondition<FontSize, FontSize, number>;
   lineThrough?: OptionalTrueCondition<EmphasisToggleable, boolean, never>;
   underline?: OptionalTrueCondition<EmphasisToggleable, boolean, never>;
 };

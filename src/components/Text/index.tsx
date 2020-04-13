@@ -77,7 +77,7 @@ function textFactory<
       } = textVariation
         ? (textVariation as {
             [VariationKey in keyof TextVariation]: TextVariationProps<
-              FontSize,
+              OptionalExistCondition<FontSize, keyof FontSize, undefined>,
               AdditionalPalettes
             >
           })[variationName as keyof TextVariation]

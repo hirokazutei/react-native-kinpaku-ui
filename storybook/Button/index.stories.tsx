@@ -19,7 +19,7 @@ const {Sharp, Round, Circular} = buttonFactory<typeof themes, null, null, null>(
 );
 
 const DEFAULT_PROPS = {
-  title: 'PRESS HERE',
+  label: 'PRESS HERE',
 };
 
 const BUTTON_TYPES: Array<ButtonType> = ['fill', 'outline', 'clear'];
@@ -44,13 +44,13 @@ const sizeSelect: {
 };
 
 const getRequiredProps = (overrides = {}): ButtonProps<null, null, null> => {
-  const {title} = {
+  const {label} = {
     ...DEFAULT_PROPS,
     ...overrides,
   };
   return {
     onPress: action('button-pressed'),
-    title: text('Title', title),
+    label: text('Title', label),
   };
 };
 

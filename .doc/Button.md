@@ -175,7 +175,7 @@ type DefaultColor = keyof (ThemePalette & AdditionalPalettes);
  * @param props - properties
  *
  * Required:
- * @param props.title - title of the button
+ * @param props.label - label of the button
  * @param props.onPress - onPress event of the button
  *
  * Optional:
