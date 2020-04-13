@@ -1,11 +1,6 @@
 import React, {useContext} from 'react';
 import {Text, TextStyle} from 'react-native';
-import {
-  DefaultObject,
-  OptionalExistCondition,
-  UnionDefaultKey,
-} from '../../types';
-import {ThemePalette} from '../../theme/types';
+import {OptionalExistCondition, UnionDefaultKey} from '../../types';
 import {colorResolverFactory} from '../../helper';
 import {
   TextFactoryProps,

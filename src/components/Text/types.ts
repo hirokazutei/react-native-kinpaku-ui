@@ -22,7 +22,7 @@ type TextVariationProps<FontSize, AdditionalPalettes> = {
   fontFamily?: string;
   fontSize?: FontSize extends string | string
     ? NonNullable<TextSizeProps<FontSize>>
-    : never;
+    : undefined;
   fontWeight?: TextStyle['fontWeight'];
   isBold?: boolean;
   isItalic?: boolean;
@@ -46,10 +46,10 @@ type TextFactoryProps<
   additionalPalettes?: {
     [AdditionalPaletteKeys in keyof AdditionalPalettes]: Color
   };
-  defaultFontSizeKey?: OptionalExistCondition<FontSize, never, FontSize>;
+  defaultFontSizeKey?: OptionalExistCondition<FontSize, undefined, FontSize>;
   textVariation?: {
     [VariationKeys in keyof TextVariation]: TextVariationProps<
-      OptionalExistCondition<FontSize, never, FontSize>,
+      OptionalExistCondition<FontSize, undefined, FontSize>,
       AdditionalPalettes
     >
   };

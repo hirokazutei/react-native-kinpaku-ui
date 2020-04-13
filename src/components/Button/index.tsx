@@ -11,6 +11,7 @@ import {
   ButtonProps as Props,
   ButtonShapeVariation,
   ButtonSizeProps,
+  ButtonType,
 } from './types';
 import {
   DEFAULT_BUTTON_SIZE,
@@ -32,7 +33,7 @@ function buttonFactory<
   sizes,
   additionalPalettes,
   defaultColor,
-  defaultType = 'fill',
+  defaultType = 'fill' as ButtonType,
 }: ButtonFactoryProps<
   Themes,
   AdditionalPalettes,
@@ -125,9 +126,13 @@ function buttonFactory<
           ? currentTheme.disabled
           : colorResolver({color, defaultColor: currentTheme.primary});
         const buttonColor =
-          type === 'fill' ? primaryColor : currentTheme.background;
+          type === ('fill' as ButtonType)
+            ? primaryColor
+            : currentTheme.background;
         const fontColor =
-          type === 'fill' ? currentTheme.background : primaryColor;
+          type === ('fill' as ButtonType)
+            ? currentTheme.background
+            : primaryColor;
 
         // Size
         const buttonSizeProperty = sizes

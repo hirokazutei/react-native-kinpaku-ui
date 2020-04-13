@@ -30,7 +30,6 @@ const UIFactory = <ThemeObject, AdditionalPalettes>(
     false
   >({
     themes,
-    checkBoxShape: 'Sharp',
   });
   const InputField = inputFieldFactory<
     Themes<ThemeObject>,
@@ -57,7 +56,7 @@ const UIFactory = <ThemeObject, AdditionalPalettes>(
   });
   const {Title, Heading, SubHeading, Body, Caption, Quote} = textFactory<
     typeof themes,
-    null,
+    AdditionalPalettes,
     typeof DEFAULT_TEXT_VARIATION,
     null,
     true

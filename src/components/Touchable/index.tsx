@@ -5,7 +5,6 @@ import {
   OptionalExistCondition,
   UnionDefaultKey,
 } from '../../types';
-import {ThemePalette} from '../../theme/types';
 import {
   TouchableAllSizeProps,
   TouchableFactoryProps,
