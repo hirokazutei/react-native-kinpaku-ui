@@ -52,7 +52,7 @@ function buttonFactory<
     >
   >
 } {
-  // Types
+  // Type
   type ButtonProps = Props<
     AdditionalPalettes,
     OptionalExistCondition<ButtonSize, ButtonSize, typeof DEFAULT_BUTTON_SIZE>,
@@ -69,7 +69,7 @@ function buttonFactory<
     [key in ButtonShapeVariation]?: React.FunctionComponent<ButtonProps>
   } = {};
 
-  // Creating Each Button Componens
+  // Creating Each Button Components
   for (const variationKey of BUTTON_SHAPE_VARIATION_KEYS) {
     const Button = ({
       _additionalButtonProps,
