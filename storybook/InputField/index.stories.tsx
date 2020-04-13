@@ -8,13 +8,13 @@ import themes from '../../src/themes';
 import {ThemePalette} from '../../src/theme/types';
 import {InputFieldProps} from '../../src/components/InputField/types';
 import inputFieldFactory from '../../src/components/InputField';
-import {INPUT_FIELD_TYPES} from '../../src/components/InputField/constants';
+import {INPUT_FIELD_TYPE} from '../../src/components/InputField/constants';
 import {
-  InputFieldTypes,
-  InputFieldShapes,
+  InputFieldType,
+  InputFieldShape,
 } from '../../src/components/InputField/types';
 
-const Inputs = INPUT_FIELD_TYPES.map((type: InputFieldTypes) => {
+const Inputs = INPUT_FIELD_TYPE.map((type: InputFieldType) => {
   return inputFieldFactory<typeof themes, null, null>({
     themes,
     inputFieldType: type,
@@ -25,7 +25,7 @@ const DEFAULT_PROPS = {
   value: '',
 };
 
-const shapeSelect: {[key in InputFieldShapes]: InputFieldShapes} = {
+const shapeSelect: {[key in InputFieldShape]: InputFieldShape} = {
   sharp: 'sharp',
   rounded: 'rounded',
   circular: 'circular',

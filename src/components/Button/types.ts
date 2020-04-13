@@ -1,9 +1,9 @@
 import {
-  TouchableOpacityProps,
-  TextProperties,
-  ViewStyle,
-  TextStyle,
   FlexAlignType,
+  TextProperties,
+  TextStyle,
+  TouchableOpacityProps,
+  ViewStyle,
 } from 'react-native';
 import {
   AddDefaultToObject,
@@ -13,21 +13,20 @@ import {
 } from '../../types';
 import {ThemePalette} from '../../theme/types';
 
-// FIX: This should be ButtonShape and takes in as an arg in factory
-type ButtonVariations = 'Circular' | 'Round' | 'Sharp';
-type ButtonTypes = 'solid' | 'clear' | 'outline';
+type ButtonShapeVariation = 'Circular' | 'Round' | 'Sharp';
+type ButtonType = 'solid' | 'clear' | 'outline';
 
 type ButtonSizeProps = {
-  horizontalPadding: number;
-  verticalPaddding: number;
-  fontSize: number;
   borderRadius: number;
+  fontSize: number;
+  paddingHorizontal: number;
+  paddingVertical: number;
 };
 
 type ButtonFactoryProps<
   Themes,
   AdditionalPalettes,
-  ButtonSizes,
+  ButtonSize,
   //@ts-ignore: TS6133 Unused Variable
   AllowCustomProps
 > = {
@@ -39,14 +38,15 @@ type ButtonFactoryProps<
   };
   sizes?: {
     [SizeKey in keyof AddDefaultToObject<
-      ButtonSizes,
+      ButtonSize,
       ButtonSizeProps
     >]: ButtonSizeProps
   };
-  defaultType?: ButtonTypes;
+  defaultColor?: keyof (ThemePalette & AdditionalPalettes);
+  defaultType?: ButtonType;
 };
 
-type ButtonProps<AdditionalPalettes, ButtonSizes, AllowCustomProps> = {
+type ButtonProps<AdditionalPalettes, ButtonSize, AllowCustomProps> = {
   _additionalButtonProps?: OptionalTrueCondition<
     AllowCustomProps,
     never,
@@ -71,16 +71,16 @@ type ButtonProps<AdditionalPalettes, ButtonSizes, AllowCustomProps> = {
   color?: keyof (ThemePalette & AdditionalPalettes);
   isDisabled?: boolean;
   isStretched?: boolean;
-  size?: UnionDefaultKey<keyof ButtonSizes>;
+  size?: UnionDefaultKey<keyof ButtonSize>;
   title: string;
-  type?: ButtonTypes;
+  type?: ButtonType;
   onPress: (args: any) => any;
 };
 
 export {
   ButtonProps,
-  ButtonVariations,
+  ButtonShapeVariation,
   ButtonSizeProps,
-  ButtonTypes,
+  ButtonType,
   ButtonFactoryProps,
 };

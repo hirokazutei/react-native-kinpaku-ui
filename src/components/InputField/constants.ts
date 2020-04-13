@@ -1,13 +1,35 @@
 import {Platform} from 'react-native';
+import {UnionDefaultKey} from '../../types';
 import {
-  InputFieldTypes,
   InputFieldSizeProps,
+  InputFieldType,
+  InputFieldVariation,
   InputFieldVariationProps,
-  InputFieldVariations,
 } from './types';
 
-const DEFAULT_INPUT_VARIATION_SETTINGS: {
-  [key in InputFieldVariations]: InputFieldVariationProps
+type DefaultInputFieldSize = 'medium';
+
+const DEFAULTLESS_INPUT_FIELD_SIZE: {
+  [key in DefaultInputFieldSize]: InputFieldSizeProps
+} = {
+  medium: {
+    borderWidth: 2,
+    fontSize: 12,
+    padding: 8,
+  },
+};
+
+const DEFAULT_INPUT_FIELD_SIZE: {
+  [key in UnionDefaultKey<DefaultInputFieldSize>]: InputFieldSizeProps
+} = {
+  ...DEFAULTLESS_INPUT_FIELD_SIZE,
+  default: DEFAULTLESS_INPUT_FIELD_SIZE.medium,
+};
+
+const DEFAULT_INPUT_FIELD_BORDER_WIDTH = 2;
+
+const DEFAULT_INPUT_VARIATION_SETTING: {
+  [key in InputFieldVariation]: InputFieldVariationProps
 } = {
   creditCardNumber: {
     autoCapitalize: 'none',
@@ -273,16 +295,6 @@ const DEFAULT_INPUT_VARIATION_SETTINGS: {
   },
 };
 
-const DEFAULT_INPUT_FIELD_SIZE: InputFieldSizeProps = {
-  borderWidth: 2,
-  fontSize: 12,
-  padding: 8,
-};
-
-const DEFAULT_BORDER_WIDTH = 2;
-
-type InputFieldSizes = 'small' | 'medium' | 'large';
-
 /* TODO:
 Accessibility Prop
 - allowFontScaling
@@ -292,17 +304,16 @@ Methods
 - isFocused()
 */
 
-const INPUT_FIELD_TYPES: Array<InputFieldTypes> = [
-  'Underline',
-  'Outline',
-  'Fill',
+const INPUT_FIELD_TYPE: Array<InputFieldType> = [
+  'underline',
+  'outline',
+  'fill',
 ];
 
 export {
-  DEFAULT_BORDER_WIDTH,
+  DEFAULT_INPUT_FIELD_BORDER_WIDTH,
   DEFAULT_INPUT_FIELD_SIZE,
-  InputFieldSizes,
-  INPUT_FIELD_TYPES,
-  DEFAULT_INPUT_VARIATION_SETTINGS,
-  InputFieldVariations,
+  DEFAULT_INPUT_VARIATION_SETTING,
+  INPUT_FIELD_TYPE,
+  InputFieldVariation,
 };

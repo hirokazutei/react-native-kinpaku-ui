@@ -3,41 +3,41 @@ import {Themes, ThemePalette} from './theme/types';
 // Button
 import buttonFactory from './components/Button';
 import {
-  ButtonProps,
-  ButtonVariations,
-  ButtonSizeProps,
-  ButtonTypes,
   ButtonFactoryProps,
+  ButtonProps,
+  ButtonShapeVariation,
+  ButtonSizeProps,
+  ButtonType,
 } from './components/Button/types';
 // CheckBox
 import checkBoxFactory from './components/CheckBox';
 import {
-  CheckBoxProps,
-  CheckBoxShapes,
-  CheckBoxSizeProps,
-  CheckBoxVariations,
   CheckBoxFactoryProps,
+  CheckBoxProps,
+  CheckBoxShapeVariation,
+  CheckBoxSizeProps,
+  CheckBoxType,
 } from './components/CheckBox/types';
 // Input
 import inputFieldFactory from './components/InputField';
 import {
   InputFieldFactoryProps,
   InputFieldProps,
-  InputFieldShapes,
+  InputFieldShape,
   InputFieldSizeProps,
-  InputFieldTypes,
+  InputFieldType,
+  InputFieldVariation,
   InputFieldVariationProps,
-  InputFieldVariations,
 } from './components/InputField/types';
 // Touchable
 import touchableFactory from './components/Touchable';
 import {
-  TouchableTypes,
+  TouchableAllSizeProps,
+  TouchableFactoryProps,
   TouchableProps,
   TouchableSizeProps,
-  TouchableFactoryProps,
+  TouchableTypeVariations,
   TouchableVerHorSizeProps,
-  TouchableAllSizeProps,
 } from './components/Touchable/types';
 // RadioButton
 import radioButtonFactory from './components/RadioButton';
@@ -45,56 +45,56 @@ import {
   RadioButtonFactoryProps,
   RadioButtonProps,
   RadioButtonSizeProps,
-  RadioButtonVariations,
+  RadioButtonTypeVariation,
 } from './components/RadioButton/types';
 // Text
 import textFactory from './components/Text';
 import {
-  TextSizeProps,
-  TextVariationProps,
   TextFactoryProps,
   TextProps,
+  TextSizeProps,
+  TextVariationProps,
 } from './components/Text/types';
 
 export {
-  buttonFactory,
   ButtonFactoryProps,
   ButtonProps,
+  ButtonType,
+  ButtonShapeVariation,
   ButtonSizeProps,
-  ButtonTypes,
-  ButtonVariations,
-  checkBoxFactory,
-  CheckBoxProps,
-  CheckBoxShapes,
-  CheckBoxSizeProps,
-  CheckBoxVariations,
+  buttonFactory,
   CheckBoxFactoryProps,
-  radioButtonFactory,
+  CheckBoxProps,
+  CheckBoxShapeVariation,
+  CheckBoxSizeProps,
+  CheckBoxType,
+  checkBoxFactory,
   InputFieldFactoryProps,
   InputFieldProps,
-  InputFieldShapes,
+  InputFieldShape,
   InputFieldSizeProps,
-  InputFieldTypes,
+  InputFieldType,
   InputFieldVariationProps,
-  InputFieldVariations,
+  InputFieldVariation,
   inputFieldFactory,
   RadioButtonFactoryProps,
   RadioButtonProps,
   RadioButtonSizeProps,
-  RadioButtonVariations,
+  RadioButtonTypeVariation,
+  radioButtonFactory,
   ThemePalette,
   Themes,
-  textFactory,
   TextFactoryProps,
   TextProps,
   TextSizeProps,
   TextVariationProps,
+  textFactory,
   TouchableAllSizeProps,
-  touchableFactory,
   TouchableFactoryProps,
   TouchableProps,
   TouchableSizeProps,
-  TouchableTypes,
+  TouchableTypeVariations,
   TouchableVerHorSizeProps,
+  touchableFactory,
   UIFactory,
 };

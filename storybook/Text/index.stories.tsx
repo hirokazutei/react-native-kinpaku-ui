@@ -8,17 +8,17 @@ import themes from '../../src/themes';
 import {ThemePalette} from '../../src/theme/types';
 import {TextProps} from '../../src/components/Text/types';
 import textFactory from '../../src/components/Text';
-import {DEFAULT_TEXT_VARIATIONS} from '../../src/components/Text/constants';
+import {DEFAULT_TEXT_VARIATION} from '../../src/components/Text/constants';
 
 const {Title, Heading, SubHeading, Body, Caption, Quote} = textFactory<
   typeof themes,
   null,
-  typeof DEFAULT_TEXT_VARIATIONS,
+  typeof DEFAULT_TEXT_VARIATION,
   null,
   true
 >({
   themes,
-  textVariations: DEFAULT_TEXT_VARIATIONS,
+  textVariation: DEFAULT_TEXT_VARIATION,
 });
 
 const DEFAULT_PROPS = {

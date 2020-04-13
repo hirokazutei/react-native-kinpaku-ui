@@ -1,10 +1,13 @@
-import { InputFieldTypes, InputFieldSizeProps, InputFieldVariationProps, InputFieldVariations } from './types';
-declare const DEFAULT_INPUT_VARIATION_SETTINGS: {
-    [key in InputFieldVariations]: InputFieldVariationProps;
+import { UnionDefaultKey } from '../../types';
+import { InputFieldSizeProps, InputFieldType, InputFieldVariation, InputFieldVariationProps } from './types';
+declare type DefaultInputFieldSize = 'medium';
+declare const DEFAULT_INPUT_FIELD_SIZE: {
+    [key in UnionDefaultKey<DefaultInputFieldSize>]: InputFieldSizeProps;
 };
-declare const DEFAULT_INPUT_FIELD_SIZE: InputFieldSizeProps;
-declare const DEFAULT_BORDER_WIDTH = 2;
-declare type InputFieldSizes = 'small' | 'medium' | 'large';
-declare const INPUT_FIELD_TYPES: Array<InputFieldTypes>;
-export { DEFAULT_BORDER_WIDTH, DEFAULT_INPUT_FIELD_SIZE, InputFieldSizes, INPUT_FIELD_TYPES, DEFAULT_INPUT_VARIATION_SETTINGS, InputFieldVariations, };
+declare const DEFAULT_INPUT_FIELD_BORDER_WIDTH = 2;
+declare const DEFAULT_INPUT_VARIATION_SETTING: {
+    [key in InputFieldVariation]: InputFieldVariationProps;
+};
+declare const INPUT_FIELD_TYPE: Array<InputFieldType>;
+export { DEFAULT_INPUT_FIELD_BORDER_WIDTH, DEFAULT_INPUT_FIELD_SIZE, DEFAULT_INPUT_VARIATION_SETTING, INPUT_FIELD_TYPE, InputFieldVariation, };
 //# sourceMappingURL=constants.d.ts.map

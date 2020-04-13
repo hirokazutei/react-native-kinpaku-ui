@@ -1,46 +1,47 @@
 import React, {useContext} from 'react';
 import {TouchableOpacity, View, ViewStyle} from 'react-native';
 import {
-  CheckBoxFactoryProps,
-  CheckBoxProps as Props,
-  CheckBoxSizeProps,
-  CheckBoxVariations,
-} from './types';
-import {
-  UnionDefaultKey,
-  OptionalExistCondition,
   AddDefaultToObject,
+  OptionalExistCondition,
+  UnionDefaultKey,
 } from '../../types';
 import {ThemePalette} from '../../theme/types';
 import {
-  CHECK_BOX_VARIATION_KEYS,
+  CheckBoxFactoryProps,
+  CheckBoxProps as Props,
+  CheckBoxShapeVariation,
+  CheckBoxSizeProps,
+} from './types';
+import {
+  CHECK_BOX_SHAPE_VARIATION_KEYS,
   DEFAULT_CHECK_BOX_SIZES,
-  DefaultCheckBoxSizes,
+  DefaultCheckBoxSize,
 } from './constants';
 
 function checkBoxFactory<
   Themes,
   AdditionalPalettes,
-  CheckBoxSizes,
+  CheckBoxSize,
   AllowCustomProps
 >({
   themes,
   sizes,
   additionalPalettes,
-  checkBoxShape,
+  defaultColor,
+  defaultType = 'fill',
 }: CheckBoxFactoryProps<
   Themes,
   AdditionalPalettes,
-  CheckBoxSizes,
+  CheckBoxSize,
   AllowCustomProps
 >): {
-  [key in CheckBoxVariations]: React.FunctionComponent<
+  [key in CheckBoxShapeVariation]: React.FunctionComponent<
     Props<
       AdditionalPalettes,
       OptionalExistCondition<
-        CheckBoxSizes,
+        CheckBoxSize,
         typeof DEFAULT_CHECK_BOX_SIZES,
-        CheckBoxSizes
+        CheckBoxSize
       >,
       AllowCustomProps
     >
@@ -50,66 +51,59 @@ function checkBoxFactory<
     'default' as keyof Themes,
   );
   const checkBoxes: {
-    [key in CheckBoxVariations]?: React.FunctionComponent<
+    [key in CheckBoxShapeVariation]?: React.FunctionComponent<
       Props<
         AdditionalPalettes,
         OptionalExistCondition<
-          CheckBoxSizes,
+          CheckBoxSize,
           typeof DEFAULT_CHECK_BOX_SIZES,
-          CheckBoxSizes
+          CheckBoxSize
         >,
         AllowCustomProps
       >
     >
   } = {};
-  CHECK_BOX_VARIATION_KEYS.forEach((variation: CheckBoxVariations) => {
-    const Button: React.FunctionComponent<
+  for (const variationKey of CHECK_BOX_SHAPE_VARIATION_KEYS) {
+    const CheckBox: React.FunctionComponent<
       Props<
         AdditionalPalettes,
         OptionalExistCondition<
-          CheckBoxSizes,
+          CheckBoxSize,
           typeof DEFAULT_CHECK_BOX_SIZES,
-          CheckBoxSizes
+          CheckBoxSize
         >,
         AllowCustomProps
       >
     > = ({
-      active,
-      color = 'primary',
-      isDisabled,
-      onPress,
-      size = 'default' as keyof AddDefaultToObject<
-        OptionalExistCondition<
-          CheckBoxSizes,
-          typeof DEFAULT_CHECK_BOX_SIZES,
-          CheckBoxSizes
-        >,
-        CheckBoxSizeProps
-      >,
       _customOuterViewProps,
       _customOuterViewStyle,
+      active,
+      color = defaultColor,
+      isDisabled,
+      onPress,
+      size = 'default',
+      type = defaultType,
     }: Props<
       AdditionalPalettes,
       OptionalExistCondition<
-        CheckBoxSizes,
+        CheckBoxSize,
         typeof DEFAULT_CHECK_BOX_SIZES,
-        CheckBoxSizes
+        CheckBoxSize
       >,
       AllowCustomProps
     >): React.ReactElement<
       Props<
         AdditionalPalettes,
         OptionalExistCondition<
-          CheckBoxSizes,
+          CheckBoxSize,
           typeof DEFAULT_CHECK_BOX_SIZES,
-          CheckBoxSizes
+          CheckBoxSize
         >,
         AllowCustomProps
       >
     > => {
       // Palettes
-      const currentThemeKey =
-        useContext(themeContext) || ('default' as UnionDefaultKey<Themes>);
+      const currentThemeKey = useContext(themeContext) || 'default';
       const currentTheme =
         themes[`${currentThemeKey}` as keyof UnionDefaultKey<Themes>];
 
@@ -120,15 +114,15 @@ function checkBoxFactory<
           currentTheme[color as keyof ThemePalette]
         : currentTheme.disabled;
       const activeColor =
-        variation === 'Fill' || variation === 'Reverse'
+        type === 'fill' || type === 'reverse'
           ? currentTheme.background
           : primaryColor;
       const inactiveColor =
-        variation === 'Fill' ? primaryColor : currentTheme.background;
+        type === 'fill' ? primaryColor : currentTheme.background;
       const outerBorderColor = primaryColor;
       const checkColor = active ? activeColor : inactiveColor;
       const innerBackgroundColor =
-        (variation === 'Reverse' && active) || variation === 'Fill'
+        (type === 'reverse' && active) || type === 'fill'
           ? primaryColor
           : currentTheme.background;
 
@@ -136,29 +130,24 @@ function checkBoxFactory<
       const sizeProperty = sizes
         ? (sizes as {
             [SizeKey in keyof AddDefaultToObject<
-              CheckBoxSizes,
+              CheckBoxSize,
               CheckBoxSizeProps
             >]: CheckBoxSizeProps
-          })[size as keyof AddDefaultToObject<CheckBoxSizes, CheckBoxSizeProps>]
-        : DEFAULT_CHECK_BOX_SIZES[
-            size as UnionDefaultKey<DefaultCheckBoxSizes>
-          ];
+          })[size as keyof AddDefaultToObject<CheckBoxSize, CheckBoxSizeProps>]
+        : DEFAULT_CHECK_BOX_SIZES[size as UnionDefaultKey<DefaultCheckBoxSize>];
 
       // BorderStyles
       const borderThickness = sizeProperty.size / 10;
       const borderChunk = sizeProperty.size / 8;
       let borderRadius = borderThickness * 2;
       borderRadius =
-        checkBoxShape && checkBoxShape === 'Circular'
-          ? borderRadius * 256
-          : borderRadius;
+        variationKey === 'Circular' ? borderRadius * 256 : borderRadius;
 
       const outerRingStyle: ViewStyle = {
         alignItems: 'center',
         backgroundColor: innerBackgroundColor,
         borderColor: outerBorderColor,
-        borderRadius:
-          checkBoxShape && checkBoxShape === 'Sharp' ? 0 : borderRadius,
+        borderRadius: variationKey === 'Sharp' ? 0 : borderRadius,
         borderWidth: borderThickness,
         justifyContent: 'center',
         width: sizeProperty.size,
@@ -187,44 +176,22 @@ function checkBoxFactory<
         </TouchableOpacity>
       );
     };
-    checkBoxes[variation as CheckBoxVariations] = Button;
-  });
-  const CheckBoxes = {
-    Outline: checkBoxes.Outline as React.FunctionComponent<
+    checkBoxes[variationKey as CheckBoxShapeVariation] = CheckBox;
+  }
+
+  return checkBoxes as {
+    [key in CheckBoxShapeVariation]: React.FunctionComponent<
       Props<
         AdditionalPalettes,
         OptionalExistCondition<
-          CheckBoxSizes,
+          CheckBoxSize,
           typeof DEFAULT_CHECK_BOX_SIZES,
-          CheckBoxSizes
+          CheckBoxSize
         >,
         AllowCustomProps
       >
-    >,
-    Reverse: checkBoxes.Reverse as React.FunctionComponent<
-      Props<
-        AdditionalPalettes,
-        OptionalExistCondition<
-          CheckBoxSizes,
-          typeof DEFAULT_CHECK_BOX_SIZES,
-          CheckBoxSizes
-        >,
-        AllowCustomProps
-      >
-    >,
-    Fill: checkBoxes.Fill as React.FunctionComponent<
-      Props<
-        AdditionalPalettes,
-        OptionalExistCondition<
-          CheckBoxSizes,
-          typeof DEFAULT_CHECK_BOX_SIZES,
-          CheckBoxSizes
-        >,
-        AllowCustomProps
-      >
-    >,
+    >
   };
-  return CheckBoxes;
 }
 
 export default checkBoxFactory;

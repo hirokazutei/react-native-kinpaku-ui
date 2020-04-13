@@ -1,4 +1,4 @@
-import {TouchableOpacityProps, ViewStyle, FlexAlignType} from 'react-native';
+import {FlexAlignType, TouchableOpacityProps, ViewStyle} from 'react-native';
 import {
   AddDefaultToObject,
   Color,
@@ -7,10 +7,10 @@ import {
 } from '../../types';
 import {ThemePalette} from '../../theme/types';
 
-// FIX: This Should Be Variations
-type TouchableTypes = 'solid' | 'outline';
+type TouchableTypeVariations = 'Fill' | 'Outline';
 
-type VerHor = {horizontalPadding: number; verticalPadding: number};
+type VerHor = {paddingHorizontal: number; paddingVertical: number};
+
 type Padding = {padding: number};
 
 type TouchableVerHorSizeProps = {
@@ -26,7 +26,7 @@ type TouchableSizeProps = TouchableVerHorSizeProps | TouchableAllSizeProps;
 type TouchableFactoryProps<
   Themes,
   AdditionalPalettes,
-  TouchableSizes,
+  TouchableSize,
   //@ts-ignore: TS6133 Unused Variable
   AllowCustomProps
 > = {
@@ -38,14 +38,14 @@ type TouchableFactoryProps<
   };
   sizes?: {
     [SizeKey in keyof AddDefaultToObject<
-      TouchableSizes,
+      TouchableSize,
       TouchableSizeProps
     >]: TouchableSizeProps
   };
-  defaultType?: TouchableTypes;
+  defaultType?: TouchableTypeVariations;
 };
 
-type TouchableProps<AdditionalPalettes, TouchableSizes, AllowCustomProps> = {
+type TouchableProps<AdditionalPalettes, TouchableSize, AllowCustomProps> = {
   _additionalProps?: OptionalTrueCondition<
     AllowCustomProps,
     never,
@@ -57,13 +57,12 @@ type TouchableProps<AdditionalPalettes, TouchableSizes, AllowCustomProps> = {
   color?: keyof (ThemePalette & AdditionalPalettes);
   isDisabled?: boolean;
   isStretched?: boolean;
-  size?: UnionDefaultKey<keyof TouchableSizes>;
-  type?: TouchableTypes;
+  size?: UnionDefaultKey<keyof TouchableSize>;
   onPress: (args: any) => any;
 };
 
 export {
-  TouchableTypes,
+  TouchableTypeVariations,
   TouchableProps,
   TouchableSizeProps,
   TouchableFactoryProps,

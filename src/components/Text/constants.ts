@@ -1,6 +1,6 @@
 import {TextVariationProps} from './types';
 
-type DefaultTextVariations =
+type DefaultTextVariation =
   | 'Title'
   | 'Heading'
   | 'SubHeading'
@@ -8,8 +8,8 @@ type DefaultTextVariations =
   | 'Caption'
   | 'Quote';
 
-const DEFAULT_TEXT_VARIATIONS: {
-  [textVariation in DefaultTextVariations]: TextVariationProps<null, null>
+const DEFAULT_TEXT_VARIATION: {
+  [textVariation in DefaultTextVariation]: TextVariationProps<null, null>
 } = {
   Title: {
     fontWeight: 'bold',
@@ -35,4 +35,4 @@ const DEFAULT_TEXT_VARIATIONS: {
   },
 };
 
-export {DefaultTextVariations, DEFAULT_TEXT_VARIATIONS};
+export {DEFAULT_TEXT_VARIATION, DefaultTextVariation};

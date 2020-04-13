@@ -109,15 +109,15 @@ See more in detail from the Themes doc.
 > `sizes` is an object with keys dictating the name of the size and value determining the size and shape of the `InputField`. If not specified, a default value is used.
 
 ```ts
-type Sizes = {
+type Size = {
   [SizeKey in keyof AddDefaultToObject<
-    InputFieldSizes,
+    InputFieldSize,
     InputFieldSizeProps
   >]: InputFieldSizeProps
 };
 ```
 
-- `InputFieldSizes`
+- `InputFieldSize`
   - Is the string literal of the keys of the sizes object.
   - `AddDefaultToObject` means that a default value MUST be specified.
 - `InputFieldSizePros`
@@ -163,7 +163,7 @@ type DefaultColor = keyof (ThemePalette & AdditionalPalettes);
 > A string literal that determines the type of the field.
 
 ```ts
-type InputFieldTypes = 'Underline' | 'Outline' | 'Fill' | 'UnderlinedFill';
+type InputFieldType = 'Underline' | 'Outline' | 'Fill' | 'UnderlinedFill';
 ```
 
 #### `defaultShape [Optional]`
@@ -171,10 +171,10 @@ type InputFieldTypes = 'Underline' | 'Outline' | 'Fill' | 'UnderlinedFill';
 > A string literal that determines the shape of the field.
 
 ```ts
-type InputFieldShapes = 'sharp' | 'rounded' | 'circular';
+type InputFieldShape = 'sharp' | 'rounded' | 'circular';
 ```
 
-## InputField Variations
+## InputField Variation
 
 > These are the default variations that can be made with InputFieldFactory and UIFactory. For details on the properties of each variations, checkout this doc.
 

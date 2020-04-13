@@ -5,7 +5,7 @@ import inputFieldFactory from './components/InputField';
 import touchableFactory from './components/Touchable';
 import radioButtonFactory from './components/RadioButton';
 import textFactory from './components/Text';
-import {DEFAULT_TEXT_VARIATIONS} from './components/Text/constants';
+import {DEFAULT_TEXT_VARIATION} from './components/Text/constants';
 import {Color, DefaultObject} from './types';
 
 const UIFactory = <ThemeObject, AdditionalPalettes>(
@@ -30,7 +30,6 @@ const UIFactory = <ThemeObject, AdditionalPalettes>(
     false
   >({
     themes,
-    checkBoxShape: 'Sharp',
   });
   const InputField = inputFieldFactory<
     Themes<ThemeObject>,
@@ -57,13 +56,13 @@ const UIFactory = <ThemeObject, AdditionalPalettes>(
   });
   const {Title, Heading, SubHeading, Body, Caption, Quote} = textFactory<
     typeof themes,
-    null,
-    typeof DEFAULT_TEXT_VARIATIONS,
+    AdditionalPalettes,
+    typeof DEFAULT_TEXT_VARIATION,
     null,
     true
   >({
     ...commonProps,
-    textVariations: DEFAULT_TEXT_VARIATIONS,
+    textVariation: DEFAULT_TEXT_VARIATION,
   });
   return {
     Body,

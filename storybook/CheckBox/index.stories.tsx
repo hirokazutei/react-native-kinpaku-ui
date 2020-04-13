@@ -8,23 +8,17 @@ import Provider from '../Provider';
 import {IntersectDefaultKey, UnionDefaultKey} from '../../src/types';
 import themes from '../../src/themes';
 import {ThemePalette} from '../../src/Theme/types';
-import {CheckBoxProps} from '../../src/components/CheckBox/types';
+import {CheckBoxProps, CheckBoxType} from '../../src/components/CheckBox/types';
 import checkBoxFactory from '../../src/components/CheckBox';
-import {DefaultCheckBoxSizes} from '../../src/components/CheckBox/constants';
+import {DefaultCheckBoxSize} from '../../src/components/CheckBox/constants';
 
-const Sharp = checkBoxFactory<typeof themes, null, null, null>({
+const {Sharp, Round, Circular} = checkBoxFactory<
+  typeof themes,
+  null,
+  null,
+  null
+>({
   themes,
-  checkBoxShape: 'Sharp',
-});
-
-const Rounded = checkBoxFactory<typeof themes, null, null, null>({
-  themes,
-  checkBoxShape: 'Rounded',
-});
-
-const Circular = checkBoxFactory<typeof themes, null, null, null>({
-  themes,
-  checkBoxShape: 'Circular',
 });
 
 const colorSelect: {[key in keyof ThemePalette]?: keyof ThemePalette} = {
@@ -34,13 +28,19 @@ const colorSelect: {[key in keyof ThemePalette]?: keyof ThemePalette} = {
 };
 
 const sizeSelect: {
-  [key in IntersectDefaultKey<DefaultCheckBoxSizes>]?: UnionDefaultKey<
-    DefaultCheckBoxSizes
+  [key in IntersectDefaultKey<DefaultCheckBoxSize>]?: UnionDefaultKey<
+    DefaultCheckBoxSize
   >
 } = {
   small: 'small',
   medium: 'medium',
   large: 'large',
+};
+
+const typeSelect: {[key in CheckBoxType]: CheckBoxType} = {
+  outline: 'outline',
+  fill: 'fill',
+  reverse: 'reverse',
 };
 
 const getRequiredProps = (): CheckBoxProps<null, null, null> => {
@@ -55,6 +55,7 @@ const getOptionalProps = (): Partial<CheckBoxProps<null, null, null>> => {
     color: select('Color Options', colorSelect, undefined),
     isDisabled: boolean('isDisabled', undefined),
     size: select('Size Options', sizeSelect, undefined),
+    type: select('Type Options', typeSelect, undefined),
   };
 };
 
@@ -89,19 +90,13 @@ storiesOf('UI/CheckBox', module)
     <View style={styles.baseView}>
       <View style={styles.realignView}>
         <View style={styles.variationView}>
-          <Sharp.Outline {...getRequiredProps()} {...getOptionalProps()} />
-          <Sharp.Reverse {...getRequiredProps()} {...getOptionalProps()} />
-          <Sharp.Fill {...getRequiredProps()} {...getOptionalProps()} />
+          <Sharp {...getRequiredProps()} {...getOptionalProps()} />
         </View>
         <View style={styles.variationView}>
-          <Rounded.Outline {...getRequiredProps()} {...getOptionalProps()} />
-          <Rounded.Reverse {...getRequiredProps()} {...getOptionalProps()} />
-          <Rounded.Fill {...getRequiredProps()} {...getOptionalProps()} />
+          <Round {...getRequiredProps()} {...getOptionalProps()} />
         </View>
         <View style={styles.variationView}>
-          <Circular.Outline {...getRequiredProps()} {...getOptionalProps()} />
-          <Circular.Reverse {...getRequiredProps()} {...getOptionalProps()} />
-          <Circular.Fill {...getRequiredProps()} {...getOptionalProps()} />
+          <Circular {...getRequiredProps()} {...getOptionalProps()} />
         </View>
       </View>
     </View>

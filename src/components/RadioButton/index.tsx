@@ -1,28 +1,28 @@
 import React, {useContext} from 'react';
 import {TouchableOpacity, View, ViewStyle} from 'react-native';
 import {
-  RadioButtonFactoryProps,
-  RadioButtonProps as Props,
-  RadioButtonSizeProps,
-  RadioButtonVariations,
-} from './types';
-import {
   UnionDefaultKey,
   OptionalExistCondition,
   AddDefaultToObject,
 } from '../../types';
 import {ThemePalette} from '../../theme/types';
-import {
-  RADIO_BUTTON_VARIATION_KEYS,
-  DEFAULT_RADIO_BUTTON_SIZES,
-  DefaultRadioButtonSizes,
-} from './constants';
 import {colorResolverFactory} from '../../helper';
+import {
+  RadioButtonFactoryProps,
+  RadioButtonProps as Props,
+  RadioButtonSizeProps,
+  RadioButtonTypeVariation,
+} from './types';
+import {
+  RADIO_BUTTON_SHAPE_VARIATION_KEYS,
+  DEFAULT_RADIO_BUTTON_SIZE,
+  DefaultRadioButtonSize,
+} from './constants';
 
 function radioButtonFactory<
   Themes,
   AdditionalPalettes,
-  RadioButtonSizes,
+  RadioButtonSize,
   AllowCustomProps
 >({
   themes,
@@ -31,16 +31,16 @@ function radioButtonFactory<
 }: RadioButtonFactoryProps<
   Themes,
   AdditionalPalettes,
-  RadioButtonSizes,
+  RadioButtonSize,
   AllowCustomProps
 >): {
-  [key in RadioButtonVariations]: React.FunctionComponent<
+  [key in RadioButtonTypeVariation]: React.FunctionComponent<
     Props<
       AdditionalPalettes,
       OptionalExistCondition<
-        RadioButtonSizes,
-        typeof DEFAULT_RADIO_BUTTON_SIZES,
-        RadioButtonSizes
+        RadioButtonSize,
+        typeof DEFAULT_RADIO_BUTTON_SIZE,
+        RadioButtonSize
       >,
       AllowCustomProps
     >
@@ -50,26 +50,26 @@ function radioButtonFactory<
     'default' as keyof Themes,
   );
   const radioButtons: {
-    [key in RadioButtonVariations]?: React.FunctionComponent<
+    [key in RadioButtonTypeVariation]?: React.FunctionComponent<
       Props<
         AdditionalPalettes,
         OptionalExistCondition<
-          RadioButtonSizes,
-          typeof DEFAULT_RADIO_BUTTON_SIZES,
-          RadioButtonSizes
+          RadioButtonSize,
+          typeof DEFAULT_RADIO_BUTTON_SIZE,
+          RadioButtonSize
         >,
         AllowCustomProps
       >
     >
   } = {};
-  RADIO_BUTTON_VARIATION_KEYS.forEach((variation: RadioButtonVariations) => {
+  for (const shapeKey of RADIO_BUTTON_SHAPE_VARIATION_KEYS) {
     const Button: React.FunctionComponent<
       Props<
         AdditionalPalettes,
         OptionalExistCondition<
-          RadioButtonSizes,
-          typeof DEFAULT_RADIO_BUTTON_SIZES,
-          RadioButtonSizes
+          RadioButtonSize,
+          typeof DEFAULT_RADIO_BUTTON_SIZE,
+          RadioButtonSize
         >,
         AllowCustomProps
       >
@@ -80,9 +80,9 @@ function radioButtonFactory<
       onPress,
       size = 'default' as keyof AddDefaultToObject<
         OptionalExistCondition<
-          RadioButtonSizes,
-          typeof DEFAULT_RADIO_BUTTON_SIZES,
-          RadioButtonSizes
+          RadioButtonSize,
+          typeof DEFAULT_RADIO_BUTTON_SIZE,
+          RadioButtonSize
         >,
         RadioButtonSizeProps
       >,
@@ -93,18 +93,18 @@ function radioButtonFactory<
     }: Props<
       AdditionalPalettes,
       OptionalExistCondition<
-        RadioButtonSizes,
-        typeof DEFAULT_RADIO_BUTTON_SIZES,
-        RadioButtonSizes
+        RadioButtonSize,
+        typeof DEFAULT_RADIO_BUTTON_SIZE,
+        RadioButtonSize
       >,
       AllowCustomProps
     >): React.ReactElement<
       Props<
         AdditionalPalettes,
         OptionalExistCondition<
-          RadioButtonSizes,
-          typeof DEFAULT_RADIO_BUTTON_SIZES,
-          RadioButtonSizes
+          RadioButtonSize,
+          typeof DEFAULT_RADIO_BUTTON_SIZE,
+          RadioButtonSize
         >,
         AllowCustomProps
       >
@@ -128,33 +128,33 @@ function radioButtonFactory<
           currentTheme[color as keyof ThemePalette]
         : currentTheme.disabled;
       const activeColor =
-        variation === 'Reverse' ? currentTheme.background : primaryColor;
+        shapeKey === 'Reverse' ? currentTheme.background : primaryColor;
       const inactiveColor =
-        variation === 'Reverse' ? primaryColor : currentTheme.background;
+        shapeKey === 'Reverse' ? primaryColor : currentTheme.background;
       const outerRingColor = primaryColor;
       const dotColor = active ? activeColor : inactiveColor;
       const innerRingColor =
-        variation === 'Reverse' ? primaryColor : currentTheme.background;
+        shapeKey === 'Reverse' ? primaryColor : currentTheme.background;
 
       // Size
       const sizeProperty = sizes
         ? (sizes as {
             [SizeKey in keyof AddDefaultToObject<
-              RadioButtonSizes,
+              RadioButtonSize,
               RadioButtonSizeProps
             >]: RadioButtonSizeProps
           })[
             size as keyof AddDefaultToObject<
-              RadioButtonSizes,
+              RadioButtonSize,
               RadioButtonSizeProps
             >
           ]
-        : DEFAULT_RADIO_BUTTON_SIZES[
-            size as UnionDefaultKey<DefaultRadioButtonSizes>
+        : DEFAULT_RADIO_BUTTON_SIZE[
+            size as UnionDefaultKey<DefaultRadioButtonSize>
           ];
 
       const dotSize =
-        variation === 'Fill'
+        shapeKey === 'Fill'
           ? sizeProperty.size - sizeProperty.borderThickness * 2
           : sizeProperty.dotSize;
 
@@ -191,44 +191,21 @@ function radioButtonFactory<
         </TouchableOpacity>
       );
     };
-    radioButtons[variation as RadioButtonVariations] = Button;
-  });
-  const RadioButtons = {
-    Outline: radioButtons.Outline as React.FunctionComponent<
+    radioButtons[shapeKey as RadioButtonTypeVariation] = Button;
+  }
+  return radioButtons as {
+    [key in RadioButtonTypeVariation]: React.FunctionComponent<
       Props<
         AdditionalPalettes,
         OptionalExistCondition<
-          RadioButtonSizes,
-          typeof DEFAULT_RADIO_BUTTON_SIZES,
-          RadioButtonSizes
+          RadioButtonSize,
+          typeof DEFAULT_RADIO_BUTTON_SIZE,
+          RadioButtonSize
         >,
         AllowCustomProps
       >
-    >,
-    Reverse: radioButtons.Reverse as React.FunctionComponent<
-      Props<
-        AdditionalPalettes,
-        OptionalExistCondition<
-          RadioButtonSizes,
-          typeof DEFAULT_RADIO_BUTTON_SIZES,
-          RadioButtonSizes
-        >,
-        AllowCustomProps
-      >
-    >,
-    Fill: radioButtons.Fill as React.FunctionComponent<
-      Props<
-        AdditionalPalettes,
-        OptionalExistCondition<
-          RadioButtonSizes,
-          typeof DEFAULT_RADIO_BUTTON_SIZES,
-          RadioButtonSizes
-        >,
-        AllowCustomProps
-      >
-    >,
+    >
   };
-  return RadioButtons;
 }
 
 export default radioButtonFactory;

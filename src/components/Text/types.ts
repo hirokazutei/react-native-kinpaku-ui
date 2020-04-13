@@ -1,28 +1,28 @@
-import {TextStyle, TextProps as ReactNativeTextProps} from 'react-native';
+import {TextProps as ReactNativeTextProps, TextStyle} from 'react-native';
 import {
   AddDefaultToObject,
   Color,
-  OptionalTrueCondition,
   OptionalExistCondition,
+  OptionalTrueCondition,
 } from '../../types';
 import {ThemePalette} from '../../theme/types';
 
-type TextSizeProps<FontSizes extends string | string> = {
-  [key in FontSizes]: number
+type TextSizeProps<FontSize extends string | string> = {
+  [key in FontSize]: number
 };
 
-type TextVariationProps<FontSizes, AdditionalPalettes> = {
+type TextVariationProps<FontSize, AdditionalPalettes> = {
   allowFontScaling?: boolean;
   defaultColor?: keyof (ThemePalette & AdditionalPalettes);
   defaultFontSize?: OptionalExistCondition<
-    FontSizes,
+    FontSize,
     NonNullable<number>,
     undefined
   >;
   fontFamily?: string;
-  fontSizes?: FontSizes extends string | string
-    ? NonNullable<TextSizeProps<FontSizes>>
-    : never;
+  fontSize?: FontSize extends string | string
+    ? NonNullable<TextSizeProps<FontSize>>
+    : undefined;
   fontWeight?: TextStyle['fontWeight'];
   isBold?: boolean;
   isItalic?: boolean;
@@ -35,30 +35,27 @@ type TextVariationProps<FontSizes, AdditionalPalettes> = {
 type TextFactoryProps<
   Themes,
   AdditionalPalettes,
-  TextVariations,
-  FontSizes,
+  TextVariation,
+  FontSize,
   //@ts-ignore: TS6133 Unused Variable
   EmphasisToggleable
 > = {
   themes: {
-    [ThemeKey in keyof AddDefaultToObject<Themes, ThemePalette>]: ThemePalette
+    [ThemeKeys in keyof AddDefaultToObject<Themes, ThemePalette>]: ThemePalette
   };
   additionalPalettes?: {
-    [AdditionalPaletteKey in keyof AddDefaultToObject<
-      AdditionalPalettes,
-      Color
-    >]: Color
+    [AdditionalPaletteKeys in keyof AdditionalPalettes]: Color
   };
-  defaultFontSizeKey?: OptionalExistCondition<FontSizes, never, FontSizes>;
-  textVariations?: {
-    [VariationKeys in keyof TextVariations]: TextVariationProps<
-      OptionalExistCondition<FontSizes, never, FontSizes>,
+  defaultFontSizeKey?: OptionalExistCondition<FontSize, undefined, FontSize>;
+  textVariation?: {
+    [VariationKeys in keyof TextVariation]: TextVariationProps<
+      OptionalExistCondition<FontSize, undefined, FontSize>,
       AdditionalPalettes
     >
   };
 };
 
-type TextProps<AdditionalPalettes, FontSizes, EmphasisToggleable> = {
+type TextProps<AdditionalPalettes, FontSize, EmphasisToggleable> = {
   align?: TextStyle['textAlign'];
   bold?: OptionalTrueCondition<EmphasisToggleable, never, boolean>;
   color?: keyof (ThemePalette & AdditionalPalettes);
@@ -66,7 +63,7 @@ type TextProps<AdditionalPalettes, FontSizes, EmphasisToggleable> = {
   ellipsizeMode?: ReactNativeTextProps['ellipsizeMode'];
   italic?: OptionalTrueCondition<EmphasisToggleable, never, boolean>;
   numberOfLines?: number;
-  size?: OptionalExistCondition<FontSizes, number, FontSizes>;
+  size?: OptionalExistCondition<FontSize, number, FontSize>;
   lineThrough?: OptionalTrueCondition<EmphasisToggleable, never, boolean>;
   underline?: OptionalTrueCondition<EmphasisToggleable, never, boolean>;
 };

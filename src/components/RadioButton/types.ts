@@ -7,7 +7,7 @@ import {
 } from '../../types';
 import {ThemePalette} from '../../theme/types';
 
-type RadioButtonVariations = 'Outline' | 'Reverse' | 'Fill';
+type RadioButtonTypeVariation = 'Outline' | 'Reverse' | 'Fill';
 
 type RadioButtonSizeProps = {
   size: number;
@@ -18,7 +18,7 @@ type RadioButtonSizeProps = {
 type RadioButtonFactoryProps<
   Themes,
   AdditionalPalettes,
-  RadioButtonSizes,
+  RadioButtonSize,
   //@ts-ignore: TS6133 Unused Variable
   AllowCustomProps
 > = {
@@ -30,22 +30,13 @@ type RadioButtonFactoryProps<
   };
   sizes?: {
     [SizeKey in keyof AddDefaultToObject<
-      RadioButtonSizes,
+      RadioButtonSize,
       RadioButtonSizeProps
     >]: RadioButtonSizeProps
   };
 };
 
-type RadioButtonProps<
-  AdditionalPalettes,
-  RadioButtonSizes,
-  AllowCustomProps
-> = {
-  active?: boolean;
-  color?: keyof (ThemePalette & AdditionalPalettes);
-  isDisabled?: boolean;
-  size?: UnionDefaultKey<keyof RadioButtonSizes>;
-  onPress: (args: any) => any;
+type RadioButtonProps<AdditionalPalettes, RadioButtonSize, AllowCustomProps> = {
   _customOuterViewProps?: OptionalTrueCondition<
     AllowCustomProps,
     never,
@@ -66,11 +57,16 @@ type RadioButtonProps<
     never,
     ViewStyle
   >;
+  active?: boolean;
+  color?: keyof (ThemePalette & AdditionalPalettes);
+  isDisabled?: boolean;
+  size?: UnionDefaultKey<keyof RadioButtonSize>;
+  onPress: (args: any) => any;
 };
 
 export {
   RadioButtonFactoryProps,
   RadioButtonProps,
   RadioButtonSizeProps,
-  RadioButtonVariations,
+  RadioButtonTypeVariation,
 };

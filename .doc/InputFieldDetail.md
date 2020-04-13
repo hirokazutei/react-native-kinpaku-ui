@@ -47,7 +47,7 @@ Properties that change depending on the Input Field Variation
 
 ```ts
 const INPUT_VARIATION_DEFAULT_SETTINGS: {
-  [key in InputFieldVariations]: InputFieldVariationProps
+  [key in InputFieldVariation]: InputFieldVariationProps
 } = {
   creditCardNumber: {
     autoCapitalize: 'none',
