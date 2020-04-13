@@ -41,13 +41,13 @@ type CheckBoxFactoryProps<
 type CheckBoxProps<AdditionalPalettes, CheckBoxSize, AllowCustomProps> = {
   _customOuterViewProps?: OptionalTrueCondition<
     AllowCustomProps,
-    never,
-    TouchableOpacityProps
+    TouchableOpacityProps,
+    never
   >;
   _customOuterViewStyle?: OptionalTrueCondition<
     AllowCustomProps,
-    never,
-    ViewStyle
+    ViewStyle,
+    never
   >;
   active?: boolean;
   color?: keyof (ThemePalette & AdditionalPalettes);

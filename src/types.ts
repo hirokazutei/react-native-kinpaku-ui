@@ -11,7 +11,7 @@ type Falsy = undefined | null | false;
 
 type NonExistent = undefined | null;
 
-type OptionalTrueCondition<T, IfFalse, IfTrue> = T extends Falsy
+type OptionalTrueCondition<T, IfTrue, IfFalse> = T extends Falsy
   ? IfFalse
   : T extends true
   ? IfTrue

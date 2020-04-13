@@ -49,23 +49,23 @@ type ButtonFactoryProps<
 type ButtonProps<AdditionalPalettes, ButtonSize, AllowCustomProps> = {
   _additionalButtonProps?: OptionalTrueCondition<
     AllowCustomProps,
-    never,
-    TouchableOpacityProps
+    TouchableOpacityProps,
+    never
   >;
   _additionalButtonStyle?: OptionalTrueCondition<
     AllowCustomProps,
-    never,
-    ViewStyle
+    ViewStyle,
+    never
   >;
   _additionalTextProps?: OptionalTrueCondition<
     AllowCustomProps,
-    never,
-    TextProperties
+    TextProperties,
+    never
   >;
   _additionalTextStyle?: OptionalTrueCondition<
     AllowCustomProps,
-    never,
-    TextStyle
+    TextStyle,
+    never
   >;
   align?: FlexAlignType;
   color?: keyof (ThemePalette & AdditionalPalettes);

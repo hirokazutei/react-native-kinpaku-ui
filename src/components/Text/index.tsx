@@ -25,16 +25,16 @@ function textFactory<
   AdditionalPalettes,
   OptionalExistCondition<
     TextVariation,
-    typeof DEFAULT_TEXT_VARIATION,
-    TextVariation
+    TextVariation,
+    typeof DEFAULT_TEXT_VARIATION
   >,
   FontSize,
   EmphasisToggleable
 >): {
   [Variation in keyof OptionalExistCondition<
     TextVariation,
-    typeof DEFAULT_TEXT_VARIATION,
-    TextVariation
+    TextVariation,
+    typeof DEFAULT_TEXT_VARIATION
   >]: React.FunctionComponent<
     Props<AdditionalPalettes, FontSize, EmphasisToggleable>
   >
@@ -46,8 +46,8 @@ function textFactory<
   const texts: {
     [Variation in keyof OptionalExistCondition<
       TextVariation,
-      typeof DEFAULT_TEXT_VARIATION,
-      TextVariation
+      TextVariation,
+      typeof DEFAULT_TEXT_VARIATION
     >]?: React.FunctionComponent<
       Props<AdditionalPalettes, FontSize, EmphasisToggleable>
     >
@@ -185,8 +185,8 @@ function textFactory<
       texts[
         `${variationName}` as keyof OptionalExistCondition<
           TextVariation,
-          typeof DEFAULT_TEXT_VARIATION,
-          TextVariation
+          TextVariation,
+          typeof DEFAULT_TEXT_VARIATION
         >
       ] = Text;
     }
@@ -195,8 +195,8 @@ function textFactory<
   return texts as {
     [Variation in keyof OptionalExistCondition<
       TextVariation,
-      typeof DEFAULT_TEXT_VARIATION,
-      TextVariation
+      TextVariation,
+      typeof DEFAULT_TEXT_VARIATION
     >]: React.FunctionComponent<
       Props<AdditionalPalettes, FontSize, EmphasisToggleable>
     >

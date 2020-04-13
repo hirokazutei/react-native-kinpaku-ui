@@ -42,8 +42,8 @@ function touchableFactory<
       AdditionalPalettes,
       OptionalExistCondition<
         TouchableSize,
-        typeof DEFAULT_TOUCHABLE_SIZE,
-        TouchableSize
+        TouchableSize,
+        typeof DEFAULT_TOUCHABLE_SIZE
       >,
       AllowCustomProps
     >
@@ -59,8 +59,8 @@ function touchableFactory<
         AdditionalPalettes,
         OptionalExistCondition<
           TouchableSize,
-          typeof DEFAULT_TOUCHABLE_SIZE,
-          TouchableSize
+          TouchableSize,
+          typeof DEFAULT_TOUCHABLE_SIZE
         >,
         AllowCustomProps
       >
@@ -73,8 +73,8 @@ function touchableFactory<
         AdditionalPalettes,
         OptionalExistCondition<
           TouchableSize,
-          typeof DEFAULT_TOUCHABLE_SIZE,
-          TouchableSize
+          TouchableSize,
+          typeof DEFAULT_TOUCHABLE_SIZE
         >,
         AllowCustomProps
       >
@@ -92,8 +92,8 @@ function touchableFactory<
       AdditionalPalettes,
       OptionalExistCondition<
         TouchableSize,
-        typeof DEFAULT_TOUCHABLE_SIZE,
-        TouchableSize
+        TouchableSize,
+        typeof DEFAULT_TOUCHABLE_SIZE
       >,
       AllowCustomProps
     >): React.ReactElement<
@@ -101,8 +101,8 @@ function touchableFactory<
         AdditionalPalettes,
         OptionalExistCondition<
           TouchableSize,
-          typeof DEFAULT_TOUCHABLE_SIZE,
-          TouchableSize
+          TouchableSize,
+          typeof DEFAULT_TOUCHABLE_SIZE
         >,
         AllowCustomProps
       >

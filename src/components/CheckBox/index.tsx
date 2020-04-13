@@ -40,8 +40,8 @@ function checkBoxFactory<
       AdditionalPalettes,
       OptionalExistCondition<
         CheckBoxSize,
-        typeof DEFAULT_CHECK_BOX_SIZES,
-        CheckBoxSize
+        CheckBoxSize,
+        typeof DEFAULT_CHECK_BOX_SIZES
       >,
       AllowCustomProps
     >
@@ -56,8 +56,8 @@ function checkBoxFactory<
         AdditionalPalettes,
         OptionalExistCondition<
           CheckBoxSize,
-          typeof DEFAULT_CHECK_BOX_SIZES,
-          CheckBoxSize
+          CheckBoxSize,
+          typeof DEFAULT_CHECK_BOX_SIZES
         >,
         AllowCustomProps
       >
@@ -69,8 +69,8 @@ function checkBoxFactory<
         AdditionalPalettes,
         OptionalExistCondition<
           CheckBoxSize,
-          typeof DEFAULT_CHECK_BOX_SIZES,
-          CheckBoxSize
+          CheckBoxSize,
+          typeof DEFAULT_CHECK_BOX_SIZES
         >,
         AllowCustomProps
       >
@@ -87,8 +87,8 @@ function checkBoxFactory<
       AdditionalPalettes,
       OptionalExistCondition<
         CheckBoxSize,
-        typeof DEFAULT_CHECK_BOX_SIZES,
-        CheckBoxSize
+        CheckBoxSize,
+        typeof DEFAULT_CHECK_BOX_SIZES
       >,
       AllowCustomProps
     >): React.ReactElement<
@@ -96,8 +96,8 @@ function checkBoxFactory<
         AdditionalPalettes,
         OptionalExistCondition<
           CheckBoxSize,
-          typeof DEFAULT_CHECK_BOX_SIZES,
-          CheckBoxSize
+          CheckBoxSize,
+          typeof DEFAULT_CHECK_BOX_SIZES
         >,
         AllowCustomProps
       >
@@ -185,8 +185,8 @@ function checkBoxFactory<
         AdditionalPalettes,
         OptionalExistCondition<
           CheckBoxSize,
-          typeof DEFAULT_CHECK_BOX_SIZES,
-          CheckBoxSize
+          CheckBoxSize,
+          typeof DEFAULT_CHECK_BOX_SIZES
         >,
         AllowCustomProps
       >

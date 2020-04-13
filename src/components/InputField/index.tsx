@@ -31,8 +31,8 @@ function inputFieldFactory<Themes, AdditionalPalettes, InputFieldSize>({
       AdditionalPalettes,
       OptionalExistCondition<
         InputFieldSize,
-        typeof DEFAULT_INPUT_FIELD_SIZE,
-        InputFieldSize
+        InputFieldSize,
+        typeof DEFAULT_INPUT_FIELD_SIZE
       >
     >
   >
@@ -246,8 +246,8 @@ function inputFieldFactory<Themes, AdditionalPalettes, InputFieldSize>({
         AdditionalPalettes,
         OptionalExistCondition<
           InputFieldSize,
-          typeof DEFAULT_INPUT_FIELD_SIZE,
-          InputFieldSize
+          InputFieldSize,
+          typeof DEFAULT_INPUT_FIELD_SIZE
         >
       >
     >

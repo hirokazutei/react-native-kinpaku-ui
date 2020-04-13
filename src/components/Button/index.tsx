@@ -45,8 +45,8 @@ function buttonFactory<
       AdditionalPalettes,
       OptionalExistCondition<
         ButtonSize,
-        typeof DEFAULT_BUTTON_SIZE,
-        ButtonSize
+        ButtonSize,
+        typeof DEFAULT_BUTTON_SIZE
       >,
       AllowCustomProps
     >
@@ -61,8 +61,8 @@ function buttonFactory<
         AdditionalPalettes,
         OptionalExistCondition<
           ButtonSize,
-          typeof DEFAULT_BUTTON_SIZE,
-          ButtonSize
+          ButtonSize,
+          typeof DEFAULT_BUTTON_SIZE
         >,
         AllowCustomProps
       >
@@ -75,8 +75,8 @@ function buttonFactory<
         AdditionalPalettes,
         OptionalExistCondition<
           ButtonSize,
-          typeof DEFAULT_BUTTON_SIZE,
-          ButtonSize
+          ButtonSize,
+          typeof DEFAULT_BUTTON_SIZE
         >,
         AllowCustomProps
       >
@@ -97,8 +97,8 @@ function buttonFactory<
       AdditionalPalettes,
       OptionalExistCondition<
         ButtonSize,
-        typeof DEFAULT_BUTTON_SIZE,
-        ButtonSize
+        ButtonSize,
+        typeof DEFAULT_BUTTON_SIZE
       >,
       AllowCustomProps
     >): React.ReactElement<
@@ -106,8 +106,8 @@ function buttonFactory<
         AdditionalPalettes,
         OptionalExistCondition<
           ButtonSize,
-          typeof DEFAULT_BUTTON_SIZE,
-          ButtonSize
+          ButtonSize,
+          typeof DEFAULT_BUTTON_SIZE
         >,
         AllowCustomProps
       >
@@ -213,8 +213,8 @@ function buttonFactory<
         AdditionalPalettes,
         OptionalExistCondition<
           ButtonSize,
-          typeof DEFAULT_BUTTON_SIZE,
-          ButtonSize
+          ButtonSize,
+          typeof DEFAULT_BUTTON_SIZE
         >,
         AllowCustomProps
       >

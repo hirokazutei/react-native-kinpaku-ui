@@ -48,10 +48,10 @@ type TouchableFactoryProps<
 type TouchableProps<AdditionalPalettes, TouchableSize, AllowCustomProps> = {
   _additionalProps?: OptionalTrueCondition<
     AllowCustomProps,
-    never,
-    TouchableOpacityProps
+    TouchableOpacityProps,
+    never
   >;
-  _additionalStyle?: OptionalTrueCondition<AllowCustomProps, never, ViewStyle>;
+  _additionalStyle?: OptionalTrueCondition<AllowCustomProps, ViewStyle, never>;
   align?: FlexAlignType;
   children: React.ReactNode;
   color?: keyof (ThemePalette & AdditionalPalettes);

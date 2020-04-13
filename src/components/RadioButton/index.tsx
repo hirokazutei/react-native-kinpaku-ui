@@ -39,8 +39,8 @@ function radioButtonFactory<
       AdditionalPalettes,
       OptionalExistCondition<
         RadioButtonSize,
-        typeof DEFAULT_RADIO_BUTTON_SIZE,
-        RadioButtonSize
+        RadioButtonSize,
+        typeof DEFAULT_RADIO_BUTTON_SIZE
       >,
       AllowCustomProps
     >
@@ -55,8 +55,8 @@ function radioButtonFactory<
         AdditionalPalettes,
         OptionalExistCondition<
           RadioButtonSize,
-          typeof DEFAULT_RADIO_BUTTON_SIZE,
-          RadioButtonSize
+          RadioButtonSize,
+          typeof DEFAULT_RADIO_BUTTON_SIZE
         >,
         AllowCustomProps
       >
@@ -68,8 +68,8 @@ function radioButtonFactory<
         AdditionalPalettes,
         OptionalExistCondition<
           RadioButtonSize,
-          typeof DEFAULT_RADIO_BUTTON_SIZE,
-          RadioButtonSize
+          RadioButtonSize,
+          typeof DEFAULT_RADIO_BUTTON_SIZE
         >,
         AllowCustomProps
       >
@@ -81,8 +81,8 @@ function radioButtonFactory<
       size = 'default' as keyof AddDefaultToObject<
         OptionalExistCondition<
           RadioButtonSize,
-          typeof DEFAULT_RADIO_BUTTON_SIZE,
-          RadioButtonSize
+          RadioButtonSize,
+          typeof DEFAULT_RADIO_BUTTON_SIZE
         >,
         RadioButtonSizeProps
       >,
@@ -94,8 +94,8 @@ function radioButtonFactory<
       AdditionalPalettes,
       OptionalExistCondition<
         RadioButtonSize,
-        typeof DEFAULT_RADIO_BUTTON_SIZE,
-        RadioButtonSize
+        RadioButtonSize,
+        typeof DEFAULT_RADIO_BUTTON_SIZE
       >,
       AllowCustomProps
     >): React.ReactElement<
@@ -103,8 +103,8 @@ function radioButtonFactory<
         AdditionalPalettes,
         OptionalExistCondition<
           RadioButtonSize,
-          typeof DEFAULT_RADIO_BUTTON_SIZE,
-          RadioButtonSize
+          RadioButtonSize,
+          typeof DEFAULT_RADIO_BUTTON_SIZE
         >,
         AllowCustomProps
       >
@@ -199,8 +199,8 @@ function radioButtonFactory<
         AdditionalPalettes,
         OptionalExistCondition<
           RadioButtonSize,
-          typeof DEFAULT_RADIO_BUTTON_SIZE,
-          RadioButtonSize
+          RadioButtonSize,
+          typeof DEFAULT_RADIO_BUTTON_SIZE
         >,
         AllowCustomProps
       >
