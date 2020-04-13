@@ -1,6 +1,6 @@
 # Input Field
 
-> This doc is on `inputFieldFactory` which creates `InputField` components.
+> This doc is on `InputField` components as well as the `inputFieldFactory` function.
 
 <p align="middle">
   <img src="https://raw.githubusercontent.com/hirokazutei/react-native-kinpaku-ui/master/.doc/images/InputField.png" width="800" />
@@ -9,10 +9,10 @@
 ## Table of Contents
 
 1. Usage
-1. Using UIFactory
-1. Using InputFieldFactory
-1. Factory Type Arguments
-1. Factory Arguments
+   1. Using UIFactory
+   1. Using InputFieldFactory
+   1. Factory Type Arguments
+   1. Factory Arguments
 1. JSDocs
 
 ## Usage
@@ -32,7 +32,7 @@ const {InputField} = UIFactory<typeof themes, typeof additionalPalettes>({
   additionalPalettes,
 });
 
-const EmailFieldPage: React.FC = (): React.ReactElement<null> => {
+const EmailFieldPage = () => {
   return (
     <View>
       <InputField.email value="" />
@@ -198,29 +198,30 @@ type InputFieldShape = 'sharp' | 'rounded' | 'circular';
 > Just in case having JSDocs on your component declaration comes in handy.
 
 ```ts
-/*
-- InputField
--
-- Required:
-- @param props - properties
-- @param props.value - the value in the inputField
--
-- Optional:
-- @param [props.autoFocus] - if the field should be auto-focused
-- @param [props.backgroundColor] - background color of the field
-- @param [props.borderColor] - border color of the field
-- @param [props.color] - the main color of the field
-- @param [props.defaultValue] - the default value of the field
-- @param [props.isDisabled] - if the input field is disabled
-- @param [props.maxLength] - max length of the field
-- @param [props.onBlur] - function that runs on blur
-- @param [props.onChange] - function that runs on change
-- @param [props.onEndEditing] - function that runs on end editing
-- @param [props.onFocus] - function that runs on focus
-- @param [props.onKeyPress] - function that runs on key press
-- @param [props.placeholder] - placeholder of the input field
-- @param [props.size] - size of the input field
-- @param [props.shape] - type of the input field: "sharp" | "rounded" | "circular"
-- @param [props.textColor] - text color of the field
-*/
+/**
+ * InputField
+ *
+ * @param props - properties
+ *
+ * Required:
+ * @param props.value - the value in the inputField
+ *
+ * Optional:
+ * @param [props.autoFocus] - if the field should be auto-focused
+ * @param [props.backgroundColor] - background color of the field
+ * @param [props.borderColor] - border color of the field
+ * @param [props.color] - the main color of the field
+ * @param [props.defaultValue] - the default value of the field
+ * @param [props.isDisabled] - if the input field is disabled
+ * @param [props.maxLength] - max length of the field
+ * @param [props.onBlur] - function that runs on blur
+ * @param [props.onChange] - function that runs on change
+ * @param [props.onEndEditing] - function that runs on end editing
+ * @param [props.onFocus] - function that runs on focus
+ * @param [props.onKeyPress] - function that runs on key press
+ * @param [props.placeholder] - placeholder of the input field
+ * @param [props.size] - size of the input field
+ * @param [props.shape] - type of the input field: "sharp" | "rounded" | "circular"
+ * @param [props.textColor] - text color of the field
+ */
 ```
