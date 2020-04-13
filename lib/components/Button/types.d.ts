@@ -1,8 +1,8 @@
 import { FlexAlignType, TextProperties, TextStyle, TouchableOpacityProps, ViewStyle } from 'react-native';
 import { AddDefaultToObject, Color, OptionalTrueCondition, UnionDefaultKey } from '../../types';
-import { ThemePalette } from '../../theme/types';
+import { ThemePalette, Themes as ThemesType } from '../../theme/types';
 declare type ButtonShapeVariation = 'Circular' | 'Round' | 'Sharp';
-declare type ButtonType = 'solid' | 'clear' | 'outline';
+declare type ButtonType = 'fill' | 'clear' | 'outline';
 declare type ButtonSizeProps = {
     borderRadius: number;
     fontSize: number;
@@ -10,9 +10,7 @@ declare type ButtonSizeProps = {
     paddingVertical: number;
 };
 declare type ButtonFactoryProps<Themes, AdditionalPalettes, ButtonSize, AllowCustomProps> = {
-    themes: {
-        [ThemeKey in keyof AddDefaultToObject<Themes, ThemePalette>]: ThemePalette;
-    };
+    themes: ThemesType<Themes>;
     additionalPalettes?: {
         [AdditionalPaletteKey in keyof AdditionalPalettes]: Color;
     };
@@ -23,16 +21,16 @@ declare type ButtonFactoryProps<Themes, AdditionalPalettes, ButtonSize, AllowCus
     defaultType?: ButtonType;
 };
 declare type ButtonProps<AdditionalPalettes, ButtonSize, AllowCustomProps> = {
-    _additionalButtonProps?: OptionalTrueCondition<AllowCustomProps, never, TouchableOpacityProps>;
-    _additionalButtonStyle?: OptionalTrueCondition<AllowCustomProps, never, ViewStyle>;
-    _additionalTextProps?: OptionalTrueCondition<AllowCustomProps, never, TextProperties>;
-    _additionalTextStyle?: OptionalTrueCondition<AllowCustomProps, never, TextStyle>;
+    _additionalButtonProps?: OptionalTrueCondition<AllowCustomProps, TouchableOpacityProps, never>;
+    _additionalButtonStyle?: OptionalTrueCondition<AllowCustomProps, ViewStyle, never>;
+    _additionalTextProps?: OptionalTrueCondition<AllowCustomProps, TextProperties, never>;
+    _additionalTextStyle?: OptionalTrueCondition<AllowCustomProps, TextStyle, never>;
     align?: FlexAlignType;
     color?: keyof (ThemePalette & AdditionalPalettes);
     isDisabled?: boolean;
     isStretched?: boolean;
     size?: UnionDefaultKey<keyof ButtonSize>;
-    title: string;
+    label: string;
     type?: ButtonType;
     onPress: (args: any) => any;
 };

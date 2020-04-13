@@ -60,6 +60,7 @@ const {InputFields} = inputFieldFactory<
   typeof themes,
   typeof additionalPalettes,
   typeof sizes
+  false,
 >({
   themes,
   additionalPalettes,
@@ -93,6 +94,10 @@ export default ParagraphPage;
 #### `InputFieldsizes [Optional]`
 
 > The type of `sizes` object, which has a default value if the type is not provided.
+
+#### `AllowCustomProps [Nullable]`
+
+> If the factory produces a InputField component that allows custom props or not.
 
 ### Factory Arguments
 
@@ -223,5 +228,11 @@ type InputFieldShape = 'sharp' | 'rounded' | 'circular';
  * @param [props.size] - size of the input field
  * @param [props.shape] - type of the input field: "sharp" | "rounded" | "circular"
  * @param [props.textColor] - text color of the field
+ *
+ * Optional Additional Args:
+ * @param [_additionalTextProps] - additional props for the TextInput component
+ * @param [_additionalTextStyle] - additional styles for the TextInput component
+ * @param [_additionalWrapperProps] - additional props for the wrapper View component
+ * @param [_additionalWrapperProps] - additional styles for the wrapper View component
  */
 ```

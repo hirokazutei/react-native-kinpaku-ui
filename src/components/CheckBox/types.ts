@@ -5,7 +5,7 @@ import {
   OptionalTrueCondition,
   UnionDefaultKey,
 } from '../../types';
-import {ThemePalette} from '../../theme/types';
+import {ThemePalette, Themes as ThemesType} from '../../theme/types';
 
 type CheckBoxShapeVariation = 'Sharp' | 'Round' | 'Circular';
 
@@ -22,9 +22,7 @@ type CheckBoxFactoryProps<
   //@ts-ignore: TS6133 Unused Variable
   AllowCustomProps
 > = {
-  themes: {
-    [ThemeKeys in keyof AddDefaultToObject<Themes, ThemePalette>]: ThemePalette
-  };
+  themes: ThemesType<Themes>;
   additionalPalettes?: {
     [AdditionalPaletteKeys in keyof AdditionalPalettes]: Color
   };
@@ -41,13 +39,13 @@ type CheckBoxFactoryProps<
 type CheckBoxProps<AdditionalPalettes, CheckBoxSize, AllowCustomProps> = {
   _customOuterViewProps?: OptionalTrueCondition<
     AllowCustomProps,
-    never,
-    TouchableOpacityProps
+    TouchableOpacityProps,
+    never
   >;
   _customOuterViewStyle?: OptionalTrueCondition<
     AllowCustomProps,
-    never,
-    ViewStyle
+    ViewStyle,
+    never
   >;
   active?: boolean;
   color?: keyof (ThemePalette & AdditionalPalettes);

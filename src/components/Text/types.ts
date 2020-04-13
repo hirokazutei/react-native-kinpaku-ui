@@ -16,8 +16,8 @@ type TextVariationProps<FontSize, AdditionalPalettes> = {
   defaultColor?: keyof (ThemePalette & AdditionalPalettes);
   defaultFontSize?: OptionalExistCondition<
     FontSize,
-    NonNullable<number>,
-    undefined
+    undefined | keyof FontSize,
+    NonNullable<number>
   >;
   fontFamily?: string;
   fontSize?: FontSize extends string | string
@@ -46,10 +46,14 @@ type TextFactoryProps<
   additionalPalettes?: {
     [AdditionalPaletteKeys in keyof AdditionalPalettes]: Color
   };
-  defaultFontSizeKey?: OptionalExistCondition<FontSize, undefined, FontSize>;
+  defaultFontSizeKey?: OptionalExistCondition<
+    FontSize,
+    undefined | keyof FontSize,
+    undefined
+  >;
   textVariation?: {
     [VariationKeys in keyof TextVariation]: TextVariationProps<
-      OptionalExistCondition<FontSize, undefined, FontSize>,
+      OptionalExistCondition<FontSize, keyof FontSize, null>,
       AdditionalPalettes
     >
   };
@@ -57,15 +61,15 @@ type TextFactoryProps<
 
 type TextProps<AdditionalPalettes, FontSize, EmphasisToggleable> = {
   align?: TextStyle['textAlign'];
-  bold?: OptionalTrueCondition<EmphasisToggleable, never, boolean>;
+  bold?: OptionalTrueCondition<EmphasisToggleable, boolean, never>;
   color?: keyof (ThemePalette & AdditionalPalettes);
   children: string;
   ellipsizeMode?: ReactNativeTextProps['ellipsizeMode'];
-  italic?: OptionalTrueCondition<EmphasisToggleable, never, boolean>;
+  italic?: OptionalTrueCondition<EmphasisToggleable, boolean, never>;
   numberOfLines?: number;
-  size?: OptionalExistCondition<FontSize, number, FontSize>;
-  lineThrough?: OptionalTrueCondition<EmphasisToggleable, never, boolean>;
-  underline?: OptionalTrueCondition<EmphasisToggleable, never, boolean>;
+  size?: OptionalExistCondition<FontSize, FontSize, number>;
+  lineThrough?: OptionalTrueCondition<EmphasisToggleable, boolean, never>;
+  underline?: OptionalTrueCondition<EmphasisToggleable, boolean, never>;
 };
 
 export {TextSizeProps, TextVariationProps, TextFactoryProps, TextProps};

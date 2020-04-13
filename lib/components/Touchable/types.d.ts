@@ -30,8 +30,8 @@ declare type TouchableFactoryProps<Themes, AdditionalPalettes, TouchableSize, Al
     defaultType?: TouchableTypeVariations;
 };
 declare type TouchableProps<AdditionalPalettes, TouchableSize, AllowCustomProps> = {
-    _additionalProps?: OptionalTrueCondition<AllowCustomProps, never, TouchableOpacityProps>;
-    _additionalStyle?: OptionalTrueCondition<AllowCustomProps, never, ViewStyle>;
+    _additionalProps?: OptionalTrueCondition<AllowCustomProps, TouchableOpacityProps, never>;
+    _additionalStyle?: OptionalTrueCondition<AllowCustomProps, ViewStyle, never>;
     align?: FlexAlignType;
     children: React.ReactNode;
     color?: keyof (ThemePalette & AdditionalPalettes);

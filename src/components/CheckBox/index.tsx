@@ -40,41 +40,37 @@ function checkBoxFactory<
       AdditionalPalettes,
       OptionalExistCondition<
         CheckBoxSize,
-        typeof DEFAULT_CHECK_BOX_SIZES,
-        CheckBoxSize
+        CheckBoxSize,
+        typeof DEFAULT_CHECK_BOX_SIZES
       >,
       AllowCustomProps
     >
   >
 } {
+  // Type
+  type CheckBoxProps = Props<
+    AdditionalPalettes,
+    OptionalExistCondition<
+      CheckBoxSize,
+      CheckBoxSize,
+      typeof DEFAULT_CHECK_BOX_SIZES
+    >,
+    AllowCustomProps
+  >;
+
+  // Context
   const themeContext: React.Context<keyof Themes> = React.createContext(
     'default' as keyof Themes,
   );
+
+  // CheckBox Collections
   const checkBoxes: {
-    [key in CheckBoxShapeVariation]?: React.FunctionComponent<
-      Props<
-        AdditionalPalettes,
-        OptionalExistCondition<
-          CheckBoxSize,
-          typeof DEFAULT_CHECK_BOX_SIZES,
-          CheckBoxSize
-        >,
-        AllowCustomProps
-      >
-    >
+    [key in CheckBoxShapeVariation]?: React.FunctionComponent<CheckBoxProps>
   } = {};
+
+  // Creating Each CheckBox Components
   for (const variationKey of CHECK_BOX_SHAPE_VARIATION_KEYS) {
-    const CheckBox: React.FunctionComponent<
-      Props<
-        AdditionalPalettes,
-        OptionalExistCondition<
-          CheckBoxSize,
-          typeof DEFAULT_CHECK_BOX_SIZES,
-          CheckBoxSize
-        >,
-        AllowCustomProps
-      >
-    > = ({
+    const CheckBox = ({
       _customOuterViewProps,
       _customOuterViewStyle,
       active,
@@ -83,25 +79,7 @@ function checkBoxFactory<
       onPress,
       size = 'default',
       type = defaultType,
-    }: Props<
-      AdditionalPalettes,
-      OptionalExistCondition<
-        CheckBoxSize,
-        typeof DEFAULT_CHECK_BOX_SIZES,
-        CheckBoxSize
-      >,
-      AllowCustomProps
-    >): React.ReactElement<
-      Props<
-        AdditionalPalettes,
-        OptionalExistCondition<
-          CheckBoxSize,
-          typeof DEFAULT_CHECK_BOX_SIZES,
-          CheckBoxSize
-        >,
-        AllowCustomProps
-      >
-    > => {
+    }: CheckBoxProps) => {
       // Palettes
       const currentThemeKey = useContext(themeContext) || 'default';
       const currentTheme =
@@ -139,10 +117,13 @@ function checkBoxFactory<
       // BorderStyles
       const borderThickness = sizeProperty.size / 10;
       const borderChunk = sizeProperty.size / 8;
-      let borderRadius = borderThickness * 2;
-      borderRadius =
-        variationKey === 'Circular' ? borderRadius * 256 : borderRadius;
+      const borderRadius = (() => {
+        if (variationKey === 'Circular') {
+          return sizeProperty.size * 256;
+        } else return sizeProperty.size / 5;
+      })();
 
+      // Outer Ring Style
       const outerRingStyle: ViewStyle = {
         alignItems: 'center',
         backgroundColor: innerBackgroundColor,
@@ -155,6 +136,7 @@ function checkBoxFactory<
         ...(_customOuterViewStyle || {}),
       };
 
+      // Dot Style
       const dotStyle: ViewStyle = {
         borderBottomColor: checkColor,
         borderBottomWidth: borderThickness,
@@ -180,17 +162,7 @@ function checkBoxFactory<
   }
 
   return checkBoxes as {
-    [key in CheckBoxShapeVariation]: React.FunctionComponent<
-      Props<
-        AdditionalPalettes,
-        OptionalExistCondition<
-          CheckBoxSize,
-          typeof DEFAULT_CHECK_BOX_SIZES,
-          CheckBoxSize
-        >,
-        AllowCustomProps
-      >
-    >
+    [key in CheckBoxShapeVariation]: React.FunctionComponent<CheckBoxProps>
   };
 }
 

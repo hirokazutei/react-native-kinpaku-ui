@@ -295,15 +295,6 @@ const DEFAULT_INPUT_VARIATION_SETTING: {
   },
 };
 
-/* TODO:
-Accessibility Prop
-- allowFontScaling
-
-Methods
-- clear()
-- isFocused()
-*/
-
 const INPUT_FIELD_TYPE: Array<InputFieldType> = [
   'underline',
   'outline',

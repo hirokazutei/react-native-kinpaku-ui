@@ -19,10 +19,10 @@ declare type RadioButtonFactoryProps<Themes, AdditionalPalettes, RadioButtonSize
     };
 };
 declare type RadioButtonProps<AdditionalPalettes, RadioButtonSize, AllowCustomProps> = {
-    _customOuterViewProps?: OptionalTrueCondition<AllowCustomProps, never, TouchableOpacityProps>;
-    _customOuterViewStyle?: OptionalTrueCondition<AllowCustomProps, never, ViewStyle>;
-    _customInnerViewProps?: OptionalTrueCondition<AllowCustomProps, never, ViewProps>;
-    _customInnerViewStyle?: OptionalTrueCondition<AllowCustomProps, never, ViewStyle>;
+    _customOuterViewProps?: OptionalTrueCondition<AllowCustomProps, TouchableOpacityProps, never>;
+    _customOuterViewStyle?: OptionalTrueCondition<AllowCustomProps, ViewStyle, never>;
+    _customInnerViewProps?: OptionalTrueCondition<AllowCustomProps, ViewProps, never>;
+    _customInnerViewStyle?: OptionalTrueCondition<AllowCustomProps, ViewStyle, never>;
     active?: boolean;
     color?: keyof (ThemePalette & AdditionalPalettes);
     isDisabled?: boolean;

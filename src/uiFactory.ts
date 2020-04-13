@@ -5,7 +5,6 @@ import inputFieldFactory from './components/InputField';
 import touchableFactory from './components/Touchable';
 import radioButtonFactory from './components/RadioButton';
 import textFactory from './components/Text';
-import {DEFAULT_TEXT_VARIATION} from './components/Text/constants';
 import {Color, DefaultObject} from './types';
 
 const UIFactory = <ThemeObject, AdditionalPalettes>(
@@ -34,7 +33,8 @@ const UIFactory = <ThemeObject, AdditionalPalettes>(
   const InputField = inputFieldFactory<
     Themes<ThemeObject>,
     AdditionalPalettes,
-    null
+    null,
+    false
   >({
     ...commonProps,
   });
@@ -55,14 +55,13 @@ const UIFactory = <ThemeObject, AdditionalPalettes>(
     ...commonProps,
   });
   const {Title, Heading, SubHeading, Body, Caption, Quote} = textFactory<
-    typeof themes,
+    Themes<ThemeObject>,
     AdditionalPalettes,
-    typeof DEFAULT_TEXT_VARIATION,
+    null,
     null,
     true
   >({
     ...commonProps,
-    textVariation: DEFAULT_TEXT_VARIATION,
   });
   return {
     Body,

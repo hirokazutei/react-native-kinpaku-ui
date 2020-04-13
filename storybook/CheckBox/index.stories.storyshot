@@ -164,7 +164,7 @@ exports[`Storyshots UI/CheckBox Default 1`] = `
               "alignItems": "center",
               "backgroundColor": undefined,
               "borderColor": undefined,
-              "borderRadius": 1024,
+              "borderRadius": 5120,
               "borderWidth": 2,
               "height": 20,
               "justifyContent": "center",

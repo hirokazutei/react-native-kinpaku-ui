@@ -39,23 +39,23 @@ type RadioButtonFactoryProps<
 type RadioButtonProps<AdditionalPalettes, RadioButtonSize, AllowCustomProps> = {
   _customOuterViewProps?: OptionalTrueCondition<
     AllowCustomProps,
-    never,
-    TouchableOpacityProps
+    TouchableOpacityProps,
+    never
   >;
   _customOuterViewStyle?: OptionalTrueCondition<
     AllowCustomProps,
-    never,
-    ViewStyle
+    ViewStyle,
+    never
   >;
   _customInnerViewProps?: OptionalTrueCondition<
     AllowCustomProps,
-    never,
-    ViewProps
+    ViewProps,
+    never
   >;
   _customInnerViewStyle?: OptionalTrueCondition<
     AllowCustomProps,
-    never,
-    ViewStyle
+    ViewStyle,
+    never
   >;
   active?: boolean;
   color?: keyof (ThemePalette & AdditionalPalettes);

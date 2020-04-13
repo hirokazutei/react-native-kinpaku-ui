@@ -58,59 +58,59 @@ declare const UIFactory: <ThemeObject, AdditionalPalettes>(themes: Themes<ThemeO
         number: import("react").FunctionComponent<import("./components/InputField/types").InputFieldProps<AdditionalPalettes, {
             default: import("./components/InputField/types").InputFieldSizeProps;
             medium: import("./components/InputField/types").InputFieldSizeProps;
-        }>>;
+        }, false>>;
         email: import("react").FunctionComponent<import("./components/InputField/types").InputFieldProps<AdditionalPalettes, {
             default: import("./components/InputField/types").InputFieldSizeProps;
             medium: import("./components/InputField/types").InputFieldSizeProps;
-        }>>;
+        }, false>>;
         name: import("react").FunctionComponent<import("./components/InputField/types").InputFieldProps<AdditionalPalettes, {
             default: import("./components/InputField/types").InputFieldSizeProps;
             medium: import("./components/InputField/types").InputFieldSizeProps;
-        }>>;
+        }, false>>;
         password: import("react").FunctionComponent<import("./components/InputField/types").InputFieldProps<AdditionalPalettes, {
             default: import("./components/InputField/types").InputFieldSizeProps;
             medium: import("./components/InputField/types").InputFieldSizeProps;
-        }>>;
+        }, false>>;
         username: import("react").FunctionComponent<import("./components/InputField/types").InputFieldProps<AdditionalPalettes, {
             default: import("./components/InputField/types").InputFieldSizeProps;
             medium: import("./components/InputField/types").InputFieldSizeProps;
-        }>>;
+        }, false>>;
         url: import("react").FunctionComponent<import("./components/InputField/types").InputFieldProps<AdditionalPalettes, {
             default: import("./components/InputField/types").InputFieldSizeProps;
             medium: import("./components/InputField/types").InputFieldSizeProps;
-        }>>;
+        }, false>>;
         creditCardNumber: import("react").FunctionComponent<import("./components/InputField/types").InputFieldProps<AdditionalPalettes, {
             default: import("./components/InputField/types").InputFieldSizeProps;
             medium: import("./components/InputField/types").InputFieldSizeProps;
-        }>>;
+        }, false>>;
         oneTimeCode: import("react").FunctionComponent<import("./components/InputField/types").InputFieldProps<AdditionalPalettes, {
             default: import("./components/InputField/types").InputFieldSizeProps;
             medium: import("./components/InputField/types").InputFieldSizeProps;
-        }>>;
+        }, false>>;
         decimal: import("react").FunctionComponent<import("./components/InputField/types").InputFieldProps<AdditionalPalettes, {
             default: import("./components/InputField/types").InputFieldSizeProps;
             medium: import("./components/InputField/types").InputFieldSizeProps;
-        }>>;
+        }, false>>;
         freeField: import("react").FunctionComponent<import("./components/InputField/types").InputFieldProps<AdditionalPalettes, {
             default: import("./components/InputField/types").InputFieldSizeProps;
             medium: import("./components/InputField/types").InputFieldSizeProps;
-        }>>;
+        }, false>>;
         oneTimeNumberCode: import("react").FunctionComponent<import("./components/InputField/types").InputFieldProps<AdditionalPalettes, {
             default: import("./components/InputField/types").InputFieldSizeProps;
             medium: import("./components/InputField/types").InputFieldSizeProps;
-        }>>;
+        }, false>>;
         paragragh: import("react").FunctionComponent<import("./components/InputField/types").InputFieldProps<AdditionalPalettes, {
             default: import("./components/InputField/types").InputFieldSizeProps;
             medium: import("./components/InputField/types").InputFieldSizeProps;
-        }>>;
+        }, false>>;
         passcode: import("react").FunctionComponent<import("./components/InputField/types").InputFieldProps<AdditionalPalettes, {
             default: import("./components/InputField/types").InputFieldSizeProps;
             medium: import("./components/InputField/types").InputFieldSizeProps;
-        }>>;
+        }, false>>;
         phone: import("react").FunctionComponent<import("./components/InputField/types").InputFieldProps<AdditionalPalettes, {
             default: import("./components/InputField/types").InputFieldSizeProps;
             medium: import("./components/InputField/types").InputFieldSizeProps;
-        }>>;
+        }, false>>;
     };
     RadioButton: {
         Fill: import("react").FunctionComponent<import("./components/RadioButton/types").RadioButtonProps<AdditionalPalettes, {

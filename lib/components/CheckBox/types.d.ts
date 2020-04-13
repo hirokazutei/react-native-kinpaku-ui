@@ -1,15 +1,13 @@
 import { TouchableOpacityProps, ViewStyle } from 'react-native';
 import { AddDefaultToObject, Color, OptionalTrueCondition, UnionDefaultKey } from '../../types';
-import { ThemePalette } from '../../theme/types';
+import { ThemePalette, Themes as ThemesType } from '../../theme/types';
 declare type CheckBoxShapeVariation = 'Sharp' | 'Round' | 'Circular';
 declare type CheckBoxType = 'outline' | 'fill' | 'reverse';
 declare type CheckBoxSizeProps = {
     size: number;
 };
 declare type CheckBoxFactoryProps<Themes, AdditionalPalettes, CheckBoxSize, AllowCustomProps> = {
-    themes: {
-        [ThemeKeys in keyof AddDefaultToObject<Themes, ThemePalette>]: ThemePalette;
-    };
+    themes: ThemesType<Themes>;
     additionalPalettes?: {
         [AdditionalPaletteKeys in keyof AdditionalPalettes]: Color;
     };
@@ -20,8 +18,8 @@ declare type CheckBoxFactoryProps<Themes, AdditionalPalettes, CheckBoxSize, Allo
     defaultType?: CheckBoxType;
 };
 declare type CheckBoxProps<AdditionalPalettes, CheckBoxSize, AllowCustomProps> = {
-    _customOuterViewProps?: OptionalTrueCondition<AllowCustomProps, never, TouchableOpacityProps>;
-    _customOuterViewStyle?: OptionalTrueCondition<AllowCustomProps, never, ViewStyle>;
+    _customOuterViewProps?: OptionalTrueCondition<AllowCustomProps, TouchableOpacityProps, never>;
+    _customOuterViewStyle?: OptionalTrueCondition<AllowCustomProps, ViewStyle, never>;
     active?: boolean;
     color?: keyof (ThemePalette & AdditionalPalettes);
     isDisabled?: boolean;

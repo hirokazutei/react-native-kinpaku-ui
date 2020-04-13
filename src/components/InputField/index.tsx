@@ -18,40 +18,65 @@ import {
   DEFAULT_INPUT_VARIATION_SETTING,
 } from './constants';
 
-function inputFieldFactory<Themes, AdditionalPalettes, InputFieldSize>({
+function inputFieldFactory<
+  Themes,
+  AdditionalPalettes,
+  InputFieldSize,
+  AllowCustomProps
+>({
   themes,
   additionalPalettes,
   sizes,
   defaultColor,
   inputFieldType = 'outline',
   defaultShape = 'circular',
-}: InputFieldFactoryProps<Themes, AdditionalPalettes, InputFieldSize>): {
+}: InputFieldFactoryProps<
+  Themes,
+  AdditionalPalettes,
+  InputFieldSize,
+  AllowCustomProps
+>): {
   [key in InputFieldVariation]: React.FunctionComponent<
     Props<
       AdditionalPalettes,
       OptionalExistCondition<
         InputFieldSize,
-        typeof DEFAULT_INPUT_FIELD_SIZE,
-        InputFieldSize
-      >
+        InputFieldSize,
+        typeof DEFAULT_INPUT_FIELD_SIZE
+      >,
+      AllowCustomProps
     >
   >
 } {
+  // Type
+  type InputFieldProps = Props<
+    AdditionalPalettes,
+    OptionalExistCondition<
+      InputFieldSize,
+      InputFieldSize,
+      typeof DEFAULT_INPUT_FIELD_SIZE
+    >,
+    AllowCustomProps
+  >;
+
+  // Context
   const themeContext: React.Context<keyof Themes> = React.createContext(
     'default' as keyof Themes,
   );
 
+  // InputField Collections
   const inputFields: {
-    [key in InputFieldVariation]?: React.FunctionComponent<
-      Props<AdditionalPalettes, InputFieldSize>
-    >
+    [key in InputFieldVariation]?: React.FunctionComponent<InputFieldProps>
   } = {};
 
+  // Creating each InputField Components
   for (const settingKey in DEFAULT_INPUT_VARIATION_SETTING) {
     if (DEFAULT_INPUT_VARIATION_SETTING.hasOwnProperty(settingKey)) {
-      const InputField: React.FunctionComponent<
-        Props<AdditionalPalettes, InputFieldSize>
-      > = ({
+      const InputField = ({
+        _additionalTextInputProps,
+        _additionalTextInputStyle,
+        _additionalWrapperProps,
+        _additionalWrapperStyle,
         backgroundColor,
         borderColor,
         color = defaultColor,
@@ -61,9 +86,7 @@ function inputFieldFactory<Themes, AdditionalPalettes, InputFieldSize>({
         shape,
         textColor,
         ...inputFieldProps
-      }: Props<AdditionalPalettes, InputFieldSize>): React.ReactElement<
-        Props<AdditionalPalettes, InputFieldSize>
-      > => {
+      }: InputFieldProps) => {
         // Palettes
         const currentThemeKey =
           useContext(themeContext) || ('default' as UnionDefaultKey<Themes>);
@@ -208,6 +231,7 @@ function inputFieldFactory<Themes, AdditionalPalettes, InputFieldSize>({
           ...paddingProp,
           ...paddingHorizontalProp,
           ...paddingVerticalProp,
+          ..._additionalWrapperStyle,
         };
 
         // FieldStyle
@@ -221,10 +245,11 @@ function inputFieldFactory<Themes, AdditionalPalettes, InputFieldSize>({
           ...{fontSize: sizeProp.fontSize},
           ...(letterSpacing ? {letterSpacing} : {}),
           ...(lineHeight ? {lineHeight} : {}),
+          ..._additionalTextInputStyle,
         };
 
         return (
-          <View style={wrapperStyleProps}>
+          <View style={wrapperStyleProps} {..._additionalWrapperProps}>
             {leftIcon}
             <TextInput
               style={fieldStyleProps}
@@ -232,6 +257,7 @@ function inputFieldFactory<Themes, AdditionalPalettes, InputFieldSize>({
               {...(maxLength ? {maxLength} : defaultMaxLength)}
               {...inputFieldProps}
               {...inputFieldOptions}
+              {..._additionalTextInputProps}
             />
             {rightIcon}
           </View>
@@ -241,16 +267,7 @@ function inputFieldFactory<Themes, AdditionalPalettes, InputFieldSize>({
     }
   }
   return inputFields as {
-    [key in InputFieldVariation]: React.FunctionComponent<
-      Props<
-        AdditionalPalettes,
-        OptionalExistCondition<
-          InputFieldSize,
-          typeof DEFAULT_INPUT_FIELD_SIZE,
-          InputFieldSize
-        >
-      >
-    >
+    [key in InputFieldVariation]: React.FunctionComponent<InputFieldProps>
   };
 }
 
