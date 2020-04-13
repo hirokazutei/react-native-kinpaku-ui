@@ -47,8 +47,8 @@ function inputFieldFactory<Themes, AdditionalPalettes, InputFieldSize>({
     >
   } = {};
 
-  for (const key in DEFAULT_INPUT_VARIATION_SETTING) {
-    if (DEFAULT_INPUT_VARIATION_SETTING.hasOwnProperty(key)) {
+  for (const settingKey in DEFAULT_INPUT_VARIATION_SETTING) {
+    if (DEFAULT_INPUT_VARIATION_SETTING.hasOwnProperty(settingKey)) {
       const InputField: React.FunctionComponent<
         Props<AdditionalPalettes, InputFieldSize>
       > = ({
@@ -193,7 +193,7 @@ function inputFieldFactory<Themes, AdditionalPalettes, InputFieldSize>({
           textAlign,
           textContentType,
           ...inputFieldOptions
-        } = DEFAULT_INPUT_VARIATION_SETTING[key as InputFieldVariation];
+        } = DEFAULT_INPUT_VARIATION_SETTING[settingKey as InputFieldVariation];
 
         // WrappedStyle
         const wrapperStyleProps = {
@@ -237,7 +237,7 @@ function inputFieldFactory<Themes, AdditionalPalettes, InputFieldSize>({
           </View>
         );
       };
-      inputFields[key as InputFieldVariation] = InputField;
+      inputFields[settingKey as InputFieldVariation] = InputField;
     }
   }
   return inputFields as {

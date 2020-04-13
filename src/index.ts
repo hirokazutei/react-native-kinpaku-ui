@@ -3,20 +3,20 @@ import {Themes, ThemePalette} from './theme/types';
 // Button
 import buttonFactory from './components/Button';
 import {
+  ButtonFactoryProps,
   ButtonProps,
   ButtonShapeVariation,
   ButtonSizeProps,
   ButtonType,
-  ButtonFactoryProps,
 } from './components/Button/types';
 // CheckBox
 import checkBoxFactory from './components/CheckBox';
 import {
+  CheckBoxFactoryProps,
   CheckBoxProps,
   CheckBoxShapeVariation,
   CheckBoxSizeProps,
   CheckBoxType,
-  CheckBoxFactoryProps,
 } from './components/CheckBox/types';
 // Input
 import inputFieldFactory from './components/InputField';
@@ -26,18 +26,18 @@ import {
   InputFieldShape,
   InputFieldSizeProps,
   InputFieldType,
-  InputFieldVariationProps,
   InputFieldVariation,
+  InputFieldVariationProps,
 } from './components/InputField/types';
 // Touchable
 import touchableFactory from './components/Touchable';
 import {
-  TouchableTypeVariations,
+  TouchableAllSizeProps,
+  TouchableFactoryProps,
   TouchableProps,
   TouchableSizeProps,
-  TouchableFactoryProps,
+  TouchableTypeVariations,
   TouchableVerHorSizeProps,
-  TouchableAllSizeProps,
 } from './components/Touchable/types';
 // RadioButton
 import radioButtonFactory from './components/RadioButton';
@@ -50,26 +50,25 @@ import {
 // Text
 import textFactory from './components/Text';
 import {
-  TextSizeProps,
-  TextVariationProps,
   TextFactoryProps,
   TextProps,
+  TextSizeProps,
+  TextVariationProps,
 } from './components/Text/types';
 
 export {
-  buttonFactory,
   ButtonFactoryProps,
   ButtonProps,
-  ButtonSizeProps,
   ButtonType,
   ButtonShapeVariation,
-  checkBoxFactory,
+  ButtonSizeProps,
+  buttonFactory,
+  CheckBoxFactoryProps,
   CheckBoxProps,
   CheckBoxShapeVariation,
   CheckBoxSizeProps,
   CheckBoxType,
-  CheckBoxFactoryProps,
-  radioButtonFactory,
+  checkBoxFactory,
   InputFieldFactoryProps,
   InputFieldProps,
   InputFieldShape,
@@ -82,19 +81,20 @@ export {
   RadioButtonProps,
   RadioButtonSizeProps,
   RadioButtonTypeVariation,
+  radioButtonFactory,
   ThemePalette,
   Themes,
-  textFactory,
   TextFactoryProps,
   TextProps,
   TextSizeProps,
   TextVariationProps,
+  textFactory,
   TouchableAllSizeProps,
-  touchableFactory,
   TouchableFactoryProps,
   TouchableProps,
   TouchableSizeProps,
   TouchableTypeVariations,
   TouchableVerHorSizeProps,
+  touchableFactory,
   UIFactory,
 };
