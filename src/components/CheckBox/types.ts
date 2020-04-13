@@ -1,15 +1,15 @@
 import {TouchableOpacityProps, ViewStyle} from 'react-native';
-import {ThemePalette} from '../../theme/types';
 import {
-  Color,
   AddDefaultToObject,
+  Color,
   OptionalTrueCondition,
   UnionDefaultKey,
 } from '../../types';
+import {ThemePalette} from '../../theme/types';
 
-// FIX: Both Should be taken in as an arg during factory
-type CheckBoxVariations = 'Outline' | 'Fill' | 'Reverse';
-type CheckBoxShapes = 'Sharp' | 'Rounded' | 'Circular';
+type CheckBoxShapeVariation = 'Sharp' | 'Round' | 'Circular';
+
+type CheckBoxType = 'outline' | 'fill' | 'reverse';
 
 type CheckBoxSizeProps = {
   size: number;
@@ -18,7 +18,7 @@ type CheckBoxSizeProps = {
 type CheckBoxFactoryProps<
   Themes,
   AdditionalPalettes,
-  CheckBoxSizes,
+  CheckBoxSize,
   //@ts-ignore: TS6133 Unused Variable
   AllowCustomProps
 > = {
@@ -30,35 +30,37 @@ type CheckBoxFactoryProps<
   };
   sizes?: {
     [SizeKey in keyof AddDefaultToObject<
-      CheckBoxSizes,
+      CheckBoxSize,
       CheckBoxSizeProps
     >]: CheckBoxSizeProps
   };
-  checkBoxShape?: CheckBoxShapes;
+  defaultColor?: keyof (ThemePalette & AdditionalPalettes);
+  defaultType?: CheckBoxType;
 };
 
-type CheckBoxProps<AdditionalPalettes, CheckBoxSizes, AllowCustomProps> = {
-  active?: boolean;
-  color?: keyof (ThemePalette & AdditionalPalettes);
-  isDisabled?: boolean;
-  size?: UnionDefaultKey<keyof CheckBoxSizes>;
-  onPress: (args: any) => any;
-  _customOuterViewStyle?: OptionalTrueCondition<
-    AllowCustomProps,
-    never,
-    ViewStyle
-  >;
+type CheckBoxProps<AdditionalPalettes, CheckBoxSize, AllowCustomProps> = {
   _customOuterViewProps?: OptionalTrueCondition<
     AllowCustomProps,
     never,
     TouchableOpacityProps
   >;
+  _customOuterViewStyle?: OptionalTrueCondition<
+    AllowCustomProps,
+    never,
+    ViewStyle
+  >;
+  active?: boolean;
+  color?: keyof (ThemePalette & AdditionalPalettes);
+  isDisabled?: boolean;
+  size?: UnionDefaultKey<keyof CheckBoxSize>;
+  type?: CheckBoxType;
+  onPress: (args: any) => any;
 };
 
 export {
   CheckBoxProps,
-  CheckBoxShapes,
+  CheckBoxShapeVariation,
   CheckBoxSizeProps,
-  CheckBoxVariations,
   CheckBoxFactoryProps,
+  CheckBoxType,
 };

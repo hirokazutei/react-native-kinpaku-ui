@@ -1,8 +1,8 @@
 import {FlexAlignType, TextStyle} from 'react-native';
-import {ButtonSizeProps, ButtonVariations} from './types';
 import {UnionDefaultKey} from '../../types';
+import {ButtonSizeProps, ButtonShapeVariation} from './types';
 
-type DefaultButtonSizes =
+type DefaultButtonSize =
   | 'tiny'
   | 'small'
   | 'medium'
@@ -10,52 +10,52 @@ type DefaultButtonSizes =
   | 'huge'
   | 'massive';
 
-const DEFAULTLESS_BUTTON_SIZES: {
-  [key in DefaultButtonSizes]: ButtonSizeProps
+const DEFAULTLESS_BUTTON_SIZE: {
+  [key in DefaultButtonSize]: ButtonSizeProps
 } = {
   tiny: {
-    verticalPaddding: 4,
-    paddingHorizontal: 8,
-    fontSize: 12,
     borderRadius: 6,
+    fontSize: 12,
+    paddingHorizontal: 8,
+    paddingVertical: 4,
   },
   small: {
-    verticalPaddding: 4,
-    paddingHorizontal: 8,
-    fontSize: 14,
     borderRadius: 6,
+    fontSize: 14,
+    paddingHorizontal: 8,
+    paddingVertical: 4,
   },
   medium: {
-    verticalPaddding: 6,
-    paddingHorizontal: 12,
-    fontSize: 16,
     borderRadius: 8,
+    fontSize: 16,
+    paddingHorizontal: 12,
+    paddingVertical: 6,
   },
   large: {
-    verticalPaddding: 6,
-    paddingHorizontal: 12,
-    fontSize: 20,
     borderRadius: 8,
+    fontSize: 20,
+    paddingHorizontal: 12,
+    paddingVertical: 6,
   },
   huge: {
-    verticalPaddding: 8,
-    paddingHorizontal: 16,
-    fontSize: 24,
     borderRadius: 10,
+    fontSize: 24,
+    paddingHorizontal: 16,
+    paddingVertical: 8,
   },
   massive: {
-    verticalPaddding: 8,
-    paddingHorizontal: 24,
-    fontSize: 32,
     borderRadius: 12,
+    fontSize: 32,
+    paddingHorizontal: 24,
+    paddingVertical: 8,
   },
 };
 
-const DEFAULT_BUTTON_SIZES: {
-  [key in UnionDefaultKey<DefaultButtonSizes>]: ButtonSizeProps
+const DEFAULT_BUTTON_SIZE: {
+  [key in UnionDefaultKey<DefaultButtonSize>]: ButtonSizeProps
 } = {
-  ...DEFAULTLESS_BUTTON_SIZES,
-  default: DEFAULTLESS_BUTTON_SIZES.medium,
+  ...DEFAULTLESS_BUTTON_SIZE,
+  default: DEFAULTLESS_BUTTON_SIZE.medium,
 };
 
 const DEFAULT_BUTTON_ALIGN: FlexAlignType = 'center';
@@ -64,34 +64,24 @@ const DEFAULT_BUTTON_FONT_WEIGHT: TextStyle['fontWeight'] = 'bold';
 
 const DEFAULT_BUTTON_BORDER_WIDTH: number = 2;
 
-const BORDER_RADIUS_MULTIPLIERS: {[key in ButtonVariations]: number} = {
+const BORDER_RADIUS_MULTIPLIER: {[key in ButtonShapeVariation]: number} = {
   Circular: 4,
   Round: 1,
   Sharp: 0,
 };
 
-const BUTTON_VARIATION_KEYS: Array<ButtonVariations> = [
+const BUTTON_SHAPE_VARIATION_KEYS: Array<ButtonShapeVariation> = [
   'Circular',
   'Round',
   'Sharp',
 ];
 
-const buttonSizeKeys: Array<UnionDefaultKey<DefaultButtonSizes>> = [
-  'tiny',
-  'small',
-  'medium',
-  'large',
-  'huge',
-  'massive',
-];
-
 export {
-  DEFAULT_BUTTON_SIZES,
+  BUTTON_SHAPE_VARIATION_KEYS,
+  BORDER_RADIUS_MULTIPLIER,
   DEFAULT_BUTTON_ALIGN,
-  DEFAULT_BUTTON_FONT_WEIGHT,
   DEFAULT_BUTTON_BORDER_WIDTH,
-  BORDER_RADIUS_MULTIPLIERS,
-  BUTTON_VARIATION_KEYS,
-  buttonSizeKeys,
-  DefaultButtonSizes,
+  DEFAULT_BUTTON_FONT_WEIGHT,
+  DEFAULT_BUTTON_SIZE,
+  DefaultButtonSize,
 };

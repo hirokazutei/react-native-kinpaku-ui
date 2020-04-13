@@ -4,18 +4,18 @@ import {Themes, ThemePalette} from './theme/types';
 import buttonFactory from './components/Button';
 import {
   ButtonProps,
-  ButtonVariations,
+  ButtonShapeVariation,
   ButtonSizeProps,
-  ButtonTypes,
+  ButtonType,
   ButtonFactoryProps,
 } from './components/Button/types';
 // CheckBox
 import checkBoxFactory from './components/CheckBox';
 import {
   CheckBoxProps,
-  CheckBoxShapes,
+  CheckBoxShapeVariation,
   CheckBoxSizeProps,
-  CheckBoxVariations,
+  CheckBoxType,
   CheckBoxFactoryProps,
 } from './components/CheckBox/types';
 // Input
@@ -23,16 +23,16 @@ import inputFieldFactory from './components/InputField';
 import {
   InputFieldFactoryProps,
   InputFieldProps,
-  InputFieldShapes,
+  InputFieldShape,
   InputFieldSizeProps,
-  InputFieldTypes,
+  InputFieldType,
   InputFieldVariationProps,
-  InputFieldVariations,
+  InputFieldVariation,
 } from './components/InputField/types';
 // Touchable
 import touchableFactory from './components/Touchable';
 import {
-  TouchableTypes,
+  TouchableTypeVariations,
   TouchableProps,
   TouchableSizeProps,
   TouchableFactoryProps,
@@ -45,7 +45,7 @@ import {
   RadioButtonFactoryProps,
   RadioButtonProps,
   RadioButtonSizeProps,
-  RadioButtonVariations,
+  RadioButtonTypeVariation,
 } from './components/RadioButton/types';
 // Text
 import textFactory from './components/Text';
@@ -61,27 +61,27 @@ export {
   ButtonFactoryProps,
   ButtonProps,
   ButtonSizeProps,
-  ButtonTypes,
-  ButtonVariations,
+  ButtonType,
+  ButtonShapeVariation,
   checkBoxFactory,
   CheckBoxProps,
-  CheckBoxShapes,
+  CheckBoxShapeVariation,
   CheckBoxSizeProps,
-  CheckBoxVariations,
+  CheckBoxType,
   CheckBoxFactoryProps,
   radioButtonFactory,
   InputFieldFactoryProps,
   InputFieldProps,
-  InputFieldShapes,
+  InputFieldShape,
   InputFieldSizeProps,
-  InputFieldTypes,
+  InputFieldType,
   InputFieldVariationProps,
-  InputFieldVariations,
+  InputFieldVariation,
   inputFieldFactory,
   RadioButtonFactoryProps,
   RadioButtonProps,
   RadioButtonSizeProps,
-  RadioButtonVariations,
+  RadioButtonTypeVariation,
   ThemePalette,
   Themes,
   textFactory,
@@ -94,7 +94,7 @@ export {
   TouchableFactoryProps,
   TouchableProps,
   TouchableSizeProps,
-  TouchableTypes,
+  TouchableTypeVariations,
   TouchableVerHorSizeProps,
   UIFactory,
 };

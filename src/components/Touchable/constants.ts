@@ -1,8 +1,8 @@
 import {FlexAlignType} from 'react-native';
-import {TouchableAllSizeProps} from './types';
 import {UnionDefaultKey} from '../../types';
+import {TouchableAllSizeProps, TouchableTypeVariations} from './types';
 
-type DefaultTouchableSizes =
+type DefaultTouchableSize =
   | 'tiny'
   | 'small'
   | 'medium'
@@ -10,8 +10,8 @@ type DefaultTouchableSizes =
   | 'huge'
   | 'massive';
 
-const DEFAULTLESSS_TOUCHABLE_SIZES: {
-  [key in DefaultTouchableSizes]: TouchableAllSizeProps
+const DEFAULTLESSS_TOUCHABLE_SIZE: {
+  [key in DefaultTouchableSize]: TouchableAllSizeProps
 } = {
   tiny: {
     padding: 4,
@@ -39,31 +39,26 @@ const DEFAULTLESSS_TOUCHABLE_SIZES: {
   },
 };
 
-const DEFAULT_TOUCHABLE_SIZES: {
-  [key in UnionDefaultKey<DefaultTouchableSizes>]: TouchableAllSizeProps
+const DEFAULT_TOUCHABLE_SIZE: {
+  [key in UnionDefaultKey<DefaultTouchableSize>]: TouchableAllSizeProps
 } = {
-  ...DEFAULTLESSS_TOUCHABLE_SIZES,
-  default: DEFAULTLESSS_TOUCHABLE_SIZES.medium,
+  ...DEFAULTLESSS_TOUCHABLE_SIZE,
+  default: DEFAULTLESSS_TOUCHABLE_SIZE.medium,
 };
 
 const DEFAULT_TOUCHABLE_ALIGN: FlexAlignType = 'center';
 
 const DEFAULT_TOUCHABLE_BORDER_WIDTH: number = 2;
 
-const touchableSizeKeys: Array<UnionDefaultKey<DefaultTouchableSizes>> = [
-  'default',
-  'tiny',
-  'small',
-  'medium',
-  'large',
-  'huge',
-  'massive',
+const TOUCHABLE_TYPE_VARIATION_KEYS: Array<TouchableTypeVariations> = [
+  'Fill',
+  'Outline',
 ];
 
 export {
-  DEFAULT_TOUCHABLE_SIZES,
   DEFAULT_TOUCHABLE_ALIGN,
   DEFAULT_TOUCHABLE_BORDER_WIDTH,
-  DefaultTouchableSizes,
-  touchableSizeKeys,
+  DEFAULT_TOUCHABLE_SIZE,
+  DefaultTouchableSize,
+  TOUCHABLE_TYPE_VARIATION_KEYS,
 };

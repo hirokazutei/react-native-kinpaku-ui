@@ -10,11 +10,8 @@ import {alignSelect} from '../knobs';
 import themes from '../../src/themes';
 import {ThemePalette} from '../../src/Theme/types';
 import touchableFactory from '../../src/components/Touchable';
-import {
-  TouchableProps,
-  TouchableTypes,
-} from '../../src/components/Touchable/types';
-import {DefaultTouchableSizes} from '../../src/components/Touchable/constants';
+import {TouchableProps} from '../../src/components/Touchable/types';
+import {DefaultTouchableSize} from '../../src/components/Touchable/constants';
 
 const Touchable = touchableFactory<typeof themes, null, null, null>({
   themes,
@@ -31,8 +28,8 @@ const colorSelect: {[key in keyof ThemePalette]?: keyof ThemePalette} = {
 };
 
 const sizeSelect: {
-  [key in IntersectDefaultKey<DefaultTouchableSizes>]?: UnionDefaultKey<
-    DefaultTouchableSizes
+  [key in IntersectDefaultKey<DefaultTouchableSize>]?: UnionDefaultKey<
+    DefaultTouchableSize
   >
 } = {
   tiny: 'tiny',
@@ -41,11 +38,6 @@ const sizeSelect: {
   large: 'large',
   huge: 'huge',
   massive: 'massive',
-};
-
-const typeSelect: {[Type in TouchableTypes]: TouchableTypes} = {
-  solid: 'solid',
-  outline: 'outline',
 };
 
 const getRequiredProps = (overrides = {}): TouchableProps<null, null, null> => {
@@ -65,7 +57,6 @@ const getOptionalProps = (): Partial<TouchableProps<null, null, null>> => {
     color: select('Color Options', colorSelect, undefined),
     isDisabled: boolean('Disabled', undefined),
     isStretched: boolean('Stretched', undefined),
-    type: select('Type Options', typeSelect, undefined),
     size: select('Size Option', sizeSelect, undefined),
   };
 };
@@ -77,6 +68,7 @@ storiesOf('UI/Touchable', module)
   .addDecorator(withKnobs)
   .add('Default', () => (
     <>
-      <Touchable {...getRequiredProps()} {...getOptionalProps()} />
+      <Touchable.Fill {...getRequiredProps()} {...getOptionalProps()} />
+      <Touchable.Outline {...getRequiredProps()} {...getOptionalProps()} />
     </>
   ));

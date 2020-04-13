@@ -1,50 +1,51 @@
 import React, {useContext} from 'react';
-import {TouchableOpacity, Text, FlexAlignType} from 'react-native';
+import {FlexAlignType, Text, TouchableOpacity} from 'react-native';
+import {
+  AddDefaultToObject,
+  OptionalExistCondition,
+  UnionDefaultKey,
+} from '../../types';
+import {colorResolverFactory} from '../../helper';
 import {
   ButtonFactoryProps,
   ButtonProps as Props,
-  ButtonVariations,
+  ButtonShapeVariation,
   ButtonSizeProps,
 } from './types';
 import {
-  UnionDefaultKey,
-  OptionalExistCondition,
-  AddDefaultToObject,
-} from '../../types';
-import {
-  DEFAULT_BUTTON_SIZES,
+  DEFAULT_BUTTON_SIZE,
   DEFAULT_BUTTON_ALIGN,
   DEFAULT_BUTTON_FONT_WEIGHT,
   DEFAULT_BUTTON_BORDER_WIDTH,
-  BORDER_RADIUS_MULTIPLIERS,
-  BUTTON_VARIATION_KEYS,
-  DefaultButtonSizes,
+  BORDER_RADIUS_MULTIPLIER,
+  BUTTON_SHAPE_VARIATION_KEYS,
+  DefaultButtonSize,
 } from './constants';
-import {colorResolverFactory} from '../../helper';
 
 function buttonFactory<
   Themes,
   AdditionalPalettes,
-  ButtonSizes,
+  ButtonSize,
   AllowCustomProps
 >({
   themes,
   sizes,
   additionalPalettes,
-  defaultType = 'solid',
+  defaultColor,
+  defaultType = 'fill',
 }: ButtonFactoryProps<
   Themes,
   AdditionalPalettes,
-  ButtonSizes,
+  ButtonSize,
   AllowCustomProps
 >): {
-  [key in ButtonVariations]: React.FunctionComponent<
+  [key in ButtonShapeVariation]: React.FunctionComponent<
     Props<
       AdditionalPalettes,
       OptionalExistCondition<
-        ButtonSizes,
-        typeof DEFAULT_BUTTON_SIZES,
-        ButtonSizes
+        ButtonSize,
+        typeof DEFAULT_BUTTON_SIZE,
+        ButtonSize
       >,
       AllowCustomProps
     >
@@ -54,184 +55,166 @@ function buttonFactory<
     'default' as keyof Themes,
   );
   const buttons: {
-    [key in ButtonVariations]?: React.FunctionComponent<
+    [key in ButtonShapeVariation]?: React.FunctionComponent<
       Props<
         AdditionalPalettes,
         OptionalExistCondition<
-          ButtonSizes,
-          typeof DEFAULT_BUTTON_SIZES,
-          ButtonSizes
+          ButtonSize,
+          typeof DEFAULT_BUTTON_SIZE,
+          ButtonSize
         >,
         AllowCustomProps
       >
     >
   } = {};
-  BUTTON_VARIATION_KEYS.forEach((variation: ButtonVariations) => {
-    const Button: React.FunctionComponent<
-      Props<
+  for (const key in BUTTON_SHAPE_VARIATION_KEYS) {
+    if (BUTTON_SHAPE_VARIATION_KEYS.hasOwnProperty(key)) {
+      const Button: React.FunctionComponent<
+        Props<
+          AdditionalPalettes,
+          OptionalExistCondition<
+            ButtonSize,
+            typeof DEFAULT_BUTTON_SIZE,
+            ButtonSize
+          >,
+          AllowCustomProps
+        >
+      > = ({
+        _additionalButtonProps,
+        _additionalButtonStyle,
+        _additionalTextProps,
+        _additionalTextStyle,
+        align = DEFAULT_BUTTON_ALIGN,
+        color = defaultColor,
+        isDisabled,
+        isStretched,
+        onPress,
+        size = 'default',
+        title,
+        type = defaultType,
+      }: Props<
         AdditionalPalettes,
         OptionalExistCondition<
-          ButtonSizes,
-          typeof DEFAULT_BUTTON_SIZES,
-          ButtonSizes
+          ButtonSize,
+          typeof DEFAULT_BUTTON_SIZE,
+          ButtonSize
         >,
         AllowCustomProps
-      >
-    > = ({
-      color,
-      size = 'default',
-      isDisabled,
-      isStretched,
-      align = DEFAULT_BUTTON_ALIGN,
-      onPress,
-      title,
-      type = defaultType,
-      _additionalButtonProps,
-      _additionalButtonStyle,
-      _additionalTextProps,
-      _additionalTextStyle,
-    }: Props<
-      AdditionalPalettes,
-      OptionalExistCondition<
-        ButtonSizes,
-        typeof DEFAULT_BUTTON_SIZES,
-        ButtonSizes
-      >,
-      AllowCustomProps
-    >): React.ReactElement<
-      Props<
-        AdditionalPalettes,
-        OptionalExistCondition<
-          ButtonSizes,
-          typeof DEFAULT_BUTTON_SIZES,
-          ButtonSizes
-        >,
-        AllowCustomProps
-      >
-    > => {
-      // Palettes
-      const currentThemeKey = useContext(themeContext) || 'default';
-      const currentTheme =
-        themes[`${currentThemeKey}` as keyof UnionDefaultKey<Themes>];
-      const colorResolver = colorResolverFactory<AdditionalPalettes>({
-        currentTheme,
-        additionalPalettes,
-      });
-      // Color
-      const primaryColor = isDisabled
-        ? currentTheme.disabled
-        : colorResolver({color, defaultColor: currentTheme.primary});
-      const buttonColor =
-        type === 'solid' ? primaryColor : currentTheme.background;
-      const fontColor =
-        type === 'solid' ? currentTheme.background : primaryColor;
+      >): React.ReactElement<
+        Props<
+          AdditionalPalettes,
+          OptionalExistCondition<
+            ButtonSize,
+            typeof DEFAULT_BUTTON_SIZE,
+            ButtonSize
+          >,
+          AllowCustomProps
+        >
+      > => {
+        // Palettes
+        const currentThemeKey = useContext(themeContext) || 'default';
+        const currentTheme =
+          themes[`${currentThemeKey}` as keyof UnionDefaultKey<Themes>];
+        const colorResolver = colorResolverFactory<AdditionalPalettes>({
+          currentTheme,
+          additionalPalettes,
+        });
 
-      // Size
-      const buttonSizeProperty = sizes
-        ? (sizes as {
-            [SizeKey in keyof AddDefaultToObject<
-              ButtonSizes,
-              ButtonSizeProps
-            >]: ButtonSizeProps
-          })[size as keyof AddDefaultToObject<ButtonSizes, ButtonSizeProps>]
-        : DEFAULT_BUTTON_SIZES[size as UnionDefaultKey<DefaultButtonSizes>];
+        // Color
+        const primaryColor = isDisabled
+          ? currentTheme.disabled
+          : colorResolver({color, defaultColor: currentTheme.primary});
+        const buttonColor =
+          type === 'fill' ? primaryColor : currentTheme.background;
+        const fontColor =
+          type === 'fill' ? currentTheme.background : primaryColor;
 
-      // BorderStyles
-      const borderStyles =
-        type === 'outline'
-          ? {
-              borderColor: primaryColor,
-              borderWidth: DEFAULT_BUTTON_BORDER_WIDTH,
-            }
-          : {};
+        // Size
+        const buttonSizeProperty = sizes
+          ? (sizes as {
+              [SizeKey in keyof AddDefaultToObject<
+                ButtonSize,
+                ButtonSizeProps
+              >]: ButtonSizeProps
+            })[size as keyof AddDefaultToObject<ButtonSize, ButtonSizeProps>]
+          : DEFAULT_BUTTON_SIZE[size as UnionDefaultKey<DefaultButtonSize>];
 
-      // BorderRadius
-      let borderRadius = 0;
-      if (buttonSizeProperty) {
-        borderRadius =
-          BORDER_RADIUS_MULTIPLIERS[variation as ButtonVariations] *
-          buttonSizeProperty.borderRadius;
-      } else {
-        borderRadius = DEFAULT_BUTTON_SIZES.default.paddingHorizontal;
-      }
+        // BorderStyles
+        const borderStyles =
+          type === 'outline'
+            ? {
+                borderColor: primaryColor,
+                borderWidth: DEFAULT_BUTTON_BORDER_WIDTH,
+              }
+            : {};
 
-      const touchableStyle = {
-        borderRadius: borderRadius,
-        backgroundColor: buttonColor,
-        paddingHorizontal:
-          (buttonSizeProperty && buttonSizeProperty.paddingHorizontal) ||
-          DEFAULT_BUTTON_SIZES.default.paddingHorizontal,
-        alignItems: align,
-        alignSelf: !isStretched
-          ? DEFAULT_BUTTON_ALIGN
-          : ('stretch' as FlexAlignType),
-        paddingVertical:
-          (buttonSizeProperty && buttonSizeProperty.verticalPaddding) ||
-          DEFAULT_BUTTON_SIZES.default.verticalPaddding,
-        ...borderStyles,
-        ...(_additionalButtonStyle || {}),
+        // BorderRadius
+        let borderRadius = 0;
+        if (buttonSizeProperty) {
+          borderRadius =
+            BORDER_RADIUS_MULTIPLIER[key as ButtonShapeVariation] *
+            buttonSizeProperty.borderRadius;
+        } else {
+          borderRadius = DEFAULT_BUTTON_SIZE.default.paddingHorizontal;
+        }
+
+        // Touchable Style
+        const touchableStyle = {
+          borderRadius: borderRadius,
+          backgroundColor: buttonColor,
+          paddingHorizontal:
+            (buttonSizeProperty && buttonSizeProperty.paddingHorizontal) ||
+            DEFAULT_BUTTON_SIZE.default.paddingHorizontal,
+          alignItems: align,
+          alignSelf: !isStretched
+            ? DEFAULT_BUTTON_ALIGN
+            : ('stretch' as FlexAlignType),
+          paddingVertical:
+            (buttonSizeProperty && buttonSizeProperty.paddingVertical) ||
+            DEFAULT_BUTTON_SIZE.default.paddingVertical,
+          ...borderStyles,
+          ...(_additionalButtonStyle || {}),
+        };
+
+        // Text Style
+        const textStyle = {
+          color: fontColor,
+          fontSize:
+            (buttonSizeProperty && buttonSizeProperty.fontSize) ||
+            DEFAULT_BUTTON_SIZE.default.fontSize,
+          fontWeight: DEFAULT_BUTTON_FONT_WEIGHT,
+          ...(_additionalTextStyle || {}),
+        };
+
+        return (
+          <TouchableOpacity
+            style={touchableStyle}
+            disabled={isDisabled}
+            onPress={onPress}
+            accessibilityLabel={title}
+            {..._additionalButtonProps || {}}>
+            <Text style={textStyle} {..._additionalTextProps || {}}>
+              {title}
+            </Text>
+          </TouchableOpacity>
+        );
       };
-
-      // Text Style
-      const textStyle = {
-        color: fontColor,
-        fontSize:
-          (buttonSizeProperty && buttonSizeProperty.fontSize) ||
-          DEFAULT_BUTTON_SIZES.default.fontSize,
-        fontWeight: DEFAULT_BUTTON_FONT_WEIGHT,
-        ...(_additionalTextStyle || {}),
-      };
-      return (
-        <TouchableOpacity
-          style={touchableStyle}
-          disabled={isDisabled}
-          onPress={onPress}
-          accessibilityLabel={title}
-          {..._additionalButtonProps || {}}>
-          <Text style={textStyle} {..._additionalTextProps || {}}>
-            {title}
-          </Text>
-        </TouchableOpacity>
-      );
-    };
-    buttons[variation as ButtonVariations] = Button;
-  });
-  const Button = {
-    Circular: buttons.Circular as React.FunctionComponent<
+      buttons[key as ButtonShapeVariation] = Button;
+    }
+  }
+  return buttons as {
+    [key in ButtonShapeVariation]: React.FunctionComponent<
       Props<
         AdditionalPalettes,
         OptionalExistCondition<
-          ButtonSizes,
-          typeof DEFAULT_BUTTON_SIZES,
-          ButtonSizes
+          ButtonSize,
+          typeof DEFAULT_BUTTON_SIZE,
+          ButtonSize
         >,
         AllowCustomProps
       >
-    >,
-    Round: buttons.Round as React.FunctionComponent<
-      Props<
-        AdditionalPalettes,
-        OptionalExistCondition<
-          ButtonSizes,
-          typeof DEFAULT_BUTTON_SIZES,
-          ButtonSizes
-        >,
-        AllowCustomProps
-      >
-    >,
-    Sharp: buttons.Sharp as React.FunctionComponent<
-      Props<
-        AdditionalPalettes,
-        OptionalExistCondition<
-          ButtonSizes,
-          typeof DEFAULT_BUTTON_SIZES,
-          ButtonSizes
-        >,
-        AllowCustomProps
-      >
-    >,
+    >
   };
-  return Button;
 }
 
 export default buttonFactory;

@@ -1,12 +1,8 @@
-import {TextInputProps, TextStyle} from 'react-native';
+import {TextStyle, TextInputProps} from 'react-native';
 import {AddDefaultToObject, Color} from '../../types';
 import {ThemePalette} from '../../theme/types';
 
-type InputFieldTypes = 'Underline' | 'Outline' | 'Fill';
-
-type InputFieldShapes = 'sharp' | 'rounded' | 'circular';
-
-type InputFieldVariations =
+type InputFieldVariation =
   | 'creditCardNumber'
   | 'decimal'
   | 'email'
@@ -21,8 +17,11 @@ type InputFieldVariations =
   | 'phone'
   | 'url'
   | 'username';
+// TODO: SearchField,
 
-// SearchField,
+type InputFieldShape = 'sharp' | 'rounded' | 'circular';
+
+type InputFieldType = 'underline' | 'outline' | 'fill';
 
 type InputFieldSizeProps = {
   borderRadiusFontRatio?: number; // Ratio depends on the fontSize
@@ -64,7 +63,7 @@ type InputFieldVariationProps = {
   minimumFontScale?: number;
 };
 
-type InputFieldFactoryProps<Themes, AdditionalPalettes, InputFieldSizes> = {
+type InputFieldFactoryProps<Themes, AdditionalPalettes, InputFieldSize> = {
   themes: {
     [ThemeKey in keyof AddDefaultToObject<Themes, ThemePalette>]: ThemePalette
   };
@@ -73,16 +72,16 @@ type InputFieldFactoryProps<Themes, AdditionalPalettes, InputFieldSizes> = {
   };
   sizes?: {
     [SizeKey in keyof AddDefaultToObject<
-      InputFieldSizes,
+      InputFieldSize,
       InputFieldSizeProps
     >]: InputFieldSizeProps
   };
+  inputFieldType?: InputFieldType;
   defaultColor?: keyof (ThemePalette & AdditionalPalettes);
-  inputFieldType?: InputFieldTypes;
-  defaultShape?: InputFieldShapes;
+  defaultShape?: InputFieldShape;
 };
 
-type InputFieldProps<AdditionalPalettes, InputFieldSizes> = {
+type InputFieldProps<AdditionalPalettes, InputFieldSize> = {
   autoFocus?: boolean;
   backgroundColor?: keyof (ThemePalette & AdditionalPalettes);
   borderColor?: keyof (ThemePalette & AdditionalPalettes);
@@ -96,8 +95,8 @@ type InputFieldProps<AdditionalPalettes, InputFieldSizes> = {
   onFocus?: (args: any) => any;
   onKeyPress?: (args: any) => any;
   placeholder?: string;
-  size?: keyof AddDefaultToObject<InputFieldSizes, InputFieldSizeProps>;
-  shape?: InputFieldShapes;
+  size?: keyof AddDefaultToObject<InputFieldSize, InputFieldSizeProps>;
+  shape?: InputFieldShape;
   textColor?: keyof (ThemePalette & AdditionalPalettes);
   value: string;
 };
@@ -105,9 +104,9 @@ type InputFieldProps<AdditionalPalettes, InputFieldSizes> = {
 export {
   InputFieldFactoryProps,
   InputFieldProps,
-  InputFieldShapes,
+  InputFieldShape,
   InputFieldSizeProps,
-  InputFieldTypes,
+  InputFieldType,
   InputFieldVariationProps,
-  InputFieldVariations,
+  InputFieldVariation,
 };

@@ -8,9 +8,9 @@ import {IntersectDefaultKey, UnionDefaultKey} from '../../src/types';
 import {alignSelect} from '../knobs';
 import themes from '../../src/themes';
 import {ThemePalette} from '../../src/Theme/types';
-import {ButtonProps, ButtonTypes} from '../../src/components/Button/types';
+import {ButtonProps, ButtonType} from '../../src/components/Button/types';
 import buttonFactory from '../../src/components/Button';
-import {DefaultButtonSizes} from '../../src/components/Button/constants';
+import {DefaultButtonSize} from '../../src/components/Button/constants';
 
 const {Sharp, Round, Circular} = buttonFactory<typeof themes, null, null, null>(
   {
@@ -22,7 +22,7 @@ const DEFAULT_PROPS = {
   title: 'PRESS HERE',
 };
 
-const BUTTON_TYPES: Array<ButtonTypes> = ['solid', 'outline', 'clear'];
+const BUTTON_TYPES: Array<ButtonType> = ['fill', 'outline', 'clear'];
 
 const colorSelect: {[key in keyof ThemePalette]?: keyof ThemePalette} = {
   primary: 'primary',
@@ -31,8 +31,8 @@ const colorSelect: {[key in keyof ThemePalette]?: keyof ThemePalette} = {
 };
 
 const sizeSelect: {
-  [key in IntersectDefaultKey<DefaultButtonSizes>]?: UnionDefaultKey<
-    DefaultButtonSizes
+  [key in IntersectDefaultKey<DefaultButtonSize>]?: UnionDefaultKey<
+    DefaultButtonSize
   >
 } = {
   tiny: 'tiny',
@@ -72,7 +72,7 @@ storiesOf('UI/Button', module)
   .addDecorator(withKnobs)
   .add('Default', () => (
     <>
-      {BUTTON_TYPES.map((type: ButtonTypes, index: number) => {
+      {BUTTON_TYPES.map((type: ButtonType, index: number) => {
         return (
           <Sharp
             key={index}
@@ -82,7 +82,7 @@ storiesOf('UI/Button', module)
           />
         );
       })}
-      {BUTTON_TYPES.map((type: ButtonTypes, index: number) => {
+      {BUTTON_TYPES.map((type: ButtonType, index: number) => {
         return (
           <Round
             key={index}
@@ -92,7 +92,7 @@ storiesOf('UI/Button', module)
           />
         );
       })}
-      {BUTTON_TYPES.map((type: ButtonTypes, index: number) => {
+      {BUTTON_TYPES.map((type: ButtonType, index: number) => {
         return (
           <Circular
             key={index}
