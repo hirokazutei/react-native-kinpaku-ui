@@ -12,5 +12,9 @@ declare const colorResolverFactory: <AdditionalPalettes>({ additionalPalettes, c
     color?: keyof AdditionalPalettes | "primary" | "secondary" | "tertiary" | "disabled" | "background" | "text" | undefined;
     defaultColor: string;
 }) => string;
-export { colorResolverFactory };
+declare const lightenColor: ({ color, percent, }: {
+    color: number;
+    percent: number;
+}) => string;
+export { colorResolverFactory, lightenColor };
 //# sourceMappingURL=helper.d.ts.map

@@ -1,15 +1,15 @@
-import { TouchableOpacityProps, TextProperties, ViewStyle, TextStyle, FlexAlignType } from 'react-native';
+import { FlexAlignType, TextProperties, TextStyle, TouchableOpacityProps, ViewStyle } from 'react-native';
 import { AddDefaultToObject, Color, OptionalTrueCondition, UnionDefaultKey } from '../../types';
 import { ThemePalette } from '../../theme/types';
-declare type ButtonVariations = 'Circular' | 'Round' | 'Sharp';
-declare type ButtonTypes = 'solid' | 'clear' | 'outline';
+declare type ButtonShapeVariation = 'Circular' | 'Round' | 'Sharp';
+declare type ButtonType = 'solid' | 'clear' | 'outline';
 declare type ButtonSizeProps = {
-    horizontalPadding: number;
-    verticalPaddding: number;
-    fontSize: number;
     borderRadius: number;
+    fontSize: number;
+    paddingHorizontal: number;
+    paddingVertical: number;
 };
-declare type ButtonFactoryProps<Themes, AdditionalPalettes, ButtonSizes, AllowCustomProps> = {
+declare type ButtonFactoryProps<Themes, AdditionalPalettes, ButtonSize, AllowCustomProps> = {
     themes: {
         [ThemeKey in keyof AddDefaultToObject<Themes, ThemePalette>]: ThemePalette;
     };
@@ -17,11 +17,12 @@ declare type ButtonFactoryProps<Themes, AdditionalPalettes, ButtonSizes, AllowCu
         [AdditionalPaletteKey in keyof AdditionalPalettes]: Color;
     };
     sizes?: {
-        [SizeKey in keyof AddDefaultToObject<ButtonSizes, ButtonSizeProps>]: ButtonSizeProps;
+        [SizeKey in keyof AddDefaultToObject<ButtonSize, ButtonSizeProps>]: ButtonSizeProps;
     };
-    defaultType?: ButtonTypes;
+    defaultColor?: keyof (ThemePalette & AdditionalPalettes);
+    defaultType?: ButtonType;
 };
-declare type ButtonProps<AdditionalPalettes, ButtonSizes, AllowCustomProps> = {
+declare type ButtonProps<AdditionalPalettes, ButtonSize, AllowCustomProps> = {
     _additionalButtonProps?: OptionalTrueCondition<AllowCustomProps, never, TouchableOpacityProps>;
     _additionalButtonStyle?: OptionalTrueCondition<AllowCustomProps, never, ViewStyle>;
     _additionalTextProps?: OptionalTrueCondition<AllowCustomProps, never, TextProperties>;
@@ -30,10 +31,10 @@ declare type ButtonProps<AdditionalPalettes, ButtonSizes, AllowCustomProps> = {
     color?: keyof (ThemePalette & AdditionalPalettes);
     isDisabled?: boolean;
     isStretched?: boolean;
-    size?: UnionDefaultKey<keyof ButtonSizes>;
+    size?: UnionDefaultKey<keyof ButtonSize>;
     title: string;
-    type?: ButtonTypes;
+    type?: ButtonType;
     onPress: (args: any) => any;
 };
-export { ButtonProps, ButtonVariations, ButtonSizeProps, ButtonTypes, ButtonFactoryProps, };
+export { ButtonProps, ButtonShapeVariation, ButtonSizeProps, ButtonType, ButtonFactoryProps, };
 //# sourceMappingURL=types.d.ts.map

@@ -1,11 +1,11 @@
 /// <reference types="react" />
-import { TouchableOpacityProps, ViewStyle, FlexAlignType } from 'react-native';
+import { FlexAlignType, TouchableOpacityProps, ViewStyle } from 'react-native';
 import { AddDefaultToObject, Color, OptionalTrueCondition, UnionDefaultKey } from '../../types';
 import { ThemePalette } from '../../theme/types';
-declare type TouchableTypes = 'solid' | 'outline';
+declare type TouchableTypeVariations = 'Fill' | 'Outline';
 declare type VerHor = {
-    horizontalPadding: number;
-    verticalPadding: number;
+    paddingHorizontal: number;
+    paddingVertical: number;
 };
 declare type Padding = {
     padding: number;
@@ -17,7 +17,7 @@ declare type TouchableAllSizeProps = {
     borderRadius: number;
 } & Padding;
 declare type TouchableSizeProps = TouchableVerHorSizeProps | TouchableAllSizeProps;
-declare type TouchableFactoryProps<Themes, AdditionalPalettes, TouchableSizes, AllowCustomProps> = {
+declare type TouchableFactoryProps<Themes, AdditionalPalettes, TouchableSize, AllowCustomProps> = {
     themes: {
         [ThemeKeys in keyof AddDefaultToObject<Themes, ThemePalette>]: ThemePalette;
     };
@@ -25,11 +25,11 @@ declare type TouchableFactoryProps<Themes, AdditionalPalettes, TouchableSizes, A
         [AdditionalPaletteKeys in keyof AdditionalPalettes]: Color;
     };
     sizes?: {
-        [SizeKey in keyof AddDefaultToObject<TouchableSizes, TouchableSizeProps>]: TouchableSizeProps;
+        [SizeKey in keyof AddDefaultToObject<TouchableSize, TouchableSizeProps>]: TouchableSizeProps;
     };
-    defaultType?: TouchableTypes;
+    defaultType?: TouchableTypeVariations;
 };
-declare type TouchableProps<AdditionalPalettes, TouchableSizes, AllowCustomProps> = {
+declare type TouchableProps<AdditionalPalettes, TouchableSize, AllowCustomProps> = {
     _additionalProps?: OptionalTrueCondition<AllowCustomProps, never, TouchableOpacityProps>;
     _additionalStyle?: OptionalTrueCondition<AllowCustomProps, never, ViewStyle>;
     align?: FlexAlignType;
@@ -37,9 +37,8 @@ declare type TouchableProps<AdditionalPalettes, TouchableSizes, AllowCustomProps
     color?: keyof (ThemePalette & AdditionalPalettes);
     isDisabled?: boolean;
     isStretched?: boolean;
-    size?: UnionDefaultKey<keyof TouchableSizes>;
-    type?: TouchableTypes;
+    size?: UnionDefaultKey<keyof TouchableSize>;
     onPress: (args: any) => any;
 };
-export { TouchableTypes, TouchableProps, TouchableSizeProps, TouchableFactoryProps, TouchableVerHorSizeProps, TouchableAllSizeProps, };
+export { TouchableTypeVariations, TouchableProps, TouchableSizeProps, TouchableFactoryProps, TouchableVerHorSizeProps, TouchableAllSizeProps, };
 //# sourceMappingURL=types.d.ts.map

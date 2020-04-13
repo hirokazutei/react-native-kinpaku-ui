@@ -1,9 +1,9 @@
 import React from 'react';
-import { RadioButtonFactoryProps, RadioButtonProps as Props, RadioButtonVariations } from './types';
 import { OptionalExistCondition } from '../../types';
-import { DEFAULT_RADIO_BUTTON_SIZES } from './constants';
-declare function radioButtonFactory<Themes, AdditionalPalettes, RadioButtonSizes, AllowCustomProps>({ themes, sizes, additionalPalettes, }: RadioButtonFactoryProps<Themes, AdditionalPalettes, RadioButtonSizes, AllowCustomProps>): {
-    [key in RadioButtonVariations]: React.FunctionComponent<Props<AdditionalPalettes, OptionalExistCondition<RadioButtonSizes, typeof DEFAULT_RADIO_BUTTON_SIZES, RadioButtonSizes>, AllowCustomProps>>;
+import { RadioButtonFactoryProps, RadioButtonProps as Props, RadioButtonTypeVariation } from './types';
+import { DEFAULT_RADIO_BUTTON_SIZE } from './constants';
+declare function radioButtonFactory<Themes, AdditionalPalettes, RadioButtonSize, AllowCustomProps>({ themes, sizes, additionalPalettes, }: RadioButtonFactoryProps<Themes, AdditionalPalettes, RadioButtonSize, AllowCustomProps>): {
+    [key in RadioButtonTypeVariation]: React.FunctionComponent<Props<AdditionalPalettes, OptionalExistCondition<RadioButtonSize, typeof DEFAULT_RADIO_BUTTON_SIZE, RadioButtonSize>, AllowCustomProps>>;
 };
 export default radioButtonFactory;
 //# sourceMappingURL=index.d.ts.map
