@@ -7,7 +7,9 @@ import {
 } from '../../types';
 import {ThemePalette} from '../../theme/types';
 
-type RadioButtonTypeVariation = 'Outline' | 'Reverse' | 'Fill';
+type RadioButtonShapeVariation = 'Sharp' | 'Round' | 'Circular';
+
+type RadioButtonType = 'fill' | 'outline' | 'reverse';
 
 type RadioButtonSizeProps = {
   size: number;
@@ -34,6 +36,8 @@ type RadioButtonFactoryProps<
       RadioButtonSizeProps
     >]: RadioButtonSizeProps
   };
+  defaultColor?: keyof (ThemePalette & AdditionalPalettes);
+  defaultType?: RadioButtonType;
 };
 
 type RadioButtonProps<AdditionalPalettes, RadioButtonSize, AllowCustomProps> = {
@@ -61,6 +65,7 @@ type RadioButtonProps<AdditionalPalettes, RadioButtonSize, AllowCustomProps> = {
   color?: keyof (ThemePalette & AdditionalPalettes);
   isDisabled?: boolean;
   size?: UnionDefaultKey<keyof RadioButtonSize>;
+  type?: RadioButtonType;
   onPress: (args: any) => any;
 };
 
@@ -68,5 +73,6 @@ export {
   RadioButtonFactoryProps,
   RadioButtonProps,
   RadioButtonSizeProps,
-  RadioButtonTypeVariation,
+  RadioButtonShapeVariation,
+  RadioButtonType,
 };
