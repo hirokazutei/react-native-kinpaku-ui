@@ -1,13 +1,13 @@
 # Kinpaku UI Docs
 
-## [Button](./Button.md Button Docs)
+## [Button](./Button.md)
 
-## [CheckBox](./CheckBox.md CheckBox Docs)
+## [CheckBox](./CheckBox.md)
 
-## [InputField](./InputField.md InputField Docs)
+## [InputField](./InputField.md)
 
-## [RadioButton](./RadioButton.md RadioButton Docs)
+## [RadioButton](./RadioButton.md)
 
-## [Touchable](./Touchable.md Touchable Docs)
+## [Touchable](./Touchable.md)
 
-## [Themes & Palettes](./Theme.md Themes & Palettes Doc)
+## [Themes & Palettes](./Theme.md)
