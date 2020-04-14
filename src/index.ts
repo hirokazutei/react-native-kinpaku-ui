@@ -45,7 +45,7 @@ import {
   RadioButtonFactoryProps,
   RadioButtonProps,
   RadioButtonSizeProps,
-  RadioButtonTypeVariation,
+  RadioButtonShapeVariation,
 } from './components/RadioButton/types';
 // Text
 import textFactory from './components/Text';
@@ -80,7 +80,7 @@ export {
   RadioButtonFactoryProps,
   RadioButtonProps,
   RadioButtonSizeProps,
-  RadioButtonTypeVariation,
+  RadioButtonShapeVariation,
   radioButtonFactory,
   ThemePalette,
   Themes,

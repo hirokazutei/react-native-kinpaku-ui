@@ -12,7 +12,6 @@ import {
   RadioButtonProps as Props,
   RadioButtonSizeProps,
   RadioButtonShapeVariation,
-  RadioButtonType,
 } from './types';
 import {
   RADIO_BUTTON_SHAPE_VARIATION_KEYS,
