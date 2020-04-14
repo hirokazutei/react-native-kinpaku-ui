@@ -51,7 +51,7 @@ export default ButtonPage;
 
 ### Using buttonFactory
 
-> `buttonFactory` allows you to create a custom collection of Buttons that has different shape variations: `Circular`, `Round`, and `Sharp`.
+> `buttonFactory` allows you to create a custom collection of `Button` components that has different shape variations: `Circular`, `Round`, and `Sharp`.
 
 ```ts
 import React from 'react';
@@ -106,7 +106,7 @@ export default ButtonPage;
 
 #### `AllowCustomProps [Nullable]`
 
-> If the factory produces a Button component that allows custom props or not.
+> If the factory produces a `Button` component that allows custom props or not.
 
 ### Factory Arguments
 
@@ -138,11 +138,11 @@ type Sizes = {
   - `paddingHorizontal`
     - number
     - required
-    - The horizontal padding of the button.
+    - The horizontal padding of the `Button`.
   - `paddingVertical`
     - number
     - required
-    - The vertical padding of the botton.
+    - The vertical padding of the `Button`.
   - `fontSize`
     - number
     - required
@@ -162,7 +162,7 @@ type DefaultColor = keyof (ThemePalette & AdditionalPalettes);
 
 #### `defaultType [Optional]`
 
-> The default type of `Button` component: `solid`, `clear` or `outline`
+> The default type of `Button` component: `fill`, `clear` or `outline`
 
 ## JSDocs
 
@@ -175,16 +175,16 @@ type DefaultColor = keyof (ThemePalette & AdditionalPalettes);
  * @param props - properties
  *
  * Required:
- * @param props.label - label of the button
- * @param props.onPress - onPress event of the button
+ * @param props.label - label of the Button
+ * @param props.onPress - onPress event of the Button
  *
  * Optional:
  * @param [props.align] - the alignment of the text
- * @param [props.color] - color of the button
- * @param [props.isDisabled] - if the button is disabled or not
- * @param [props.isStretched] - if the button spans the entire horizontal space
- * @param [props.size] - size of the button, default is medium.
- * @param [props.type] - type of button: solid | clear | outline
+ * @param [props.color] - color of the Button
+ * @param [props.isDisabled] - if the Button is disabled or not
+ * @param [props.isStretched] - if the Button spans the entire horizontal space
+ * @param [props.size] - size of the Button
+ * @param [props.type] - type of Button: solid | clear | outline
  *
  * Optional Additional Args:
  * @param [_additionalButtonProps] - additional props for the TouchableOpacity component
