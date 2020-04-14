@@ -14,6 +14,7 @@ import {
 import {ThemePalette, Themes as ThemesType} from '../../theme/types';
 
 type ButtonShapeVariation = 'Circular' | 'Round' | 'Sharp';
+
 type ButtonType = 'fill' | 'clear' | 'outline';
 
 type ButtonSizeProps = {

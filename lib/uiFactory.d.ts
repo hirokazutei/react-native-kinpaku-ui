@@ -113,19 +113,19 @@ declare const UIFactory: <ThemeObject, AdditionalPalettes>(themes: Themes<ThemeO
         }, false>>;
     };
     RadioButton: {
-        Fill: import("react").FunctionComponent<import("./components/RadioButton/types").RadioButtonProps<AdditionalPalettes, {
+        Circular: import("react").FunctionComponent<import("./components/RadioButton/types").RadioButtonProps<AdditionalPalettes, {
             default: import("./components/RadioButton/types").RadioButtonSizeProps;
             small: import("./components/RadioButton/types").RadioButtonSizeProps;
             medium: import("./components/RadioButton/types").RadioButtonSizeProps;
             large: import("./components/RadioButton/types").RadioButtonSizeProps;
         }, false>>;
-        Outline: import("react").FunctionComponent<import("./components/RadioButton/types").RadioButtonProps<AdditionalPalettes, {
+        Round: import("react").FunctionComponent<import("./components/RadioButton/types").RadioButtonProps<AdditionalPalettes, {
             default: import("./components/RadioButton/types").RadioButtonSizeProps;
             small: import("./components/RadioButton/types").RadioButtonSizeProps;
             medium: import("./components/RadioButton/types").RadioButtonSizeProps;
             large: import("./components/RadioButton/types").RadioButtonSizeProps;
         }, false>>;
-        Reverse: import("react").FunctionComponent<import("./components/RadioButton/types").RadioButtonProps<AdditionalPalettes, {
+        Sharp: import("react").FunctionComponent<import("./components/RadioButton/types").RadioButtonProps<AdditionalPalettes, {
             default: import("./components/RadioButton/types").RadioButtonSizeProps;
             small: import("./components/RadioButton/types").RadioButtonSizeProps;
             medium: import("./components/RadioButton/types").RadioButtonSizeProps;

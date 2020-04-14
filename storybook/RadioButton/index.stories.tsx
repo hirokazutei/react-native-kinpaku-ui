@@ -11,7 +11,7 @@ import {RadioButtonProps} from '../../src/components/RadioButton/types';
 import radioButtonFactory from '../../src/components/RadioButton';
 import {DefaultRadioButtonSize} from '../../src/components/RadioButton/constants';
 
-const {Outline, Reverse, Fill} = radioButtonFactory<
+const {Sharp, Round, Circular} = radioButtonFactory<
   typeof themes,
   null,
   null,
@@ -58,8 +58,8 @@ storiesOf('UI/RadioButton', module)
   .addDecorator(withKnobs)
   .add('Default', () => (
     <>
-      <Outline {...getRequiredProps()} {...getOptionalProps()} />
-      <Reverse {...getRequiredProps()} {...getOptionalProps()} />
-      <Fill {...getRequiredProps()} {...getOptionalProps()} />
+      <Sharp {...getRequiredProps()} {...getOptionalProps()} />
+      <Round {...getRequiredProps()} {...getOptionalProps()} />
+      <Circular {...getRequiredProps()} {...getOptionalProps()} />
     </>
   ));

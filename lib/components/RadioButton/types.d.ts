@@ -1,7 +1,8 @@
 import { TouchableOpacityProps, ViewStyle, ViewProps } from 'react-native';
 import { Color, AddDefaultToObject, OptionalTrueCondition, UnionDefaultKey } from '../../types';
 import { ThemePalette } from '../../theme/types';
-declare type RadioButtonTypeVariation = 'Outline' | 'Reverse' | 'Fill';
+declare type RadioButtonShapeVariation = 'Sharp' | 'Round' | 'Circular';
+declare type RadioButtonType = 'fill' | 'outline' | 'reverse';
 declare type RadioButtonSizeProps = {
     size: number;
     dotSize: number;
@@ -17,6 +18,8 @@ declare type RadioButtonFactoryProps<Themes, AdditionalPalettes, RadioButtonSize
     sizes?: {
         [SizeKey in keyof AddDefaultToObject<RadioButtonSize, RadioButtonSizeProps>]: RadioButtonSizeProps;
     };
+    defaultColor?: keyof (ThemePalette & AdditionalPalettes);
+    defaultType?: RadioButtonType;
 };
 declare type RadioButtonProps<AdditionalPalettes, RadioButtonSize, AllowCustomProps> = {
     _customOuterViewProps?: OptionalTrueCondition<AllowCustomProps, TouchableOpacityProps, never>;
@@ -27,7 +30,8 @@ declare type RadioButtonProps<AdditionalPalettes, RadioButtonSize, AllowCustomPr
     color?: keyof (ThemePalette & AdditionalPalettes);
     isDisabled?: boolean;
     size?: UnionDefaultKey<keyof RadioButtonSize>;
+    type?: RadioButtonType;
     onPress: (args: any) => any;
 };
-export { RadioButtonFactoryProps, RadioButtonProps, RadioButtonSizeProps, RadioButtonTypeVariation, };
+export { RadioButtonFactoryProps, RadioButtonProps, RadioButtonSizeProps, RadioButtonShapeVariation, RadioButtonType, };
 //# sourceMappingURL=types.d.ts.map
