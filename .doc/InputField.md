@@ -10,7 +10,7 @@
 
 1. Usage
    1. Using UIFactory
-   1. Using InputFieldFactory
+   1. Using inputFieldFactory
    1. Factory Type Arguments
    1. Factory Arguments
 1. JSDocs
@@ -45,7 +45,7 @@ export default EmailFieldPage;
 
 ### Using InputFieldFactory
 
-> `inputFieldFactory` allows you to create a custom collection of InputFields that handles different text input scenarios such as `number`, `email`, or `password`.
+> `inputFieldFactory` allows you to create a custom collection of `InputField` components that handles different text input scenarios such as `number`, `email`, or `password`.
 
 ```ts
 import React from 'react';
@@ -97,7 +97,7 @@ export default ParagraphPage;
 
 #### `AllowCustomProps [Nullable]`
 
-> If the factory produces a InputField component that allows custom props or not.
+> If the factory produces a `InputField` component that allows custom props or not.
 
 ### Factory Arguments
 
@@ -181,7 +181,7 @@ type InputFieldShape = 'sharp' | 'rounded' | 'circular';
 
 ## InputField Variation
 
-> These are the default variations that can be made with InputFieldFactory and UIFactory. For details on the properties of each variations, checkout this doc.
+> These are the default variations that can be made with `inputFieldFactory` and `UIFactory`. For details on the properties of each variations, checkout this doc.
 
 - `creditCardNumber`
 - `decimal`
@@ -209,25 +209,25 @@ type InputFieldShape = 'sharp' | 'rounded' | 'circular';
  * @param props - properties
  *
  * Required:
- * @param props.value - the value in the inputField
+ * @param props.value - the value in the InputField
  *
  * Optional:
- * @param [props.autoFocus] - if the field should be auto-focused
- * @param [props.backgroundColor] - background color of the field
- * @param [props.borderColor] - border color of the field
- * @param [props.color] - the main color of the field
- * @param [props.defaultValue] - the default value of the field
- * @param [props.isDisabled] - if the input field is disabled
- * @param [props.maxLength] - max length of the field
+ * @param [props.autoFocus] - if the InputField should be auto-focused
+ * @param [props.backgroundColor] - background color of the InputField
+ * @param [props.borderColor] - border color of the InputField
+ * @param [props.color] - the main color of the InputField
+ * @param [props.defaultValue] - the default value of the InputField
+ * @param [props.isDisabled] - if the InputField is disabled
+ * @param [props.maxLength] - max length of the InputField
  * @param [props.onBlur] - function that runs on blur
  * @param [props.onChange] - function that runs on change
  * @param [props.onEndEditing] - function that runs on end editing
  * @param [props.onFocus] - function that runs on focus
  * @param [props.onKeyPress] - function that runs on key press
- * @param [props.placeholder] - placeholder of the input field
- * @param [props.size] - size of the input field
- * @param [props.shape] - type of the input field: "sharp" | "rounded" | "circular"
- * @param [props.textColor] - text color of the field
+ * @param [props.placeholder] - placeholder of the InputField
+ * @param [props.size] - size of the input InputField
+ * @param [props.shape] - type of the input InputField: "sharp" | "rounded" | "circular"
+ * @param [props.textColor] - text color of the InputField
  *
  * Optional Additional Args:
  * @param [_additionalTextProps] - additional props for the TextInput component
