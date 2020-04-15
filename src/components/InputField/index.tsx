@@ -73,10 +73,10 @@ function inputFieldFactory<
   for (const settingKey in DEFAULT_INPUT_VARIATION_SETTING) {
     if (DEFAULT_INPUT_VARIATION_SETTING.hasOwnProperty(settingKey)) {
       const InputField = ({
-        _additionalTextInputProps,
-        _additionalTextInputStyle,
-        _additionalWrapperProps,
-        _additionalWrapperStyle,
+        _customTextInputProps,
+        _customTextInputStyle,
+        _customWrapperProps,
+        _customWrapperStyle,
         backgroundColor,
         borderColor,
         color = defaultColor,
@@ -231,7 +231,7 @@ function inputFieldFactory<
           ...paddingProp,
           ...paddingHorizontalProp,
           ...paddingVerticalProp,
-          ..._additionalWrapperStyle,
+          ..._customWrapperStyle,
         };
 
         // FieldStyle
@@ -245,11 +245,11 @@ function inputFieldFactory<
           ...{fontSize: sizeProp.fontSize},
           ...(letterSpacing ? {letterSpacing} : {}),
           ...(lineHeight ? {lineHeight} : {}),
-          ..._additionalTextInputStyle,
+          ..._customTextInputStyle,
         };
 
         return (
-          <View style={wrapperStyleProps} {..._additionalWrapperProps}>
+          <View style={wrapperStyleProps} {..._customWrapperProps}>
             {leftIcon}
             <TextInput
               style={fieldStyleProps}
@@ -257,7 +257,7 @@ function inputFieldFactory<
               {...(maxLength ? {maxLength} : defaultMaxLength)}
               {...inputFieldProps}
               {...inputFieldOptions}
-              {..._additionalTextInputProps}
+              {..._customTextInputProps}
             />
             {rightIcon}
           </View>

@@ -86,8 +86,8 @@ function touchableFactory<
       isStretched,
       align = DEFAULT_TOUCHABLE_ALIGN,
       onPress,
-      _additionalProps,
-      _additionalStyle,
+      _customProps,
+      _customStyle,
     }: Props<
       AdditionalPalettes,
       OptionalExistCondition<
@@ -172,7 +172,7 @@ function touchableFactory<
         paddingVertical:
           touchablePaddingVertical || DEFAULT_TOUCHABLE_SIZE.default.padding,
         ...borderStyles,
-        ..._additionalStyle,
+        ..._customStyle,
       };
 
       return (
@@ -180,7 +180,7 @@ function touchableFactory<
           style={touchableStyle}
           disabled={isDisabled}
           onPress={onPress}
-          {..._additionalProps}>
+          {..._customProps}>
           {children}
         </TouchableOpacity>
       );

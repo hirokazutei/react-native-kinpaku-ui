@@ -14,7 +14,8 @@ function textFactory<
   AdditionalPalettes,
   TextVariation,
   FontSize,
-  EmphasisToggleable
+  EmphasisToggleable,
+  AllowCustomProps
 >({
   themes,
   additionalPalettes,
@@ -28,64 +29,66 @@ function textFactory<
     TextVariation,
     typeof DEFAULT_TEXT_VARIATION
   >,
-  FontSize,
-  EmphasisToggleable
+  OptionalExistCondition<FontSize, FontSize, null>,
+  EmphasisToggleable,
+  AllowCustomProps
 >): {
   [Variation in keyof OptionalExistCondition<
     TextVariation,
     TextVariation,
     typeof DEFAULT_TEXT_VARIATION
   >]: React.FunctionComponent<
-    Props<AdditionalPalettes, FontSize, EmphasisToggleable>
+    Props<
+      AdditionalPalettes,
+      OptionalExistCondition<FontSize, FontSize, null>,
+      EmphasisToggleable,
+      AllowCustomProps
+    >
   >
 } {
+  // Type
+  type TextProps = Props<
+    AdditionalPalettes,
+    OptionalExistCondition<FontSize, FontSize, null>,
+    EmphasisToggleable,
+    AllowCustomProps
+  >;
+
+  type TextVariationKeys = keyof OptionalExistCondition<
+    TextVariation,
+    TextVariation,
+    typeof DEFAULT_TEXT_VARIATION
+  >;
+
+  type ExistanceConfirmedTextVariation = {
+    [VariationKeys in keyof TextVariation]: TextVariationProps<
+      OptionalExistCondition<FontSize, keyof FontSize, null>,
+      AdditionalPalettes
+    >
+  };
+
+  // Context
   const themeContext: React.Context<keyof Themes> = React.createContext(
     'default' as keyof Themes,
   );
 
+  // Text Collections
   const texts: {
-    [Variation in keyof OptionalExistCondition<
-      TextVariation,
-      TextVariation,
-      typeof DEFAULT_TEXT_VARIATION
-    >]?: React.FunctionComponent<
-      Props<AdditionalPalettes, FontSize, EmphasisToggleable>
-    >
+    [Variation in TextVariationKeys]?: React.FunctionComponent<TextProps>
   } = {};
 
   for (const variationName in textVariation
-    ? textVariation
+    ? (textVariation as ExistanceConfirmedTextVariation)
     : DEFAULT_TEXT_VARIATION) {
     if (
-      (textVariation ? textVariation : DEFAULT_TEXT_VARIATION).hasOwnProperty(
-        variationName,
-      )
+      (textVariation
+        ? (textVariation as ExistanceConfirmedTextVariation)
+        : DEFAULT_TEXT_VARIATION
+      ).hasOwnProperty(variationName)
     ) {
-      const {
-        allowFontScaling,
-        defaultColor,
-        defaultFontSize,
-        fontFamily,
-        fontSize,
-        fontWeight,
-        isBold,
-        isItalic,
-        letterSpacing,
-        lineHeight,
-        maxFontSizeMultiplier,
-        minimumFontScale,
-      } = textVariation
-        ? (textVariation as {
-            [VariationKey in keyof TextVariation]: TextVariationProps<
-              OptionalExistCondition<FontSize, keyof FontSize, null>,
-              AdditionalPalettes
-            >
-          })[variationName as keyof TextVariation]
-        : DEFAULT_TEXT_VARIATION[variationName as DefaultTextVariation];
-
-      const Text: React.FunctionComponent<
-        Props<AdditionalPalettes, FontSize, EmphasisToggleable>
-      > = ({
+      const Text = ({
+        _customTextProps,
+        _customTextStyle,
         align,
         bold,
         color,
@@ -96,13 +99,7 @@ function textFactory<
         size,
         lineThrough,
         underline,
-      }: Props<
-        AdditionalPalettes,
-        FontSize,
-        EmphasisToggleable
-      >): React.ReactElement<
-        Props<AdditionalPalettes, FontSize, EmphasisToggleable>
-      > => {
+      }: TextProps) => {
         // Palettes
         const currentThemeKey = useContext(themeContext) || 'default';
         const currentTheme =
@@ -111,6 +108,26 @@ function textFactory<
           currentTheme,
           additionalPalettes,
         });
+
+        // Text Settings
+        const {
+          allowFontScaling,
+          defaultColor,
+          defaultFontSize,
+          fontFamily,
+          fontSize,
+          fontWeight,
+          isBold,
+          isItalic,
+          letterSpacing,
+          lineHeight,
+          maxFontSizeMultiplier,
+          minimumFontScale,
+        } = textVariation
+          ? (textVariation as ExistanceConfirmedTextVariation)[
+              variationName as keyof TextVariation
+            ]
+          : DEFAULT_TEXT_VARIATION[variationName as DefaultTextVariation];
 
         // Color
         const fontColor = colorResolver({
@@ -150,8 +167,7 @@ function textFactory<
         // Bold
         let fontWeightStyle: TextStyle['fontWeight'] =
           isBold || bold ? 'bold' : 'normal';
-        fontWeightStyle =
-          fontWeight && fontWeight !== undefined ? fontWeight : fontWeightStyle;
+        fontWeightStyle = fontWeight ? fontWeight : fontWeightStyle;
         fontWeightStyle = bold === false ? 'normal' : fontWeightStyle;
 
         // Text Style
@@ -165,6 +181,7 @@ function textFactory<
           lineHeight,
           textAlign: align,
           textDecorationLine,
+          ..._customTextStyle,
         };
 
         // Text Props
@@ -174,6 +191,7 @@ function textFactory<
           maxFontSizeMultiplier,
           minimumFontScale,
           numberOfLines,
+          ..._customTextProps,
         };
 
         return (
@@ -182,24 +200,11 @@ function textFactory<
           </RNText>
         );
       };
-      texts[
-        `${variationName}` as keyof OptionalExistCondition<
-          TextVariation,
-          TextVariation,
-          typeof DEFAULT_TEXT_VARIATION
-        >
-      ] = Text;
+      texts[`${variationName}` as TextVariationKeys] = Text;
     }
   }
-
   return texts as {
-    [Variation in keyof OptionalExistCondition<
-      TextVariation,
-      TextVariation,
-      typeof DEFAULT_TEXT_VARIATION
-    >]: React.FunctionComponent<
-      Props<AdditionalPalettes, FontSize, EmphasisToggleable>
-    >
+    [Variation in TextVariationKeys]: React.FunctionComponent<TextProps>
   };
 }
 

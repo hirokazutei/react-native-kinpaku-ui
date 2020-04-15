@@ -59,7 +59,8 @@ const UIFactory = <ThemeObject, AdditionalPalettes>(
     AdditionalPalettes,
     null,
     null,
-    true
+    true,
+    false
   >({
     ...commonProps,
   });

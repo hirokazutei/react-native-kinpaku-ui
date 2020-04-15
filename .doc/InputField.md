@@ -230,9 +230,9 @@ type InputFieldShape = 'sharp' | 'rounded' | 'circular';
  * @param [props.textColor] - text color of the InputField
  *
  * Optional Additional Args:
- * @param [_additionalTextProps] - additional props for the TextInput component
- * @param [_additionalTextStyle] - additional styles for the TextInput component
- * @param [_additionalWrapperProps] - additional props for the wrapper View component
- * @param [_additionalWrapperProps] - additional styles for the wrapper View component
+ * @param [_customTextProps] - additional props for the TextInput component
+ * @param [_customTextStyle] - additional styles for the TextInput component
+ * @param [_customWrapperProps] - additional props for the wrapper View component
+ * @param [_customWrapperProps] - additional styles for the wrapper View component
  */
 ```

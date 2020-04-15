@@ -1,4 +1,4 @@
-import {TextProps as ReactNativeTextProps, TextStyle} from 'react-native';
+import {TextProps as RNTextProps, TextStyle} from 'react-native';
 import {
   AddDefaultToObject,
   Color,
@@ -38,7 +38,9 @@ type TextFactoryProps<
   TextVariation,
   FontSize,
   //@ts-ignore: TS6133 Unused Variable
-  EmphasisToggleable
+  EmphasisToggleable,
+  //@ts-ignore: TS6133 Unused Variable
+  AllowCustomProps
 > = {
   themes: {
     [ThemeKeys in keyof AddDefaultToObject<Themes, ThemePalette>]: ThemePalette
@@ -51,20 +53,35 @@ type TextFactoryProps<
     undefined | keyof FontSize,
     undefined
   >;
-  textVariation?: {
-    [VariationKeys in keyof TextVariation]: TextVariationProps<
-      OptionalExistCondition<FontSize, keyof FontSize, null>,
-      AdditionalPalettes
-    >
-  };
+  textVariation?: OptionalExistCondition<
+    TextVariation,
+    {
+      [VariationKeys in keyof TextVariation]: TextVariationProps<
+        OptionalExistCondition<FontSize, keyof FontSize, null>,
+        AdditionalPalettes
+      >
+    },
+    null
+  >;
 };
 
-type TextProps<AdditionalPalettes, FontSize, EmphasisToggleable> = {
+type TextProps<
+  AdditionalPalettes,
+  FontSize,
+  EmphasisToggleable,
+  AllowCustomProps
+> = {
+  _customTextProps?: OptionalTrueCondition<
+    AllowCustomProps,
+    RNTextProps,
+    never
+  >;
+  _customTextStyle?: OptionalTrueCondition<AllowCustomProps, TextStyle, never>;
   align?: TextStyle['textAlign'];
   bold?: OptionalTrueCondition<EmphasisToggleable, boolean, never>;
   color?: keyof (ThemePalette & AdditionalPalettes);
   children: string;
-  ellipsizeMode?: ReactNativeTextProps['ellipsizeMode'];
+  ellipsizeMode?: RNTextProps['ellipsizeMode'];
   italic?: OptionalTrueCondition<EmphasisToggleable, boolean, never>;
   numberOfLines?: number;
   size?: OptionalExistCondition<FontSize, FontSize, number>;

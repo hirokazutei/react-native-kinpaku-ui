@@ -57,10 +57,10 @@ declare type InputFieldFactoryProps<Themes, AdditionalPalettes, InputFieldSize, 
     defaultShape?: InputFieldShape;
 };
 declare type InputFieldProps<AdditionalPalettes, InputFieldSize, AllowCustomProps> = {
-    _additionalTextInputProps?: OptionalTrueCondition<AllowCustomProps, TextInputProps, never>;
-    _additionalTextInputStyle?: OptionalTrueCondition<AllowCustomProps, TextStyle, never>;
-    _additionalWrapperProps?: OptionalTrueCondition<AllowCustomProps, ViewProps, never>;
-    _additionalWrapperStyle?: OptionalTrueCondition<AllowCustomProps, ViewStyle, never>;
+    _customTextInputProps?: OptionalTrueCondition<AllowCustomProps, TextInputProps, never>;
+    _customTextInputStyle?: OptionalTrueCondition<AllowCustomProps, TextStyle, never>;
+    _customWrapperProps?: OptionalTrueCondition<AllowCustomProps, ViewProps, never>;
+    _customWrapperStyle?: OptionalTrueCondition<AllowCustomProps, ViewStyle, never>;
     autoFocus?: boolean;
     backgroundColor?: keyof (ThemePalette & AdditionalPalettes);
     borderColor?: keyof (ThemePalette & AdditionalPalettes);

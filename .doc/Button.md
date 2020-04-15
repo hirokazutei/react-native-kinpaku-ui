@@ -187,9 +187,9 @@ type DefaultColor = keyof (ThemePalette & AdditionalPalettes);
  * @param [props.type] - type of Button: solid | clear | outline
  *
  * Optional Additional Args:
- * @param [_additionalButtonProps] - additional props for the TouchableOpacity component
- * @param [_additionalButtonStyle] - additional styles for the TouchableOpacity component
- * @param [_additionalTextProps] - additional props for the Text component
- * @param [_additionalTextProps] - additional styles for the Text component
+ * @param [_customButtonProps] - additional props for the TouchableOpacity component
+ * @param [_customButtonStyle] - additional styles for the TouchableOpacity component
+ * @param [_customTextProps] - additional props for the Text component
+ * @param [_customTextProps] - additional styles for the Text component
  */
 ```
