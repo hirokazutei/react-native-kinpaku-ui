@@ -31,10 +31,10 @@ exports[`Storyshots UI/RadioButton Default 1`] = `
         "borderColor": undefined,
         "borderRadius": 0,
         "borderWidth": 2,
-        "height": 16,
+        "height": 20,
         "justifyContent": "center",
         "opacity": 1,
-        "width": 16,
+        "width": 20,
       }
     }
   >
@@ -43,8 +43,8 @@ exports[`Storyshots UI/RadioButton Default 1`] = `
         Object {
           "backgroundColor": "#FEFFFF",
           "borderRadius": 0,
-          "height": 8,
-          "width": 8,
+          "height": 10,
+          "width": 10,
         }
       }
     />
@@ -65,12 +65,12 @@ exports[`Storyshots UI/RadioButton Default 1`] = `
         "alignItems": "center",
         "backgroundColor": "#FEFFFF",
         "borderColor": undefined,
-        "borderRadius": 3.2,
+        "borderRadius": 4,
         "borderWidth": 2,
-        "height": 16,
+        "height": 20,
         "justifyContent": "center",
         "opacity": 1,
-        "width": 16,
+        "width": 20,
       }
     }
   >
@@ -78,9 +78,9 @@ exports[`Storyshots UI/RadioButton Default 1`] = `
       style={
         Object {
           "backgroundColor": "#FEFFFF",
-          "borderRadius": 1.6,
-          "height": 8,
-          "width": 8,
+          "borderRadius": 2,
+          "height": 10,
+          "width": 10,
         }
       }
     />
@@ -101,12 +101,12 @@ exports[`Storyshots UI/RadioButton Default 1`] = `
         "alignItems": "center",
         "backgroundColor": "#FEFFFF",
         "borderColor": undefined,
-        "borderRadius": 4096,
+        "borderRadius": 5120,
         "borderWidth": 2,
-        "height": 16,
+        "height": 20,
         "justifyContent": "center",
         "opacity": 1,
-        "width": 16,
+        "width": 20,
       }
     }
   >
@@ -114,9 +114,9 @@ exports[`Storyshots UI/RadioButton Default 1`] = `
       style={
         Object {
           "backgroundColor": "#FEFFFF",
-          "borderRadius": 2048,
-          "height": 8,
-          "width": 8,
+          "borderRadius": 2560,
+          "height": 10,
+          "width": 10,
         }
       }
     />
