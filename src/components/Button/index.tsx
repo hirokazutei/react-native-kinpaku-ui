@@ -72,10 +72,10 @@ function buttonFactory<
   // Creating Each Button Components
   for (const variationKey of BUTTON_SHAPE_VARIATION_KEYS) {
     const Button = ({
-      _additionalButtonProps,
-      _additionalButtonStyle,
-      _additionalTextProps,
-      _additionalTextStyle,
+      _customButtonProps,
+      _customButtonStyle,
+      _customTextProps,
+      _customTextStyle,
       align = DEFAULT_BUTTON_ALIGN,
       color = defaultColor,
       isDisabled,
@@ -148,7 +148,7 @@ function buttonFactory<
           (buttonSizeProperty && buttonSizeProperty.paddingVertical) ||
           DEFAULT_BUTTON_SIZE.default.paddingVertical,
         ...borderStyles,
-        ...(_additionalButtonStyle || {}),
+        ...(_customButtonStyle || {}),
       };
 
       // Text Style
@@ -158,7 +158,7 @@ function buttonFactory<
           (buttonSizeProperty && buttonSizeProperty.fontSize) ||
           DEFAULT_BUTTON_SIZE.default.fontSize,
         fontWeight: DEFAULT_BUTTON_FONT_WEIGHT,
-        ...(_additionalTextStyle || {}),
+        ...(_customTextStyle || {}),
       };
 
       return (
@@ -167,8 +167,8 @@ function buttonFactory<
           disabled={isDisabled}
           onPress={onPress}
           accessibilityLabel={label}
-          {..._additionalButtonProps || {}}>
-          <Text style={textStyle} {..._additionalTextProps || {}}>
+          {..._customButtonProps || {}}>
+          <Text style={textStyle} {..._customTextProps || {}}>
             {label}
           </Text>
         </TouchableOpacity>

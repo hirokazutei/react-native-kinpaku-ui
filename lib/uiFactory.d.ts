@@ -2,7 +2,7 @@
 import { Themes } from './theme/types';
 import { DefaultObject } from './types';
 declare const UIFactory: <ThemeObject, AdditionalPalettes>(themes: Themes<ThemeObject>, additionalPalettes?: { [key in keyof (AdditionalPalettes & DefaultObject<string>)]: string; } | undefined) => {
-    Body: import("react").FunctionComponent<import("./components/Text/types").TextProps<AdditionalPalettes, null, true>>;
+    Body: any;
     Button: {
         Circular: import("react").FunctionComponent<import("./components/Button/types").ButtonProps<AdditionalPalettes, {
             default: import("./components/Button/types").ButtonSizeProps;
@@ -32,7 +32,7 @@ declare const UIFactory: <ThemeObject, AdditionalPalettes>(themes: Themes<ThemeO
             massive: import("./components/Button/types").ButtonSizeProps;
         }, false>>;
     };
-    Caption: import("react").FunctionComponent<import("./components/Text/types").TextProps<AdditionalPalettes, null, true>>;
+    Caption: any;
     CheckBox: {
         Circular: import("react").FunctionComponent<import("./components/CheckBox/types").CheckBoxProps<AdditionalPalettes, {
             default: import("./components/CheckBox/types").CheckBoxSizeProps;
@@ -53,7 +53,7 @@ declare const UIFactory: <ThemeObject, AdditionalPalettes>(themes: Themes<ThemeO
             large: import("./components/CheckBox/types").CheckBoxSizeProps;
         }, false>>;
     };
-    Heading: import("react").FunctionComponent<import("./components/Text/types").TextProps<AdditionalPalettes, null, true>>;
+    Heading: any;
     InputField: {
         number: import("react").FunctionComponent<import("./components/InputField/types").InputFieldProps<AdditionalPalettes, {
             default: import("./components/InputField/types").InputFieldSizeProps;
@@ -132,8 +132,8 @@ declare const UIFactory: <ThemeObject, AdditionalPalettes>(themes: Themes<ThemeO
             large: import("./components/RadioButton/types").RadioButtonSizeProps;
         }, false>>;
     };
-    SubHeading: import("react").FunctionComponent<import("./components/Text/types").TextProps<AdditionalPalettes, null, true>>;
-    Title: import("react").FunctionComponent<import("./components/Text/types").TextProps<AdditionalPalettes, null, true>>;
+    SubHeading: any;
+    Title: any;
     Touchable: {
         Fill?: import("react").FunctionComponent<import("./components/Touchable/types").TouchableProps<AdditionalPalettes, {
             default: import("./components/Touchable/types").TouchableAllSizeProps;
@@ -154,7 +154,7 @@ declare const UIFactory: <ThemeObject, AdditionalPalettes>(themes: Themes<ThemeO
             massive: import("./components/Touchable/types").TouchableAllSizeProps;
         }, false>> | undefined;
     };
-    Quote: import("react").FunctionComponent<import("./components/Text/types").TextProps<AdditionalPalettes, null, true>>;
+    Quote: any;
 };
 export default UIFactory;
 //# sourceMappingURL=uiFactory.d.ts.map

@@ -1,4 +1,4 @@
-import { TextProps as ReactNativeTextProps, TextStyle } from 'react-native';
+import { TextProps as RNTextProps, TextStyle } from 'react-native';
 import { AddDefaultToObject, Color, OptionalExistCondition, OptionalTrueCondition } from '../../types';
 import { ThemePalette } from '../../theme/types';
 declare type TextSizeProps<FontSize extends string | string> = {
@@ -18,7 +18,7 @@ declare type TextVariationProps<FontSize, AdditionalPalettes> = {
     maxFontSizeMultiplier?: number;
     minimumFontScale?: number;
 };
-declare type TextFactoryProps<Themes, AdditionalPalettes, TextVariation, FontSize, EmphasisToggleable> = {
+declare type TextFactoryProps<Themes, AdditionalPalettes, TextVariation, FontSize, EmphasisToggleable, AllowCustomProps> = {
     themes: {
         [ThemeKeys in keyof AddDefaultToObject<Themes, ThemePalette>]: ThemePalette;
     };
@@ -26,16 +26,18 @@ declare type TextFactoryProps<Themes, AdditionalPalettes, TextVariation, FontSiz
         [AdditionalPaletteKeys in keyof AdditionalPalettes]: Color;
     };
     defaultFontSizeKey?: OptionalExistCondition<FontSize, undefined | keyof FontSize, undefined>;
-    textVariation?: {
+    textVariation?: OptionalExistCondition<TextVariation, {
         [VariationKeys in keyof TextVariation]: TextVariationProps<OptionalExistCondition<FontSize, keyof FontSize, null>, AdditionalPalettes>;
-    };
+    }, null>;
 };
-declare type TextProps<AdditionalPalettes, FontSize, EmphasisToggleable> = {
+declare type TextProps<AdditionalPalettes, FontSize, EmphasisToggleable, AllowCustomProps> = {
+    _customTextProps?: OptionalTrueCondition<AllowCustomProps, RNTextProps, never>;
+    _customTextStyle?: OptionalTrueCondition<AllowCustomProps, TextStyle, never>;
     align?: TextStyle['textAlign'];
     bold?: OptionalTrueCondition<EmphasisToggleable, boolean, never>;
     color?: keyof (ThemePalette & AdditionalPalettes);
     children: string;
-    ellipsizeMode?: ReactNativeTextProps['ellipsizeMode'];
+    ellipsizeMode?: RNTextProps['ellipsizeMode'];
     italic?: OptionalTrueCondition<EmphasisToggleable, boolean, never>;
     numberOfLines?: number;
     size?: OptionalExistCondition<FontSize, FontSize, number>;

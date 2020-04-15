@@ -21,10 +21,10 @@ declare type ButtonFactoryProps<Themes, AdditionalPalettes, ButtonSize, AllowCus
     defaultType?: ButtonType;
 };
 declare type ButtonProps<AdditionalPalettes, ButtonSize, AllowCustomProps> = {
-    _additionalButtonProps?: OptionalTrueCondition<AllowCustomProps, TouchableOpacityProps, never>;
-    _additionalButtonStyle?: OptionalTrueCondition<AllowCustomProps, ViewStyle, never>;
-    _additionalTextProps?: OptionalTrueCondition<AllowCustomProps, TextProperties, never>;
-    _additionalTextStyle?: OptionalTrueCondition<AllowCustomProps, TextStyle, never>;
+    _customButtonProps?: OptionalTrueCondition<AllowCustomProps, TouchableOpacityProps, never>;
+    _customButtonStyle?: OptionalTrueCondition<AllowCustomProps, ViewStyle, never>;
+    _customTextProps?: OptionalTrueCondition<AllowCustomProps, TextProperties, never>;
+    _customTextStyle?: OptionalTrueCondition<AllowCustomProps, TextStyle, never>;
     align?: FlexAlignType;
     color?: keyof (ThemePalette & AdditionalPalettes);
     isDisabled?: boolean;

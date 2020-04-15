@@ -87,22 +87,22 @@ type InputFieldFactoryProps<
 };
 
 type InputFieldProps<AdditionalPalettes, InputFieldSize, AllowCustomProps> = {
-  _additionalTextInputProps?: OptionalTrueCondition<
+  _customTextInputProps?: OptionalTrueCondition<
     AllowCustomProps,
     TextInputProps,
     never
   >;
-  _additionalTextInputStyle?: OptionalTrueCondition<
+  _customTextInputStyle?: OptionalTrueCondition<
     AllowCustomProps,
     TextStyle,
     never
   >;
-  _additionalWrapperProps?: OptionalTrueCondition<
+  _customWrapperProps?: OptionalTrueCondition<
     AllowCustomProps,
     ViewProps,
     never
   >;
-  _additionalWrapperStyle?: OptionalTrueCondition<
+  _customWrapperStyle?: OptionalTrueCondition<
     AllowCustomProps,
     ViewStyle,
     never
