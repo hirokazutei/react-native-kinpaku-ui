@@ -52,23 +52,6 @@ exports[`Storyshots UI/Text Default 1`] = `
       Object {
         "color": "#111122",
         "fontFamily": undefined,
-        "fontSize": 24,
-        "fontStyle": "normal",
-        "fontWeight": "bold",
-        "letterSpacing": undefined,
-        "lineHeight": undefined,
-        "textAlign": undefined,
-        "textDecorationLine": "none",
-      }
-    }
-  >
-    Sample Text
-  </Text>
-  <Text
-    style={
-      Object {
-        "color": "#111122",
-        "fontFamily": undefined,
         "fontSize": 20,
         "fontStyle": "normal",
         "fontWeight": "bold",
