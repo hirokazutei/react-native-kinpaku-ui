@@ -39,7 +39,7 @@ exports[`Storyshots UI/Touchable Default 1`] = `
     }
   >
     <Text>
-      TOUCH
+      Content
     </Text>
   </View>
   <View
@@ -68,7 +68,7 @@ exports[`Storyshots UI/Touchable Default 1`] = `
     }
   >
     <Text>
-      TOUCH
+      Content
     </Text>
   </View>
 </View>

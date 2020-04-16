@@ -52,8 +52,8 @@ exports[`Storyshots UI/CheckBox Default 1`] = `
           style={
             Object {
               "alignItems": "center",
-              "backgroundColor": undefined,
-              "borderColor": undefined,
+              "backgroundColor": "#FEFFFF",
+              "borderColor": "#88EEBB",
               "borderRadius": 0,
               "borderWidth": 2,
               "height": 20,
@@ -66,9 +66,97 @@ exports[`Storyshots UI/CheckBox Default 1`] = `
           <View
             style={
               Object {
-                "borderBottomColor": undefined,
+                "borderBottomColor": "#FEFFFF",
                 "borderBottomWidth": 2,
-                "borderRightColor": undefined,
+                "borderRightColor": "#FEFFFF",
+                "borderRightWidth": 2,
+                "bottom": 1,
+                "height": 12.5,
+                "transform": Array [
+                  Object {
+                    "rotate": "40deg",
+                  },
+                ],
+                "width": 7.5,
+              }
+            }
+          />
+        </View>
+        <View
+          accessible={true}
+          clickable={true}
+          isTVSelectable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "alignItems": "center",
+              "backgroundColor": "#88EEBB",
+              "borderColor": "#88EEBB",
+              "borderRadius": 0,
+              "borderWidth": 2,
+              "height": 20,
+              "justifyContent": "center",
+              "opacity": 1,
+              "width": 20,
+            }
+          }
+        >
+          <View
+            style={
+              Object {
+                "borderBottomColor": "#88EEBB",
+                "borderBottomWidth": 2,
+                "borderRightColor": "#88EEBB",
+                "borderRightWidth": 2,
+                "bottom": 1,
+                "height": 12.5,
+                "transform": Array [
+                  Object {
+                    "rotate": "40deg",
+                  },
+                ],
+                "width": 7.5,
+              }
+            }
+          />
+        </View>
+        <View
+          accessible={true}
+          clickable={true}
+          isTVSelectable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "alignItems": "center",
+              "backgroundColor": "#FEFFFF",
+              "borderColor": "#88EEBB",
+              "borderRadius": 0,
+              "borderWidth": 2,
+              "height": 20,
+              "justifyContent": "center",
+              "opacity": 1,
+              "width": 20,
+            }
+          }
+        >
+          <View
+            style={
+              Object {
+                "borderBottomColor": "#FEFFFF",
+                "borderBottomWidth": 2,
+                "borderRightColor": "#FEFFFF",
                 "borderRightWidth": 2,
                 "bottom": 1,
                 "height": 12.5,
@@ -107,8 +195,8 @@ exports[`Storyshots UI/CheckBox Default 1`] = `
           style={
             Object {
               "alignItems": "center",
-              "backgroundColor": undefined,
-              "borderColor": undefined,
+              "backgroundColor": "#FEFFFF",
+              "borderColor": "#88EEBB",
               "borderRadius": 4,
               "borderWidth": 2,
               "height": 20,
@@ -121,9 +209,97 @@ exports[`Storyshots UI/CheckBox Default 1`] = `
           <View
             style={
               Object {
-                "borderBottomColor": undefined,
+                "borderBottomColor": "#FEFFFF",
                 "borderBottomWidth": 2,
-                "borderRightColor": undefined,
+                "borderRightColor": "#FEFFFF",
+                "borderRightWidth": 2,
+                "bottom": 1,
+                "height": 12.5,
+                "transform": Array [
+                  Object {
+                    "rotate": "40deg",
+                  },
+                ],
+                "width": 7.5,
+              }
+            }
+          />
+        </View>
+        <View
+          accessible={true}
+          clickable={true}
+          isTVSelectable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "alignItems": "center",
+              "backgroundColor": "#88EEBB",
+              "borderColor": "#88EEBB",
+              "borderRadius": 4,
+              "borderWidth": 2,
+              "height": 20,
+              "justifyContent": "center",
+              "opacity": 1,
+              "width": 20,
+            }
+          }
+        >
+          <View
+            style={
+              Object {
+                "borderBottomColor": "#88EEBB",
+                "borderBottomWidth": 2,
+                "borderRightColor": "#88EEBB",
+                "borderRightWidth": 2,
+                "bottom": 1,
+                "height": 12.5,
+                "transform": Array [
+                  Object {
+                    "rotate": "40deg",
+                  },
+                ],
+                "width": 7.5,
+              }
+            }
+          />
+        </View>
+        <View
+          accessible={true}
+          clickable={true}
+          isTVSelectable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "alignItems": "center",
+              "backgroundColor": "#FEFFFF",
+              "borderColor": "#88EEBB",
+              "borderRadius": 4,
+              "borderWidth": 2,
+              "height": 20,
+              "justifyContent": "center",
+              "opacity": 1,
+              "width": 20,
+            }
+          }
+        >
+          <View
+            style={
+              Object {
+                "borderBottomColor": "#FEFFFF",
+                "borderBottomWidth": 2,
+                "borderRightColor": "#FEFFFF",
                 "borderRightWidth": 2,
                 "bottom": 1,
                 "height": 12.5,
@@ -162,8 +338,8 @@ exports[`Storyshots UI/CheckBox Default 1`] = `
           style={
             Object {
               "alignItems": "center",
-              "backgroundColor": undefined,
-              "borderColor": undefined,
+              "backgroundColor": "#FEFFFF",
+              "borderColor": "#88EEBB",
               "borderRadius": 5120,
               "borderWidth": 2,
               "height": 20,
@@ -176,9 +352,97 @@ exports[`Storyshots UI/CheckBox Default 1`] = `
           <View
             style={
               Object {
-                "borderBottomColor": undefined,
+                "borderBottomColor": "#FEFFFF",
                 "borderBottomWidth": 2,
-                "borderRightColor": undefined,
+                "borderRightColor": "#FEFFFF",
+                "borderRightWidth": 2,
+                "bottom": 1,
+                "height": 12.5,
+                "transform": Array [
+                  Object {
+                    "rotate": "40deg",
+                  },
+                ],
+                "width": 7.5,
+              }
+            }
+          />
+        </View>
+        <View
+          accessible={true}
+          clickable={true}
+          isTVSelectable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "alignItems": "center",
+              "backgroundColor": "#88EEBB",
+              "borderColor": "#88EEBB",
+              "borderRadius": 5120,
+              "borderWidth": 2,
+              "height": 20,
+              "justifyContent": "center",
+              "opacity": 1,
+              "width": 20,
+            }
+          }
+        >
+          <View
+            style={
+              Object {
+                "borderBottomColor": "#88EEBB",
+                "borderBottomWidth": 2,
+                "borderRightColor": "#88EEBB",
+                "borderRightWidth": 2,
+                "bottom": 1,
+                "height": 12.5,
+                "transform": Array [
+                  Object {
+                    "rotate": "40deg",
+                  },
+                ],
+                "width": 7.5,
+              }
+            }
+          />
+        </View>
+        <View
+          accessible={true}
+          clickable={true}
+          isTVSelectable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "alignItems": "center",
+              "backgroundColor": "#FEFFFF",
+              "borderColor": "#88EEBB",
+              "borderRadius": 5120,
+              "borderWidth": 2,
+              "height": 20,
+              "justifyContent": "center",
+              "opacity": 1,
+              "width": 20,
+            }
+          }
+        >
+          <View
+            style={
+              Object {
+                "borderBottomColor": "#FEFFFF",
+                "borderBottomWidth": 2,
+                "borderRightColor": "#FEFFFF",
                 "borderRightWidth": 2,
                 "bottom": 1,
                 "height": 12.5,
