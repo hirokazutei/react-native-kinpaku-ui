@@ -1,5 +1,6 @@
 // @flow
 import * as React from 'react';
+import {View, ViewStyle, StyleSheet} from 'react-native';
 import {storiesOf} from '@storybook/react-native';
 import {action} from '@storybook/addon-actions';
 import {boolean, select, text, withKnobs, number} from '@storybook/addon-knobs';
@@ -14,21 +15,23 @@ import {
   InputFieldShape,
 } from '../../src/components/InputField/types';
 
-const Inputs = INPUT_FIELD_TYPE.map((type: InputFieldType) => {
-  return inputFieldFactory<typeof themes, null, null>({
-    themes,
-    inputFieldType: type,
-  });
-});
+const INPUT_FIELD_SETTING_VARIATIONS = INPUT_FIELD_TYPE.map(
+  (type: InputFieldType) => {
+    return inputFieldFactory<typeof themes, null, null, null>({
+      themes,
+      inputFieldType: type,
+    });
+  },
+);
+
+const INPUT_FIELD_SHAPE: Array<InputFieldShape> = [
+  'sharp',
+  'rounded',
+  'circular',
+];
 
 const DEFAULT_PROPS = {
   value: '',
-};
-
-const shapeSelect: {[key in InputFieldShape]: InputFieldShape} = {
-  sharp: 'sharp',
-  rounded: 'rounded',
-  circular: 'circular',
 };
 
 const colorSelect: {[key in keyof ThemePalette]?: keyof ThemePalette} = {
@@ -54,7 +57,9 @@ const variationSelect = {
   username: 'username',
 };
 
-const getRequiredProps = (overrides = {}): InputFieldProps<null, null> => {
+const getRequiredProps = (
+  overrides: Partial<InputFieldProps<null, null, null>> = {},
+): InputFieldProps<null, null, null> => {
   const {value} = {
     ...DEFAULT_PROPS,
     ...overrides,
@@ -64,24 +69,64 @@ const getRequiredProps = (overrides = {}): InputFieldProps<null, null> => {
   };
 };
 
-const geOptionalProps = (): Partial<InputFieldProps<null, null>> => {
+const geOptionalProps = (
+  overrides: Partial<InputFieldProps<null, null, null>> = {},
+): Partial<InputFieldProps<null, null, null>> => {
+  const {
+    autoFocus,
+    backgroundColor,
+    borderColor,
+    color,
+    defaultValue,
+    isDisabled,
+    maxLength,
+    placeholder,
+    shape,
+    textColor,
+  } = overrides;
   return {
-    autoFocus: boolean('Auto Focus', undefined),
-    backgroundColor: select('Background Color Options', colorSelect, undefined),
-    borderColor: select('Border Color Options', colorSelect, undefined),
-    defaultValue: text('Default Value', undefined),
-    isDisabled: boolean('Disabled', undefined),
-    maxLength: number('Max Length', undefined),
+    autoFocus: boolean('Auto Focus', autoFocus),
+    backgroundColor: select(
+      'Background Color Options',
+      colorSelect,
+      backgroundColor,
+    ),
+    borderColor: select('Border Color Options', colorSelect, borderColor),
+    color: select('Color Options', colorSelect, color),
+    defaultValue: text('Default Value', defaultValue),
+    isDisabled: boolean('Disabled', isDisabled),
+    maxLength: number('Max Length', maxLength),
     onBlur: action('on-blur'),
     onChange: action('on-change'),
     onEndEditing: action('on-end-editing'),
     onFocus: action('on-focus'),
     onKeyPress: action('on-key-press'),
-    placeholder: text('Place Holder', undefined),
-    shape: select('Shape Options', shapeSelect, undefined),
-    textColor: select('Text Color Options', colorSelect, undefined),
+    placeholder: text('Place Holder', placeholder),
+    shape,
+    textColor: select('Text Color Options', colorSelect, textColor),
   };
 };
+
+type Styles = {
+  baseView: ViewStyle;
+  realignView: ViewStyle;
+  variationView: ViewStyle;
+};
+
+const styles: Styles = StyleSheet.create<Styles>({
+  baseView: {
+    flex: 1,
+    flexDirection: 'row',
+  },
+  realignView: {
+    flex: 1,
+  },
+  variationView: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'space-evenly',
+  },
+});
 
 storiesOf('UI/InputField', module)
   .addDecorator((story: () => React.ReactElement<null>) => (
@@ -89,21 +134,31 @@ storiesOf('UI/InputField', module)
   ))
   .addDecorator(withKnobs)
   .add('Default', () => (
-    <>
-      {Inputs.map((Components, index: number) => {
-        const variationName = select(
-          'Component Type',
-          variationSelect,
-          'number',
-        );
-        const Component = Components[variationName];
-        return (
-          <Component
-            key={index}
-            {...getRequiredProps()}
-            {...geOptionalProps()}
-          />
-        );
-      })}
-    </>
+    <View style={styles.baseView}>
+      <View style={styles.realignView}>
+        {INPUT_FIELD_SETTING_VARIATIONS.map((Components, index: number) => {
+          const variationName = select(
+            'Component Type',
+            variationSelect,
+            'number',
+          );
+          const Component = Components[variationName];
+          return (
+            <View key={index} style={styles.variationView}>
+              {INPUT_FIELD_SHAPE.map(
+                (shape: InputFieldShape, index: number) => {
+                  return (
+                    <Component
+                      key={index}
+                      {...getRequiredProps()}
+                      {...geOptionalProps({shape})}
+                    />
+                  );
+                },
+              )}
+            </View>
+          );
+        })}
+      </View>
+    </View>
   ));

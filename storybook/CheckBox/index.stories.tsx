@@ -11,6 +11,7 @@ import {ThemePalette} from '../../src/Theme/types';
 import {CheckBoxProps, CheckBoxType} from '../../src/components/CheckBox/types';
 import checkBoxFactory from '../../src/components/CheckBox';
 import {DefaultCheckBoxSize} from '../../src/components/CheckBox/constants';
+import {colorSelect} from '../knobs';
 
 const {Sharp, Round, Circular} = checkBoxFactory<
   typeof themes,
@@ -21,11 +22,9 @@ const {Sharp, Round, Circular} = checkBoxFactory<
   themes,
 });
 
-const colorSelect: {[key in keyof ThemePalette]?: keyof ThemePalette} = {
-  primary: 'primary',
-  secondary: 'secondary',
-  tertiary: 'tertiary',
-};
+const CHECKBOX_SHAPES = [Sharp, Round, Circular];
+
+const CHECKBOX_TYPES: Array<CheckBoxType> = ['outline', 'fill', 'reverse'];
 
 const sizeSelect: {
   [key in IntersectDefaultKey<DefaultCheckBoxSize>]?: UnionDefaultKey<
@@ -37,25 +36,22 @@ const sizeSelect: {
   large: 'large',
 };
 
-const typeSelect: {[key in CheckBoxType]: CheckBoxType} = {
-  outline: 'outline',
-  fill: 'fill',
-  reverse: 'reverse',
-};
-
 const getRequiredProps = (): CheckBoxProps<null, null, null> => {
   return {
     onPress: action('button-pressed'),
   };
 };
 
-const getOptionalProps = (): Partial<CheckBoxProps<null, null, null>> => {
+const getOptionalProps = (
+  overrides: Partial<CheckBoxProps<null, null, null>> = {},
+): Partial<CheckBoxProps<null, null, null>> => {
+  const {active, color, isDisabled, size, type} = overrides;
   return {
-    active: boolean('Active', undefined),
-    color: select('Color Options', colorSelect, undefined),
-    isDisabled: boolean('isDisabled', undefined),
-    size: select('Size Options', sizeSelect, undefined),
-    type: select('Type Options', typeSelect, undefined),
+    active: boolean('Active', active),
+    color: select('Color Options', colorSelect, color),
+    isDisabled: boolean('isDisabled', isDisabled),
+    size: select('Size Options', sizeSelect, size),
+    type,
   };
 };
 
@@ -89,15 +85,23 @@ storiesOf('UI/CheckBox', module)
   .add('Default', () => (
     <View style={styles.baseView}>
       <View style={styles.realignView}>
-        <View style={styles.variationView}>
-          <Sharp {...getRequiredProps()} {...getOptionalProps()} />
-        </View>
-        <View style={styles.variationView}>
-          <Round {...getRequiredProps()} {...getOptionalProps()} />
-        </View>
-        <View style={styles.variationView}>
-          <Circular {...getRequiredProps()} {...getOptionalProps()} />
-        </View>
+        {CHECKBOX_SHAPES.map(
+          (Component: React.FunctionComponent, index: number) => {
+            return (
+              <View key={index} style={styles.variationView}>
+                {CHECKBOX_TYPES.map((type: CheckBoxType, index: number) => {
+                  return (
+                    <Component
+                      key={index}
+                      {...getRequiredProps()}
+                      {...getOptionalProps({type})}
+                    />
+                  );
+                })}
+              </View>
+            );
+          },
+        )}
       </View>
     </View>
   ));

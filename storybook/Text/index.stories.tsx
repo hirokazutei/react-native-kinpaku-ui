@@ -1,5 +1,6 @@
 // @flow
 import * as React from 'react';
+import {TextProps as RNTextProps} from 'react-native';
 import {storiesOf} from '@storybook/react-native';
 import {boolean, select, number, text, withKnobs} from '@storybook/addon-knobs';
 import Provider from '../Provider';
@@ -15,7 +16,8 @@ const {Title, Heading, SubHeading, Body, Caption, Quote} = textFactory<
   null,
   typeof DEFAULT_TEXT_VARIATION,
   null,
-  true
+  true,
+  false
 >({
   themes,
   textVariation: DEFAULT_TEXT_VARIATION,
@@ -25,29 +27,59 @@ const DEFAULT_PROPS = {
   children: 'Sample Text',
 };
 
-const colorSelect: {[key in keyof ThemePalette]?: keyof ThemePalette} = {
+const textColorSelect: {[key in keyof ThemePalette]?: keyof ThemePalette} = {
   text: 'text',
   primary: 'primary',
   secondary: 'secondary',
   tertiary: 'tertiary',
 };
 
-const getRequiredProps = (overrrides = {}): TextProps<null, null, true> => {
+const ellipsizeModeSelect: {
+  [key in RNTextProps['ellipsizeMode']]: RNTextProps['ellipsizeMode']
+} = {
+  head: 'head',
+  middle: 'middle',
+  tail: 'tail',
+  clip: 'clip',
+};
+
+const getRequiredProps = (
+  overrrides: Partial<TextProps<null, null, true, false>> = {},
+): TextProps<null, null, true, false> => {
   const {children} = {...DEFAULT_PROPS, ...overrrides};
   return {
     children: text('Children', children),
   };
 };
 
-const getOptionalProps = (): Partial<TextProps<null, null, true>> => {
+const getOptionalProps = (
+  overrrides: Partial<TextProps<null, null, true, false>> = {},
+): Partial<TextProps<null, null, true, false>> => {
+  const {
+    align,
+    bold,
+    color,
+    ellipsizeMode,
+    italic,
+    lineThrough,
+    numberOfLines,
+    size,
+    underline,
+  } = overrrides;
   return {
-    align: select('Align Options', textAlignSelect, undefined),
-    bold: boolean('Bold', undefined),
-    color: select('Color Options', colorSelect, undefined),
-    italic: boolean('Italic', undefined),
-    size: number('Numeric Size', undefined),
-    lineThrough: boolean('Line Though', undefined),
-    underline: boolean('Underline', undefined),
+    align: select('Align Options', textAlignSelect, align),
+    bold: boolean('Bold', bold),
+    color: select('Color Options', textColorSelect, color),
+    ellipsizeMode: select(
+      'Ellipsize Mode Options',
+      ellipsizeModeSelect,
+      ellipsizeMode,
+    ),
+    italic: boolean('Italic', italic),
+    lineThrough: boolean('Line Though', lineThrough),
+    numberOfLines: number('Nuber of Lines', numberOfLines),
+    size: number('Numeric Size', size),
+    underline: boolean('Underline', underline),
   };
 };
 
@@ -58,12 +90,11 @@ storiesOf('UI/Text', module)
   .addDecorator(withKnobs)
   .add('Default', () => (
     <>
-      <Title {...DEFAULT_PROPS} {...getOptionalProps()} />
-      <Title {...DEFAULT_PROPS} {...getOptionalProps()} />
-      <Heading {...DEFAULT_PROPS} {...getOptionalProps()} />
-      <SubHeading {...DEFAULT_PROPS} {...getOptionalProps()} />
-      <Body {...DEFAULT_PROPS} {...getOptionalProps()} />
-      <Caption {...DEFAULT_PROPS} {...getOptionalProps()} />
-      <Quote {...DEFAULT_PROPS} {...getOptionalProps()} />
+      <Title {...getRequiredProps()} {...getOptionalProps()} />
+      <Heading {...getRequiredProps()} {...getOptionalProps()} />
+      <SubHeading {...getRequiredProps()} {...getOptionalProps()} />
+      <Body {...getRequiredProps()} {...getOptionalProps()} />
+      <Caption {...getRequiredProps()} {...getOptionalProps()} />
+      <Quote {...getRequiredProps()} {...getOptionalProps()} />
     </>
   ));

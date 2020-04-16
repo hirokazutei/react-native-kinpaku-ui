@@ -3,28 +3,21 @@ import * as React from 'react';
 import {Text} from 'react-native';
 import {storiesOf} from '@storybook/react-native';
 import {action} from '@storybook/addon-actions';
-import {boolean, select, text, withKnobs} from '@storybook/addon-knobs';
+import {boolean, select, withKnobs} from '@storybook/addon-knobs';
 import Provider from '../Provider';
 import {IntersectDefaultKey, UnionDefaultKey} from '../../src/types';
-import {alignSelect} from '../knobs';
+import {alignSelect, colorSelect} from '../knobs';
 import themes from '../../src/themes';
-import {ThemePalette} from '../../src/Theme/types';
 import touchableFactory from '../../src/components/Touchable';
 import {TouchableProps} from '../../src/components/Touchable/types';
 import {DefaultTouchableSize} from '../../src/components/Touchable/constants';
 
-const Touchable = touchableFactory<typeof themes, null, null, null>({
+const {Fill, Outline} = touchableFactory<typeof themes, null, null, null>({
   themes,
 });
 
 const DEFAULT_PROPS = {
-  children: 'TOUCH',
-};
-
-const colorSelect: {[key in keyof ThemePalette]?: keyof ThemePalette} = {
-  primary: 'primary',
-  secondary: 'secondary',
-  tertiary: 'tertiary',
+  children: <Text>Content</Text>,
 };
 
 const sizeSelect: {
@@ -40,24 +33,29 @@ const sizeSelect: {
   massive: 'massive',
 };
 
-const getRequiredProps = (overrides = {}): TouchableProps<null, null, null> => {
+const getRequiredProps = (
+  overrides: Partial<TouchableProps<null, null, null>> = {},
+): TouchableProps<null, null, null> => {
   const {children} = {
     ...DEFAULT_PROPS,
     ...overrides,
   };
   return {
-    children: <Text>{text('Content', children)}</Text>,
+    children,
     onPress: action('button-pressed'),
   };
 };
 
-const getOptionalProps = (): Partial<TouchableProps<null, null, null>> => {
+const getOptionalProps = (
+  overrides: Partial<TouchableProps<null, null, null>> = {},
+): Partial<TouchableProps<null, null, null>> => {
+  const {align, color, isDisabled, isStretched, size} = overrides;
   return {
-    align: select('Align Options', alignSelect, undefined),
-    color: select('Color Options', colorSelect, undefined),
-    isDisabled: boolean('Disabled', undefined),
-    isStretched: boolean('Stretched', undefined),
-    size: select('Size Option', sizeSelect, undefined),
+    align: select('Align Options', alignSelect, align),
+    color: select('Color Options', colorSelect, color),
+    isDisabled: boolean('Disabled', isDisabled),
+    isStretched: boolean('Stretched', isStretched),
+    size: select('Size Option', sizeSelect, size),
   };
 };
 
@@ -68,7 +66,7 @@ storiesOf('UI/Touchable', module)
   .addDecorator(withKnobs)
   .add('Default', () => (
     <>
-      <Touchable.Fill {...getRequiredProps()} {...getOptionalProps()} />
-      <Touchable.Outline {...getRequiredProps()} {...getOptionalProps()} />
+      <Fill {...getRequiredProps()} {...getOptionalProps()} />
+      <Outline {...getRequiredProps()} {...getOptionalProps()} />
     </>
   ));

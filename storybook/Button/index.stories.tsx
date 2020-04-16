@@ -1,11 +1,12 @@
 // @flow
 import * as React from 'react';
+import {View, StyleSheet, ViewStyle} from 'react-native';
 import {storiesOf} from '@storybook/react-native';
 import {action} from '@storybook/addon-actions';
 import {boolean, select, text, withKnobs} from '@storybook/addon-knobs';
 import Provider from '../Provider';
 import {IntersectDefaultKey, UnionDefaultKey} from '../../src/types';
-import {alignSelect} from '../knobs';
+import {alignSelect, colorSelect} from '../knobs';
 import themes from '../../src/themes';
 import {ThemePalette} from '../../src/Theme/types';
 import {ButtonProps, ButtonType} from '../../src/components/Button/types';
@@ -18,16 +19,12 @@ const {Sharp, Round, Circular} = buttonFactory<typeof themes, null, null, null>(
   },
 );
 
-const DEFAULT_PROPS = {
-  label: 'PRESS HERE',
-};
+const BUTTON_SHAPES = [Sharp, Round, Circular];
 
 const BUTTON_TYPES: Array<ButtonType> = ['fill', 'outline', 'clear'];
 
-const colorSelect: {[key in keyof ThemePalette]?: keyof ThemePalette} = {
-  primary: 'primary',
-  secondary: 'secondary',
-  tertiary: 'tertiary',
+const DEFAULT_PROPS = {
+  label: 'PRESS HERE',
 };
 
 const sizeSelect: {
@@ -43,7 +40,9 @@ const sizeSelect: {
   massive: 'massive',
 };
 
-const getRequiredProps = (overrides = {}): ButtonProps<null, null, null> => {
+const getRequiredProps = (
+  overrides: Partial<ButtonProps<null, null, null>> = {},
+): ButtonProps<null, null, null> => {
   const {label} = {
     ...DEFAULT_PROPS,
     ...overrides,
@@ -54,16 +53,31 @@ const getRequiredProps = (overrides = {}): ButtonProps<null, null, null> => {
   };
 };
 
-const geOptionalProps = (): Partial<ButtonProps<null, null, null>> => {
+const geOptionalProps = (
+  overrides: Partial<ButtonProps<null, null, null>> = {},
+): Partial<ButtonProps<null, null, null>> => {
+  const {color, isDisabled, isStretched, align, size, type} = overrides;
   return {
-    color: select('Color Options', colorSelect, undefined),
-    isDisabled: boolean('isDisabled', undefined),
-    isStretched: boolean('isStretched', undefined),
-    align: select('Align Options', alignSelect, undefined),
+    color: select('Color Options', colorSelect, color),
+    isDisabled: boolean('isDisabled', isDisabled),
+    isStretched: boolean('isStretched', isStretched),
+    align: select('Align Options', alignSelect, align),
     onPress: action('button-pressed'),
-    size: select('Size Options', sizeSelect, undefined),
+    size: select('Size Options', sizeSelect, size),
+    type,
   };
 };
+
+type Styles = {
+  variationView: ViewStyle;
+};
+
+const styles: Styles = StyleSheet.create<Styles>({
+  variationView: {
+    flex: 1,
+    justifyContent: 'space-evenly',
+  },
+});
 
 storiesOf('UI/Button', module)
   .addDecorator((story: () => React.ReactElement<null>) => (
@@ -72,35 +86,22 @@ storiesOf('UI/Button', module)
   .addDecorator(withKnobs)
   .add('Default', () => (
     <>
-      {BUTTON_TYPES.map((type: ButtonType, index: number) => {
-        return (
-          <Sharp
-            key={index}
-            {...getRequiredProps()}
-            type={type}
-            {...geOptionalProps()}
-          />
-        );
-      })}
-      {BUTTON_TYPES.map((type: ButtonType, index: number) => {
-        return (
-          <Round
-            key={index}
-            {...getRequiredProps()}
-            type={type}
-            {...geOptionalProps()}
-          />
-        );
-      })}
-      {BUTTON_TYPES.map((type: ButtonType, index: number) => {
-        return (
-          <Circular
-            key={index}
-            {...getRequiredProps()}
-            type={type}
-            {...geOptionalProps()}
-          />
-        );
-      })}
+      {BUTTON_SHAPES.map(
+        (Component: React.FunctionComponent, index: number) => {
+          return (
+            <View key={index} style={styles.variationView}>
+              {BUTTON_TYPES.map((type: ButtonType, index: number) => {
+                return (
+                  <Component
+                    key={index}
+                    {...getRequiredProps()}
+                    {...geOptionalProps({type})}
+                  />
+                );
+              })}
+            </View>
+          );
+        },
+      )}
     </>
   ));
