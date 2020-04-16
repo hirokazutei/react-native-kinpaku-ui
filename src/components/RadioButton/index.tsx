@@ -5,7 +5,6 @@ import {
   OptionalExistCondition,
   AddDefaultToObject,
 } from '../../types';
-import {ThemePalette} from '../../theme/types';
 import {colorResolverFactory} from '../../helper';
 import {
   RadioButtonFactoryProps,
