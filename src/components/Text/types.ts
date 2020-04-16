@@ -83,9 +83,9 @@ type TextProps<
   children: string;
   ellipsizeMode?: RNTextProps['ellipsizeMode'];
   italic?: OptionalTrueCondition<EmphasisToggleable, boolean, never>;
+  lineThrough?: OptionalTrueCondition<EmphasisToggleable, boolean, never>;
   numberOfLines?: number;
   size?: OptionalExistCondition<FontSize, FontSize, number>;
-  lineThrough?: OptionalTrueCondition<EmphasisToggleable, boolean, never>;
   underline?: OptionalTrueCondition<EmphasisToggleable, boolean, never>;
 };
 
