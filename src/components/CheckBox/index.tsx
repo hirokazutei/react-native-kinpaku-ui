@@ -17,6 +17,7 @@ import {
   DEFAULT_CHECK_BOX_SIZES,
   DefaultCheckBoxSize,
 } from './constants';
+import {colorResolverFactory} from '../../helper';
 
 function checkBoxFactory<
   Themes,
@@ -86,11 +87,13 @@ function checkBoxFactory<
         themes[`${currentThemeKey}` as keyof UnionDefaultKey<Themes>];
 
       // Color
-      const primaryColor = !isDisabled
-        ? (additionalPalettes &&
-            additionalPalettes[color as keyof AdditionalPalettes]) ||
-          currentTheme[color as keyof ThemePalette]
-        : currentTheme.disabled;
+      const colorResolver = colorResolverFactory<AdditionalPalettes>({
+        currentTheme,
+        additionalPalettes,
+      });
+      const primaryColor = isDisabled
+        ? currentTheme.disabled
+        : colorResolver({color, defaultColor: currentTheme.primary});
       const activeColor =
         type === 'fill' || type === 'reverse'
           ? currentTheme.background

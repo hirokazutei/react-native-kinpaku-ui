@@ -90,19 +90,14 @@ function radioButtonFactory<
       const currentTheme =
         themes[`${currentThemeKey}` as keyof UnionDefaultKey<Themes>];
 
+      // Color
       const colorResolver = colorResolverFactory<AdditionalPalettes>({
         currentTheme,
         additionalPalettes,
       });
-
-      // Color
       const primaryColor = isDisabled
         ? currentTheme.disabled
-        : colorResolver({color, defaultColor: currentTheme.primary})
-        ? (additionalPalettes &&
-            additionalPalettes[color as keyof AdditionalPalettes]) ||
-          currentTheme[color as keyof ThemePalette]
-        : currentTheme.disabled;
+        : colorResolver({color, defaultColor: currentTheme.primary});
       const activeColor =
         type === 'reverse' ? currentTheme.background : primaryColor;
       const inactiveColor =
@@ -142,8 +137,7 @@ function radioButtonFactory<
 
       const ringBorderRadius =
         variationKey == 'Sharp' ? 0 : borderRadiusResolver(ringSize);
-      const dotBorderRadius =
-        variationKey == 'Sharp' ? 0 : borderRadiusResolver(dotSize);
+      const dotBorderRadius = variationKey == 'Circular' ? dotSize * 256 : 0;
 
       // Outer Ring Style
       const outerRingStyle: ViewStyle = {

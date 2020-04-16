@@ -92,10 +92,6 @@ function inputFieldFactory<
           useContext(themeContext) || ('default' as UnionDefaultKey<Themes>);
         const currentTheme =
           themes[`${currentThemeKey}` as keyof UnionDefaultKey<Themes>];
-        const colorResolver = colorResolverFactory<AdditionalPalettes>({
-          currentTheme,
-          additionalPalettes,
-        });
 
         // Type
         const isOutline = inputFieldType === 'outline';
@@ -116,6 +112,10 @@ function inputFieldFactory<
           : currentTheme.primary;
 
         // Set-Up Color
+        const colorResolver = colorResolverFactory<AdditionalPalettes>({
+          currentTheme,
+          additionalPalettes,
+        });
         const primaryBackgroundColor = colorResolver({
           color: backgroundColor,
           defaultColor: currentTheme.primary,

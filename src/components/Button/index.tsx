@@ -89,12 +89,12 @@ function buttonFactory<
       const currentThemeKey = useContext(themeContext) || 'default';
       const currentTheme =
         themes[`${currentThemeKey}` as keyof UnionDefaultKey<Themes>];
+
+      // Color
       const colorResolver = colorResolverFactory<AdditionalPalettes>({
         currentTheme,
         additionalPalettes,
       });
-
-      // Color
       const primaryColor = isDisabled
         ? currentTheme.disabled
         : colorResolver({color, defaultColor: currentTheme.primary});
