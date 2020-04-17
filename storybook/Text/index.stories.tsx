@@ -11,7 +11,7 @@ import {TextProps} from '../../src/components/Text/types';
 import textFactory from '../../src/components/Text';
 import {DEFAULT_TEXT_VARIATION} from '../../src/components/Text/constants';
 
-const {Title, Heading, SubHeading, Body, Caption, Quote} = textFactory<
+const {Title, Heading, SubHeading, Body, Label, Quote} = textFactory<
   typeof themes,
   null,
   typeof DEFAULT_TEXT_VARIATION,
@@ -94,7 +94,7 @@ storiesOf('UI/Text', module)
       <Heading {...getRequiredProps()} {...getOptionalProps()} />
       <SubHeading {...getRequiredProps()} {...getOptionalProps()} />
       <Body {...getRequiredProps()} {...getOptionalProps()} />
-      <Caption {...getRequiredProps()} {...getOptionalProps()} />
+      <Label {...getRequiredProps()} {...getOptionalProps()} />
       <Quote {...getRequiredProps()} {...getOptionalProps()} />
     </>
   ));

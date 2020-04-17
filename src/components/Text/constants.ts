@@ -5,7 +5,7 @@ type DefaultTextVariation =
   | 'Heading'
   | 'SubHeading'
   | 'Body'
-  | 'Caption'
+  | 'Label'
   | 'Quote';
 
 const DEFAULT_TEXT_VARIATION: {
@@ -13,7 +13,7 @@ const DEFAULT_TEXT_VARIATION: {
 } = {
   Title: {
     fontWeight: 'bold',
-    defaultFontSize: 24,
+    defaultFontSize: 28,
   },
   Heading: {
     fontWeight: 'bold',
@@ -26,7 +26,7 @@ const DEFAULT_TEXT_VARIATION: {
   Body: {
     defaultFontSize: 14,
   },
-  Caption: {
+  Label: {
     defaultFontSize: 16,
   },
   Quote: {
