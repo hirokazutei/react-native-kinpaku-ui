@@ -106,26 +106,27 @@ function inputFieldFactory<
           ? shape === 'circular'
           : defaultShape === 'circular';
 
-        // Type Color
-        const defaultTextColor = isFill
-          ? currentTheme.background
-          : currentTheme.primary;
-
         // Set-Up Color
         const colorResolver = colorResolverFactory<AdditionalPalettes>({
           currentTheme,
           additionalPalettes,
         });
+
+        const defaultTextColor = isFill
+          ? currentTheme.background
+          : currentTheme.primary;
+        const declaredTextColor = textColor || (isFill ? 'background' : color);
+
         const primaryBackgroundColor = colorResolver({
-          color: backgroundColor,
+          color: backgroundColor || color,
           defaultColor: currentTheme.primary,
         });
         const primaryTextColor = colorResolver({
-          color: textColor,
+          color: declaredTextColor,
           defaultColor: defaultTextColor,
         });
         const primaryBorderColor = colorResolver({
-          color: borderColor,
+          color: borderColor || color,
           defaultColor: currentTheme.primary,
         });
 
@@ -231,7 +232,7 @@ function inputFieldFactory<
           ...paddingProp,
           ...paddingHorizontalProp,
           ...paddingVerticalProp,
-          ..._customWrapperStyle,
+          ...(_customWrapperStyle ? _customWrapperStyle : {}),
         };
 
         // FieldStyle
@@ -245,11 +246,13 @@ function inputFieldFactory<
           ...{fontSize: sizeProp.fontSize},
           ...(letterSpacing ? {letterSpacing} : {}),
           ...(lineHeight ? {lineHeight} : {}),
-          ..._customTextInputStyle,
+          ...(_customTextInputStyle ? _customTextInputStyle : {}),
         };
 
         return (
-          <View style={wrapperStyleProps} {..._customWrapperProps}>
+          <View
+            style={wrapperStyleProps}
+            {...(_customWrapperProps ? _customWrapperProps : {})}>
             {leftIcon}
             <TextInput
               style={fieldStyleProps}
@@ -257,7 +260,7 @@ function inputFieldFactory<
               {...(maxLength ? {maxLength} : defaultMaxLength)}
               {...inputFieldProps}
               {...inputFieldOptions}
-              {..._customTextInputProps}
+              {...(_customTextInputProps ? _customTextInputProps : {})}
             />
             {rightIcon}
           </View>
