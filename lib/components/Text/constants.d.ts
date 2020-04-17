@@ -1,5 +1,5 @@
 import { TextVariationProps } from './types';
-declare type DefaultTextVariation = 'Title' | 'Heading' | 'SubHeading' | 'Body' | 'Caption' | 'Quote';
+declare type DefaultTextVariation = 'Title' | 'Heading' | 'SubHeading' | 'Body' | 'Label' | 'Quote';
 declare const DEFAULT_TEXT_VARIATION: {
     [textVariation in DefaultTextVariation]: TextVariationProps<null, null>;
 };

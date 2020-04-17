@@ -54,7 +54,7 @@ const UIFactory = <ThemeObject, AdditionalPalettes>(
   >({
     ...commonProps,
   });
-  const {Title, Heading, SubHeading, Body, Caption, Quote} = textFactory<
+  const {Title, Heading, SubHeading, Body, Label, Quote} = textFactory<
     Themes<ThemeObject>,
     AdditionalPalettes,
     null,
@@ -67,7 +67,7 @@ const UIFactory = <ThemeObject, AdditionalPalettes>(
   return {
     Body,
     Button,
-    Caption,
+    Label,
     CheckBox,
     Heading,
     InputField,

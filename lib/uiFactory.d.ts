@@ -32,7 +32,7 @@ declare const UIFactory: <ThemeObject, AdditionalPalettes>(themes: Themes<ThemeO
             massive: import("./components/Button/types").ButtonSizeProps;
         }, false>>;
     };
-    Caption: import("react").FunctionComponent<import("./components/Text/types").TextProps<AdditionalPalettes, null, true, false>>;
+    Label: import("react").FunctionComponent<import("./components/Text/types").TextProps<AdditionalPalettes, null, true, false>>;
     CheckBox: {
         Circular: import("react").FunctionComponent<import("./components/CheckBox/types").CheckBoxProps<AdditionalPalettes, {
             default: import("./components/CheckBox/types").CheckBoxSizeProps;
