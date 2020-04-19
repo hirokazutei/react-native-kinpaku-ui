@@ -36,17 +36,15 @@ const {Touchable: Touchables} = UIFactory<
   additionalPalettes,
 });
 
-const Touchable = Touchables.Circular;
-
 const TouchablePage = () => {
   return (
     <View>
-      <Touchable
+      <Touchable.Fill
         onPress={() => {
           /* Dummy Function */
         }}>
         <AnotherComponent />
-      </Touchable>
+      </Touchable.Fill>
     </View>
   );
 };
@@ -68,7 +66,7 @@ import AnotherComponent from '../anotherComponent';
   ... configuration ...
 */
 
-const {Fill, Outline} = touchableFactory<
+const Touchable = touchableFactory<
   typeof themes,
   typeof additionalPalettes,
   typeof sizes,
@@ -84,12 +82,12 @@ const {Fill, Outline} = touchableFactory<
 const TouchablePage = () => {
   return (
     <View>
-      <Touchable
+      <Touchable.Fill
         onPress={() => {
           /* Dummy Function */
         }}>
         <AnotherComponent />
-      </Touchable>
+      </Touchable.Fill>
     </View>
   );
 };
