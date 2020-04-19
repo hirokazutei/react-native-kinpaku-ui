@@ -79,14 +79,23 @@ Install Node Modules:
 $ npm install
 ```
 
-Make sure you have Cocoapods installed:
-https://cocoapods.org/
+Make sure you have Bundler installed:
+
+```
+gem install bundler
+```
+
+Install the ruby dependencies:
+
+```
+bundle install
+```
 
 Install Pods:
 
 ```
 go to your ios directory
-$ pod install
+$ bundle exec pod install
 ```
 
 Open workspace with Xcode and build the project:
