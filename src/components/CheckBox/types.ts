@@ -4,6 +4,7 @@ import {
   Color,
   OptionalTrueCondition,
   UnionDefaultKey,
+  RequiredIfSpecified,
 } from '../../types';
 import {ThemePalette, Themes as ThemesType} from '../../theme/types';
 
@@ -23,15 +24,19 @@ type CheckBoxFactoryProps<
   AllowCustomProps
 > = {
   themes: ThemesType<Themes>;
-  additionalPalettes?: {
-    [AdditionalPaletteKeys in keyof AdditionalPalettes]: Color
-  };
-  sizes?: {
-    [SizeKey in keyof AddDefaultToObject<
-      CheckBoxSize,
-      CheckBoxSizeProps
-    >]: CheckBoxSizeProps
-  };
+  additionalPalettes?: RequiredIfSpecified<
+    AdditionalPalettes,
+    {[AdditionalPaletteKeys in keyof AdditionalPalettes]: Color}
+  >;
+  sizes?: RequiredIfSpecified<
+    CheckBoxSize,
+    {
+      [SizeKey in keyof AddDefaultToObject<
+        CheckBoxSize,
+        CheckBoxSizeProps
+      >]: CheckBoxSizeProps
+    }
+  >;
   defaultColor?: keyof (ThemePalette & AdditionalPalettes);
   defaultType?: CheckBoxType;
 };

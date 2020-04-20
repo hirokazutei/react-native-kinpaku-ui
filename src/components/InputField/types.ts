@@ -1,5 +1,10 @@
 import {TextStyle, TextInputProps, ViewProps, ViewStyle} from 'react-native';
-import {AddDefaultToObject, Color, OptionalTrueCondition} from '../../types';
+import {
+  AddDefaultToObject,
+  Color,
+  OptionalTrueCondition,
+  RequiredIfSpecified,
+} from '../../types';
 import {ThemePalette} from '../../theme/types';
 
 type InputFieldVariation =
@@ -72,15 +77,19 @@ type InputFieldFactoryProps<
   themes: {
     [ThemeKey in keyof AddDefaultToObject<Themes, ThemePalette>]: ThemePalette
   };
-  additionalPalettes?: {
-    [AdditionalPaletteKey in keyof AdditionalPalettes]: Color
-  };
-  sizes?: {
-    [SizeKey in keyof AddDefaultToObject<
-      InputFieldSize,
-      InputFieldSizeProps
-    >]: InputFieldSizeProps
-  };
+  additionalPalettes?: RequiredIfSpecified<
+    AdditionalPalettes,
+    {[AdditionalPaletteKey in keyof AdditionalPalettes]: Color}
+  >;
+  sizes?: RequiredIfSpecified<
+    InputFieldSize,
+    {
+      [SizeKey in keyof AddDefaultToObject<
+        InputFieldSize,
+        InputFieldSizeProps
+      >]: InputFieldSizeProps
+    }
+  >;
   inputFieldType?: InputFieldType;
   defaultColor?: keyof (ThemePalette & AdditionalPalettes);
   defaultShape?: InputFieldShape;

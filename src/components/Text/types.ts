@@ -4,6 +4,7 @@ import {
   Color,
   OptionalExistCondition,
   OptionalTrueCondition,
+  RequiredIfSpecified,
 } from '../../types';
 import {ThemePalette} from '../../theme/types';
 
@@ -45,24 +46,16 @@ type TextFactoryProps<
   themes: {
     [ThemeKeys in keyof AddDefaultToObject<Themes, ThemePalette>]: ThemePalette
   };
-  additionalPalettes?: {
-    [AdditionalPaletteKeys in keyof AdditionalPalettes]: Color
-  };
+  additionalPalettes?: RequiredIfSpecified<
+    AdditionalPalettes,
+    {[AdditionalPaletteKeys in keyof AdditionalPalettes]: Color}
+  >;
   defaultFontSizeKey?: OptionalExistCondition<
     FontSize,
-    undefined | keyof FontSize,
+    undefined | FontSize,
     undefined
   >;
-  textVariation?: OptionalExistCondition<
-    TextVariation,
-    {
-      [VariationKeys in keyof TextVariation]: TextVariationProps<
-        OptionalExistCondition<FontSize, keyof FontSize, null>,
-        AdditionalPalettes
-      >
-    },
-    null
-  >;
+  textVariation?: RequiredIfSpecified<TextVariation, TextVariation>;
 };
 
 type TextProps<

@@ -49,36 +49,28 @@ function touchableFactory<
     >
   >
 } {
+  // Type
+  type TouchableProps = Props<
+    AdditionalPalettes,
+    OptionalExistCondition<
+      TouchableSize,
+      TouchableSize,
+      typeof DEFAULT_TOUCHABLE_SIZE
+    >,
+    AllowCustomProps
+  >;
+
+  // Context
   const themeContext: React.Context<keyof Themes> = React.createContext(
     'default' as keyof Themes,
   );
 
   const touchables: {
-    [key in TouchableTypeVariations]?: React.FunctionComponent<
-      Props<
-        AdditionalPalettes,
-        OptionalExistCondition<
-          TouchableSize,
-          TouchableSize,
-          typeof DEFAULT_TOUCHABLE_SIZE
-        >,
-        AllowCustomProps
-      >
-    >
+    [key in TouchableTypeVariations]?: React.FunctionComponent<TouchableProps>
   } = {};
 
   for (const typeKey of TOUCHABLE_TYPE_VARIATION_KEYS) {
-    const Touchable: React.FunctionComponent<
-      Props<
-        AdditionalPalettes,
-        OptionalExistCondition<
-          TouchableSize,
-          TouchableSize,
-          typeof DEFAULT_TOUCHABLE_SIZE
-        >,
-        AllowCustomProps
-      >
-    > = ({
+    const Touchable: React.FunctionComponent<TouchableProps> = ({
       color,
       size = 'default',
       children,
@@ -88,25 +80,7 @@ function touchableFactory<
       onPress,
       _customProps,
       _customStyle,
-    }: Props<
-      AdditionalPalettes,
-      OptionalExistCondition<
-        TouchableSize,
-        TouchableSize,
-        typeof DEFAULT_TOUCHABLE_SIZE
-      >,
-      AllowCustomProps
-    >): React.ReactElement<
-      Props<
-        AdditionalPalettes,
-        OptionalExistCondition<
-          TouchableSize,
-          TouchableSize,
-          typeof DEFAULT_TOUCHABLE_SIZE
-        >,
-        AllowCustomProps
-      >
-    > => {
+    }: TouchableProps): React.ReactElement<TouchableProps> => {
       // Palettes
       const currentThemeKey = useContext(themeContext) || 'default';
       const currentTheme =
@@ -187,7 +161,9 @@ function touchableFactory<
     };
     touchables[typeKey as TouchableTypeVariations] = Touchable;
   }
-  return touchables;
+  return touchables as {
+    [key in TouchableTypeVariations]: React.FunctionComponent<TouchableProps>
+  };
 }
 
 export default touchableFactory;

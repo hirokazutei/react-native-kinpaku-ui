@@ -4,6 +4,7 @@ import {
   Color,
   OptionalTrueCondition,
   UnionDefaultKey,
+  RequiredIfSpecified,
 } from '../../types';
 import {ThemePalette} from '../../theme/types';
 
@@ -33,15 +34,19 @@ type TouchableFactoryProps<
   themes: {
     [ThemeKeys in keyof AddDefaultToObject<Themes, ThemePalette>]: ThemePalette
   };
-  additionalPalettes?: {
-    [AdditionalPaletteKeys in keyof AdditionalPalettes]: Color
-  };
-  sizes?: {
-    [SizeKey in keyof AddDefaultToObject<
-      TouchableSize,
-      TouchableSizeProps
-    >]: TouchableSizeProps
-  };
+  additionalPalettes?: RequiredIfSpecified<
+    AdditionalPalettes,
+    {[AdditionalPaletteKeys in keyof AdditionalPalettes]: Color}
+  >;
+  sizes?: RequiredIfSpecified<
+    TouchableSize,
+    {
+      [SizeKey in keyof AddDefaultToObject<
+        TouchableSize,
+        TouchableSizeProps
+      >]: TouchableSizeProps
+    }
+  >;
   defaultType?: TouchableTypeVariations;
 };
 
