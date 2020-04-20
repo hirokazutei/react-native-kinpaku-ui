@@ -11,5 +11,6 @@ declare type Falsy = undefined | null | false;
 declare type NonExistent = undefined | null;
 declare type OptionalTrueCondition<T, IfTrue, IfFalse> = T extends Falsy ? IfFalse : T extends true ? IfTrue : IfFalse;
 declare type OptionalExistCondition<T, IfExist, IfNonExist> = T extends NonExistent ? IfNonExist : IfExist;
-export { AddDefaultToObject, Color, DefaultObject, Falsy, NonExistent, IntersectDefaultKey, OptionalExistCondition, OptionalTrueCondition, UnionDefaultKey, };
+declare type RequiredIfSpecified<T, RequiredType> = T extends NonExistent ? Required<RequiredType> : never;
+export { AddDefaultToObject, Color, DefaultObject, Falsy, NonExistent, IntersectDefaultKey, OptionalExistCondition, OptionalTrueCondition, RequiredIfSpecified, UnionDefaultKey, };
 //# sourceMappingURL=types.d.ts.map

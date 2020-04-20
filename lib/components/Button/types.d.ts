@@ -1,5 +1,5 @@
 import { FlexAlignType, TextProperties, TextStyle, TouchableOpacityProps, ViewStyle } from 'react-native';
-import { AddDefaultToObject, Color, OptionalTrueCondition, UnionDefaultKey } from '../../types';
+import { AddDefaultToObject, Color, OptionalTrueCondition, UnionDefaultKey, RequiredIfSpecified } from '../../types';
 import { ThemePalette, Themes as ThemesType } from '../../theme/types';
 declare type ButtonShapeVariation = 'Circular' | 'Round' | 'Sharp';
 declare type ButtonType = 'fill' | 'clear' | 'outline';
@@ -11,12 +11,12 @@ declare type ButtonSizeProps = {
 };
 declare type ButtonFactoryProps<Themes, AdditionalPalettes, ButtonSize, AllowCustomProps> = {
     themes: ThemesType<Themes>;
-    additionalPalettes?: {
+    additionalPalettes?: RequiredIfSpecified<AdditionalPalettes, {
         [AdditionalPaletteKey in keyof AdditionalPalettes]: Color;
-    };
-    sizes?: {
+    }>;
+    sizes?: RequiredIfSpecified<ButtonSize, {
         [SizeKey in keyof AddDefaultToObject<ButtonSize, ButtonSizeProps>]: ButtonSizeProps;
-    };
+    }>;
     defaultColor?: keyof (ThemePalette & AdditionalPalettes);
     defaultType?: ButtonType;
 };

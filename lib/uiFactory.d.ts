@@ -1,7 +1,7 @@
 /// <reference types="react" />
 import { Themes } from './theme/types';
-import { DefaultObject } from './types';
-declare const UIFactory: <ThemeObject, AdditionalPalettes>(themes: Themes<ThemeObject>, additionalPalettes?: { [key in keyof (AdditionalPalettes & DefaultObject<string>)]: string; } | undefined) => {
+import { DefaultObject, RequiredIfSpecified } from './types';
+declare const UIFactory: <ThemeObject, AdditionalPalettes>(themes: Themes<ThemeObject>, additionalPalettes?: RequiredIfSpecified<AdditionalPalettes, { [key in keyof (AdditionalPalettes & DefaultObject<string>)]: string; }> | undefined) => {
     Body: import("react").FunctionComponent<import("./components/Text/types").TextProps<AdditionalPalettes, null, true, false>>;
     Button: {
         Circular: import("react").FunctionComponent<import("./components/Button/types").ButtonProps<AdditionalPalettes, {

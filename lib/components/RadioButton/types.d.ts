@@ -1,5 +1,5 @@
 import { TouchableOpacityProps, ViewStyle, ViewProps } from 'react-native';
-import { Color, AddDefaultToObject, OptionalTrueCondition, UnionDefaultKey } from '../../types';
+import { Color, AddDefaultToObject, OptionalTrueCondition, UnionDefaultKey, RequiredIfSpecified } from '../../types';
 import { ThemePalette } from '../../theme/types';
 declare type RadioButtonShapeVariation = 'Sharp' | 'Round' | 'Circular';
 declare type RadioButtonType = 'fill' | 'outline' | 'reverse';
@@ -12,12 +12,12 @@ declare type RadioButtonFactoryProps<Themes, AdditionalPalettes, RadioButtonSize
     themes: {
         [ThemeKeys in keyof AddDefaultToObject<Themes, ThemePalette>]: ThemePalette;
     };
-    additionalPalettes?: {
+    additionalPalettes?: RequiredIfSpecified<AdditionalPalettes, Required<{
         [AdditionalPaletteKeys in keyof AdditionalPalettes]: Color;
-    };
-    sizes?: {
+    }>>;
+    sizes?: RequiredIfSpecified<RadioButtonSize, {
         [SizeKey in keyof AddDefaultToObject<RadioButtonSize, RadioButtonSizeProps>]: RadioButtonSizeProps;
-    };
+    }>;
     defaultColor?: keyof (ThemePalette & AdditionalPalettes);
     defaultType?: RadioButtonType;
 };

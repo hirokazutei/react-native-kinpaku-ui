@@ -1,6 +1,6 @@
 /// <reference types="react" />
 import { TextStyle, TextInputProps, ViewProps, ViewStyle } from 'react-native';
-import { AddDefaultToObject, Color, OptionalTrueCondition } from '../../types';
+import { AddDefaultToObject, Color, OptionalTrueCondition, RequiredIfSpecified } from '../../types';
 import { ThemePalette } from '../../theme/types';
 declare type InputFieldVariation = 'creditCardNumber' | 'decimal' | 'email' | 'freeField' | 'name' | 'number' | 'oneTimeNumberCode' | 'oneTimeCode' | 'paragragh' | 'passcode' | 'password' | 'phone' | 'url' | 'username';
 declare type InputFieldShape = 'sharp' | 'rounded' | 'circular';
@@ -46,12 +46,12 @@ declare type InputFieldFactoryProps<Themes, AdditionalPalettes, InputFieldSize, 
     themes: {
         [ThemeKey in keyof AddDefaultToObject<Themes, ThemePalette>]: ThemePalette;
     };
-    additionalPalettes?: {
+    additionalPalettes?: RequiredIfSpecified<AdditionalPalettes, {
         [AdditionalPaletteKey in keyof AdditionalPalettes]: Color;
-    };
-    sizes?: {
+    }>;
+    sizes?: RequiredIfSpecified<InputFieldSize, {
         [SizeKey in keyof AddDefaultToObject<InputFieldSize, InputFieldSizeProps>]: InputFieldSizeProps;
-    };
+    }>;
     inputFieldType?: InputFieldType;
     defaultColor?: keyof (ThemePalette & AdditionalPalettes);
     defaultShape?: InputFieldShape;
