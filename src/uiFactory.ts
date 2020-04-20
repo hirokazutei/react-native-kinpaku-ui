@@ -5,13 +5,14 @@ import inputFieldFactory from './components/InputField';
 import touchableFactory from './components/Touchable';
 import radioButtonFactory from './components/RadioButton';
 import textFactory from './components/Text';
-import {Color, DefaultObject} from './types';
+import {Color, DefaultObject, RequiredIfSpecified} from './types';
 
 const UIFactory = <ThemeObject, AdditionalPalettes>(
   themes: Themes<ThemeObject>,
-  additionalPalettes?: {
-    [key in keyof (AdditionalPalettes & DefaultObject<Color>)]: Color
-  },
+  additionalPalettes?: RequiredIfSpecified<
+    AdditionalPalettes,
+    {[key in keyof (AdditionalPalettes & DefaultObject<Color>)]: Color}
+  >,
 ) => {
   const commonProps = {themes, additionalPalettes};
   const Button = buttonFactory<
