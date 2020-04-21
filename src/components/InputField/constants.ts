@@ -182,7 +182,7 @@ const DEFAULT_INPUT_VARIATION_SETTING: {
       },
     }),
   },
-  paragragh: {
+  paragraph: {
     autoCapitalize: 'sentences',
     autoCorrect: true,
     caretHidden: false,

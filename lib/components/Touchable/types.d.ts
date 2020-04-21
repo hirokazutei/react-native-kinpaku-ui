@@ -1,6 +1,6 @@
 /// <reference types="react" />
 import { FlexAlignType, TouchableOpacityProps, ViewStyle } from 'react-native';
-import { AddDefaultToObject, Color, OptionalTrueCondition, UnionDefaultKey } from '../../types';
+import { AddDefaultToObject, Color, OptionalTrueCondition, UnionDefaultKey, RequiredIfSpecified } from '../../types';
 import { ThemePalette } from '../../theme/types';
 declare type TouchableTypeVariations = 'Fill' | 'Outline';
 declare type VerHor = {
@@ -21,12 +21,12 @@ declare type TouchableFactoryProps<Themes, AdditionalPalettes, TouchableSize, Al
     themes: {
         [ThemeKeys in keyof AddDefaultToObject<Themes, ThemePalette>]: ThemePalette;
     };
-    additionalPalettes?: {
+    additionalPalettes?: RequiredIfSpecified<AdditionalPalettes, {
         [AdditionalPaletteKeys in keyof AdditionalPalettes]: Color;
-    };
-    sizes?: {
+    }>;
+    sizes?: RequiredIfSpecified<TouchableSize, {
         [SizeKey in keyof AddDefaultToObject<TouchableSize, TouchableSizeProps>]: TouchableSizeProps;
-    };
+    }>;
     defaultType?: TouchableTypeVariations;
 };
 declare type TouchableProps<AdditionalPalettes, TouchableSize, AllowCustomProps> = {

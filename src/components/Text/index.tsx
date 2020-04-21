@@ -29,7 +29,7 @@ function textFactory<
     TextVariation,
     typeof DEFAULT_TEXT_VARIATION
   >,
-  OptionalExistCondition<FontSize, FontSize, null>,
+  FontSize,
   EmphasisToggleable,
   AllowCustomProps
 >): {
@@ -38,18 +38,13 @@ function textFactory<
     TextVariation,
     typeof DEFAULT_TEXT_VARIATION
   >]: React.FunctionComponent<
-    Props<
-      AdditionalPalettes,
-      OptionalExistCondition<FontSize, FontSize, null>,
-      EmphasisToggleable,
-      AllowCustomProps
-    >
+    Props<AdditionalPalettes, FontSize, EmphasisToggleable, AllowCustomProps>
   >
 } {
   // Type
   type TextProps = Props<
     AdditionalPalettes,
-    OptionalExistCondition<FontSize, FontSize, null>,
+    FontSize,
     EmphasisToggleable,
     AllowCustomProps
   >;
@@ -62,7 +57,7 @@ function textFactory<
 
   type ExistanceConfirmedTextVariation = {
     [VariationKeys in keyof TextVariation]: TextVariationProps<
-      OptionalExistCondition<FontSize, keyof FontSize, null>,
+      FontSize,
       AdditionalPalettes
     >
   };

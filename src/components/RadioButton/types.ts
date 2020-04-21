@@ -4,6 +4,7 @@ import {
   AddDefaultToObject,
   OptionalTrueCondition,
   UnionDefaultKey,
+  RequiredIfSpecified,
 } from '../../types';
 import {ThemePalette} from '../../theme/types';
 
@@ -27,15 +28,19 @@ type RadioButtonFactoryProps<
   themes: {
     [ThemeKeys in keyof AddDefaultToObject<Themes, ThemePalette>]: ThemePalette
   };
-  additionalPalettes?: {
-    [AdditionalPaletteKeys in keyof AdditionalPalettes]: Color
-  };
-  sizes?: {
-    [SizeKey in keyof AddDefaultToObject<
-      RadioButtonSize,
-      RadioButtonSizeProps
-    >]: RadioButtonSizeProps
-  };
+  additionalPalettes?: RequiredIfSpecified<
+    AdditionalPalettes,
+    Required<{[AdditionalPaletteKeys in keyof AdditionalPalettes]: Color}>
+  >;
+  sizes?: RequiredIfSpecified<
+    RadioButtonSize,
+    {
+      [SizeKey in keyof AddDefaultToObject<
+        RadioButtonSize,
+        RadioButtonSizeProps
+      >]: RadioButtonSizeProps
+    }
+  >;
   defaultColor?: keyof (ThemePalette & AdditionalPalettes);
   defaultType?: RadioButtonType;
 };

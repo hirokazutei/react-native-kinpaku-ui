@@ -49,7 +49,7 @@ const variationSelect = {
   number: 'number',
   oneTimeNumberCode: 'oneTimeNumberCode',
   oneTimeCode: 'oneTimeCode',
-  paragraph: 'paragragh',
+  paragraph: 'paragraph',
   passcode: 'passcode',
   password: 'password',
   phone: 'phone',

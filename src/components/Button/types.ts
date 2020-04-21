@@ -10,6 +10,7 @@ import {
   Color,
   OptionalTrueCondition,
   UnionDefaultKey,
+  RequiredIfSpecified,
 } from '../../types';
 import {ThemePalette, Themes as ThemesType} from '../../theme/types';
 
@@ -32,15 +33,19 @@ type ButtonFactoryProps<
   AllowCustomProps
 > = {
   themes: ThemesType<Themes>;
-  additionalPalettes?: {
-    [AdditionalPaletteKey in keyof AdditionalPalettes]: Color
-  };
-  sizes?: {
-    [SizeKey in keyof AddDefaultToObject<
-      ButtonSize,
-      ButtonSizeProps
-    >]: ButtonSizeProps
-  };
+  additionalPalettes?: RequiredIfSpecified<
+    AdditionalPalettes,
+    {[AdditionalPaletteKey in keyof AdditionalPalettes]: Color}
+  >;
+  sizes?: RequiredIfSpecified<
+    ButtonSize,
+    {
+      [SizeKey in keyof AddDefaultToObject<
+        ButtonSize,
+        ButtonSizeProps
+      >]: ButtonSizeProps
+    }
+  >;
   defaultColor?: keyof (ThemePalette & AdditionalPalettes);
   defaultType?: ButtonType;
 };

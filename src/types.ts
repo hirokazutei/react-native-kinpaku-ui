@@ -21,6 +21,10 @@ type OptionalExistCondition<T, IfExist, IfNonExist> = T extends NonExistent
   ? IfNonExist
   : IfExist;
 
+type RequiredIfSpecified<T, RequiredType> = T extends NonExistent
+  ? never
+  : Required<RequiredType>;
+
 export {
   AddDefaultToObject,
   Color,
@@ -30,5 +34,6 @@ export {
   IntersectDefaultKey,
   OptionalExistCondition,
   OptionalTrueCondition,
+  RequiredIfSpecified,
   UnionDefaultKey,
 };

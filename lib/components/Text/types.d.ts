@@ -1,5 +1,5 @@
 import { TextProps as RNTextProps, TextStyle } from 'react-native';
-import { AddDefaultToObject, Color, OptionalExistCondition, OptionalTrueCondition } from '../../types';
+import { AddDefaultToObject, Color, OptionalExistCondition, OptionalTrueCondition, RequiredIfSpecified } from '../../types';
 import { ThemePalette } from '../../theme/types';
 declare type TextSizeProps<FontSize extends string | string> = {
     [key in FontSize]: number;
@@ -22,13 +22,11 @@ declare type TextFactoryProps<Themes, AdditionalPalettes, TextVariation, FontSiz
     themes: {
         [ThemeKeys in keyof AddDefaultToObject<Themes, ThemePalette>]: ThemePalette;
     };
-    additionalPalettes?: {
+    additionalPalettes?: RequiredIfSpecified<AdditionalPalettes, {
         [AdditionalPaletteKeys in keyof AdditionalPalettes]: Color;
-    };
-    defaultFontSizeKey?: OptionalExistCondition<FontSize, undefined | keyof FontSize, undefined>;
-    textVariation?: OptionalExistCondition<TextVariation, {
-        [VariationKeys in keyof TextVariation]: TextVariationProps<OptionalExistCondition<FontSize, keyof FontSize, null>, AdditionalPalettes>;
-    }, null>;
+    }>;
+    defaultFontSizeKey?: OptionalExistCondition<FontSize, undefined | FontSize, undefined>;
+    textVariation?: RequiredIfSpecified<TextVariation, TextVariation>;
 };
 declare type TextProps<AdditionalPalettes, FontSize, EmphasisToggleable, AllowCustomProps> = {
     _customTextProps?: OptionalTrueCondition<AllowCustomProps, RNTextProps, never>;
