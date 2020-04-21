@@ -22,8 +22,8 @@ type OptionalExistCondition<T, IfExist, IfNonExist> = T extends NonExistent
   : IfExist;
 
 type RequiredIfSpecified<T, RequiredType> = T extends NonExistent
-  ? Required<RequiredType>
-  : never;
+  ? never
+  : Required<RequiredType>;
 
 export {
   AddDefaultToObject,

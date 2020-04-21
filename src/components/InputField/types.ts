@@ -16,7 +16,7 @@ type InputFieldVariation =
   | 'number'
   | 'oneTimeNumberCode'
   | 'oneTimeCode'
-  | 'paragragh'
+  | 'paragraph'
   | 'passcode'
   | 'password'
   | 'phone'

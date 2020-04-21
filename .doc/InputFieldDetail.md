@@ -200,7 +200,7 @@ const INPUT_VARIATION_DEFAULT_SETTINGS: {
       },
     }),
   },
-  paragragh: {
+  paragraph: {
     autoCapitalize: 'sentences',
     autoCorrect: true,
     caretHidden: false,

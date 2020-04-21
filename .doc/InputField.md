@@ -191,7 +191,7 @@ type InputFieldShape = 'sharp' | 'rounded' | 'circular';
 - `number`
 - `oneTimeNumberCode`
 - `oneTimeCode`
-- `paragragh`
+- `paragraph`
 - `passcode`
 - `password`
 - `phone`
