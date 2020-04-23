@@ -8,6 +8,7 @@ import {
   TextVariationProps,
 } from './types';
 import {DEFAULT_TEXT_VARIATION, DefaultTextVariation} from './constants';
+import {TextSizeProps} from '../..';
 
 function textFactory<
   Themes,
@@ -19,8 +20,7 @@ function textFactory<
 >({
   themes,
   additionalPalettes,
-  defaultFontSizeKey,
-  textVariation,
+  variation,
 }: TextFactoryProps<
   Themes,
   AdditionalPalettes,
@@ -72,12 +72,12 @@ function textFactory<
     [Variation in TextVariationKeys]?: React.FunctionComponent<TextProps>
   } = {};
 
-  for (const variationName in textVariation
-    ? (textVariation as ExistanceConfirmedTextVariation)
+  for (const variationName in variation
+    ? (variation as ExistanceConfirmedTextVariation)
     : DEFAULT_TEXT_VARIATION) {
     if (
-      (textVariation
-        ? (textVariation as ExistanceConfirmedTextVariation)
+      (variation
+        ? (variation as ExistanceConfirmedTextVariation)
         : DEFAULT_TEXT_VARIATION
       ).hasOwnProperty(variationName)
     ) {
@@ -85,15 +85,15 @@ function textFactory<
         _customTextProps,
         _customTextStyle,
         align,
-        bold,
         color,
         children,
         ellipsizeMode,
-        italic,
+        isBold,
+        isItalic,
+        isLinethrough,
+        isUnderline,
         numberOfLines,
         size,
-        lineThrough,
-        underline,
       }: TextProps) => {
         // Palettes
         const currentThemeKey = useContext(themeContext) || 'default';
@@ -108,18 +108,18 @@ function textFactory<
         const {
           allowFontScaling,
           defaultColor,
-          defaultFontSize,
           fontFamily,
           fontSize,
-          fontWeight,
-          isBold,
-          isItalic,
+          fontWeight = 'normal',
+          fontBoldWeight = 'bold',
+          isBold: boldTextSetting,
+          isItalic: italicTextSetting,
           letterSpacing,
           lineHeight,
           maxFontSizeMultiplier,
           minimumFontScale,
-        } = textVariation
-          ? (textVariation as ExistanceConfirmedTextVariation)[
+        } = variation
+          ? (variation as ExistanceConfirmedTextVariation)[
               variationName as keyof TextVariation
             ]
           : DEFAULT_TEXT_VARIATION[variationName as DefaultTextVariation];
@@ -134,6 +134,20 @@ function textFactory<
         });
 
         // Size
+        const textFontSize = (() => {
+          if (typeof fontSize == 'number') {
+            return size || fontSize;
+          } else {
+            return size
+              ? (fontSize as TextSizeProps<FontSize>)[
+                  size as keyof UnionDefaultKey<FontSize>
+                ]
+              : (fontSize as TextSizeProps<FontSize>)[
+                  'default' as keyof UnionDefaultKey<FontSize>
+                ];
+          }
+        })();
+        /*
         const sizeKey =
           (fontSize && (size as keyof typeof fontSize | undefined)) ||
           defaultFontSizeKey;
@@ -143,33 +157,39 @@ function textFactory<
               sizeKey as keyof typeof fontSize
             ]
           : (numericSize as number);
-
+*/
         // DecorationLine
-        let textDecorationLine: TextStyle['textDecorationLine'] = 'none';
-        if (underline && lineThrough) {
-          textDecorationLine = 'underline line-through';
-        } else if (underline) {
-          textDecorationLine = 'underline';
-        } else if (lineThrough) {
-          textDecorationLine = 'line-through';
-        }
+        const textDecorationLine: TextStyle['textDecorationLine'] = (() => {
+          if (isUnderline && isLinethrough) {
+            return 'underline line-through';
+          } else if (isUnderline) {
+            return 'underline';
+          } else if (isLinethrough) {
+            return 'line-through';
+          } else {
+            return 'none';
+          }
+        })();
 
         // FontStyle
-        let fontStyle: TextStyle['fontStyle'] =
-          isItalic || italic ? 'italic' : 'normal';
-        fontStyle = italic === false ? 'normal' : fontStyle;
+        const isTextItalic =
+          typeof isItalic !== 'undefined' ? isItalic : italicTextSetting;
+        const fontStyle: TextStyle['fontStyle'] = isTextItalic
+          ? 'italic'
+          : 'normal';
 
         // Bold
-        let fontWeightStyle: TextStyle['fontWeight'] =
-          isBold || bold ? 'bold' : 'normal';
-        fontWeightStyle = fontWeight ? fontWeight : fontWeightStyle;
-        fontWeightStyle = bold === false ? 'normal' : fontWeightStyle;
+        const isTextBold =
+          typeof isBold !== 'undefined' ? isBold : boldTextSetting;
+        const fontWeightStyle: TextStyle['fontWeight'] = isTextBold
+          ? fontBoldWeight
+          : fontWeight;
 
         // Text Style
         const textStyle: TextStyle = {
           color: fontColor,
           fontFamily,
-          fontSize: textFontSize,
+          fontSize: textFontSize as number,
           fontStyle,
           fontWeight: fontWeightStyle,
           letterSpacing,

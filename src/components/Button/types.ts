@@ -11,6 +11,7 @@ import {
   OptionalTrueCondition,
   UnionDefaultKey,
   RequiredIfSpecified,
+  Falsy,
 } from '../../types';
 import {ThemePalette, Themes as ThemesType} from '../../theme/types';
 
@@ -28,29 +29,31 @@ type ButtonSizeProps = {
 type ButtonFactoryProps<
   Themes,
   AdditionalPalettes,
-  ButtonSize,
+  ButtonSize extends Record<string | string, ButtonSizeProps> | Falsy,
   //@ts-ignore: TS6133 Unused Variable
-  AllowCustomProps
+  AllowCustomProps extends boolean | Falsy
 > = {
   themes: ThemesType<Themes>;
   additionalPalettes?: RequiredIfSpecified<
     AdditionalPalettes,
-    {[AdditionalPaletteKey in keyof AdditionalPalettes]: Color}
+    Record<keyof AdditionalPalettes, Color>
   >;
   sizes?: RequiredIfSpecified<
     ButtonSize,
-    {
-      [SizeKey in keyof AddDefaultToObject<
-        ButtonSize,
-        ButtonSizeProps
-      >]: ButtonSizeProps
-    }
+    Record<
+      keyof AddDefaultToObject<ButtonSize, ButtonSizeProps>,
+      ButtonSizeProps
+    >
   >;
   defaultColor?: keyof (ThemePalette & AdditionalPalettes);
   defaultType?: ButtonType;
 };
 
-type ButtonProps<AdditionalPalettes, ButtonSize, AllowCustomProps> = {
+type ButtonProps<
+  AdditionalPalettes,
+  ButtonSize extends Record<string | string, ButtonSizeProps> | Falsy,
+  AllowCustomProps extends boolean | Falsy
+> = {
   _customButtonProps?: OptionalTrueCondition<
     AllowCustomProps,
     TouchableOpacityProps,
@@ -78,9 +81,9 @@ type ButtonProps<AdditionalPalettes, ButtonSize, AllowCustomProps> = {
 };
 
 export {
+  ButtonFactoryProps,
   ButtonProps,
   ButtonShapeVariation,
   ButtonSizeProps,
   ButtonType,
-  ButtonFactoryProps,
 };

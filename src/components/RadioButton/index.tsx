@@ -131,12 +131,13 @@ function radioButtonFactory<
       const borderRadiusResolver = (size: number) => {
         if (variationKey === 'Circular') {
           return size * 256;
-        } else return size / 5;
+        } else if (variationKey === 'Round') {
+          return size / 5;
+        } else return 0;
       };
 
-      const ringBorderRadius =
-        variationKey == 'Sharp' ? 0 : borderRadiusResolver(ringSize);
-      const dotBorderRadius = variationKey == 'Circular' ? dotSize * 256 : 0;
+      const ringBorderRadius = borderRadiusResolver(ringSize);
+      const dotBorderRadius = borderRadiusResolver(dotSize);
 
       // Outer Ring Style
       const outerRingStyle: ViewStyle = {

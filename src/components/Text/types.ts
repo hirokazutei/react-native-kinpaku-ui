@@ -5,26 +5,23 @@ import {
   OptionalExistCondition,
   OptionalTrueCondition,
   RequiredIfSpecified,
+  UnionDefaultKey,
 } from '../../types';
 import {ThemePalette} from '../../theme/types';
 
-type TextSizeProps<FontSize extends string | string> = {
-  [key in FontSize]: number
+type TextSizeProps<FontSize> = {
+  [key in keyof UnionDefaultKey<FontSize>]: number
 };
 
 type TextVariationProps<FontSize, AdditionalPalettes> = {
   allowFontScaling?: boolean;
   defaultColor?: keyof (ThemePalette & AdditionalPalettes);
-  defaultFontSize?: OptionalExistCondition<
-    FontSize,
-    undefined | keyof FontSize,
-    NonNullable<number>
-  >;
   fontFamily?: string;
-  fontSize?: FontSize extends string | string
-    ? NonNullable<TextSizeProps<FontSize>>
-    : undefined;
+  fontSize: FontSize extends number
+    ? number
+    : NonNullable<TextSizeProps<FontSize>>;
   fontWeight?: TextStyle['fontWeight'];
+  fontBoldWeight?: TextStyle['fontWeight'];
   isBold?: boolean;
   isItalic?: boolean;
   letterSpacing?: number;
@@ -37,6 +34,7 @@ type TextFactoryProps<
   Themes,
   AdditionalPalettes,
   TextVariation,
+  //@ts-ignore: TS6133 Unused Variable
   FontSize,
   //@ts-ignore: TS6133 Unused Variable
   EmphasisToggleable,
@@ -50,12 +48,7 @@ type TextFactoryProps<
     AdditionalPalettes,
     {[AdditionalPaletteKeys in keyof AdditionalPalettes]: Color}
   >;
-  defaultFontSizeKey?: OptionalExistCondition<
-    FontSize,
-    undefined | FontSize,
-    undefined
-  >;
-  textVariation?: RequiredIfSpecified<TextVariation, TextVariation>;
+  variation?: RequiredIfSpecified<TextVariation, TextVariation>;
 };
 
 type TextProps<
@@ -71,15 +64,15 @@ type TextProps<
   >;
   _customTextStyle?: OptionalTrueCondition<AllowCustomProps, TextStyle, never>;
   align?: TextStyle['textAlign'];
-  bold?: OptionalTrueCondition<EmphasisToggleable, boolean, never>;
   color?: keyof (ThemePalette & AdditionalPalettes);
   children: string;
   ellipsizeMode?: RNTextProps['ellipsizeMode'];
-  italic?: OptionalTrueCondition<EmphasisToggleable, boolean, never>;
-  lineThrough?: OptionalTrueCondition<EmphasisToggleable, boolean, never>;
+  isBold?: OptionalTrueCondition<EmphasisToggleable, boolean, never>;
+  isItalic?: OptionalTrueCondition<EmphasisToggleable, boolean, never>;
+  isLinethrough?: OptionalTrueCondition<EmphasisToggleable, boolean, never>;
+  isUnderline?: OptionalTrueCondition<EmphasisToggleable, boolean, never>;
   numberOfLines?: number;
-  size?: OptionalExistCondition<FontSize, FontSize, number>;
-  underline?: OptionalTrueCondition<EmphasisToggleable, boolean, never>;
+  size?: OptionalExistCondition<FontSize, keyof FontSize, number>;
 };
 
 export {TextSizeProps, TextVariationProps, TextFactoryProps, TextProps};
