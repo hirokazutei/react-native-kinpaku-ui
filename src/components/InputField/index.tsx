@@ -27,9 +27,9 @@ function inputFieldFactory<
   themes,
   additionalPalettes,
   sizes,
+  shape = 'circular',
   defaultColor,
-  inputFieldType = 'outline',
-  defaultShape = 'circular',
+  defaultType = 'outline',
 }: InputFieldFactoryProps<
   Themes,
   AdditionalPalettes,
@@ -83,8 +83,8 @@ function inputFieldFactory<
         isDisabled,
         maxLength,
         size,
-        shape,
         textColor,
+        type,
         ...inputFieldProps
       }: InputFieldProps) => {
         // Palettes
@@ -94,17 +94,14 @@ function inputFieldFactory<
           themes[`${currentThemeKey}` as keyof UnionDefaultKey<Themes>];
 
         // Type
-        const isOutline = inputFieldType === 'outline';
-        const isFill = inputFieldType === 'fill';
-        const isUnderline = inputFieldType === 'underline';
+        const setType = type || defaultType;
+        const isOutline = setType === 'outline';
+        const isFill = setType === 'fill';
+        const isUnderline = setType === 'underline';
 
         // Shape
-        const isRounded = shape
-          ? shape === 'rounded'
-          : defaultShape === 'rounded';
-        const isCircular = shape
-          ? shape === 'circular'
-          : defaultShape === 'circular';
+        const isRound = shape === 'round';
+        const isCircular = shape === 'circular';
 
         // Set-Up Color
         const colorResolver = colorResolverFactory<AdditionalPalettes>({
@@ -168,7 +165,7 @@ function inputFieldFactory<
             return {borderRadius: staticBorderRadius};
           }
           if (isOutline || isFill) {
-            if (isRounded) {
+            if (isRound) {
               const borderRadius = borderRadiusFontRatio * sizeProp.fontSize;
               return {borderRadius: borderRadius};
             } else if (isCircular) {

@@ -7,27 +7,27 @@ import {boolean, select, text, withKnobs, number} from '@storybook/addon-knobs';
 import Provider from '../Provider';
 import themes from '../../src/themes';
 import {ThemePalette} from '../../src/theme/types';
-import {InputFieldProps} from '../../src/components/InputField/types';
-import inputFieldFactory from '../../src/components/InputField';
-import {INPUT_FIELD_TYPE} from '../../src/components/InputField/constants';
 import {
+  InputFieldProps,
   InputFieldType,
-  InputFieldShape,
 } from '../../src/components/InputField/types';
+import inputFieldFactory from '../../src/components/InputField';
+import {INPUT_FIELD_SHAPE} from '../../src/components/InputField/constants';
+import {InputFieldShape} from '../../src/components/InputField/types';
 
-const INPUT_FIELD_SETTING_VARIATIONS = INPUT_FIELD_TYPE.map(
-  (type: InputFieldType) => {
+const INPUT_FIELD_SETTING_VARIATIONS = INPUT_FIELD_SHAPE.map(
+  (shape: InputFieldShape) => {
     return inputFieldFactory<typeof themes, null, null, null>({
       themes,
-      inputFieldType: type,
+      shape,
     });
   },
 );
 
-const INPUT_FIELD_SHAPE: Array<InputFieldShape> = [
-  'sharp',
-  'rounded',
-  'circular',
+const INPUT_FIELD_TYPES: Array<InputFieldType> = [
+  'fill',
+  'outline',
+  'underline',
 ];
 
 const DEFAULT_PROPS = {
@@ -81,8 +81,8 @@ const geOptionalProps = (
     isDisabled,
     maxLength,
     placeholder,
-    shape,
     textColor,
+    type,
   } = overrides;
   return {
     autoFocus: boolean('Auto Focus', autoFocus),
@@ -102,7 +102,7 @@ const geOptionalProps = (
     onFocus: action('on-focus'),
     onKeyPress: action('on-key-press'),
     placeholder: text('Place Holder', placeholder),
-    shape,
+    type,
     textColor: select('Text Color Options', colorSelect, textColor),
   };
 };
@@ -145,17 +145,15 @@ storiesOf('UI/InputField', module)
           const Component = Components[variationName];
           return (
             <View key={index} style={styles.variationView}>
-              {INPUT_FIELD_SHAPE.map(
-                (shape: InputFieldShape, index: number) => {
-                  return (
-                    <Component
-                      key={index}
-                      {...getRequiredProps()}
-                      {...geOptionalProps({shape})}
-                    />
-                  );
-                },
-              )}
+              {INPUT_FIELD_TYPES.map((type: InputFieldType, index: number) => {
+                return (
+                  <Component
+                    key={index}
+                    {...getRequiredProps()}
+                    {...geOptionalProps({type})}
+                  />
+                );
+              })}
             </View>
           );
         })}
