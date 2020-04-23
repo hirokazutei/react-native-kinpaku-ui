@@ -12,7 +12,7 @@ declare const UIFactory: <ThemeObject, AdditionalPalettes>(themes: Themes<ThemeO
             large: import("./components/Button/types").ButtonSizeProps;
             huge: import("./components/Button/types").ButtonSizeProps;
             massive: import("./components/Button/types").ButtonSizeProps;
-        }, false>>;
+        }, true>>;
         Round: import("react").FunctionComponent<import("./components/Button/types").ButtonProps<AdditionalPalettes, {
             default: import("./components/Button/types").ButtonSizeProps;
             small: import("./components/Button/types").ButtonSizeProps;
@@ -21,7 +21,7 @@ declare const UIFactory: <ThemeObject, AdditionalPalettes>(themes: Themes<ThemeO
             large: import("./components/Button/types").ButtonSizeProps;
             huge: import("./components/Button/types").ButtonSizeProps;
             massive: import("./components/Button/types").ButtonSizeProps;
-        }, false>>;
+        }, true>>;
         Sharp: import("react").FunctionComponent<import("./components/Button/types").ButtonProps<AdditionalPalettes, {
             default: import("./components/Button/types").ButtonSizeProps;
             small: import("./components/Button/types").ButtonSizeProps;
@@ -30,7 +30,7 @@ declare const UIFactory: <ThemeObject, AdditionalPalettes>(themes: Themes<ThemeO
             large: import("./components/Button/types").ButtonSizeProps;
             huge: import("./components/Button/types").ButtonSizeProps;
             massive: import("./components/Button/types").ButtonSizeProps;
-        }, false>>;
+        }, true>>;
     };
     Label: import("react").FunctionComponent<import("./components/Text/types").TextProps<AdditionalPalettes, null, true, false>>;
     CheckBox: {
@@ -135,7 +135,7 @@ declare const UIFactory: <ThemeObject, AdditionalPalettes>(themes: Themes<ThemeO
     SubHeading: import("react").FunctionComponent<import("./components/Text/types").TextProps<AdditionalPalettes, null, true, false>>;
     Title: import("react").FunctionComponent<import("./components/Text/types").TextProps<AdditionalPalettes, null, true, false>>;
     Touchable: {
-        Fill?: import("react").FunctionComponent<import("./components/Touchable/types").TouchableProps<AdditionalPalettes, {
+        Circular: import("react").FunctionComponent<import("./components/Touchable/types").TouchableProps<AdditionalPalettes, {
             default: import("./components/Touchable/types").TouchableAllSizeProps;
             small: import("./components/Touchable/types").TouchableAllSizeProps;
             tiny: import("./components/Touchable/types").TouchableAllSizeProps;
@@ -143,8 +143,8 @@ declare const UIFactory: <ThemeObject, AdditionalPalettes>(themes: Themes<ThemeO
             large: import("./components/Touchable/types").TouchableAllSizeProps;
             huge: import("./components/Touchable/types").TouchableAllSizeProps;
             massive: import("./components/Touchable/types").TouchableAllSizeProps;
-        }, false>> | undefined;
-        Outline?: import("react").FunctionComponent<import("./components/Touchable/types").TouchableProps<AdditionalPalettes, {
+        }, false>>;
+        Round: import("react").FunctionComponent<import("./components/Touchable/types").TouchableProps<AdditionalPalettes, {
             default: import("./components/Touchable/types").TouchableAllSizeProps;
             small: import("./components/Touchable/types").TouchableAllSizeProps;
             tiny: import("./components/Touchable/types").TouchableAllSizeProps;
@@ -152,7 +152,16 @@ declare const UIFactory: <ThemeObject, AdditionalPalettes>(themes: Themes<ThemeO
             large: import("./components/Touchable/types").TouchableAllSizeProps;
             huge: import("./components/Touchable/types").TouchableAllSizeProps;
             massive: import("./components/Touchable/types").TouchableAllSizeProps;
-        }, false>> | undefined;
+        }, false>>;
+        Sharp: import("react").FunctionComponent<import("./components/Touchable/types").TouchableProps<AdditionalPalettes, {
+            default: import("./components/Touchable/types").TouchableAllSizeProps;
+            small: import("./components/Touchable/types").TouchableAllSizeProps;
+            tiny: import("./components/Touchable/types").TouchableAllSizeProps;
+            medium: import("./components/Touchable/types").TouchableAllSizeProps;
+            large: import("./components/Touchable/types").TouchableAllSizeProps;
+            huge: import("./components/Touchable/types").TouchableAllSizeProps;
+            massive: import("./components/Touchable/types").TouchableAllSizeProps;
+        }, false>>;
     };
     Quote: import("react").FunctionComponent<import("./components/Text/types").TextProps<AdditionalPalettes, null, true, false>>;
 };

@@ -67,7 +67,7 @@
 ### Component Design Describable in Few Common Adjectives
 
 - The Design Variation of components should be describable in one of four following adjectives: Fill, Outline, Reverse, Clear
-- The Shape of components should be describable in one of three following adjectives: Sharp, Rounded, Circular
+- The Shape of components should be describable in one of three following adjectives: Sharp, Round, Circular
 
 > The sentiment of the project is to see how feasible it is to have atomic components generated given certain parameters.
 

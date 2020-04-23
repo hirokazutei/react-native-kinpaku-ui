@@ -5,5 +5,5 @@ declare const DEFAULT_RADIO_BUTTON_SIZE: {
     [key in UnionDefaultKey<DefaultRadioButtonSize>]: RadioButtonSizeProps;
 };
 declare const RADIO_BUTTON_SHAPE_VARIATION_KEYS: Array<RadioButtonShapeVariation>;
-export { DEFAULT_RADIO_BUTTON_SIZE, RADIO_BUTTON_SHAPE_VARIATION_KEYS, DefaultRadioButtonSize, };
+export { DEFAULT_RADIO_BUTTON_SIZE, DefaultRadioButtonSize, RADIO_BUTTON_SHAPE_VARIATION_KEYS, };
 //# sourceMappingURL=constants.d.ts.map

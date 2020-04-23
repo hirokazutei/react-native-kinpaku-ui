@@ -27,5 +27,5 @@ declare type CheckBoxProps<AdditionalPalettes, CheckBoxSize, AllowCustomProps> =
     type?: CheckBoxType;
     onPress: (args: any) => any;
 };
-export { CheckBoxProps, CheckBoxShapeVariation, CheckBoxSizeProps, CheckBoxFactoryProps, CheckBoxType, };
+export { CheckBoxFactoryProps, CheckBoxProps, CheckBoxShapeVariation, CheckBoxSizeProps, CheckBoxType, };
 //# sourceMappingURL=types.d.ts.map
