@@ -23,7 +23,7 @@ type InputFieldVariation =
   | 'url'
   | 'username';
 
-type InputFieldShape = 'sharp' | 'rounded' | 'circular';
+type InputFieldShape = 'sharp' | 'round' | 'circular';
 
 type InputFieldType = 'underline' | 'outline' | 'fill';
 
@@ -90,9 +90,9 @@ type InputFieldFactoryProps<
       >]: InputFieldSizeProps
     }
   >;
-  inputFieldType?: InputFieldType;
+  shape?: InputFieldShape;
+  defaultType?: InputFieldType;
   defaultColor?: keyof (ThemePalette & AdditionalPalettes);
-  defaultShape?: InputFieldShape;
 };
 
 type InputFieldProps<AdditionalPalettes, InputFieldSize, AllowCustomProps> = {
@@ -130,8 +130,8 @@ type InputFieldProps<AdditionalPalettes, InputFieldSize, AllowCustomProps> = {
   onKeyPress?: (args: any) => any;
   placeholder?: string;
   size?: keyof AddDefaultToObject<InputFieldSize, InputFieldSizeProps>;
-  shape?: InputFieldShape;
   textColor?: keyof (ThemePalette & AdditionalPalettes);
+  type?: InputFieldType;
   value: string;
 };
 

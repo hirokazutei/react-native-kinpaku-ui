@@ -2,9 +2,9 @@ import {Platform} from 'react-native';
 import {UnionDefaultKey} from '../../types';
 import {
   InputFieldSizeProps,
-  InputFieldType,
   InputFieldVariation,
   InputFieldVariationProps,
+  InputFieldShape,
 } from './types';
 
 type DefaultInputFieldSize = 'medium';
@@ -295,16 +295,16 @@ const DEFAULT_INPUT_VARIATION_SETTING: {
   },
 };
 
-const INPUT_FIELD_TYPE: Array<InputFieldType> = [
-  'underline',
-  'outline',
-  'fill',
+const INPUT_FIELD_SHAPE: Array<InputFieldShape> = [
+  'sharp',
+  'round',
+  'circular',
 ];
 
 export {
   DEFAULT_INPUT_FIELD_BORDER_WIDTH,
   DEFAULT_INPUT_FIELD_SIZE,
   DEFAULT_INPUT_VARIATION_SETTING,
-  INPUT_FIELD_TYPE,
+  INPUT_FIELD_SHAPE,
   InputFieldVariation,
 };
