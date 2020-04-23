@@ -3,7 +3,7 @@ import { TextStyle, TextInputProps, ViewProps, ViewStyle } from 'react-native';
 import { AddDefaultToObject, Color, OptionalTrueCondition, RequiredIfSpecified } from '../../types';
 import { ThemePalette } from '../../theme/types';
 declare type InputFieldVariation = 'creditCardNumber' | 'decimal' | 'email' | 'freeField' | 'name' | 'number' | 'oneTimeNumberCode' | 'oneTimeCode' | 'paragraph' | 'passcode' | 'password' | 'phone' | 'url' | 'username';
-declare type InputFieldShape = 'sharp' | 'rounded' | 'circular';
+declare type InputFieldShape = 'sharp' | 'round' | 'circular';
 declare type InputFieldType = 'underline' | 'outline' | 'fill';
 declare type InputFieldSizeProps = {
     borderRadiusFontRatio?: number;
@@ -52,9 +52,9 @@ declare type InputFieldFactoryProps<Themes, AdditionalPalettes, InputFieldSize, 
     sizes?: RequiredIfSpecified<InputFieldSize, {
         [SizeKey in keyof AddDefaultToObject<InputFieldSize, InputFieldSizeProps>]: InputFieldSizeProps;
     }>;
-    inputFieldType?: InputFieldType;
+    shape?: InputFieldShape;
+    defaultType?: InputFieldType;
     defaultColor?: keyof (ThemePalette & AdditionalPalettes);
-    defaultShape?: InputFieldShape;
 };
 declare type InputFieldProps<AdditionalPalettes, InputFieldSize, AllowCustomProps> = {
     _customTextInputProps?: OptionalTrueCondition<AllowCustomProps, TextInputProps, never>;
@@ -75,8 +75,8 @@ declare type InputFieldProps<AdditionalPalettes, InputFieldSize, AllowCustomProp
     onKeyPress?: (args: any) => any;
     placeholder?: string;
     size?: keyof AddDefaultToObject<InputFieldSize, InputFieldSizeProps>;
-    shape?: InputFieldShape;
     textColor?: keyof (ThemePalette & AdditionalPalettes);
+    type?: InputFieldType;
     value: string;
 };
 export { InputFieldFactoryProps, InputFieldProps, InputFieldShape, InputFieldSizeProps, InputFieldType, InputFieldVariationProps, InputFieldVariation, };
