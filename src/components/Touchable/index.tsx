@@ -10,7 +10,7 @@ import {
   TouchableFactoryProps,
   TouchableProps as Props,
   TouchableSizeProps,
-  TouchableTypeVariations,
+  TouchableShapeVariation,
   TouchableVerHorSizeProps,
 } from './types';
 import {
@@ -18,7 +18,7 @@ import {
   DEFAULT_TOUCHABLE_BORDER_WIDTH,
   DEFAULT_TOUCHABLE_SIZE,
   DefaultTouchableSize,
-  TOUCHABLE_TYPE_VARIATION_KEYS,
+  TOUCHABLE_SHAPE_VARIATION_KEYS,
 } from './constants';
 import {colorResolverFactory} from '../../helper';
 
@@ -31,13 +31,14 @@ function touchableFactory<
   themes,
   sizes,
   additionalPalettes,
+  defaultType = 'fill',
 }: TouchableFactoryProps<
   Themes,
   AdditionalPalettes,
   TouchableSize,
   AllowCustomProps
 >): {
-  [key in TouchableTypeVariations]?: React.FunctionComponent<
+  [key in TouchableShapeVariation]: React.FunctionComponent<
     Props<
       AdditionalPalettes,
       OptionalExistCondition<
@@ -66,20 +67,21 @@ function touchableFactory<
   );
 
   const touchables: {
-    [key in TouchableTypeVariations]?: React.FunctionComponent<TouchableProps>
+    [key in TouchableShapeVariation]?: React.FunctionComponent<TouchableProps>
   } = {};
 
-  for (const typeKey of TOUCHABLE_TYPE_VARIATION_KEYS) {
+  for (const shapeKey of TOUCHABLE_SHAPE_VARIATION_KEYS) {
     const Touchable: React.FunctionComponent<TouchableProps> = ({
-      color,
-      size = 'default',
-      children,
-      isDisabled = false,
-      isStretched,
-      align = DEFAULT_TOUCHABLE_ALIGN,
-      onPress,
       _customProps,
       _customStyle,
+      align = DEFAULT_TOUCHABLE_ALIGN,
+      children,
+      color,
+      isDisabled = false,
+      isStretched,
+      onPress,
+      size = 'default',
+      type = defaultType,
     }: TouchableProps): React.ReactElement<TouchableProps> => {
       // Palettes
       const currentThemeKey = useContext(themeContext) || 'default';
@@ -97,10 +99,10 @@ function touchableFactory<
       const borderColor = primaryColor;
       // TODO: Solid/Outline types should be each individual component and not a proptype
       const fillColor =
-        typeKey === 'Fill' ? primaryColor : currentTheme.background;
+        type === 'fill' ? primaryColor : currentTheme.background;
 
       // Size
-      const touchablePaddingProperty = sizes
+      const touchableSizeProperty = sizes
         ? (sizes as {
             [SizeKey in keyof AddDefaultToObject<
               TouchableSize,
@@ -118,28 +120,31 @@ function touchableFactory<
       };
 
       // Border Radius
-      let borderRadius = 0;
-      if (touchablePaddingProperty) {
-        borderRadius = touchablePaddingProperty.borderRadius;
-      } else {
-        borderRadius = DEFAULT_TOUCHABLE_SIZE.default.borderRadius;
-      }
+      const borderRadius = (() => {
+        if (shapeKey === 'Circular') {
+          return touchableSizeProperty.borderRadius * 256;
+        } else if (shapeKey == 'Round') {
+          return touchableSizeProperty.borderRadius;
+        } else {
+          return 0;
+        }
+      })();
 
       const touchablePaddingVertical =
-        (touchablePaddingProperty &&
-          (touchablePaddingProperty as TouchableVerHorSizeProps)
+        (touchableSizeProperty &&
+          (touchableSizeProperty as TouchableVerHorSizeProps)
             .paddingVertical) ||
-        (touchablePaddingProperty as TouchableAllSizeProps).padding;
+        (touchableSizeProperty as TouchableAllSizeProps).padding;
       const touchablePaddingHorizontal =
-        (touchablePaddingProperty &&
-          (touchablePaddingProperty as TouchableVerHorSizeProps)
+        (touchableSizeProperty &&
+          (touchableSizeProperty as TouchableVerHorSizeProps)
             .paddingHorizontal) ||
-        (touchablePaddingProperty as TouchableAllSizeProps).padding;
+        (touchableSizeProperty as TouchableAllSizeProps).padding;
 
       const touchableStyle = {
         alignSelf: !isStretched ? align : ('stretch' as FlexAlignType),
         alignItems: 'center' as FlexAlignType,
-        borderRadius: borderRadius,
+        borderRadius,
         backgroundColor: fillColor,
         paddingHorizontal:
           touchablePaddingHorizontal || DEFAULT_TOUCHABLE_SIZE.default.padding,
@@ -159,10 +164,10 @@ function touchableFactory<
         </TouchableOpacity>
       );
     };
-    touchables[typeKey as TouchableTypeVariations] = Touchable;
+    touchables[shapeKey as TouchableShapeVariation] = Touchable;
   }
   return touchables as {
-    [key in TouchableTypeVariations]: React.FunctionComponent<TouchableProps>
+    [key in TouchableShapeVariation]: React.FunctionComponent<TouchableProps>
   };
 }
 

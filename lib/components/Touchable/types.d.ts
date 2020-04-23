@@ -2,7 +2,8 @@
 import { FlexAlignType, TouchableOpacityProps, ViewStyle } from 'react-native';
 import { AddDefaultToObject, Color, OptionalTrueCondition, UnionDefaultKey, RequiredIfSpecified } from '../../types';
 import { ThemePalette } from '../../theme/types';
-declare type TouchableTypeVariations = 'Fill' | 'Outline';
+declare type TouchableType = 'fill' | 'outline';
+declare type TouchableShapeVariation = 'Sharp' | 'Round' | 'Circular';
 declare type VerHor = {
     paddingHorizontal: number;
     paddingVertical: number;
@@ -27,7 +28,7 @@ declare type TouchableFactoryProps<Themes, AdditionalPalettes, TouchableSize, Al
     sizes?: RequiredIfSpecified<TouchableSize, {
         [SizeKey in keyof AddDefaultToObject<TouchableSize, TouchableSizeProps>]: TouchableSizeProps;
     }>;
-    defaultType?: TouchableTypeVariations;
+    defaultType?: TouchableType;
 };
 declare type TouchableProps<AdditionalPalettes, TouchableSize, AllowCustomProps> = {
     _customProps?: OptionalTrueCondition<AllowCustomProps, TouchableOpacityProps, never>;
@@ -38,7 +39,8 @@ declare type TouchableProps<AdditionalPalettes, TouchableSize, AllowCustomProps>
     isDisabled?: boolean;
     isStretched?: boolean;
     size?: UnionDefaultKey<keyof TouchableSize>;
+    type?: TouchableType;
     onPress: (args: any) => any;
 };
-export { TouchableTypeVariations, TouchableProps, TouchableSizeProps, TouchableFactoryProps, TouchableVerHorSizeProps, TouchableAllSizeProps, };
+export { TouchableAllSizeProps, TouchableFactoryProps, TouchableProps, TouchableShapeVariation, TouchableSizeProps, TouchableType, TouchableVerHorSizeProps, };
 //# sourceMappingURL=types.d.ts.map

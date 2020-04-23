@@ -8,7 +8,9 @@ import {
 } from '../../types';
 import {ThemePalette} from '../../theme/types';
 
-type TouchableTypeVariations = 'Fill' | 'Outline';
+type TouchableType = 'fill' | 'outline';
+
+type TouchableShapeVariation = 'Sharp' | 'Round' | 'Circular';
 
 type VerHor = {paddingHorizontal: number; paddingVertical: number};
 
@@ -47,7 +49,7 @@ type TouchableFactoryProps<
       >]: TouchableSizeProps
     }
   >;
-  defaultType?: TouchableTypeVariations;
+  defaultType?: TouchableType;
 };
 
 type TouchableProps<AdditionalPalettes, TouchableSize, AllowCustomProps> = {
@@ -63,14 +65,16 @@ type TouchableProps<AdditionalPalettes, TouchableSize, AllowCustomProps> = {
   isDisabled?: boolean;
   isStretched?: boolean;
   size?: UnionDefaultKey<keyof TouchableSize>;
+  type?: TouchableType;
   onPress: (args: any) => any;
 };
 
 export {
-  TouchableTypeVariations,
-  TouchableProps,
-  TouchableSizeProps,
-  TouchableFactoryProps,
-  TouchableVerHorSizeProps,
   TouchableAllSizeProps,
+  TouchableFactoryProps,
+  TouchableProps,
+  TouchableShapeVariation,
+  TouchableSizeProps,
+  TouchableType,
+  TouchableVerHorSizeProps,
 };
