@@ -176,7 +176,7 @@ type InputFieldType = 'Underline' | 'Outline' | 'Fill' | 'UnderlinedFill';
 > A string literal that determines the shape of the field.
 
 ```ts
-type InputFieldShape = 'sharp' | 'rounded' | 'circular';
+type InputFieldShape = 'sharp' | 'round' | 'circular';
 ```
 
 ## InputField Variation
@@ -226,7 +226,7 @@ type InputFieldShape = 'sharp' | 'rounded' | 'circular';
  * @param [props.onKeyPress] - function that runs on key press
  * @param [props.placeholder] - placeholder of the InputField
  * @param [props.size] - size of the input InputField
- * @param [props.shape] - type of the input InputField: "sharp" | "rounded" | "circular"
+ * @param [props.shape] - type of the input InputField: "sharp" | "round" | "circular"
  * @param [props.textColor] - text color of the InputField
  *
  * Optional Additional Args:

@@ -13,24 +13,24 @@ const DEFAULT_TEXT_VARIATION: {
 } = {
   Title: {
     fontWeight: 'bold',
-    defaultFontSize: 28,
+    fontSize: 28,
   },
   Heading: {
     fontWeight: 'bold',
-    defaultFontSize: 24,
+    fontSize: 24,
   },
   SubHeading: {
     fontWeight: 'bold',
-    defaultFontSize: 20,
+    fontSize: 20,
   },
   Body: {
-    defaultFontSize: 14,
+    fontSize: 14,
   },
   Label: {
-    defaultFontSize: 16,
+    fontSize: 16,
   },
   Quote: {
-    defaultFontSize: 16,
+    fontSize: 16,
     isItalic: true,
   },
 };

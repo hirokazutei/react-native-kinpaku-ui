@@ -4,6 +4,7 @@ import {
   AddDefaultToObject,
   OptionalExistCondition,
   UnionDefaultKey,
+  Falsy,
 } from '../../types';
 import {colorResolverFactory} from '../../helper';
 import {
@@ -26,8 +27,8 @@ import {
 function buttonFactory<
   Themes,
   AdditionalPalettes,
-  ButtonSize,
-  AllowCustomProps
+  ButtonSize extends Record<string | string, ButtonSizeProps> | Falsy,
+  AllowCustomProps extends boolean | Falsy
 >({
   themes,
   sizes,

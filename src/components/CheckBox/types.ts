@@ -61,9 +61,9 @@ type CheckBoxProps<AdditionalPalettes, CheckBoxSize, AllowCustomProps> = {
 };
 
 export {
+  CheckBoxFactoryProps,
   CheckBoxProps,
   CheckBoxShapeVariation,
   CheckBoxSizeProps,
-  CheckBoxFactoryProps,
   CheckBoxType,
 };

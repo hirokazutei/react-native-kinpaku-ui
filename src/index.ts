@@ -36,7 +36,7 @@ import {
   TouchableFactoryProps,
   TouchableProps,
   TouchableSizeProps,
-  TouchableTypeVariations,
+  TouchableShapeVariation,
   TouchableVerHorSizeProps,
 } from './components/Touchable/types';
 // RadioButton
@@ -93,7 +93,7 @@ export {
   TouchableFactoryProps,
   TouchableProps,
   TouchableSizeProps,
-  TouchableTypeVariations,
+  TouchableShapeVariation,
   TouchableVerHorSizeProps,
   touchableFactory,
   UIFactory,

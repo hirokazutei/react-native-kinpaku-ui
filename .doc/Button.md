@@ -150,7 +150,7 @@ type Sizes = {
   - `borderRadus`
     - number
     - required
-    - The border radius of `Rounded Button` component.
+    - The border radius of `Round Button` component.
 
 #### `defaultColor [Optional]`
 
