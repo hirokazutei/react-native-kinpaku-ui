@@ -186,7 +186,7 @@ exports[`Storyshots UI/RadioButton Default 1`] = `
             style={
               Object {
                 "backgroundColor": "#FEFFFF",
-                "borderRadius": 0,
+                "borderRadius": 2,
                 "height": 10,
                 "width": 10,
               }
@@ -222,7 +222,7 @@ exports[`Storyshots UI/RadioButton Default 1`] = `
             style={
               Object {
                 "backgroundColor": "#FEFFFF",
-                "borderRadius": 0,
+                "borderRadius": 3.2,
                 "height": 16,
                 "width": 16,
               }
@@ -258,7 +258,7 @@ exports[`Storyshots UI/RadioButton Default 1`] = `
             style={
               Object {
                 "backgroundColor": "#88EEBB",
-                "borderRadius": 0,
+                "borderRadius": 2,
                 "height": 10,
                 "width": 10,
               }
