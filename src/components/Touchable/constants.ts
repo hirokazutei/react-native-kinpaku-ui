@@ -1,6 +1,6 @@
 import {FlexAlignType} from 'react-native';
 import {UnionDefaultKey} from '../../types';
-import {TouchableAllSizeProps, TouchableTypeVariations} from './types';
+import {TouchableAllSizeProps, TouchableShapeVariation} from './types';
 
 type DefaultTouchableSize =
   | 'tiny'
@@ -50,9 +50,10 @@ const DEFAULT_TOUCHABLE_ALIGN: FlexAlignType = 'center';
 
 const DEFAULT_TOUCHABLE_BORDER_WIDTH: number = 2;
 
-const TOUCHABLE_TYPE_VARIATION_KEYS: Array<TouchableTypeVariations> = [
-  'Fill',
-  'Outline',
+const TOUCHABLE_SHAPE_VARIATION_KEYS: Array<TouchableShapeVariation> = [
+  'Sharp',
+  'Round',
+  'Circular',
 ];
 
 export {
@@ -60,5 +61,5 @@ export {
   DEFAULT_TOUCHABLE_BORDER_WIDTH,
   DEFAULT_TOUCHABLE_SIZE,
   DefaultTouchableSize,
-  TOUCHABLE_TYPE_VARIATION_KEYS,
+  TOUCHABLE_SHAPE_VARIATION_KEYS,
 };
