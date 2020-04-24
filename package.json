@@ -1,6 +1,6 @@
 {
   "name": "react-native-kinpaku-ui",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Type-Checked React-Native Components with Exchangeable Palettes, Valuing Consistency, Simplicity and Usability.",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
