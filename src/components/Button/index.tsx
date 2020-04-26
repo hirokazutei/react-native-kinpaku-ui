@@ -1,10 +1,9 @@
 import React, {useContext} from 'react';
 import {FlexAlignType, Text, TouchableOpacity} from 'react-native';
 import {
-  AddDefaultToObject,
   OptionalExistCondition,
   UnionDefaultKey,
-  Falsy,
+  NonExistent,
 } from '../../types';
 import {colorResolverFactory} from '../../helper';
 import {
@@ -23,12 +22,13 @@ import {
   BUTTON_SHAPE_VARIATION_KEYS,
   DefaultButtonSize,
 } from './constants';
+import {GenericTheme, GenericAdditionalPalette} from '../../theme/types';
 
 function buttonFactory<
-  Themes,
-  AdditionalPalettes,
-  ButtonSize extends Record<string | string, ButtonSizeProps> | Falsy,
-  AllowCustomProps extends boolean | Falsy
+  Themes extends GenericTheme,
+  AdditionalPalettes extends GenericAdditionalPalette | NonExistent,
+  ButtonSize extends Record<string | string, ButtonSizeProps> | NonExistent,
+  AllowCustomProps extends boolean | NonExistent
 >({
   themes,
   sizes,
@@ -40,8 +40,9 @@ function buttonFactory<
   AdditionalPalettes,
   ButtonSize,
   AllowCustomProps
->): {
-  [key in ButtonShapeVariation]: React.FunctionComponent<
+>): Record<
+  ButtonShapeVariation,
+  React.FunctionComponent<
     Props<
       AdditionalPalettes,
       OptionalExistCondition<
@@ -52,7 +53,7 @@ function buttonFactory<
       AllowCustomProps
     >
   >
-} {
+> {
   // Type
   type ButtonProps = Props<
     AdditionalPalettes,
@@ -66,9 +67,9 @@ function buttonFactory<
   );
 
   // Button Collections
-  const buttons: {
-    [key in ButtonShapeVariation]?: React.FunctionComponent<ButtonProps>
-  } = {};
+  const buttons: Partial<
+    Record<ButtonShapeVariation, React.FunctionComponent<ButtonProps>>
+  > = {};
 
   // Creating Each Button Components
   for (const variationKey of BUTTON_SHAPE_VARIATION_KEYS) {
@@ -110,7 +111,7 @@ function buttonFactory<
 
       // Size
       const buttonSizeProperty = sizes
-        ? sizes[size as keyof AddDefaultToObject<ButtonSize, ButtonSizeProps>]
+        ? sizes[size as UnionDefaultKey<keyof ButtonSize>]
         : DEFAULT_BUTTON_SIZE[size as UnionDefaultKey<DefaultButtonSize>];
 
       // BorderStyles
@@ -178,9 +179,10 @@ function buttonFactory<
     buttons[variationKey as ButtonShapeVariation] = Button;
   }
 
-  return buttons as {
-    [key in ButtonShapeVariation]: React.FunctionComponent<ButtonProps>
-  };
+  return buttons as Record<
+    ButtonShapeVariation,
+    React.FunctionComponent<ButtonProps>
+  >;
 }
 
 export default buttonFactory;

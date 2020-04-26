@@ -32,17 +32,18 @@ const RADIO_BUTTON_TYPES: Array<RadioButtonType> = [
   'reverse',
 ];
 
-const colorSelect: {[key in keyof ThemePalette]?: keyof ThemePalette} = {
+const colorSelect: Partial<Record<keyof ThemePalette, keyof ThemePalette>> = {
   primary: 'primary',
   secondary: 'secondary',
   tertiary: 'tertiary',
 };
 
-const sizeSelect: {
-  [key in IntersectDefaultKey<DefaultRadioButtonSize>]?: UnionDefaultKey<
-    DefaultRadioButtonSize
+const sizeSelect: Partial<
+  Record<
+    IntersectDefaultKey<DefaultRadioButtonSize>,
+    UnionDefaultKey<DefaultRadioButtonSize>
   >
-} = {
+> = {
   small: 'small',
   medium: 'medium',
   large: 'large',

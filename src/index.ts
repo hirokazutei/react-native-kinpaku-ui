@@ -1,5 +1,10 @@
 import UIFactory from './uiFactory';
-import {Themes, ThemePalette} from './theme/types';
+import {
+  GenericAdditionalPalette,
+  GenericTheme,
+  Themes,
+  ThemePalette,
+} from './theme/types';
 // Button
 import buttonFactory from './components/Button';
 import {
@@ -69,6 +74,8 @@ export {
   CheckBoxSizeProps,
   CheckBoxType,
   checkBoxFactory,
+  GenericAdditionalPalette,
+  GenericTheme,
   InputFieldFactoryProps,
   InputFieldProps,
   InputFieldShape,

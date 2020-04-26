@@ -2,8 +2,8 @@ import React, {useContext} from 'react';
 import {TextInput, View, ViewStyle, TextStyle} from 'react-native';
 import {
   UnionDefaultKey,
-  AddDefaultToObject,
   OptionalExistCondition,
+  NonExistent,
 } from '../../types';
 import {colorResolverFactory} from '../../helper';
 import {
@@ -17,12 +17,15 @@ import {
   DEFAULT_INPUT_FIELD_SIZE,
   DEFAULT_INPUT_VARIATION_SETTING,
 } from './constants';
+import {GenericTheme, GenericAdditionalPalette} from '../../theme/types';
 
 function inputFieldFactory<
-  Themes,
-  AdditionalPalettes,
-  InputFieldSize,
-  AllowCustomProps
+  Themes extends GenericTheme,
+  AdditionalPalettes extends GenericAdditionalPalette | NonExistent,
+  InputFieldSize extends
+    | Record<string | string, InputFieldSizeProps>
+    | NonExistent,
+  AllowCustomProps extends boolean | NonExistent
 >({
   themes,
   additionalPalettes,
@@ -35,8 +38,9 @@ function inputFieldFactory<
   AdditionalPalettes,
   InputFieldSize,
   AllowCustomProps
->): {
-  [key in InputFieldVariation]: React.FunctionComponent<
+>): Record<
+  InputFieldVariation,
+  React.FunctionComponent<
     Props<
       AdditionalPalettes,
       OptionalExistCondition<
@@ -47,7 +51,7 @@ function inputFieldFactory<
       AllowCustomProps
     >
   >
-} {
+> {
   // Type
   type InputFieldProps = Props<
     AdditionalPalettes,
@@ -65,9 +69,9 @@ function inputFieldFactory<
   );
 
   // InputField Collections
-  const inputFields: {
-    [key in InputFieldVariation]?: React.FunctionComponent<InputFieldProps>
-  } = {};
+  const inputFields: Partial<
+    Record<InputFieldVariation, React.FunctionComponent<InputFieldProps>>
+  > = {};
 
   // Creating each InputField Components
   for (const settingKey in DEFAULT_INPUT_VARIATION_SETTING) {
@@ -129,12 +133,7 @@ function inputFieldFactory<
 
         // Size
         const sizeProp = sizes
-          ? sizes[
-              size as keyof AddDefaultToObject<
-                InputFieldSize,
-                InputFieldSizeProps
-              >
-            ]
+          ? sizes[size as UnionDefaultKey<keyof InputFieldSize>]
           : DEFAULT_INPUT_FIELD_SIZE.default;
 
         // Border Width
@@ -266,9 +265,10 @@ function inputFieldFactory<
       inputFields[settingKey as InputFieldVariation] = InputField;
     }
   }
-  return inputFields as {
-    [key in InputFieldVariation]: React.FunctionComponent<InputFieldProps>
-  };
+  return inputFields as Record<
+    InputFieldVariation,
+    React.FunctionComponent<InputFieldProps>
+  >;
 }
 
 export default inputFieldFactory;

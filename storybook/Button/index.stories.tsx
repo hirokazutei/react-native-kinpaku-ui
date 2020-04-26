@@ -27,11 +27,12 @@ const DEFAULT_PROPS = {
   label: 'PRESS HERE',
 };
 
-const sizeSelect: {
-  [key in IntersectDefaultKey<DefaultButtonSize>]?: UnionDefaultKey<
-    DefaultButtonSize
+const sizeSelect: Partial<
+  Record<
+    IntersectDefaultKey<DefaultButtonSize>,
+    UnionDefaultKey<DefaultButtonSize>
   >
-} = {
+> = {
   tiny: 'tiny',
   small: 'small',
   medium: 'medium',

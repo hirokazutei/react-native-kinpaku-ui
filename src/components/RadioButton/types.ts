@@ -1,12 +1,16 @@
 import {TouchableOpacityProps, ViewStyle, ViewProps} from 'react-native';
 import {
   Color,
-  AddDefaultToObject,
   OptionalTrueCondition,
   UnionDefaultKey,
   RequiredIfSpecified,
+  NonExistent,
 } from '../../types';
-import {ThemePalette} from '../../theme/types';
+import {
+  ThemePalette,
+  GenericTheme,
+  GenericAdditionalPalette,
+} from '../../theme/types';
 
 type RadioButtonShapeVariation = 'Sharp' | 'Round' | 'Circular';
 
@@ -19,33 +23,34 @@ type RadioButtonSizeProps = {
 };
 
 type RadioButtonFactoryProps<
-  Themes,
-  AdditionalPalettes,
-  RadioButtonSize,
+  Themes extends GenericTheme,
+  AdditionalPalettes extends GenericAdditionalPalette | NonExistent,
+  RadioButtonSize extends
+    | Record<string | string, RadioButtonSizeProps>
+    | NonExistent,
   //@ts-ignore: TS6133 Unused Variable
-  AllowCustomProps
+  AllowCustomProps extends boolean | NonExistent
 > = {
-  themes: {
-    [ThemeKeys in keyof AddDefaultToObject<Themes, ThemePalette>]: ThemePalette
-  };
+  themes: Record<UnionDefaultKey<keyof Themes>, ThemePalette>;
   additionalPalettes?: RequiredIfSpecified<
     AdditionalPalettes,
-    Required<{[AdditionalPaletteKeys in keyof AdditionalPalettes]: Color}>
+    Required<Record<keyof AdditionalPalettes, Color>>
   >;
   sizes?: RequiredIfSpecified<
     RadioButtonSize,
-    {
-      [SizeKey in keyof AddDefaultToObject<
-        RadioButtonSize,
-        RadioButtonSizeProps
-      >]: RadioButtonSizeProps
-    }
+    Record<UnionDefaultKey<keyof RadioButtonSize>, RadioButtonSizeProps>
   >;
   defaultColor?: keyof (ThemePalette & AdditionalPalettes);
   defaultType?: RadioButtonType;
 };
 
-type RadioButtonProps<AdditionalPalettes, RadioButtonSize, AllowCustomProps> = {
+type RadioButtonProps<
+  AdditionalPalettes extends GenericAdditionalPalette | NonExistent,
+  RadioButtonSize extends
+    | Record<string | string, RadioButtonSizeProps>
+    | NonExistent,
+  AllowCustomProps extends boolean | NonExistent
+> = {
   _customOuterViewProps?: OptionalTrueCondition<
     AllowCustomProps,
     TouchableOpacityProps,

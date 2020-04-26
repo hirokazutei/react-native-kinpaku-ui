@@ -1,62 +1,56 @@
-import {Themes} from './theme/types';
+import {
+  GenericTheme,
+  GenericAdditionalPalette,
+  ThemePalette,
+} from './theme/types';
 import buttonFactory from './components/Button';
 import checkBoxFactory from './components/CheckBox';
 import inputFieldFactory from './components/InputField';
 import touchableFactory from './components/Touchable';
 import radioButtonFactory from './components/RadioButton';
 import textFactory from './components/Text';
-import {Color, DefaultObject, RequiredIfSpecified} from './types';
+import {
+  Color,
+  RequiredIfSpecified,
+  NonExistent,
+  UnionDefaultKey,
+} from './types';
 
-const UIFactory = <ThemeObject, AdditionalPalettes>(
-  themes: Themes<ThemeObject>,
+const UIFactory = <
+  Themes extends GenericTheme,
+  AdditionalPalettes extends GenericAdditionalPalette | NonExistent
+>(
+  themes: Record<UnionDefaultKey<keyof Themes>, ThemePalette>,
   additionalPalettes?: RequiredIfSpecified<
     AdditionalPalettes,
-    {[key in keyof (AdditionalPalettes & DefaultObject<Color>)]: Color}
+    Required<Record<keyof AdditionalPalettes, Color>>
   >,
 ) => {
   const commonProps = {themes, additionalPalettes};
-  const Button = buttonFactory<
-    Themes<ThemeObject>,
-    AdditionalPalettes,
-    null,
-    true
-  >({
+  const Button = buttonFactory<Themes, AdditionalPalettes, null, true>({
     ...commonProps,
   });
-  const CheckBox = checkBoxFactory<
-    Themes<ThemeObject>,
-    AdditionalPalettes,
-    null,
-    false
-  >({
+  const CheckBox = checkBoxFactory<Themes, AdditionalPalettes, null, false>({
     themes,
   });
-  const InputField = inputFieldFactory<
-    Themes<ThemeObject>,
-    AdditionalPalettes,
-    null,
-    false
-  >({
-    ...commonProps,
-  });
+  const InputField = inputFieldFactory<Themes, AdditionalPalettes, null, false>(
+    {
+      ...commonProps,
+    },
+  );
   const RadioButton = radioButtonFactory<
-    Themes<ThemeObject>,
+    Themes,
     AdditionalPalettes,
     null,
     false
   >({
     ...commonProps,
   });
-  const Touchable = touchableFactory<
-    Themes<ThemeObject>,
-    AdditionalPalettes,
-    null,
-    false
-  >({
+  const Touchable = touchableFactory<Themes, AdditionalPalettes, null, false>({
     ...commonProps,
   });
   const {Title, Heading, SubHeading, Body, Label, Quote} = textFactory<
-    Themes<ThemeObject>,
+    Themes,
     AdditionalPalettes,
     null,
     null,

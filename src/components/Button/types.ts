@@ -6,14 +6,18 @@ import {
   ViewStyle,
 } from 'react-native';
 import {
-  AddDefaultToObject,
   Color,
   OptionalTrueCondition,
   UnionDefaultKey,
   RequiredIfSpecified,
-  Falsy,
+  NonExistent,
 } from '../../types';
-import {ThemePalette, Themes as ThemesType} from '../../theme/types';
+import {
+  ThemePalette,
+  Themes as ThemesType,
+  GenericTheme,
+  GenericAdditionalPalette,
+} from '../../theme/types';
 
 type ButtonShapeVariation = 'Circular' | 'Round' | 'Sharp';
 
@@ -27,11 +31,11 @@ type ButtonSizeProps = {
 };
 
 type ButtonFactoryProps<
-  Themes,
-  AdditionalPalettes,
-  ButtonSize extends Record<string | string, ButtonSizeProps> | Falsy,
+  Themes extends GenericTheme,
+  AdditionalPalettes extends GenericAdditionalPalette | NonExistent,
+  ButtonSize extends Record<string | string, ButtonSizeProps> | NonExistent,
   //@ts-ignore: TS6133 Unused Variable
-  AllowCustomProps extends boolean | Falsy
+  AllowCustomProps extends boolean | NonExistent
 > = {
   themes: ThemesType<Themes>;
   additionalPalettes?: RequiredIfSpecified<
@@ -40,19 +44,16 @@ type ButtonFactoryProps<
   >;
   sizes?: RequiredIfSpecified<
     ButtonSize,
-    Record<
-      keyof AddDefaultToObject<ButtonSize, ButtonSizeProps>,
-      ButtonSizeProps
-    >
+    Record<UnionDefaultKey<keyof ButtonSize>, ButtonSizeProps>
   >;
   defaultColor?: keyof (ThemePalette & AdditionalPalettes);
   defaultType?: ButtonType;
 };
 
 type ButtonProps<
-  AdditionalPalettes,
-  ButtonSize extends Record<string | string, ButtonSizeProps> | Falsy,
-  AllowCustomProps extends boolean | Falsy
+  AdditionalPalettes extends Record<string, Color> | NonExistent,
+  ButtonSize extends Record<string | string, ButtonSizeProps> | NonExistent,
+  AllowCustomProps extends boolean | NonExistent
 > = {
   _customButtonProps?: OptionalTrueCondition<
     AllowCustomProps,

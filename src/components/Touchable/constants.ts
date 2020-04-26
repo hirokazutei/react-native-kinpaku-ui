@@ -10,9 +10,10 @@ type DefaultTouchableSize =
   | 'huge'
   | 'massive';
 
-const DEFAULTLESSS_TOUCHABLE_SIZE: {
-  [key in DefaultTouchableSize]: TouchableAllSizeProps
-} = {
+const DEFAULTLESSS_TOUCHABLE_SIZE: Record<
+  DefaultTouchableSize,
+  TouchableAllSizeProps
+> = {
   tiny: {
     padding: 4,
     borderRadius: 6,
@@ -39,9 +40,10 @@ const DEFAULTLESSS_TOUCHABLE_SIZE: {
   },
 };
 
-const DEFAULT_TOUCHABLE_SIZE: {
-  [key in UnionDefaultKey<DefaultTouchableSize>]: TouchableAllSizeProps
-} = {
+const DEFAULT_TOUCHABLE_SIZE: Record<
+  UnionDefaultKey<DefaultTouchableSize>,
+  TouchableAllSizeProps
+> = {
   ...DEFAULTLESSS_TOUCHABLE_SIZE,
   default: DEFAULTLESSS_TOUCHABLE_SIZE.medium,
 };

@@ -1,4 +1,4 @@
-import {AddDefaultToObject, Color} from '../types';
+import {Color, UnionDefaultKey} from '../types';
 
 type ThemePalette = {
   primary: Color;
@@ -9,11 +9,13 @@ type ThemePalette = {
   text: Color;
 };
 
-type Themes<ThemeObject> = {
-  [ThemesKey in keyof AddDefaultToObject<
-    ThemeObject,
-    ThemePalette
-  >]: ThemePalette
-};
+type Themes<ThemeObject> = Record<
+  UnionDefaultKey<keyof ThemeObject>,
+  ThemePalette
+>;
 
-export {Themes, ThemePalette};
+type GenericTheme = Record<UnionDefaultKey<string | string>, ThemePalette>;
+
+type GenericAdditionalPalette = Record<string, Color>;
+
+export {GenericAdditionalPalette, GenericTheme, Themes, ThemePalette};

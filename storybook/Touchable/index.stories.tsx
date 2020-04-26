@@ -25,11 +25,12 @@ const DEFAULT_PROPS = {
   children: <Text>Content</Text>,
 };
 
-const sizeSelect: {
-  [key in IntersectDefaultKey<DefaultTouchableSize>]?: UnionDefaultKey<
-    DefaultTouchableSize
+const sizeSelect: Partial<
+  Record<
+    IntersectDefaultKey<DefaultTouchableSize>,
+    UnionDefaultKey<DefaultTouchableSize>
   >
-} = {
+> = {
   tiny: 'tiny',
   small: 'small',
   medium: 'medium',

@@ -1,23 +1,19 @@
 import { TouchableOpacityProps, ViewStyle } from 'react-native';
-import { AddDefaultToObject, Color, OptionalTrueCondition, UnionDefaultKey, RequiredIfSpecified } from '../../types';
-import { ThemePalette, Themes as ThemesType } from '../../theme/types';
+import { Color, OptionalTrueCondition, UnionDefaultKey, RequiredIfSpecified, NonExistent } from '../../types';
+import { ThemePalette, Themes as ThemesType, GenericTheme, GenericAdditionalPalette } from '../../theme/types';
 declare type CheckBoxShapeVariation = 'Sharp' | 'Round' | 'Circular';
 declare type CheckBoxType = 'outline' | 'fill' | 'reverse';
 declare type CheckBoxSizeProps = {
     size: number;
 };
-declare type CheckBoxFactoryProps<Themes, AdditionalPalettes, CheckBoxSize, AllowCustomProps> = {
+declare type CheckBoxFactoryProps<Themes extends GenericTheme, AdditionalPalettes extends GenericAdditionalPalette | NonExistent, CheckBoxSize extends Record<string, CheckBoxSizeProps> | NonExistent, AllowCustomProps extends boolean | NonExistent> = {
     themes: ThemesType<Themes>;
-    additionalPalettes?: RequiredIfSpecified<AdditionalPalettes, {
-        [AdditionalPaletteKeys in keyof AdditionalPalettes]: Color;
-    }>;
-    sizes?: RequiredIfSpecified<CheckBoxSize, {
-        [SizeKey in keyof AddDefaultToObject<CheckBoxSize, CheckBoxSizeProps>]: CheckBoxSizeProps;
-    }>;
+    additionalPalettes?: RequiredIfSpecified<AdditionalPalettes, Record<keyof AdditionalPalettes, Color>>;
+    sizes?: RequiredIfSpecified<CheckBoxSize, Record<UnionDefaultKey<keyof CheckBoxSize>, CheckBoxSizeProps>>;
     defaultColor?: keyof (ThemePalette & AdditionalPalettes);
     defaultType?: CheckBoxType;
 };
-declare type CheckBoxProps<AdditionalPalettes, CheckBoxSize, AllowCustomProps> = {
+declare type CheckBoxProps<AdditionalPalettes extends GenericAdditionalPalette | NonExistent, CheckBoxSize extends Record<string, CheckBoxSizeProps> | NonExistent, AllowCustomProps extends boolean | NonExistent> = {
     _customOuterViewProps?: OptionalTrueCondition<AllowCustomProps, TouchableOpacityProps, never>;
     _customOuterViewStyle?: OptionalTrueCondition<AllowCustomProps, ViewStyle, never>;
     active?: boolean;

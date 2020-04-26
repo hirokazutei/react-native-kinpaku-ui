@@ -26,11 +26,12 @@ const CHECKBOX_SHAPES = [Sharp, Round, Circular];
 
 const CHECKBOX_TYPES: Array<CheckBoxType> = ['outline', 'fill', 'reverse'];
 
-const sizeSelect: {
-  [key in IntersectDefaultKey<DefaultCheckBoxSize>]?: UnionDefaultKey<
-    DefaultCheckBoxSize
+const sizeSelect: Partial<
+  Record<
+    IntersectDefaultKey<DefaultCheckBoxSize>,
+    UnionDefaultKey<DefaultCheckBoxSize>
   >
-} = {
+> = {
   small: 'small',
   medium: 'medium',
   large: 'large',

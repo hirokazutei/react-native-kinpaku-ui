@@ -1,12 +1,16 @@
 import {FlexAlignType, TouchableOpacityProps, ViewStyle} from 'react-native';
 import {
-  AddDefaultToObject,
   Color,
   OptionalTrueCondition,
   UnionDefaultKey,
   RequiredIfSpecified,
+  NonExistent,
 } from '../../types';
-import {ThemePalette} from '../../theme/types';
+import {
+  ThemePalette,
+  GenericTheme,
+  GenericAdditionalPalette,
+} from '../../theme/types';
 
 type TouchableType = 'fill' | 'outline';
 
@@ -27,32 +31,33 @@ type TouchableAllSizeProps = {
 type TouchableSizeProps = TouchableVerHorSizeProps | TouchableAllSizeProps;
 
 type TouchableFactoryProps<
-  Themes,
-  AdditionalPalettes,
-  TouchableSize,
+  Themes extends GenericTheme,
+  AdditionalPalettes extends GenericAdditionalPalette | NonExistent,
+  TouchableSize extends
+    | Record<string | string, TouchableSizeProps>
+    | NonExistent,
   //@ts-ignore: TS6133 Unused Variable
-  AllowCustomProps
+  AllowCustomProps extends boolean | NonExistent
 > = {
-  themes: {
-    [ThemeKeys in keyof AddDefaultToObject<Themes, ThemePalette>]: ThemePalette
-  };
+  themes: Record<UnionDefaultKey<keyof Themes>, ThemePalette>;
   additionalPalettes?: RequiredIfSpecified<
     AdditionalPalettes,
-    {[AdditionalPaletteKeys in keyof AdditionalPalettes]: Color}
+    Record<keyof AdditionalPalettes, Color>
   >;
   sizes?: RequiredIfSpecified<
     TouchableSize,
-    {
-      [SizeKey in keyof AddDefaultToObject<
-        TouchableSize,
-        TouchableSizeProps
-      >]: TouchableSizeProps
-    }
+    Record<UnionDefaultKey<keyof TouchableSize>, TouchableSizeProps>
   >;
   defaultType?: TouchableType;
 };
 
-type TouchableProps<AdditionalPalettes, TouchableSize, AllowCustomProps> = {
+type TouchableProps<
+  AdditionalPalettes extends GenericAdditionalPalette | NonExistent,
+  TouchableSize extends
+    | Record<string | string, TouchableSizeProps>
+    | NonExistent,
+  AllowCustomProps extends boolean | NonExistent
+> = {
   _customProps?: OptionalTrueCondition<
     AllowCustomProps,
     TouchableOpacityProps,

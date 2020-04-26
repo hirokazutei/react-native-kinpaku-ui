@@ -1,11 +1,16 @@
 import {TextStyle, TextInputProps, ViewProps, ViewStyle} from 'react-native';
 import {
-  AddDefaultToObject,
   Color,
   OptionalTrueCondition,
   RequiredIfSpecified,
+  NonExistent,
+  UnionDefaultKey,
 } from '../../types';
-import {ThemePalette} from '../../theme/types';
+import {
+  ThemePalette,
+  GenericTheme,
+  GenericAdditionalPalette,
+} from '../../theme/types';
 
 type InputFieldVariation =
   | 'creditCardNumber'
@@ -68,34 +73,35 @@ type InputFieldVariationProps = {
 };
 
 type InputFieldFactoryProps<
-  Themes,
-  AdditionalPalettes,
-  InputFieldSize,
+  Themes extends GenericTheme,
+  AdditionalPalettes extends GenericAdditionalPalette | NonExistent,
+  InputFieldSize extends
+    | Record<string | string, InputFieldSizeProps>
+    | NonExistent,
   //@ts-ignore: TS6133 Unused Variable
-  AllowCustomProps
+  AllowCustomProps extends boolean | NonExistent
 > = {
-  themes: {
-    [ThemeKey in keyof AddDefaultToObject<Themes, ThemePalette>]: ThemePalette
-  };
+  themes: Record<UnionDefaultKey<keyof Themes>, ThemePalette>;
   additionalPalettes?: RequiredIfSpecified<
     AdditionalPalettes,
-    {[AdditionalPaletteKey in keyof AdditionalPalettes]: Color}
+    Record<keyof AdditionalPalettes, Color>
   >;
   sizes?: RequiredIfSpecified<
     InputFieldSize,
-    {
-      [SizeKey in keyof AddDefaultToObject<
-        InputFieldSize,
-        InputFieldSizeProps
-      >]: InputFieldSizeProps
-    }
+    Record<UnionDefaultKey<keyof InputFieldSize>, InputFieldSizeProps>
   >;
   shape?: InputFieldShape;
   defaultType?: InputFieldType;
   defaultColor?: keyof (ThemePalette & AdditionalPalettes);
 };
 
-type InputFieldProps<AdditionalPalettes, InputFieldSize, AllowCustomProps> = {
+type InputFieldProps<
+  AdditionalPalettes extends GenericAdditionalPalette | NonExistent,
+  InputFieldSize extends
+    | Record<string | string, InputFieldSizeProps>
+    | NonExistent,
+  AllowCustomProps extends boolean | NonExistent
+> = {
   _customTextInputProps?: OptionalTrueCondition<
     AllowCustomProps,
     TextInputProps,
@@ -129,7 +135,7 @@ type InputFieldProps<AdditionalPalettes, InputFieldSize, AllowCustomProps> = {
   onFocus?: (args: any) => any;
   onKeyPress?: (args: any) => any;
   placeholder?: string;
-  size?: keyof AddDefaultToObject<InputFieldSize, InputFieldSizeProps>;
+  size?: UnionDefaultKey<InputFieldSize>;
   textColor?: keyof (ThemePalette & AdditionalPalettes);
   type?: InputFieldType;
   value: string;
