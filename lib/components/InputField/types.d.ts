@@ -1,7 +1,7 @@
 /// <reference types="react" />
 import { TextStyle, TextInputProps, ViewProps, ViewStyle } from 'react-native';
-import { AddDefaultToObject, Color, OptionalTrueCondition, RequiredIfSpecified } from '../../types';
-import { ThemePalette } from '../../theme/types';
+import { Color, OptionalTrueCondition, RequiredIfSpecified, NonExistent, UnionDefaultKey } from '../../types';
+import { ThemePalette, GenericTheme, GenericAdditionalPalette } from '../../theme/types';
 declare type InputFieldVariation = 'creditCardNumber' | 'decimal' | 'email' | 'freeField' | 'name' | 'number' | 'oneTimeNumberCode' | 'oneTimeCode' | 'paragraph' | 'passcode' | 'password' | 'phone' | 'url' | 'username';
 declare type InputFieldShape = 'sharp' | 'round' | 'circular';
 declare type InputFieldType = 'underline' | 'outline' | 'fill';
@@ -42,21 +42,15 @@ declare type InputFieldVariationProps = {
     minimumFontScale?: number;
     textAlign?: TextStyle['textAlign'];
 };
-declare type InputFieldFactoryProps<Themes, AdditionalPalettes, InputFieldSize, AllowCustomProps> = {
-    themes: {
-        [ThemeKey in keyof AddDefaultToObject<Themes, ThemePalette>]: ThemePalette;
-    };
-    additionalPalettes?: RequiredIfSpecified<AdditionalPalettes, {
-        [AdditionalPaletteKey in keyof AdditionalPalettes]: Color;
-    }>;
-    sizes?: RequiredIfSpecified<InputFieldSize, {
-        [SizeKey in keyof AddDefaultToObject<InputFieldSize, InputFieldSizeProps>]: InputFieldSizeProps;
-    }>;
+declare type InputFieldFactoryProps<Themes extends GenericTheme, AdditionalPalettes extends GenericAdditionalPalette | NonExistent, InputFieldSize extends Record<string | string, InputFieldSizeProps> | NonExistent, AllowCustomProps extends boolean | NonExistent> = {
+    themes: Record<UnionDefaultKey<keyof Themes>, ThemePalette>;
+    additionalPalettes?: RequiredIfSpecified<AdditionalPalettes, Record<keyof AdditionalPalettes, Color>>;
+    sizes?: RequiredIfSpecified<InputFieldSize, Record<UnionDefaultKey<keyof InputFieldSize>, InputFieldSizeProps>>;
     shape?: InputFieldShape;
     defaultType?: InputFieldType;
     defaultColor?: keyof (ThemePalette & AdditionalPalettes);
 };
-declare type InputFieldProps<AdditionalPalettes, InputFieldSize, AllowCustomProps> = {
+declare type InputFieldProps<AdditionalPalettes extends GenericAdditionalPalette | NonExistent, InputFieldSize extends Record<string | string, InputFieldSizeProps> | NonExistent, AllowCustomProps extends boolean | NonExistent> = {
     _customTextInputProps?: OptionalTrueCondition<AllowCustomProps, TextInputProps, never>;
     _customTextInputStyle?: OptionalTrueCondition<AllowCustomProps, TextStyle, never>;
     _customWrapperProps?: OptionalTrueCondition<AllowCustomProps, ViewProps, never>;
@@ -74,7 +68,7 @@ declare type InputFieldProps<AdditionalPalettes, InputFieldSize, AllowCustomProp
     onFocus?: (args: any) => any;
     onKeyPress?: (args: any) => any;
     placeholder?: string;
-    size?: keyof AddDefaultToObject<InputFieldSize, InputFieldSizeProps>;
+    size?: UnionDefaultKey<InputFieldSize>;
     textColor?: keyof (ThemePalette & AdditionalPalettes);
     type?: InputFieldType;
     value: string;

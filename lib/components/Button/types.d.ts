@@ -1,6 +1,6 @@
 import { FlexAlignType, TextProperties, TextStyle, TouchableOpacityProps, ViewStyle } from 'react-native';
-import { AddDefaultToObject, Color, OptionalTrueCondition, UnionDefaultKey, RequiredIfSpecified, Falsy } from '../../types';
-import { ThemePalette, Themes as ThemesType } from '../../theme/types';
+import { Color, OptionalTrueCondition, UnionDefaultKey, RequiredIfSpecified, NonExistent } from '../../types';
+import { ThemePalette, Themes as ThemesType, GenericTheme, GenericAdditionalPalette } from '../../theme/types';
 declare type ButtonShapeVariation = 'Circular' | 'Round' | 'Sharp';
 declare type ButtonType = 'fill' | 'clear' | 'outline';
 declare type ButtonSizeProps = {
@@ -9,14 +9,14 @@ declare type ButtonSizeProps = {
     paddingHorizontal: number;
     paddingVertical: number;
 };
-declare type ButtonFactoryProps<Themes, AdditionalPalettes, ButtonSize extends Record<string | string, ButtonSizeProps> | Falsy, AllowCustomProps extends boolean | Falsy> = {
+declare type ButtonFactoryProps<Themes extends GenericTheme, AdditionalPalettes extends GenericAdditionalPalette | NonExistent, ButtonSize extends Record<string | string, ButtonSizeProps> | NonExistent, AllowCustomProps extends boolean | NonExistent> = {
     themes: ThemesType<Themes>;
     additionalPalettes?: RequiredIfSpecified<AdditionalPalettes, Record<keyof AdditionalPalettes, Color>>;
-    sizes?: RequiredIfSpecified<ButtonSize, Record<keyof AddDefaultToObject<ButtonSize, ButtonSizeProps>, ButtonSizeProps>>;
+    sizes?: RequiredIfSpecified<ButtonSize, Record<UnionDefaultKey<keyof ButtonSize>, ButtonSizeProps>>;
     defaultColor?: keyof (ThemePalette & AdditionalPalettes);
     defaultType?: ButtonType;
 };
-declare type ButtonProps<AdditionalPalettes, ButtonSize extends Record<string | string, ButtonSizeProps> | Falsy, AllowCustomProps extends boolean | Falsy> = {
+declare type ButtonProps<AdditionalPalettes extends Record<string, Color> | NonExistent, ButtonSize extends Record<string | string, ButtonSizeProps> | NonExistent, AllowCustomProps extends boolean | NonExistent> = {
     _customButtonProps?: OptionalTrueCondition<AllowCustomProps, TouchableOpacityProps, never>;
     _customButtonStyle?: OptionalTrueCondition<AllowCustomProps, ViewStyle, never>;
     _customTextProps?: OptionalTrueCondition<AllowCustomProps, TextProperties, never>;

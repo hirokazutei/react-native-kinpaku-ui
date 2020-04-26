@@ -1,5 +1,5 @@
 import UIFactory from './uiFactory';
-import { Themes, ThemePalette } from './theme/types';
+import { GenericAdditionalPalette, GenericTheme, Themes, ThemePalette } from './theme/types';
 import buttonFactory from './components/Button';
 import { ButtonFactoryProps, ButtonProps, ButtonShapeVariation, ButtonSizeProps, ButtonType } from './components/Button/types';
 import checkBoxFactory from './components/CheckBox';
@@ -12,5 +12,5 @@ import radioButtonFactory from './components/RadioButton';
 import { RadioButtonFactoryProps, RadioButtonProps, RadioButtonSizeProps, RadioButtonShapeVariation } from './components/RadioButton/types';
 import textFactory from './components/Text';
 import { TextFactoryProps, TextProps, TextSizeProps, TextVariationProps } from './components/Text/types';
-export { ButtonFactoryProps, ButtonProps, ButtonType, ButtonShapeVariation, ButtonSizeProps, buttonFactory, CheckBoxFactoryProps, CheckBoxProps, CheckBoxShapeVariation, CheckBoxSizeProps, CheckBoxType, checkBoxFactory, InputFieldFactoryProps, InputFieldProps, InputFieldShape, InputFieldSizeProps, InputFieldType, InputFieldVariationProps, InputFieldVariation, inputFieldFactory, RadioButtonFactoryProps, RadioButtonProps, RadioButtonSizeProps, RadioButtonShapeVariation, radioButtonFactory, ThemePalette, Themes, TextFactoryProps, TextProps, TextSizeProps, TextVariationProps, textFactory, TouchableAllSizeProps, TouchableFactoryProps, TouchableProps, TouchableSizeProps, TouchableShapeVariation, TouchableVerHorSizeProps, touchableFactory, UIFactory, };
+export { ButtonFactoryProps, ButtonProps, ButtonType, ButtonShapeVariation, ButtonSizeProps, buttonFactory, CheckBoxFactoryProps, CheckBoxProps, CheckBoxShapeVariation, CheckBoxSizeProps, CheckBoxType, checkBoxFactory, GenericAdditionalPalette, GenericTheme, InputFieldFactoryProps, InputFieldProps, InputFieldShape, InputFieldSizeProps, InputFieldType, InputFieldVariationProps, InputFieldVariation, inputFieldFactory, RadioButtonFactoryProps, RadioButtonProps, RadioButtonSizeProps, RadioButtonShapeVariation, radioButtonFactory, ThemePalette, Themes, TextFactoryProps, TextProps, TextSizeProps, TextVariationProps, textFactory, TouchableAllSizeProps, TouchableFactoryProps, TouchableProps, TouchableSizeProps, TouchableShapeVariation, TouchableVerHorSizeProps, touchableFactory, UIFactory, };
 //# sourceMappingURL=index.d.ts.map
