@@ -5,12 +5,15 @@ import {storiesOf} from '@storybook/react-native';
 import {action} from '@storybook/addon-actions';
 import {boolean, select, withKnobs} from '@storybook/addon-knobs';
 import Provider from '../Provider';
-import {IntersectDefaultKey, UnionDefaultKey} from '../../src/types';
+import {UnionDefaultKey} from '../../src/types';
 import {alignSelect, colorSelect} from '../knobs';
 import themes from '../../src/themes';
 import touchableFactory from '../../src/components/Touchable';
 import {TouchableProps} from '../../src/components/Touchable/types';
-import {DefaultTouchableSize} from '../../src/components/Touchable/constants';
+import {
+  DefaultTouchableSize,
+  DEFAULT_TOUCHABLE_SIZE,
+} from '../../src/components/Touchable/constants';
 
 const {Sharp, Round, Circular} = touchableFactory<
   typeof themes,
@@ -21,27 +24,29 @@ const {Sharp, Round, Circular} = touchableFactory<
   themes,
 });
 
+type StoryTouchableProps = TouchableProps<
+  null,
+  typeof DEFAULT_TOUCHABLE_SIZE,
+  null
+>;
+
 const DEFAULT_PROPS = {
   children: <Text>Content</Text>,
 };
 
-const sizeSelect: Partial<
-  Record<
-    IntersectDefaultKey<DefaultTouchableSize>,
-    UnionDefaultKey<DefaultTouchableSize>
-  >
-> = {
-  tiny: 'tiny',
-  small: 'small',
-  medium: 'medium',
-  large: 'large',
-  huge: 'huge',
-  massive: 'massive',
-};
+const sizeSelect: Array<UnionDefaultKey<DefaultTouchableSize>> = [
+  'tiny',
+  'small',
+  'medium',
+  'large',
+  'huge',
+  'massive',
+  'default',
+];
 
 const getRequiredProps = (
-  overrides: Partial<TouchableProps<null, null, null>> = {},
-): TouchableProps<null, null, null> => {
+  overrides: Partial<StoryTouchableProps> = {},
+): StoryTouchableProps => {
   const {children} = {
     ...DEFAULT_PROPS,
     ...overrides,
@@ -53,8 +58,8 @@ const getRequiredProps = (
 };
 
 const getOptionalProps = (
-  overrides: Partial<TouchableProps<null, null, null>> = {},
-): Partial<TouchableProps<null, null, null>> => {
+  overrides: Partial<StoryTouchableProps> = {},
+): Partial<StoryTouchableProps> => {
   const {align, color, isDisabled, isStretched, size, type} = overrides;
   return {
     align: select('Align Options', alignSelect, align),

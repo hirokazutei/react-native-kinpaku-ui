@@ -6,14 +6,17 @@ import {action} from '@storybook/addon-actions';
 import {boolean, select, text, withKnobs, number} from '@storybook/addon-knobs';
 import Provider from '../Provider';
 import themes from '../../src/themes';
-import {ThemePalette} from '../../src/theme/types';
 import {
   InputFieldProps,
   InputFieldType,
 } from '../../src/components/InputField/types';
 import inputFieldFactory from '../../src/components/InputField';
-import {INPUT_FIELD_SHAPE} from '../../src/components/InputField/constants';
+import {
+  INPUT_FIELD_SHAPE,
+  DEFAULT_INPUT_FIELD_SIZE,
+} from '../../src/components/InputField/constants';
 import {InputFieldShape} from '../../src/components/InputField/types';
+import {colorSelect} from '../knobs';
 
 const INPUT_FIELD_SETTING_VARIATIONS = INPUT_FIELD_SHAPE.map(
   (shape: InputFieldShape) => {
@@ -24,6 +27,12 @@ const INPUT_FIELD_SETTING_VARIATIONS = INPUT_FIELD_SHAPE.map(
   },
 );
 
+type StoryInputFieldProps = InputFieldProps<
+  null,
+  typeof DEFAULT_INPUT_FIELD_SIZE,
+  null
+>;
+
 const INPUT_FIELD_TYPES: Array<InputFieldType> = [
   'fill',
   'outline',
@@ -32,12 +41,6 @@ const INPUT_FIELD_TYPES: Array<InputFieldType> = [
 
 const DEFAULT_PROPS = {
   value: '',
-};
-
-const colorSelect: Partial<Record<keyof ThemePalette, keyof ThemePalette>> = {
-  primary: 'primary',
-  secondary: 'secondary',
-  tertiary: 'tertiary',
 };
 
 const variationSelect = {
@@ -58,8 +61,8 @@ const variationSelect = {
 };
 
 const getRequiredProps = (
-  overrides: Partial<InputFieldProps<null, null, null>> = {},
-): InputFieldProps<null, null, null> => {
+  overrides: Partial<StoryInputFieldProps> = {},
+): StoryInputFieldProps => {
   const {value} = {
     ...DEFAULT_PROPS,
     ...overrides,
@@ -69,9 +72,10 @@ const getRequiredProps = (
   };
 };
 
+// TODO: Size
 const geOptionalProps = (
-  overrides: Partial<InputFieldProps<null, null, null>> = {},
-): Partial<InputFieldProps<null, null, null>> => {
+  overrides: Partial<StoryInputFieldProps> = {},
+): Partial<StoryInputFieldProps> => {
   const {
     autoFocus,
     backgroundColor,

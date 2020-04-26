@@ -5,6 +5,7 @@ type DefaultObject<T> = {default: T};
 type AddDefaultToObject<T, V> = Record<keyof (T & DefaultObject<V>), V>;
 
 type UnionDefaultKey<T> = T | 'default';
+
 type IntersectDefaultKey<T> = T & 'default';
 
 type Falsy = undefined | null | false;
