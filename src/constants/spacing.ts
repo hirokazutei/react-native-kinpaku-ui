@@ -1,6 +1,6 @@
 type SpacingKeys = 'tiny' | 'small' | 'medium' | 'large' | 'huge' | 'massive';
 
-type Spacing = Readonly<{[key in SpacingKeys]: number}>;
+type Spacing = Record<SpacingKeys, number>;
 
 const spacing: Spacing = {
   tiny: 4,

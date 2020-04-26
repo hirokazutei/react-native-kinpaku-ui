@@ -9,9 +9,10 @@ import {
 
 type DefaultInputFieldSize = 'medium';
 
-const DEFAULTLESS_INPUT_FIELD_SIZE: {
-  [key in DefaultInputFieldSize]: InputFieldSizeProps
-} = {
+const DEFAULTLESS_INPUT_FIELD_SIZE: Record<
+  DefaultInputFieldSize,
+  InputFieldSizeProps
+> = {
   medium: {
     borderWidth: 2,
     fontSize: 12,
@@ -19,18 +20,20 @@ const DEFAULTLESS_INPUT_FIELD_SIZE: {
   },
 };
 
-const DEFAULT_INPUT_FIELD_SIZE: {
-  [key in UnionDefaultKey<DefaultInputFieldSize>]: InputFieldSizeProps
-} = {
+const DEFAULT_INPUT_FIELD_SIZE: Record<
+  UnionDefaultKey<DefaultInputFieldSize>,
+  InputFieldSizeProps
+> = {
   ...DEFAULTLESS_INPUT_FIELD_SIZE,
   default: DEFAULTLESS_INPUT_FIELD_SIZE.medium,
 };
 
 const DEFAULT_INPUT_FIELD_BORDER_WIDTH = 2;
 
-const DEFAULT_INPUT_VARIATION_SETTING: {
-  [key in InputFieldVariation]: InputFieldVariationProps
-} = {
+const DEFAULT_INPUT_VARIATION_SETTING: Record<
+  InputFieldVariation,
+  InputFieldVariationProps
+> = {
   creditCardNumber: {
     autoCapitalize: 'none',
     autoCorrect: false,

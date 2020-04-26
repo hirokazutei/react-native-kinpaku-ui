@@ -3,7 +3,7 @@ import {TouchableOpacity, View, ViewStyle} from 'react-native';
 import {
   UnionDefaultKey,
   OptionalExistCondition,
-  AddDefaultToObject,
+  NonExistent,
 } from '../../types';
 import {colorResolverFactory} from '../../helper';
 import {
@@ -17,12 +17,15 @@ import {
   DEFAULT_RADIO_BUTTON_SIZE,
   DefaultRadioButtonSize,
 } from './constants';
+import {GenericTheme, GenericAdditionalPalette} from '../../theme/types';
 
 function radioButtonFactory<
-  Themes,
-  AdditionalPalettes,
-  RadioButtonSize,
-  AllowCustomProps
+  Themes extends GenericTheme,
+  AdditionalPalettes extends GenericAdditionalPalette | NonExistent,
+  RadioButtonSize extends
+    | Record<string | string, RadioButtonSizeProps>
+    | NonExistent,
+  AllowCustomProps extends boolean | NonExistent
 >({
   themes,
   sizes,
@@ -34,8 +37,9 @@ function radioButtonFactory<
   AdditionalPalettes,
   RadioButtonSize,
   AllowCustomProps
->): {
-  [key in RadioButtonShapeVariation]: React.FunctionComponent<
+>): Record<
+  RadioButtonShapeVariation,
+  React.FunctionComponent<
     Props<
       AdditionalPalettes,
       OptionalExistCondition<
@@ -46,7 +50,7 @@ function radioButtonFactory<
       AllowCustomProps
     >
   >
-} {
+> {
   // Type
   type RadioButtonProps = Props<
     AdditionalPalettes,
@@ -64,11 +68,9 @@ function radioButtonFactory<
   );
 
   // RadioButton Collections
-  const radioButtons: {
-    [key in RadioButtonShapeVariation]?: React.FunctionComponent<
-      RadioButtonProps
-    >
-  } = {};
+  const radioButtons: Partial<
+    Record<RadioButtonShapeVariation, React.FunctionComponent<RadioButtonProps>>
+  > = {};
 
   // Creating Each CheckBox Components
   for (const variationKey of RADIO_BUTTON_SHAPE_VARIATION_KEYS) {
@@ -108,17 +110,10 @@ function radioButtonFactory<
 
       // Size
       const {size: ringSize, dotSize: maybeDotSize, borderThickness} = sizes
-        ? (sizes as {
-            [SizeKey in keyof AddDefaultToObject<
-              RadioButtonSize,
-              RadioButtonSizeProps
-            >]: RadioButtonSizeProps
-          })[
-            size as keyof AddDefaultToObject<
-              RadioButtonSize,
-              RadioButtonSizeProps
-            >
-          ]
+        ? (sizes as Record<
+            UnionDefaultKey<keyof RadioButtonSize>,
+            RadioButtonSizeProps
+          >)[size as UnionDefaultKey<keyof RadioButtonSize>]
         : DEFAULT_RADIO_BUTTON_SIZE[
             size as UnionDefaultKey<DefaultRadioButtonSize>
           ];
@@ -173,11 +168,10 @@ function radioButtonFactory<
     };
     radioButtons[variationKey as RadioButtonShapeVariation] = RadioButton;
   }
-  return radioButtons as {
-    [key in RadioButtonShapeVariation]: React.FunctionComponent<
-      RadioButtonProps
-    >
-  };
+  return radioButtons as Record<
+    RadioButtonShapeVariation,
+    React.FunctionComponent<RadioButtonProps>
+  >;
 }
 
 export default radioButtonFactory;

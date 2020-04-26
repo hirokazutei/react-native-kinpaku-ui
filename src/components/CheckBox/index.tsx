@@ -1,9 +1,9 @@
 import React, {useContext} from 'react';
 import {TouchableOpacity, View, ViewStyle} from 'react-native';
 import {
-  AddDefaultToObject,
   OptionalExistCondition,
   UnionDefaultKey,
+  NonExistent,
 } from '../../types';
 import {
   CheckBoxFactoryProps,
@@ -17,12 +17,13 @@ import {
   DefaultCheckBoxSize,
 } from './constants';
 import {colorResolverFactory} from '../../helper';
+import {GenericTheme, GenericAdditionalPalette} from '../../theme/types';
 
 function checkBoxFactory<
-  Themes,
-  AdditionalPalettes,
-  CheckBoxSize,
-  AllowCustomProps
+  Themes extends GenericTheme,
+  AdditionalPalettes extends GenericAdditionalPalette | NonExistent,
+  CheckBoxSize extends Record<string, CheckBoxSizeProps> | NonExistent,
+  AllowCustomProps extends boolean | NonExistent
 >({
   themes,
   sizes,
@@ -34,8 +35,9 @@ function checkBoxFactory<
   AdditionalPalettes,
   CheckBoxSize,
   AllowCustomProps
->): {
-  [key in CheckBoxShapeVariation]: React.FunctionComponent<
+>): Record<
+  CheckBoxShapeVariation,
+  React.FunctionComponent<
     Props<
       AdditionalPalettes,
       OptionalExistCondition<
@@ -46,7 +48,7 @@ function checkBoxFactory<
       AllowCustomProps
     >
   >
-} {
+> {
   // Type
   type CheckBoxProps = Props<
     AdditionalPalettes,
@@ -64,9 +66,9 @@ function checkBoxFactory<
   );
 
   // CheckBox Collections
-  const checkBoxes: {
-    [key in CheckBoxShapeVariation]?: React.FunctionComponent<CheckBoxProps>
-  } = {};
+  const checkBoxes: Partial<
+    Record<CheckBoxShapeVariation, React.FunctionComponent<CheckBoxProps>>
+  > = {};
 
   // Creating Each CheckBox Components
   for (const variationKey of CHECK_BOX_SHAPE_VARIATION_KEYS) {
@@ -108,12 +110,10 @@ function checkBoxFactory<
 
       // Size
       const sizeProperty = sizes
-        ? (sizes as {
-            [SizeKey in keyof AddDefaultToObject<
-              CheckBoxSize,
-              CheckBoxSizeProps
-            >]: CheckBoxSizeProps
-          })[size as keyof AddDefaultToObject<CheckBoxSize, CheckBoxSizeProps>]
+        ? (sizes as Record<
+            UnionDefaultKey<keyof CheckBoxSize>,
+            CheckBoxSizeProps
+          >)[size as UnionDefaultKey<keyof CheckBoxSize>]
         : DEFAULT_CHECK_BOX_SIZES[size as UnionDefaultKey<DefaultCheckBoxSize>];
 
       // BorderStyles
@@ -163,9 +163,10 @@ function checkBoxFactory<
     checkBoxes[variationKey as CheckBoxShapeVariation] = CheckBox;
   }
 
-  return checkBoxes as {
-    [key in CheckBoxShapeVariation]: React.FunctionComponent<CheckBoxProps>
-  };
+  return checkBoxes as Record<
+    CheckBoxShapeVariation,
+    React.FunctionComponent<CheckBoxProps>
+  >;
 }
 
 export default checkBoxFactory;

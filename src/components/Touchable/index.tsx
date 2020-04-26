@@ -1,9 +1,9 @@
 import React, {useContext} from 'react';
 import {FlexAlignType, TouchableOpacity} from 'react-native';
 import {
-  AddDefaultToObject,
   OptionalExistCondition,
   UnionDefaultKey,
+  NonExistent,
 } from '../../types';
 import {
   TouchableAllSizeProps,
@@ -21,12 +21,15 @@ import {
   TOUCHABLE_SHAPE_VARIATION_KEYS,
 } from './constants';
 import {colorResolverFactory} from '../../helper';
+import {GenericTheme, GenericAdditionalPalette} from '../../theme/types';
 
 function touchableFactory<
-  Themes,
-  AdditionalPalettes,
-  TouchableSize,
-  AllowCustomProps
+  Themes extends GenericTheme,
+  AdditionalPalettes extends GenericAdditionalPalette | NonExistent,
+  TouchableSize extends
+    | Record<string | string, TouchableSizeProps>
+    | NonExistent,
+  AllowCustomProps extends boolean | NonExistent
 >({
   themes,
   sizes,
@@ -37,8 +40,9 @@ function touchableFactory<
   AdditionalPalettes,
   TouchableSize,
   AllowCustomProps
->): {
-  [key in TouchableShapeVariation]: React.FunctionComponent<
+>): Record<
+  TouchableShapeVariation,
+  React.FunctionComponent<
     Props<
       AdditionalPalettes,
       OptionalExistCondition<
@@ -49,7 +53,7 @@ function touchableFactory<
       AllowCustomProps
     >
   >
-} {
+> {
   // Type
   type TouchableProps = Props<
     AdditionalPalettes,
@@ -66,12 +70,12 @@ function touchableFactory<
     'default' as keyof Themes,
   );
 
-  const touchables: {
-    [key in TouchableShapeVariation]?: React.FunctionComponent<TouchableProps>
-  } = {};
+  const touchables: Partial<
+    Record<TouchableShapeVariation, React.FunctionComponent<TouchableProps>>
+  > = {};
 
   for (const shapeKey of TOUCHABLE_SHAPE_VARIATION_KEYS) {
-    const Touchable: React.FunctionComponent<TouchableProps> = ({
+    const Touchable = ({
       _customProps,
       _customStyle,
       align = DEFAULT_TOUCHABLE_ALIGN,
@@ -82,7 +86,7 @@ function touchableFactory<
       onPress,
       size = 'default',
       type = defaultType,
-    }: TouchableProps): React.ReactElement<TouchableProps> => {
+    }: TouchableProps) => {
       // Palettes
       const currentThemeKey = useContext(themeContext) || 'default';
       const currentTheme =
@@ -103,14 +107,10 @@ function touchableFactory<
 
       // Size
       const touchableSizeProperty = sizes
-        ? (sizes as {
-            [SizeKey in keyof AddDefaultToObject<
-              TouchableSize,
-              TouchableSizeProps
-            >]: TouchableSizeProps
-          })[
-            size as keyof AddDefaultToObject<TouchableSize, TouchableSizeProps>
-          ]
+        ? (sizes as Record<
+            UnionDefaultKey<keyof TouchableSize>,
+            TouchableSizeProps
+          >)[size as UnionDefaultKey<keyof TouchableSize>]
         : DEFAULT_TOUCHABLE_SIZE[size as UnionDefaultKey<DefaultTouchableSize>];
 
       // BorderStyles
@@ -166,9 +166,10 @@ function touchableFactory<
     };
     touchables[shapeKey as TouchableShapeVariation] = Touchable;
   }
-  return touchables as {
-    [key in TouchableShapeVariation]: React.FunctionComponent<TouchableProps>
-  };
+  return touchables as Record<
+    TouchableShapeVariation,
+    React.FunctionComponent<TouchableProps>
+  >;
 }
 
 export default touchableFactory;

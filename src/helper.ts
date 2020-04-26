@@ -5,8 +5,8 @@ const colorResolverFactory = <AdditionalPalettes>({
   additionalPalettes,
   currentTheme,
 }: {
-  additionalPalettes?: {[key in keyof AdditionalPalettes]: string};
-  currentTheme: {[key in keyof ThemePalette]: string};
+  additionalPalettes?: Record<keyof AdditionalPalettes, Color>;
+  currentTheme: Record<keyof ThemePalette, Color>;
 }) => {
   const resolver = ({
     color,

@@ -1,12 +1,17 @@
 import {TouchableOpacityProps, ViewStyle} from 'react-native';
 import {
-  AddDefaultToObject,
   Color,
   OptionalTrueCondition,
   UnionDefaultKey,
   RequiredIfSpecified,
+  NonExistent,
 } from '../../types';
-import {ThemePalette, Themes as ThemesType} from '../../theme/types';
+import {
+  ThemePalette,
+  Themes as ThemesType,
+  GenericTheme,
+  GenericAdditionalPalette,
+} from '../../theme/types';
 
 type CheckBoxShapeVariation = 'Sharp' | 'Round' | 'Circular';
 
@@ -17,31 +22,30 @@ type CheckBoxSizeProps = {
 };
 
 type CheckBoxFactoryProps<
-  Themes,
-  AdditionalPalettes,
-  CheckBoxSize,
+  Themes extends GenericTheme,
+  AdditionalPalettes extends GenericAdditionalPalette | NonExistent,
+  CheckBoxSize extends Record<string, CheckBoxSizeProps> | NonExistent,
   //@ts-ignore: TS6133 Unused Variable
-  AllowCustomProps
+  AllowCustomProps extends boolean | NonExistent
 > = {
   themes: ThemesType<Themes>;
   additionalPalettes?: RequiredIfSpecified<
     AdditionalPalettes,
-    {[AdditionalPaletteKeys in keyof AdditionalPalettes]: Color}
+    Record<keyof AdditionalPalettes, Color>
   >;
   sizes?: RequiredIfSpecified<
     CheckBoxSize,
-    {
-      [SizeKey in keyof AddDefaultToObject<
-        CheckBoxSize,
-        CheckBoxSizeProps
-      >]: CheckBoxSizeProps
-    }
+    Record<UnionDefaultKey<keyof CheckBoxSize>, CheckBoxSizeProps>
   >;
   defaultColor?: keyof (ThemePalette & AdditionalPalettes);
   defaultType?: CheckBoxType;
 };
 
-type CheckBoxProps<AdditionalPalettes, CheckBoxSize, AllowCustomProps> = {
+type CheckBoxProps<
+  AdditionalPalettes extends GenericAdditionalPalette | NonExistent,
+  CheckBoxSize extends Record<string, CheckBoxSizeProps> | NonExistent,
+  AllowCustomProps extends boolean | NonExistent
+> = {
   _customOuterViewProps?: OptionalTrueCondition<
     AllowCustomProps,
     TouchableOpacityProps,

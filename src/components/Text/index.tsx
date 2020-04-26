@@ -1,6 +1,10 @@
 import React, {useContext} from 'react';
 import {Text as RNText, TextStyle} from 'react-native';
-import {OptionalExistCondition, UnionDefaultKey} from '../../types';
+import {
+  OptionalExistCondition,
+  UnionDefaultKey,
+  NonExistent,
+} from '../../types';
 import {colorResolverFactory} from '../../helper';
 import {
   TextFactoryProps,
@@ -9,14 +13,20 @@ import {
 } from './types';
 import {DEFAULT_TEXT_VARIATION, DefaultTextVariation} from './constants';
 import {TextSizeProps} from '../..';
+import {GenericAdditionalPalette, GenericTheme} from '../../theme/types';
 
 function textFactory<
-  Themes,
-  AdditionalPalettes,
-  TextVariation,
-  FontSize,
-  EmphasisToggleable,
-  AllowCustomProps
+  Themes extends GenericTheme,
+  AdditionalPalettes extends GenericAdditionalPalette | NonExistent,
+  TextVariation extends
+    | Record<
+        string | string,
+        TextVariationProps<FontSizeKey | null, AdditionalPalettes | null>
+      >
+    | NonExistent,
+  FontSizeKey extends string | string | NonExistent,
+  EmphasisToggleable extends boolean | NonExistent,
+  AllowCustomProps extends boolean | NonExistent
 >({
   themes,
   additionalPalettes,
@@ -29,22 +39,23 @@ function textFactory<
     TextVariation,
     typeof DEFAULT_TEXT_VARIATION
   >,
-  FontSize,
+  FontSizeKey,
   EmphasisToggleable,
   AllowCustomProps
->): {
-  [Variation in keyof OptionalExistCondition<
+>): Record<
+  keyof OptionalExistCondition<
     TextVariation,
     TextVariation,
     typeof DEFAULT_TEXT_VARIATION
-  >]: React.FunctionComponent<
-    Props<AdditionalPalettes, FontSize, EmphasisToggleable, AllowCustomProps>
+  >,
+  React.FunctionComponent<
+    Props<AdditionalPalettes, FontSizeKey, EmphasisToggleable, AllowCustomProps>
   >
-} {
+> {
   // Type
   type TextProps = Props<
     AdditionalPalettes,
-    FontSize,
+    FontSizeKey,
     EmphasisToggleable,
     AllowCustomProps
   >;
@@ -55,12 +66,10 @@ function textFactory<
     typeof DEFAULT_TEXT_VARIATION
   >;
 
-  type ExistanceConfirmedTextVariation = {
-    [VariationKeys in keyof TextVariation]: TextVariationProps<
-      FontSize,
-      AdditionalPalettes
-    >
-  };
+  type ExistanceConfirmedTextVariation = Record<
+    keyof TextVariation,
+    TextVariationProps<FontSizeKey, AdditionalPalettes>
+  >;
 
   // Context
   const themeContext: React.Context<keyof Themes> = React.createContext(
@@ -68,9 +77,9 @@ function textFactory<
   );
 
   // Text Collections
-  const texts: {
-    [Variation in TextVariationKeys]?: React.FunctionComponent<TextProps>
-  } = {};
+  const texts: Partial<
+    Record<TextVariationKeys, React.FunctionComponent<TextProps>>
+  > = {};
 
   for (const variationName in variation
     ? (variation as ExistanceConfirmedTextVariation)
@@ -135,15 +144,16 @@ function textFactory<
 
         // Size
         const textFontSize = (() => {
-          if (typeof fontSize == 'number') {
+          if (typeof fontSize === 'number') {
             return size || fontSize;
           } else {
+            type FontSizeKey = string | string;
             return size
-              ? (fontSize as TextSizeProps<FontSize>)[
-                  size as keyof UnionDefaultKey<FontSize>
+              ? (fontSize as TextSizeProps<FontSizeKey>)[
+                  size as UnionDefaultKey<FontSizeKey>
                 ]
-              : (fontSize as TextSizeProps<FontSize>)[
-                  'default' as keyof UnionDefaultKey<FontSize>
+              : (fontSize as TextSizeProps<FontSizeKey>)[
+                  'default' as UnionDefaultKey<FontSizeKey>
                 ];
           }
         })();
@@ -157,7 +167,7 @@ function textFactory<
               sizeKey as keyof typeof fontSize
             ]
           : (numericSize as number);
-*/
+        */
         // DecorationLine
         const textDecorationLine: TextStyle['textDecorationLine'] = (() => {
           if (isUnderline && isLinethrough) {
@@ -218,9 +228,7 @@ function textFactory<
       texts[`${variationName}` as TextVariationKeys] = Text;
     }
   }
-  return texts as {
-    [Variation in TextVariationKeys]: React.FunctionComponent<TextProps>
-  };
+  return texts as Record<TextVariationKeys, React.FunctionComponent<TextProps>>;
 }
 
 export default textFactory;

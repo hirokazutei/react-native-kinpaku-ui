@@ -10,9 +10,7 @@ type DefaultButtonSize =
   | 'huge'
   | 'massive';
 
-const DEFAULTLESS_BUTTON_SIZE: {
-  [key in DefaultButtonSize]: ButtonSizeProps
-} = {
+const DEFAULTLESS_BUTTON_SIZE: Record<DefaultButtonSize, ButtonSizeProps> = {
   tiny: {
     borderRadius: 6,
     fontSize: 12,
@@ -51,9 +49,10 @@ const DEFAULTLESS_BUTTON_SIZE: {
   },
 };
 
-const DEFAULT_BUTTON_SIZE: {
-  [key in UnionDefaultKey<DefaultButtonSize>]: ButtonSizeProps
-} = {
+const DEFAULT_BUTTON_SIZE: Record<
+  UnionDefaultKey<DefaultButtonSize>,
+  ButtonSizeProps
+> = {
   ...DEFAULTLESS_BUTTON_SIZE,
   default: DEFAULTLESS_BUTTON_SIZE.medium,
 };
@@ -64,7 +63,7 @@ const DEFAULT_BUTTON_FONT_WEIGHT: TextStyle['fontWeight'] = 'bold';
 
 const DEFAULT_BUTTON_BORDER_WIDTH: number = 2;
 
-const BORDER_RADIUS_MULTIPLIER: {[key in ButtonShapeVariation]: number} = {
+const BORDER_RADIUS_MULTIPLIER: Record<ButtonShapeVariation, number> = {
   Circular: 4,
   Round: 1,
   Sharp: 0,

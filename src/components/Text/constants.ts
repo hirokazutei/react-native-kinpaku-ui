@@ -8,9 +8,10 @@ type DefaultTextVariation =
   | 'Label'
   | 'Quote';
 
-const DEFAULT_TEXT_VARIATION: {
-  [textVariation in DefaultTextVariation]: TextVariationProps<null, null>
-} = {
+const DEFAULT_TEXT_VARIATION: Record<
+  DefaultTextVariation,
+  TextVariationProps<null, null>
+> = {
   Title: {
     fontWeight: 'bold',
     fontSize: 28,
