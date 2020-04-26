@@ -14,29 +14,31 @@ import {DEFAULT_TEXT_VARIATION} from '../../src/components/Text/constants';
 const {Title, Heading, SubHeading, Body, Label, Quote} = textFactory<
   typeof themes,
   null,
-  typeof DEFAULT_TEXT_VARIATION,
+  null,
   null,
   true,
   false
 >({
   themes,
-  textVariation: DEFAULT_TEXT_VARIATION,
 });
 
 const DEFAULT_PROPS = {
   children: 'Sample Text',
 };
 
-const textColorSelect: {[key in keyof ThemePalette]?: keyof ThemePalette} = {
+const textColorSelect: Partial<
+  Record<keyof ThemePalette, keyof ThemePalette>
+> = {
   text: 'text',
   primary: 'primary',
   secondary: 'secondary',
   tertiary: 'tertiary',
 };
 
-const ellipsizeModeSelect: {
-  [key in RNTextProps['ellipsizeMode']]: RNTextProps['ellipsizeMode']
-} = {
+const ellipsizeModeSelect: Record<
+  RNTextProps['ellipsizeMode'],
+  RNTextProps['ellipsizeMode']
+> = {
   head: 'head',
   middle: 'middle',
   tail: 'tail',
@@ -57,29 +59,29 @@ const getOptionalProps = (
 ): Partial<TextProps<null, null, true, false>> => {
   const {
     align,
-    bold,
     color,
     ellipsizeMode,
-    italic,
-    lineThrough,
+    isBold,
+    isItalic,
+    isLinethrough,
+    isUnderline,
     numberOfLines,
     size,
-    underline,
   } = overrrides;
   return {
     align: select('Align Options', textAlignSelect, align),
-    bold: boolean('Bold', bold),
     color: select('Color Options', textColorSelect, color),
     ellipsizeMode: select(
       'Ellipsize Mode Options',
       ellipsizeModeSelect,
       ellipsizeMode,
     ),
-    italic: boolean('Italic', italic),
-    lineThrough: boolean('Line Though', lineThrough),
+    isBold: boolean('Bold', isBold),
+    isItalic: boolean('Italic', isItalic),
+    isLinethrough: boolean('Line Though', isLinethrough),
+    isUnderline: boolean('Underline', isUnderline),
     numberOfLines: number('Nuber of Lines', numberOfLines),
     size: number('Numeric Size', size),
-    underline: boolean('Underline', underline),
   };
 };
 
