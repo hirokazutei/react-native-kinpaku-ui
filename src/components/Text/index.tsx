@@ -157,17 +157,7 @@ function textFactory<
                 ];
           }
         })();
-        /*
-        const sizeKey =
-          (fontSize && (size as keyof typeof fontSize | undefined)) ||
-          defaultFontSizeKey;
-        const numericSize = (!fontSize && size) || defaultFontSize;
-        const textFontSize = fontSize
-          ? (fontSize as {[SizeKey in keyof typeof fontSize]: number})[
-              sizeKey as keyof typeof fontSize
-            ]
-          : (numericSize as number);
-        */
+
         // DecorationLine
         const textDecorationLine: TextStyle['textDecorationLine'] = (() => {
           if (isUnderline && isLinethrough) {

@@ -5,12 +5,14 @@ import {storiesOf} from '@storybook/react-native';
 import {action} from '@storybook/addon-actions';
 import {boolean, select, withKnobs} from '@storybook/addon-knobs';
 import Provider from '../Provider';
-import {IntersectDefaultKey, UnionDefaultKey} from '../../src/types';
+import {UnionDefaultKey} from '../../src/types';
 import themes from '../../src/themes';
-import {ThemePalette} from '../../src/Theme/types';
 import {CheckBoxProps, CheckBoxType} from '../../src/components/CheckBox/types';
 import checkBoxFactory from '../../src/components/CheckBox';
-import {DefaultCheckBoxSize} from '../../src/components/CheckBox/constants';
+import {
+  DefaultCheckBoxSize,
+  DEFAULT_CHECK_BOX_SIZES,
+} from '../../src/components/CheckBox/constants';
 import {colorSelect} from '../knobs';
 
 const {Sharp, Round, Circular} = checkBoxFactory<
@@ -22,30 +24,31 @@ const {Sharp, Round, Circular} = checkBoxFactory<
   themes,
 });
 
+type StoryCheckBoxProps = CheckBoxProps<
+  null,
+  typeof DEFAULT_CHECK_BOX_SIZES,
+  null
+>;
+
 const CHECKBOX_SHAPES = [Sharp, Round, Circular];
 
 const CHECKBOX_TYPES: Array<CheckBoxType> = ['outline', 'fill', 'reverse'];
 
-const sizeSelect: Partial<
-  Record<
-    IntersectDefaultKey<DefaultCheckBoxSize>,
-    UnionDefaultKey<DefaultCheckBoxSize>
-  >
-> = {
-  small: 'small',
-  medium: 'medium',
-  large: 'large',
-};
+const sizeSelect: Array<UnionDefaultKey<DefaultCheckBoxSize>> = [
+  'small',
+  'medium',
+  'large',
+];
 
-const getRequiredProps = (): CheckBoxProps<null, null, null> => {
+const getRequiredProps = (): StoryCheckBoxProps => {
   return {
     onPress: action('button-pressed'),
   };
 };
 
 const getOptionalProps = (
-  overrides: Partial<CheckBoxProps<null, null, null>> = {},
-): Partial<CheckBoxProps<null, null, null>> => {
+  overrides: Partial<StoryCheckBoxProps> = {},
+): Partial<StoryCheckBoxProps> => {
   const {active, color, isDisabled, size, type} = overrides;
   return {
     active: boolean('Active', active),

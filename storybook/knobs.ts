@@ -25,4 +25,11 @@ const textAlignSelect: Array<TextStyle['textAlign']> = [
   'justify',
 ];
 
-export {alignSelect, colorSelect, textAlignSelect};
+const textColorSelect: Array<keyof ThemePalette> = [
+  'text',
+  'primary',
+  'secondary',
+  'tertiary',
+];
+
+export {alignSelect, colorSelect, textAlignSelect, textColorSelect};

@@ -101,7 +101,6 @@ function touchableFactory<
         ? currentTheme.disabled
         : colorResolver({color, defaultColor: currentTheme.primary});
       const borderColor = primaryColor;
-      // TODO: Solid/Outline types should be each individual component and not a proptype
       const fillColor =
         type === 'fill' ? primaryColor : currentTheme.background;
 

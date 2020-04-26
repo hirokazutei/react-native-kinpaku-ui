@@ -1,6 +1,7 @@
 import {Themes, ThemePalette} from './theme/types';
 
 type ThemeKey = 'test';
+
 type ThemeObject = Record<ThemeKey, ThemePalette>;
 
 const themes: Themes<ThemeObject> = {
