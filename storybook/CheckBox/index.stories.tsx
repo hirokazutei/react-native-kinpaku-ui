@@ -13,7 +13,7 @@ import {
   DefaultCheckBoxSize,
   DEFAULT_CHECK_BOX_SIZES,
 } from '../../src/components/CheckBox/constants';
-import {colorSelect} from '../knobs';
+import {selectColor} from '../knobs';
 
 const {Sharp, Round, Circular} = checkBoxFactory<
   typeof themes,
@@ -34,7 +34,7 @@ const CHECKBOX_SHAPES = [Sharp, Round, Circular];
 
 const CHECKBOX_TYPES: Array<CheckBoxType> = ['outline', 'fill', 'reverse'];
 
-const sizeSelect: Array<UnionDefaultKey<DefaultCheckBoxSize>> = [
+const selectSize: Array<UnionDefaultKey<DefaultCheckBoxSize>> = [
   'small',
   'medium',
   'large',
@@ -52,9 +52,9 @@ const getOptionalProps = (
   const {active, color, isDisabled, size, type} = overrides;
   return {
     active: boolean('Active', active),
-    color: select('Color Options', colorSelect, color),
+    color: select('Color Options', selectColor, color),
     isDisabled: boolean('isDisabled', isDisabled),
-    size: select('Size Options', sizeSelect, size),
+    size: select('Size Options', selectSize, size),
     type,
   };
 };

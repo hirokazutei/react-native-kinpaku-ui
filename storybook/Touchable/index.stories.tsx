@@ -6,7 +6,7 @@ import {action} from '@storybook/addon-actions';
 import {boolean, select, withKnobs} from '@storybook/addon-knobs';
 import Provider from '../Provider';
 import {UnionDefaultKey} from '../../src/types';
-import {alignSelect, colorSelect} from '../knobs';
+import {selectAlign, selectColor} from '../knobs';
 import themes from '../../src/themes';
 import touchableFactory from '../../src/components/Touchable';
 import {TouchableProps} from '../../src/components/Touchable/types';
@@ -34,7 +34,7 @@ const DEFAULT_PROPS = {
   children: <Text>Content</Text>,
 };
 
-const sizeSelect: Array<UnionDefaultKey<DefaultTouchableSize>> = [
+const selectSize: Array<UnionDefaultKey<DefaultTouchableSize>> = [
   'tiny',
   'small',
   'medium',
@@ -62,11 +62,11 @@ const getOptionalProps = (
 ): Partial<StoryTouchableProps> => {
   const {align, color, isDisabled, isStretched, size, type} = overrides;
   return {
-    align: select('Align Options', alignSelect, align),
-    color: select('Color Options', colorSelect, color),
+    align: select('Align Options', selectAlign, align),
+    color: select('Color Options', selectColor, color),
     isDisabled: boolean('Disabled', isDisabled),
     isStretched: boolean('Stretched', isStretched),
-    size: select('Size Option', sizeSelect, size),
+    size: select('Size Option', selectSize, size),
     type,
   };
 };

@@ -6,7 +6,7 @@ import {action} from '@storybook/addon-actions';
 import {boolean, select, text, withKnobs} from '@storybook/addon-knobs';
 import Provider from '../Provider';
 import {UnionDefaultKey} from '../../src/types';
-import {alignSelect, colorSelect} from '../knobs';
+import {selectAlign, selectColor} from '../knobs';
 import themes from '../../src/themes';
 import {ButtonProps, ButtonType} from '../../src/components/Button/types';
 import buttonFactory from '../../src/components/Button';
@@ -31,7 +31,7 @@ const DEFAULT_PROPS = {
   label: 'PRESS HERE',
 };
 
-const sizeSelect: Array<UnionDefaultKey<DefaultButtonSize>> = [
+const selectSize: Array<UnionDefaultKey<DefaultButtonSize>> = [
   'tiny',
   'small',
   'medium',
@@ -58,12 +58,12 @@ const geOptionalProps = (
 ): Partial<StoryButtonProps> => {
   const {color, isDisabled, isStretched, align, size, type} = overrides;
   return {
-    color: select('Color Options', colorSelect, color),
+    color: select('Color Options', selectColor, color),
     isDisabled: boolean('isDisabled', isDisabled),
     isStretched: boolean('isStretched', isStretched),
-    align: select('Align Options', alignSelect, align),
+    align: select('Align Options', selectAlign, align),
     onPress: action('button-pressed'),
-    size: select('Size Options', sizeSelect, size),
+    size: select('Size Options', selectSize, size),
     type,
   };
 };

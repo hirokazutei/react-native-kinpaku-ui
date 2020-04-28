@@ -14,9 +14,13 @@ import inputFieldFactory from '../../src/components/InputField';
 import {
   INPUT_FIELD_SHAPE,
   DEFAULT_INPUT_FIELD_SIZE,
+  DefaultInputFieldSize,
 } from '../../src/components/InputField/constants';
-import {InputFieldShape} from '../../src/components/InputField/types';
-import {colorSelect} from '../knobs';
+import {
+  InputFieldShape,
+  InputFieldVariation,
+} from '../../src/components/InputField/types';
+import {selectColor} from '../knobs';
 
 const INPUT_FIELD_SETTING_VARIATIONS = INPUT_FIELD_SHAPE.map(
   (shape: InputFieldShape) => {
@@ -43,22 +47,24 @@ const DEFAULT_PROPS = {
   value: '',
 };
 
-const variationSelect = {
-  creditCardNumber: 'creditCardNumber',
-  decimal: 'decimal',
-  email: 'email',
-  freeField: 'freeField',
-  name: 'name',
-  number: 'number',
-  oneTimeNumberCode: 'oneTimeNumberCode',
-  oneTimeCode: 'oneTimeCode',
-  paragraph: 'paragraph',
-  passcode: 'passcode',
-  password: 'password',
-  phone: 'phone',
-  url: 'url',
-  username: 'username',
-};
+const selectVariation: Array<InputFieldVariation> = [
+  'creditCardNumber',
+  'decimal',
+  'email',
+  'freeField',
+  'name',
+  'number',
+  'oneTimeNumberCode',
+  'oneTimeCode',
+  'paragraph',
+  'passcode',
+  'password',
+  'phone',
+  'url',
+  'username',
+];
+
+const selectSize: Array<DefaultInputFieldSize> = ['small', 'medium', 'large'];
 
 const getRequiredProps = (
   overrides: Partial<StoryInputFieldProps> = {},
@@ -72,7 +78,6 @@ const getRequiredProps = (
   };
 };
 
-// TODO: Size
 const geOptionalProps = (
   overrides: Partial<StoryInputFieldProps> = {},
 ): Partial<StoryInputFieldProps> => {
@@ -86,17 +91,18 @@ const geOptionalProps = (
     maxLength,
     placeholder,
     textColor,
+    size,
     type,
   } = overrides;
   return {
     autoFocus: boolean('Auto Focus', autoFocus),
     backgroundColor: select(
       'Background Color Options',
-      colorSelect,
+      selectColor,
       backgroundColor,
     ),
-    borderColor: select('Border Color Options', colorSelect, borderColor),
-    color: select('Color Options', colorSelect, color),
+    borderColor: select('Border Color Options', selectColor, borderColor),
+    color: select('Color Options', selectColor, color),
     defaultValue: text('Default Value', defaultValue),
     isDisabled: boolean('Disabled', isDisabled),
     maxLength: number('Max Length', maxLength),
@@ -106,8 +112,9 @@ const geOptionalProps = (
     onFocus: action('on-focus'),
     onKeyPress: action('on-key-press'),
     placeholder: text('Place Holder', placeholder),
+    size: select('Size Options', selectSize, size),
     type,
-    textColor: select('Text Color Options', colorSelect, textColor),
+    textColor: select('Text Color Options', selectColor, textColor),
   };
 };
 
@@ -143,7 +150,7 @@ storiesOf('UI/InputField', module)
         {INPUT_FIELD_SETTING_VARIATIONS.map((Components, index: number) => {
           const variationName = select(
             'Component Type',
-            variationSelect,
+            selectVariation,
             'number',
           );
           const Component = Components[variationName];

@@ -86,7 +86,7 @@ function inputFieldFactory<
         color = defaultColor,
         isDisabled,
         maxLength,
-        size,
+        size = 'default',
         textColor,
         type,
         ...inputFieldProps
@@ -183,7 +183,7 @@ function inputFieldFactory<
           : {};
 
         // Border
-        const borderWidthProp = isOutline ? {borderWidth: borderWidth} : {};
+        const borderWidthProp = isOutline ? {borderWidth} : {};
         const borderColorProp = !isFill
           ? {borderColor: primaryBorderColor}
           : {};

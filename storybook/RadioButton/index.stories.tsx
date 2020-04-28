@@ -16,7 +16,7 @@ import {
   DefaultRadioButtonSize,
   DEFAULT_RADIO_BUTTON_SIZE,
 } from '../../src/components/RadioButton/constants';
-import {colorSelect} from '../knobs';
+import {selectColor} from '../knobs';
 
 const {Sharp, Round, Circular} = radioButtonFactory<
   typeof themes,
@@ -41,7 +41,7 @@ const RADIO_BUTTON_TYPES: Array<RadioButtonType> = [
   'reverse',
 ];
 
-const sizeSelect: Array<UnionDefaultKey<DefaultRadioButtonSize>> = [
+const selectSize: Array<UnionDefaultKey<DefaultRadioButtonSize>> = [
   'small',
   'medium',
   'large',
@@ -60,9 +60,9 @@ const getOptionalProps = (
   const {active, color, isDisabled, size, type} = overrides;
   return {
     active: boolean('Active', active),
-    color: select('Color Options', colorSelect, color),
+    color: select('Color Options', selectColor, color),
     isDisabled: boolean('isDisabled', isDisabled),
-    size: select('Size Options', sizeSelect, size),
+    size: select('Size Options', selectSize, size),
     type,
   };
 };

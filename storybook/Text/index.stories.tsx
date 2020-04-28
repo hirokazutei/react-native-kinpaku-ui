@@ -4,7 +4,7 @@ import {TextProps as RNTextProps} from 'react-native';
 import {storiesOf} from '@storybook/react-native';
 import {boolean, select, number, text, withKnobs} from '@storybook/addon-knobs';
 import Provider from '../Provider';
-import {textAlignSelect, textColorSelect} from '../knobs';
+import {selectTextAlign, selectTextColor} from '../knobs';
 import themes from '../../src/themes';
 import {TextProps} from '../../src/components/Text/types';
 import textFactory from '../../src/components/Text';
@@ -26,7 +26,7 @@ const DEFAULT_PROPS = {
   children: 'Sample Text',
 };
 
-const ellipsizeModeSelect: Array<RNTextProps['ellipsizeMode']> = [
+const selectEllipsizeMode: Array<RNTextProps['ellipsizeMode']> = [
   'head',
   'middle',
   'tail',
@@ -57,11 +57,11 @@ const getOptionalProps = (
     size,
   } = overrrides;
   return {
-    align: select('Align Options', textAlignSelect, align),
-    color: select('Color Options', textColorSelect, color),
+    align: select('Align Options', selectTextAlign, align),
+    color: select('Color Options', selectTextColor, color),
     ellipsizeMode: select(
       'Ellipsize Mode Options',
-      ellipsizeModeSelect,
+      selectEllipsizeMode,
       ellipsizeMode,
     ),
     isBold: boolean('Bold', isBold),
