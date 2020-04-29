@@ -12,7 +12,6 @@ import {
   GenericTheme,
   GenericAdditionalPalette,
 } from '../../theme/types';
-import {DEFAULT_CHECK_BOX_SIZES} from './constants';
 
 type CheckBoxShapeVariation = 'Sharp' | 'Round' | 'Circular';
 
