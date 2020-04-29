@@ -1,5 +1,11 @@
 import React, {useContext} from 'react';
-import {TextInput, View, ViewStyle, TextStyle} from 'react-native';
+import {
+  TextInput,
+  View,
+  ViewStyle,
+  TextStyle,
+  FlexAlignType,
+} from 'react-native';
 import {
   UnionDefaultKey,
   OptionalExistCondition,
@@ -85,7 +91,9 @@ function inputFieldFactory<
         borderColor,
         color = defaultColor,
         isDisabled,
+        leftItem,
         maxLength,
+        rightItem,
         size = 'default',
         textColor,
         type,
@@ -204,12 +212,12 @@ function inputFieldFactory<
           fontFamily,
           isBold,
           isItalic,
-          leftIcon,
           letterSpacing,
           lineHeight,
           maxLength: defaultMaxLength,
           returnKeyType,
-          rightIcon,
+          staticLeftItem,
+          staticRightItem,
           textAlign,
           textContentType,
           ...inputFieldOptions
@@ -217,6 +225,7 @@ function inputFieldFactory<
 
         // WrappedStyle
         const wrapperStyleProps = {
+          alignItems: 'center' as FlexAlignType,
           flexDirection: 'row' as ViewStyle['flexDirection'],
           ...(isDisabled ? {borderColor: disabledColor} : borderColorProp),
           ...(isDisabled
@@ -249,7 +258,7 @@ function inputFieldFactory<
           <View
             style={wrapperStyleProps}
             {...(_customWrapperProps ? _customWrapperProps : {})}>
-            {leftIcon}
+            {leftItem || staticLeftItem}
             <TextInput
               style={fieldStyleProps}
               {...(isDisabled ? {editable: !isDisabled} : {})}
@@ -258,7 +267,7 @@ function inputFieldFactory<
               {...inputFieldOptions}
               {...(_customTextInputProps ? _customTextInputProps : {})}
             />
-            {rightIcon}
+            {rightItem || staticRightItem}
           </View>
         );
       };

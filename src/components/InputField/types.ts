@@ -30,7 +30,7 @@ type InputFieldVariation =
 
 type InputFieldShape = 'sharp' | 'round' | 'circular';
 
-type InputFieldType = 'underline' | 'outline' | 'fill';
+type InputFieldType = 'underline' | 'outline' | 'fill' | 'blank';
 
 type InputFieldSizeProps = {
   borderRadiusFontRatio?: number; // Ratio depends on the fontSize
@@ -51,11 +51,11 @@ type InputFieldVariationProps = {
   dataDetectorTypes?: TextInputProps['dataDetectorTypes'];
   hasClearButton?: boolean; // Available Only in Custom
   keyboardType?: TextInputProps['keyboardType'];
-  leftIcon?: React.ReactNode; // Available Only in Custom
+  staticLeftItem?: React.ReactNode;
   maxLength?: TextInputProps['maxLength'];
   multiline?: TextInputProps['multiline'];
   returnKeyType?: TextInputProps['returnKeyType'];
-  rightIcon?: React.ReactNode; // Available Only in Custom
+  staticRightItem?: React.ReactNode;
   secureTextEntry?: TextInputProps['secureTextEntry'];
   selectTextOnFocus?: TextInputProps['selectTextOnFocus'];
   spellCheck?: TextInputProps['spellCheck'];
@@ -128,6 +128,7 @@ type InputFieldProps<
   color?: keyof (ThemePalette & AdditionalPalettes);
   defaultValue?: string;
   isDisabled?: boolean;
+  leftItem?: React.ReactNode;
   maxLength?: number;
   onBlur?: (args: any) => any;
   onChange?: (args: any) => any;
@@ -135,6 +136,7 @@ type InputFieldProps<
   onFocus?: (args: any) => any;
   onKeyPress?: (args: any) => any;
   placeholder?: string;
+  rightItem?: React.ReactNode;
   size?: UnionDefaultKey<keyof InputFieldSize>;
   textColor?: keyof (ThemePalette & AdditionalPalettes);
   type?: InputFieldType;

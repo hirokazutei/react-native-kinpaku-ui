@@ -29,7 +29,7 @@ function checkBoxFactory<
   sizes,
   additionalPalettes,
   defaultColor,
-  defaultType = 'fill',
+  defaultType = 'outline',
 }: CheckBoxFactoryProps<
   Themes,
   AdditionalPalettes,
