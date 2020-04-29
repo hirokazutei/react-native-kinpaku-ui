@@ -122,7 +122,7 @@ function touchableFactory<
       const borderRadius = (() => {
         if (shapeKey === 'Circular') {
           return touchableSizeProperty.borderRadius * 256;
-        } else if (shapeKey == 'Round') {
+        } else if (shapeKey === 'Round') {
           return touchableSizeProperty.borderRadius;
         } else {
           return 0;

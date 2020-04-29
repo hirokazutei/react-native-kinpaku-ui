@@ -7,15 +7,25 @@ import {
   InputFieldShape,
 } from './types';
 
-type DefaultInputFieldSize = 'medium';
+type DefaultInputFieldSize = 'small' | 'medium' | 'large';
 
 const DEFAULTLESS_INPUT_FIELD_SIZE: Record<
   DefaultInputFieldSize,
   InputFieldSizeProps
 > = {
+  small: {
+    borderWidth: 2,
+    fontSize: 10,
+    padding: 8,
+  },
   medium: {
     borderWidth: 2,
     fontSize: 12,
+    padding: 8,
+  },
+  large: {
+    borderWidth: 2,
+    fontSize: 14,
     padding: 8,
   },
 };
@@ -310,4 +320,5 @@ export {
   DEFAULT_INPUT_VARIATION_SETTING,
   INPUT_FIELD_SHAPE,
   InputFieldVariation,
+  DefaultInputFieldSize,
 };

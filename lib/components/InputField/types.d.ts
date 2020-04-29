@@ -68,7 +68,7 @@ declare type InputFieldProps<AdditionalPalettes extends GenericAdditionalPalette
     onFocus?: (args: any) => any;
     onKeyPress?: (args: any) => any;
     placeholder?: string;
-    size?: UnionDefaultKey<InputFieldSize>;
+    size?: UnionDefaultKey<keyof InputFieldSize>;
     textColor?: keyof (ThemePalette & AdditionalPalettes);
     type?: InputFieldType;
     value: string;

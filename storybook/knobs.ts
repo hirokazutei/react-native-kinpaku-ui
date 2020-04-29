@@ -3,7 +3,7 @@ import {ThemePalette} from '../src/theme/types';
 
 type AlignKeys = 'baseline' | 'center' | 'flexStart' | 'flexEnd' | 'stretch';
 
-const alignSelect: Array<FlexAlignType> = [
+const selectAlign: Array<FlexAlignType> = [
   'baseline',
   'center',
   'flex-start',
@@ -11,13 +11,13 @@ const alignSelect: Array<FlexAlignType> = [
   'stretch',
 ];
 
-const colorSelect: Array<keyof ThemePalette> = [
+const selectColor: Array<keyof ThemePalette> = [
   'primary',
   'secondary',
   'tertiary',
 ];
 
-const textAlignSelect: Array<TextStyle['textAlign']> = [
+const selectTextAlign: Array<TextStyle['textAlign']> = [
   'auto',
   'left',
   'right',
@@ -25,11 +25,11 @@ const textAlignSelect: Array<TextStyle['textAlign']> = [
   'justify',
 ];
 
-const textColorSelect: Array<keyof ThemePalette> = [
+const selectTextColor: Array<keyof ThemePalette> = [
   'text',
   'primary',
   'secondary',
   'tertiary',
 ];
 
-export {alignSelect, colorSelect, textAlignSelect, textColorSelect};
+export {selectAlign, selectColor, selectTextAlign, selectTextColor};
