@@ -31,7 +31,7 @@ function radioButtonFactory<
   sizes,
   additionalPalettes,
   defaultColor,
-  defaultType,
+  defaultType = 'outline',
 }: RadioButtonFactoryProps<
   Themes,
   AdditionalPalettes,

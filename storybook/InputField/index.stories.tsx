@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import {View, ViewStyle, StyleSheet} from 'react-native';
+import {View, ViewStyle, StyleSheet, Text} from 'react-native';
 import {storiesOf} from '@storybook/react-native';
 import {action} from '@storybook/addon-actions';
 import {boolean, select, text, withKnobs, number} from '@storybook/addon-knobs';
@@ -41,6 +41,7 @@ const INPUT_FIELD_TYPES: Array<InputFieldType> = [
   'fill',
   'outline',
   'underline',
+  'blank',
 ];
 
 const DEFAULT_PROPS = {
@@ -162,6 +163,36 @@ storiesOf('UI/InputField', module)
                     key={index}
                     {...getRequiredProps()}
                     {...geOptionalProps({type})}
+                  />
+                );
+              })}
+            </View>
+          );
+        })}
+      </View>
+    </View>
+  ))
+  .add('Items', () => (
+    <View style={styles.baseView}>
+      <View style={styles.realignView}>
+        {INPUT_FIELD_SETTING_VARIATIONS.map((Components, index: number) => {
+          const variationName = select(
+            'Component Type',
+            selectVariation,
+            'number',
+          );
+          const Component = Components[variationName];
+          const Items = <Text>Item</Text>;
+          return (
+            <View key={index} style={styles.variationView}>
+              {INPUT_FIELD_TYPES.map((type: InputFieldType, index: number) => {
+                return (
+                  <Component
+                    key={index}
+                    {...getRequiredProps()}
+                    {...geOptionalProps({type})}
+                    leftItem={Items}
+                    rightItem={Items}
                   />
                 );
               })}
