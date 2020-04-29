@@ -4,7 +4,7 @@ import { Color, OptionalTrueCondition, RequiredIfSpecified, NonExistent, UnionDe
 import { ThemePalette, GenericTheme, GenericAdditionalPalette } from '../../theme/types';
 declare type InputFieldVariation = 'creditCardNumber' | 'decimal' | 'email' | 'freeField' | 'name' | 'number' | 'oneTimeNumberCode' | 'oneTimeCode' | 'paragraph' | 'passcode' | 'password' | 'phone' | 'url' | 'username';
 declare type InputFieldShape = 'sharp' | 'round' | 'circular';
-declare type InputFieldType = 'underline' | 'outline' | 'fill';
+declare type InputFieldType = 'underline' | 'outline' | 'fill' | 'blank';
 declare type InputFieldSizeProps = {
     borderRadiusFontRatio?: number;
     borderWidth?: number;
@@ -23,11 +23,11 @@ declare type InputFieldVariationProps = {
     dataDetectorTypes?: TextInputProps['dataDetectorTypes'];
     hasClearButton?: boolean;
     keyboardType?: TextInputProps['keyboardType'];
-    leftIcon?: React.ReactNode;
+    staticLeftItem?: React.ReactNode;
     maxLength?: TextInputProps['maxLength'];
     multiline?: TextInputProps['multiline'];
     returnKeyType?: TextInputProps['returnKeyType'];
-    rightIcon?: React.ReactNode;
+    staticRightItem?: React.ReactNode;
     secureTextEntry?: TextInputProps['secureTextEntry'];
     selectTextOnFocus?: TextInputProps['selectTextOnFocus'];
     spellCheck?: TextInputProps['spellCheck'];
@@ -61,6 +61,7 @@ declare type InputFieldProps<AdditionalPalettes extends GenericAdditionalPalette
     color?: keyof (ThemePalette & AdditionalPalettes);
     defaultValue?: string;
     isDisabled?: boolean;
+    leftItem?: React.ReactNode;
     maxLength?: number;
     onBlur?: (args: any) => any;
     onChange?: (args: any) => any;
@@ -68,6 +69,7 @@ declare type InputFieldProps<AdditionalPalettes extends GenericAdditionalPalette
     onFocus?: (args: any) => any;
     onKeyPress?: (args: any) => any;
     placeholder?: string;
+    rightItem?: React.ReactNode;
     size?: UnionDefaultKey<keyof InputFieldSize>;
     textColor?: keyof (ThemePalette & AdditionalPalettes);
     type?: InputFieldType;
