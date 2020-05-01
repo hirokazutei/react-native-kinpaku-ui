@@ -37,12 +37,10 @@ import {
 // Touchable
 import touchableFactory from './components/Touchable';
 import {
-  TouchableAllSizeProps,
   TouchableFactoryProps,
   TouchableProps,
   TouchableSizeProps,
   TouchableShapeVariation,
-  TouchableVerHorSizeProps,
 } from './components/Touchable/types';
 // RadioButton
 import radioButtonFactory from './components/RadioButton';
@@ -96,12 +94,10 @@ export {
   TextSizeProps,
   TextVariationProps,
   textFactory,
-  TouchableAllSizeProps,
   TouchableFactoryProps,
   TouchableProps,
   TouchableSizeProps,
   TouchableShapeVariation,
-  TouchableVerHorSizeProps,
   touchableFactory,
   UIFactory,
 };
