@@ -251,12 +251,16 @@ function inputFieldFactory<
 
         // LeftItemViewStyle
         const leftItemViewStyle = {
-          ...(sizeProp.leftItemSpacing ? sizeProp.leftItemSpacing : {}),
+          style: {
+            ...(sizeProp.leftItemSpacing ? sizeProp.leftItemSpacing : {}),
+          },
         };
 
         // RightItemViewStyle
         const rightItemViewStyle = {
-          ...(sizeProp.rightItemSpacing ? sizeProp.rightItemSpacing : {}),
+          style: {
+            ...(sizeProp.rightItemSpacing ? sizeProp.rightItemSpacing : {}),
+          },
         };
 
         return (
@@ -264,9 +268,7 @@ function inputFieldFactory<
             style={wrapperStyleProps}
             {...(_customWrapperProps ? _customWrapperProps : {})}>
             {!!(leftItem || staticLeftItem) && (
-              <View style={leftItemViewStyle}>
-                {leftItem || staticLeftItem}
-              </View>
+              <View {...leftItemViewStyle}>{leftItem || staticLeftItem}</View>
             )}
             <TextInput
               style={fieldStyleProps}
@@ -277,7 +279,7 @@ function inputFieldFactory<
               {...(_customTextInputProps ? _customTextInputProps : {})}
             />
             {!!(rightItem || staticRightItem) && (
-              <View style={rightItemViewStyle}>
+              <View {...rightItemViewStyle}>
                 {rightItem || staticRightItem}
               </View>
             )}

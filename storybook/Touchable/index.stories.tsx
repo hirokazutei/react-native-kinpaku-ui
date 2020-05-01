@@ -107,6 +107,10 @@ storiesOf('UI/Touchable', module)
             {...getRequiredProps()}
             {...getOptionalProps({type: 'outline'})}
           />
+          <Sharp
+            {...getRequiredProps()}
+            {...getOptionalProps({type: 'clear'})}
+          />
         </View>
         <View style={styles.horizontalView}>
           <Round {...getRequiredProps()} {...getOptionalProps()} />
@@ -114,12 +118,20 @@ storiesOf('UI/Touchable', module)
             {...getRequiredProps()}
             {...getOptionalProps({type: 'outline'})}
           />
+          <Round
+            {...getRequiredProps()}
+            {...getOptionalProps({type: 'clear'})}
+          />
         </View>
         <View style={styles.horizontalView}>
           <Circular {...getRequiredProps()} {...getOptionalProps()} />
           <Circular
             {...getRequiredProps()}
             {...getOptionalProps({type: 'outline'})}
+          />
+          <Circular
+            {...getRequiredProps()}
+            {...getOptionalProps({type: 'clear'})}
           />
         </View>
       </View>

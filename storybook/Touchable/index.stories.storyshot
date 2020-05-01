@@ -53,13 +53,12 @@ exports[`Storyshots UI/Touchable Default 1`] = `
             Object {
               "alignItems": "center",
               "alignSelf": "center",
-              "backgroundColor": "#88EEBB",
+              "backgroundColor": "#FEFFFF",
               "borderColor": "#88EEBB",
               "borderRadius": 0,
               "borderWidth": 2,
               "opacity": 1,
-              "paddingHorizontal": 8,
-              "paddingVertical": 8,
+              "padding": 8,
             }
           }
         >
@@ -87,8 +86,34 @@ exports[`Storyshots UI/Touchable Default 1`] = `
               "borderRadius": 0,
               "borderWidth": 2,
               "opacity": 1,
-              "paddingHorizontal": 8,
-              "paddingVertical": 8,
+              "padding": 8,
+            }
+          }
+        >
+          <Text>
+            Content
+          </Text>
+        </View>
+        <View
+          accessible={true}
+          clickable={true}
+          isTVSelectable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "alignItems": "center",
+              "alignSelf": "center",
+              "backgroundColor": "#FEFFFF",
+              "borderColor": "#88EEBB",
+              "borderRadius": 0,
+              "opacity": 1,
+              "padding": 8,
             }
           }
         >
@@ -122,13 +147,12 @@ exports[`Storyshots UI/Touchable Default 1`] = `
             Object {
               "alignItems": "center",
               "alignSelf": "center",
-              "backgroundColor": "#88EEBB",
+              "backgroundColor": "#FEFFFF",
               "borderColor": "#88EEBB",
               "borderRadius": 12,
               "borderWidth": 2,
               "opacity": 1,
-              "paddingHorizontal": 8,
-              "paddingVertical": 8,
+              "padding": 8,
             }
           }
         >
@@ -156,8 +180,34 @@ exports[`Storyshots UI/Touchable Default 1`] = `
               "borderRadius": 12,
               "borderWidth": 2,
               "opacity": 1,
-              "paddingHorizontal": 8,
-              "paddingVertical": 8,
+              "padding": 8,
+            }
+          }
+        >
+          <Text>
+            Content
+          </Text>
+        </View>
+        <View
+          accessible={true}
+          clickable={true}
+          isTVSelectable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "alignItems": "center",
+              "alignSelf": "center",
+              "backgroundColor": "#FEFFFF",
+              "borderColor": "#88EEBB",
+              "borderRadius": 12,
+              "opacity": 1,
+              "padding": 8,
             }
           }
         >
@@ -191,13 +241,12 @@ exports[`Storyshots UI/Touchable Default 1`] = `
             Object {
               "alignItems": "center",
               "alignSelf": "center",
-              "backgroundColor": "#88EEBB",
+              "backgroundColor": "#FEFFFF",
               "borderColor": "#88EEBB",
               "borderRadius": 3072,
               "borderWidth": 2,
               "opacity": 1,
-              "paddingHorizontal": 8,
-              "paddingVertical": 8,
+              "padding": 8,
             }
           }
         >
@@ -225,8 +274,34 @@ exports[`Storyshots UI/Touchable Default 1`] = `
               "borderRadius": 3072,
               "borderWidth": 2,
               "opacity": 1,
-              "paddingHorizontal": 8,
-              "paddingVertical": 8,
+              "padding": 8,
+            }
+          }
+        >
+          <Text>
+            Content
+          </Text>
+        </View>
+        <View
+          accessible={true}
+          clickable={true}
+          isTVSelectable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "alignItems": "center",
+              "alignSelf": "center",
+              "backgroundColor": "#FEFFFF",
+              "borderColor": "#88EEBB",
+              "borderRadius": 3072,
+              "opacity": 1,
+              "padding": 8,
             }
           }
         >
