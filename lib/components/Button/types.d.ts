@@ -1,13 +1,14 @@
 import { FlexAlignType, TextProperties, TextStyle, TouchableOpacityProps, ViewStyle } from 'react-native';
 import { Color, OptionalTrueCondition, UnionDefaultKey, RequiredIfSpecified, NonExistent } from '../../types';
 import { ThemePalette, Themes as ThemesType, GenericTheme, GenericAdditionalPalette } from '../../theme/types';
+import { PaddingSpacing } from '../../common/spacing';
 declare type ButtonShapeVariation = 'Circular' | 'Round' | 'Sharp';
 declare type ButtonType = 'fill' | 'clear' | 'outline';
 declare type ButtonSizeProps = {
     borderRadius: number;
     fontSize: number;
-    paddingHorizontal: number;
-    paddingVertical: number;
+    fontWeight?: TextStyle['fontWeight'];
+    buttonSpacing?: PaddingSpacing;
 };
 declare type ButtonFactoryProps<Themes extends GenericTheme, AdditionalPalettes extends GenericAdditionalPalette | NonExistent, ButtonSize extends Record<string | string, ButtonSizeProps> | NonExistent, AllowCustomProps extends boolean | NonExistent> = {
     themes: ThemesType<Themes>;

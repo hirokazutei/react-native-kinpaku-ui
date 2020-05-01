@@ -1,7 +1,7 @@
 /// <reference types="react" />
 import { ThemePalette } from './theme/types';
 import { RequiredIfSpecified, UnionDefaultKey } from './types';
-declare const UIFactory: <Themes extends Record<string, ThemePalette>, AdditionalPalettes extends Record<string, string> | null | undefined>(themes: Record<UnionDefaultKey<keyof Themes>, ThemePalette>, additionalPalettes?: RequiredIfSpecified<AdditionalPalettes, Required<Record<keyof AdditionalPalettes, string>>> | undefined) => {
+declare const UIFactory: <Themes extends Record<string, ThemePalette>, AdditionalPalettes extends void | Record<string, string> | null | undefined>(themes: Record<UnionDefaultKey<keyof Themes>, ThemePalette>, additionalPalettes?: RequiredIfSpecified<AdditionalPalettes, Required<Record<keyof AdditionalPalettes, string>>> | undefined) => {
     Body: import("react").FunctionComponent<import("./components/Text/types").TextProps<AdditionalPalettes, null, true, false>>;
     Button: Record<import("./components/Button/types").ButtonShapeVariation, import("react").FunctionComponent<import("./components/Button/types").ButtonProps<AdditionalPalettes, Record<UnionDefaultKey<import("./components/Button/constants").DefaultButtonSize>, import("./components/Button/types").ButtonSizeProps>, true>>>;
     Label: import("react").FunctionComponent<import("./components/Text/types").TextProps<AdditionalPalettes, null, true, false>>;
@@ -11,7 +11,7 @@ declare const UIFactory: <Themes extends Record<string, ThemePalette>, Additiona
     RadioButton: Record<import("./components/Button/types").ButtonShapeVariation, import("react").FunctionComponent<import("./components/RadioButton/types").RadioButtonProps<AdditionalPalettes, Record<UnionDefaultKey<import("./components/CheckBox/constants").DefaultCheckBoxSize>, import("./components/RadioButton/types").RadioButtonSizeProps>, false>>>;
     SubHeading: import("react").FunctionComponent<import("./components/Text/types").TextProps<AdditionalPalettes, null, true, false>>;
     Title: import("react").FunctionComponent<import("./components/Text/types").TextProps<AdditionalPalettes, null, true, false>>;
-    Touchable: Record<import("./components/Button/types").ButtonShapeVariation, import("react").FunctionComponent<import("./components/Touchable/types").TouchableProps<AdditionalPalettes, Record<UnionDefaultKey<import("./components/Button/constants").DefaultButtonSize>, import("./components/Touchable/types").TouchableAllSizeProps>, false>>>;
+    Touchable: Record<import("./components/Button/types").ButtonShapeVariation, import("react").FunctionComponent<import("./components/Touchable/types").TouchableProps<AdditionalPalettes, Record<UnionDefaultKey<import("./components/Button/constants").DefaultButtonSize>, import("./components/Touchable/types").TouchableSizeProps>, false>>>;
     Quote: import("react").FunctionComponent<import("./components/Text/types").TextProps<AdditionalPalettes, null, true, false>>;
 };
 export default UIFactory;

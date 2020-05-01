@@ -8,9 +8,9 @@ type UnionDefaultKey<T> = T | 'default';
 
 type IntersectDefaultKey<T> = T & 'default';
 
-type Falsy = undefined | null | false;
+type Falsy = undefined | null | false | void;
 
-type NonExistent = undefined | null;
+type NonExistent = undefined | null | void;
 
 type OptionalTrueCondition<T, IfTrue, IfFalse> = T extends Falsy
   ? IfFalse

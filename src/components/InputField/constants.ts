@@ -5,7 +5,16 @@ import {
   InputFieldVariation,
   InputFieldVariationProps,
   InputFieldShape,
+  InputFieldType,
 } from './types';
+
+const UNDERLINE: InputFieldType = 'underline';
+const OUTLINE: InputFieldType = 'outline';
+const FILL: InputFieldType = 'fill';
+const CLEAR: InputFieldType = 'clear';
+const SHARP: InputFieldShape = 'sharp';
+const ROUND: InputFieldShape = 'round';
+const CIRCULAR: InputFieldShape = 'circular';
 
 type DefaultInputFieldSize = 'small' | 'medium' | 'large';
 
@@ -15,18 +24,24 @@ const DEFAULTLESS_INPUT_FIELD_SIZE: Record<
 > = {
   small: {
     borderWidth: 2,
-    fontSize: 10,
-    padding: 8,
+    fontSize: 12,
+    fieldSpacing: {
+      padding: 2,
+    },
   },
   medium: {
     borderWidth: 2,
-    fontSize: 12,
-    padding: 8,
+    fontSize: 14,
+    fieldSpacing: {
+      padding: 2,
+    },
   },
   large: {
     borderWidth: 2,
-    fontSize: 14,
-    padding: 8,
+    fontSize: 16,
+    fieldSpacing: {
+      padding: 4,
+    },
   },
 };
 
@@ -308,17 +323,20 @@ const DEFAULT_INPUT_VARIATION_SETTING: Record<
   },
 };
 
-const INPUT_FIELD_SHAPE: Array<InputFieldShape> = [
-  'sharp',
-  'round',
-  'circular',
-];
+const INPUT_FIELD_SHAPE: Array<InputFieldShape> = [SHARP, ROUND, CIRCULAR];
 
 export {
+  CIRCULAR,
+  CLEAR,
   DEFAULT_INPUT_FIELD_BORDER_WIDTH,
   DEFAULT_INPUT_FIELD_SIZE,
   DEFAULT_INPUT_VARIATION_SETTING,
+  DefaultInputFieldSize,
+  FILL,
   INPUT_FIELD_SHAPE,
   InputFieldVariation,
-  DefaultInputFieldSize,
+  OUTLINE,
+  ROUND,
+  SHARP,
+  UNDERLINE,
 };

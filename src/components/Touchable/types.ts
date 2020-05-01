@@ -11,24 +11,16 @@ import {
   GenericTheme,
   GenericAdditionalPalette,
 } from '../../theme/types';
+import {PaddingSpacing} from '../../common/spacing';
 
-type TouchableType = 'fill' | 'outline';
+type TouchableType = 'fill' | 'outline' | 'clear';
 
 type TouchableShapeVariation = 'Sharp' | 'Round' | 'Circular';
 
-type VerHor = {paddingHorizontal: number; paddingVertical: number};
-
-type Padding = {padding: number};
-
-type TouchableVerHorSizeProps = {
+type TouchableSizeProps = {
   borderRadius: number;
-} & VerHor;
-
-type TouchableAllSizeProps = {
-  borderRadius: number;
-} & Padding;
-
-type TouchableSizeProps = TouchableVerHorSizeProps | TouchableAllSizeProps;
+  touchableSpacing?: PaddingSpacing;
+};
 
 type TouchableFactoryProps<
   Themes extends GenericTheme,
@@ -75,11 +67,9 @@ type TouchableProps<
 };
 
 export {
-  TouchableAllSizeProps,
   TouchableFactoryProps,
   TouchableProps,
   TouchableShapeVariation,
   TouchableSizeProps,
   TouchableType,
-  TouchableVerHorSizeProps,
 };

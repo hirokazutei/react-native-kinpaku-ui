@@ -11,6 +11,7 @@ import {
   GenericTheme,
   GenericAdditionalPalette,
 } from '../../theme/types';
+import {PaddingSpacing} from '../../common/spacing';
 
 type InputFieldVariation =
   | 'creditCardNumber'
@@ -30,15 +31,16 @@ type InputFieldVariation =
 
 type InputFieldShape = 'sharp' | 'round' | 'circular';
 
-type InputFieldType = 'underline' | 'outline' | 'fill' | 'blank';
+type InputFieldType = 'underline' | 'outline' | 'fill' | 'clear';
 
 type InputFieldSizeProps = {
   borderRadiusFontRatio?: number; // Ratio depends on the fontSize
   borderWidth?: number;
   fontSize: number;
-  paddingHorizontal?: number;
-  paddingVertical?: number;
-  padding?: number;
+  fieldSpacing?: PaddingSpacing;
+  textSpacing?: PaddingSpacing;
+  leftItemSpacing?: PaddingSpacing;
+  rightItemSpacing?: PaddingSpacing;
   staticBorderRadius?: number;
 };
 
