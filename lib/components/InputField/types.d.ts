@@ -2,16 +2,18 @@
 import { TextStyle, TextInputProps, ViewProps, ViewStyle } from 'react-native';
 import { Color, OptionalTrueCondition, RequiredIfSpecified, NonExistent, UnionDefaultKey } from '../../types';
 import { ThemePalette, GenericTheme, GenericAdditionalPalette } from '../../theme/types';
+import { PaddingSpacing } from '../../common/spacing';
 declare type InputFieldVariation = 'creditCardNumber' | 'decimal' | 'email' | 'freeField' | 'name' | 'number' | 'oneTimeNumberCode' | 'oneTimeCode' | 'paragraph' | 'passcode' | 'password' | 'phone' | 'url' | 'username';
 declare type InputFieldShape = 'sharp' | 'round' | 'circular';
-declare type InputFieldType = 'underline' | 'outline' | 'fill' | 'blank';
+declare type InputFieldType = 'underline' | 'outline' | 'fill' | 'clear';
 declare type InputFieldSizeProps = {
     borderRadiusFontRatio?: number;
     borderWidth?: number;
     fontSize: number;
-    paddingHorizontal?: number;
-    paddingVertical?: number;
-    padding?: number;
+    fieldSpacing?: PaddingSpacing;
+    textSpacing?: PaddingSpacing;
+    leftItemSpacing?: PaddingSpacing;
+    rightItemSpacing?: PaddingSpacing;
     staticBorderRadius?: number;
 };
 declare type InputFieldVariationProps = {

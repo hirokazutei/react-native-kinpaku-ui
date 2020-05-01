@@ -1,5 +1,11 @@
 import React, {useContext} from 'react';
-import {FlexAlignType, Text, TouchableOpacity} from 'react-native';
+import {
+  FlexAlignType,
+  Text,
+  TouchableOpacity,
+  TextStyle,
+  ViewStyle,
+} from 'react-native';
 import {
   OptionalExistCondition,
   UnionDefaultKey,
@@ -127,7 +133,7 @@ function buttonFactory<
         buttonSizeProperty.borderRadius;
 
       // Touchable Style
-      const touchableStyle = {
+      const touchableStyle: ViewStyle = {
         borderRadius: borderRadius,
         backgroundColor: buttonColor,
         alignItems: align,
@@ -142,12 +148,12 @@ function buttonFactory<
       };
 
       // Text Style
-      const textStyle = {
+      const textStyle: TextStyle = {
         color: fontColor,
         fontSize:
           (buttonSizeProperty && buttonSizeProperty.fontSize) ||
           DEFAULT_BUTTON_SIZE.default.fontSize,
-        textWeight: buttonSizeProperty.fontWeight || DEFAULT_BUTTON_FONT_WEIGHT,
+        fontWeight: buttonSizeProperty.fontWeight || DEFAULT_BUTTON_FONT_WEIGHT,
         ...(_customTextStyle || {}),
       };
 

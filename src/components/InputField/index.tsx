@@ -220,7 +220,7 @@ function inputFieldFactory<
         } = DEFAULT_INPUT_VARIATION_SETTING[settingKey as InputFieldVariation];
 
         // WrappedStyle
-        const wrapperStyleProps = {
+        const wrapperStyleProps: ViewStyle = {
           alignItems: 'center' as FlexAlignType,
           flexDirection: 'row' as ViewStyle['flexDirection'],
           ...(isDisabled ? {borderColor: disabledColor} : borderColorProp),
@@ -235,7 +235,7 @@ function inputFieldFactory<
         };
 
         // FieldStyle
-        const fieldStyleProps = {
+        const fieldStyleProps: TextStyle = {
           flex: 1,
           ...(sizeProp.textSpacing ? sizeProp.textSpacing : {}),
           ...(isBold ? {fontWeight: 'bold' as TextStyle['fontWeight']} : {}),

@@ -200,12 +200,12 @@ function textFactory<
         };
 
         // Text Props
-        const textProps = {
-          allowFontScaling,
+        const textProps: Omit<TextProps, 'children'> = {
           ellipsizeMode,
-          maxFontSizeMultiplier,
-          minimumFontScale,
           numberOfLines,
+          ...(allowFontScaling ? {allowFontScaling} : {}),
+          ...(maxFontSizeMultiplier ? {maxFontSizeMultiplier} : {}),
+          ...(minimumFontScale ? {minimumFontScale} : {}),
           ..._customTextProps,
         };
 

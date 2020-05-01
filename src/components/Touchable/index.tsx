@@ -1,5 +1,5 @@
 import React, {useContext} from 'react';
-import {FlexAlignType, TouchableOpacity} from 'react-native';
+import {FlexAlignType, TouchableOpacity, ViewStyle} from 'react-native';
 import {
   OptionalExistCondition,
   UnionDefaultKey,
@@ -139,7 +139,7 @@ function touchableFactory<
         ...borderWidth,
       };
 
-      const touchableStyle = {
+      const touchableStyle: ViewStyle = {
         alignSelf: !isStretched ? align : ('stretch' as FlexAlignType),
         alignItems: 'center' as FlexAlignType,
         backgroundColor: fillColor,

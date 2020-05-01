@@ -2,22 +2,13 @@
 import { FlexAlignType, TouchableOpacityProps, ViewStyle } from 'react-native';
 import { Color, OptionalTrueCondition, UnionDefaultKey, RequiredIfSpecified, NonExistent } from '../../types';
 import { ThemePalette, GenericTheme, GenericAdditionalPalette } from '../../theme/types';
-declare type TouchableType = 'fill' | 'outline';
+import { PaddingSpacing } from '../../common/spacing';
+declare type TouchableType = 'fill' | 'outline' | 'clear';
 declare type TouchableShapeVariation = 'Sharp' | 'Round' | 'Circular';
-declare type VerHor = {
-    paddingHorizontal: number;
-    paddingVertical: number;
-};
-declare type Padding = {
-    padding: number;
-};
-declare type TouchableVerHorSizeProps = {
+declare type TouchableSizeProps = {
     borderRadius: number;
-} & VerHor;
-declare type TouchableAllSizeProps = {
-    borderRadius: number;
-} & Padding;
-declare type TouchableSizeProps = TouchableVerHorSizeProps | TouchableAllSizeProps;
+    touchableSpacing?: PaddingSpacing;
+};
 declare type TouchableFactoryProps<Themes extends GenericTheme, AdditionalPalettes extends GenericAdditionalPalette | NonExistent, TouchableSize extends Record<string | string, TouchableSizeProps> | NonExistent, AllowCustomProps extends boolean | NonExistent> = {
     themes: Record<UnionDefaultKey<keyof Themes>, ThemePalette>;
     additionalPalettes?: RequiredIfSpecified<AdditionalPalettes, Record<keyof AdditionalPalettes, Color>>;
@@ -36,5 +27,5 @@ declare type TouchableProps<AdditionalPalettes extends GenericAdditionalPalette 
     type?: TouchableType;
     onPress: (args: any) => any;
 };
-export { TouchableAllSizeProps, TouchableFactoryProps, TouchableProps, TouchableShapeVariation, TouchableSizeProps, TouchableType, TouchableVerHorSizeProps, };
+export { TouchableFactoryProps, TouchableProps, TouchableShapeVariation, TouchableSizeProps, TouchableType, };
 //# sourceMappingURL=types.d.ts.map
