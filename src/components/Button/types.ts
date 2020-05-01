@@ -18,6 +18,7 @@ import {
   GenericTheme,
   GenericAdditionalPalette,
 } from '../../theme/types';
+import {PaddingSpacing} from '../../common/spacing';
 
 type ButtonShapeVariation = 'Circular' | 'Round' | 'Sharp';
 
@@ -26,8 +27,8 @@ type ButtonType = 'fill' | 'clear' | 'outline';
 type ButtonSizeProps = {
   borderRadius: number;
   fontSize: number;
-  paddingHorizontal: number;
-  paddingVertical: number;
+  fontWeight?: TextStyle['fontWeight'];
+  buttonSpacing?: PaddingSpacing;
 };
 
 type ButtonFactoryProps<

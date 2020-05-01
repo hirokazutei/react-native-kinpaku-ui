@@ -16,6 +16,9 @@ import {
   RADIO_BUTTON_SHAPE_VARIATION_KEYS,
   DEFAULT_RADIO_BUTTON_SIZE,
   DefaultRadioButtonSize,
+  OUTLINE,
+  REVERSE,
+  FILL,
 } from './constants';
 import {GenericTheme, GenericAdditionalPalette} from '../../theme/types';
 
@@ -31,7 +34,7 @@ function radioButtonFactory<
   sizes,
   additionalPalettes,
   defaultColor,
-  defaultType = 'outline',
+  defaultType = OUTLINE,
 }: RadioButtonFactoryProps<
   Themes,
   AdditionalPalettes,
@@ -100,13 +103,13 @@ function radioButtonFactory<
         ? currentTheme.disabled
         : colorResolver({color, defaultColor: currentTheme.primary});
       const activeColor =
-        type === 'reverse' ? currentTheme.background : primaryColor;
+        type === REVERSE ? currentTheme.background : primaryColor;
       const inactiveColor =
-        type === 'reverse' ? primaryColor : currentTheme.background;
+        type === REVERSE ? primaryColor : currentTheme.background;
       const outerRingColor = primaryColor;
       const dotColor = active ? activeColor : inactiveColor;
       const innerRingColor =
-        type === 'reverse' ? primaryColor : currentTheme.background;
+        type === REVERSE ? primaryColor : currentTheme.background;
 
       // Size
       const {size: ringSize, dotSize: maybeDotSize, borderThickness} = sizes
@@ -119,7 +122,7 @@ function radioButtonFactory<
           ];
 
       const dotSize =
-        type === 'fill' ? ringSize - borderThickness * 2 : maybeDotSize;
+        type === FILL ? ringSize - borderThickness * 2 : maybeDotSize;
 
       // BorderStyles
       const borderStyles = borderThickness;

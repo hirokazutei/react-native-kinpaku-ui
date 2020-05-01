@@ -19,9 +19,14 @@ import {
   InputFieldVariation,
 } from './types';
 import {
+  CIRCULAR,
   DEFAULT_INPUT_FIELD_BORDER_WIDTH,
   DEFAULT_INPUT_FIELD_SIZE,
   DEFAULT_INPUT_VARIATION_SETTING,
+  ROUND,
+  OUTLINE,
+  UNDERLINE,
+  FILL,
 } from './constants';
 import {GenericTheme, GenericAdditionalPalette} from '../../theme/types';
 
@@ -36,9 +41,9 @@ function inputFieldFactory<
   themes,
   additionalPalettes,
   sizes,
-  shape = 'circular',
+  shape = ROUND,
   defaultColor,
-  defaultType = 'outline',
+  defaultType = OUTLINE,
 }: InputFieldFactoryProps<
   Themes,
   AdditionalPalettes,
@@ -96,7 +101,7 @@ function inputFieldFactory<
         rightItem,
         size = 'default',
         textColor,
-        type,
+        type = defaultType,
         ...inputFieldProps
       }: InputFieldProps) => {
         // Palettes
@@ -107,13 +112,13 @@ function inputFieldFactory<
 
         // Type
         const setType = type || defaultType;
-        const isOutline = setType === 'outline';
-        const isFill = setType === 'fill';
-        const isUnderline = setType === 'underline';
+        const isOutline = setType === OUTLINE;
+        const isFill = setType === FILL;
+        const isUnderline = setType === UNDERLINE;
 
         // Shape
-        const isRound = shape === 'round';
-        const isCircular = shape === 'circular';
+        const isRound = shape === ROUND;
+        const isCircular = shape === CIRCULAR;
 
         // Set-Up Color
         const colorResolver = colorResolverFactory<AdditionalPalettes>({
@@ -148,15 +153,6 @@ function inputFieldFactory<
         const borderWidth = sizeProp.borderWidth
           ? sizeProp.borderWidth
           : DEFAULT_INPUT_FIELD_BORDER_WIDTH;
-
-        // Padding
-        const paddingProp = sizeProp.padding ? {padding: sizeProp.padding} : {};
-        const paddingHorizontalProp = sizeProp.paddingHorizontal
-          ? {padding: sizeProp.paddingHorizontal}
-          : {};
-        const paddingVerticalProp = sizeProp.paddingVertical
-          ? {padding: sizeProp.paddingVertical}
-          : {};
 
         // Border Radius
         const borderRadiusFontRatio = sizeProp.borderRadiusFontRatio
@@ -234,15 +230,14 @@ function inputFieldFactory<
           ...borderWidthProp, // Add that to set-up
           ...borderBottomWidthProp,
           ...borderRadiusProp,
-          ...paddingProp,
-          ...paddingHorizontalProp,
-          ...paddingVerticalProp,
+          ...(sizeProp.fieldSpacing ? sizeProp.fieldSpacing : {}),
           ...(_customWrapperStyle ? _customWrapperStyle : {}),
         };
 
         // FieldStyle
         const fieldStyleProps = {
           flex: 1,
+          ...(sizeProp.textSpacing ? sizeProp.textSpacing : {}),
           ...(isBold ? {fontWeight: 'bold' as TextStyle['fontWeight']} : {}),
           ...(isItalic ? {fontStyle: 'italic' as TextStyle['fontStyle']} : {}),
           ...(fontFamily ? {fontFamily} : {}),
@@ -254,11 +249,25 @@ function inputFieldFactory<
           ...(_customTextInputStyle ? _customTextInputStyle : {}),
         };
 
+        // LeftItemViewStyle
+        const leftItemViewStyle = {
+          ...(sizeProp.leftItemSpacing ? sizeProp.leftItemSpacing : {}),
+        };
+
+        // RightItemViewStyle
+        const rightItemViewStyle = {
+          ...(sizeProp.rightItemSpacing ? sizeProp.rightItemSpacing : {}),
+        };
+
         return (
           <View
             style={wrapperStyleProps}
             {...(_customWrapperProps ? _customWrapperProps : {})}>
-            {leftItem || staticLeftItem}
+            {!!(leftItem || staticLeftItem) && (
+              <View style={leftItemViewStyle}>
+                {leftItem || staticLeftItem}
+              </View>
+            )}
             <TextInput
               style={fieldStyleProps}
               {...(isDisabled ? {editable: !isDisabled} : {})}
@@ -267,7 +276,11 @@ function inputFieldFactory<
               {...inputFieldOptions}
               {...(_customTextInputProps ? _customTextInputProps : {})}
             />
-            {rightItem || staticRightItem}
+            {!!(rightItem || staticRightItem) && (
+              <View style={rightItemViewStyle}>
+                {rightItem || staticRightItem}
+              </View>
+            )}
           </View>
         );
       };

@@ -1,5 +1,9 @@
-import {CheckBoxSizeProps, CheckBoxShapeVariation} from './types';
+import {CheckBoxSizeProps, CheckBoxShapeVariation, CheckBoxType} from './types';
 import {UnionDefaultKey} from '../../types';
+
+const OUTLINE: CheckBoxType = 'outline';
+const FILL: CheckBoxType = 'fill';
+const REVERSE: CheckBoxType = 'reverse';
 
 type DefaultCheckBoxSize = 'small' | 'medium' | 'large';
 
@@ -34,6 +38,9 @@ const CHECK_BOX_SHAPE_VARIATION_KEYS: Array<CheckBoxShapeVariation> = [
 
 export {
   DEFAULT_CHECK_BOX_SIZES,
-  CHECK_BOX_SHAPE_VARIATION_KEYS,
   DefaultCheckBoxSize,
+  CHECK_BOX_SHAPE_VARIATION_KEYS,
+  FILL,
+  OUTLINE,
+  REVERSE,
 };

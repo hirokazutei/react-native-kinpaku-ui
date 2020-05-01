@@ -15,9 +15,12 @@ import {
   CHECK_BOX_SHAPE_VARIATION_KEYS,
   DEFAULT_CHECK_BOX_SIZES,
   DefaultCheckBoxSize,
+  REVERSE,
 } from './constants';
 import {colorResolverFactory} from '../../helper';
 import {GenericTheme, GenericAdditionalPalette} from '../../theme/types';
+import {OUTLINE} from './constants';
+import {FILL} from '../Button/constants';
 
 function checkBoxFactory<
   Themes extends GenericTheme,
@@ -29,7 +32,7 @@ function checkBoxFactory<
   sizes,
   additionalPalettes,
   defaultColor,
-  defaultType = 'outline',
+  defaultType = OUTLINE,
 }: CheckBoxFactoryProps<
   Themes,
   AdditionalPalettes,
@@ -96,15 +99,15 @@ function checkBoxFactory<
         ? currentTheme.disabled
         : colorResolver({color, defaultColor: currentTheme.primary});
       const activeColor =
-        type === 'fill' || type === 'reverse'
+        type === FILL || type === REVERSE
           ? currentTheme.background
           : primaryColor;
       const inactiveColor =
-        type === 'fill' ? primaryColor : currentTheme.background;
+        type === FILL ? primaryColor : currentTheme.background;
       const outerBorderColor = primaryColor;
       const checkColor = active ? activeColor : inactiveColor;
       const innerBackgroundColor =
-        (type === 'reverse' && active) || type === 'fill'
+        (type === REVERSE && active) || type === FILL
           ? primaryColor
           : currentTheme.background;
 

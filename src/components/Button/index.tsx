@@ -14,13 +14,15 @@ import {
   ButtonType,
 } from './types';
 import {
+  BORDER_RADIUS_MULTIPLIER,
+  BUTTON_SHAPE_VARIATION_KEYS,
   DEFAULT_BUTTON_SIZE,
   DEFAULT_BUTTON_ALIGN,
   DEFAULT_BUTTON_FONT_WEIGHT,
   DEFAULT_BUTTON_BORDER_WIDTH,
-  BORDER_RADIUS_MULTIPLIER,
-  BUTTON_SHAPE_VARIATION_KEYS,
   DefaultButtonSize,
+  FILL,
+  OUTLINE,
 } from './constants';
 import {GenericTheme, GenericAdditionalPalette} from '../../theme/types';
 
@@ -34,7 +36,7 @@ function buttonFactory<
   sizes,
   additionalPalettes,
   defaultColor,
-  defaultType = 'fill' as ButtonType,
+  defaultType = OUTLINE,
 }: ButtonFactoryProps<
   Themes,
   AdditionalPalettes,
@@ -101,13 +103,9 @@ function buttonFactory<
         ? currentTheme.disabled
         : colorResolver({color, defaultColor: currentTheme.primary});
       const buttonColor =
-        type === ('fill' as ButtonType)
-          ? primaryColor
-          : currentTheme.background;
+        type === (FILL as ButtonType) ? primaryColor : currentTheme.background;
       const fontColor =
-        type === ('fill' as ButtonType)
-          ? currentTheme.background
-          : primaryColor;
+        type === (FILL as ButtonType) ? currentTheme.background : primaryColor;
 
       // Size
       const buttonSizeProperty = sizes
@@ -116,7 +114,7 @@ function buttonFactory<
 
       // BorderStyles
       const borderStyles =
-        type === 'outline'
+        type === OUTLINE
           ? {
               borderColor: primaryColor,
               borderWidth: DEFAULT_BUTTON_BORDER_WIDTH,
@@ -124,31 +122,21 @@ function buttonFactory<
           : {};
 
       // BorderRadius
-      const borderRadius = (() => {
-        if (buttonSizeProperty) {
-          return (
-            BORDER_RADIUS_MULTIPLIER[variationKey as ButtonShapeVariation] *
-            buttonSizeProperty.borderRadius
-          );
-        } else {
-          return DEFAULT_BUTTON_SIZE.default.paddingHorizontal;
-        }
-      })();
+      const borderRadius =
+        BORDER_RADIUS_MULTIPLIER[variationKey as ButtonShapeVariation] *
+        buttonSizeProperty.borderRadius;
 
       // Touchable Style
       const touchableStyle = {
         borderRadius: borderRadius,
         backgroundColor: buttonColor,
-        paddingHorizontal:
-          (buttonSizeProperty && buttonSizeProperty.paddingHorizontal) ||
-          DEFAULT_BUTTON_SIZE.default.paddingHorizontal,
         alignItems: align,
         alignSelf: !isStretched
           ? DEFAULT_BUTTON_ALIGN
           : ('stretch' as FlexAlignType),
-        paddingVertical:
-          (buttonSizeProperty && buttonSizeProperty.paddingVertical) ||
-          DEFAULT_BUTTON_SIZE.default.paddingVertical,
+        ...(buttonSizeProperty.buttonSpacing
+          ? buttonSizeProperty.buttonSpacing
+          : {}),
         ...borderStyles,
         ...(_customButtonStyle || {}),
       };
@@ -159,7 +147,7 @@ function buttonFactory<
         fontSize:
           (buttonSizeProperty && buttonSizeProperty.fontSize) ||
           DEFAULT_BUTTON_SIZE.default.fontSize,
-        fontWeight: DEFAULT_BUTTON_FONT_WEIGHT,
+        textWeight: buttonSizeProperty.fontWeight || DEFAULT_BUTTON_FONT_WEIGHT,
         ...(_customTextStyle || {}),
       };
 

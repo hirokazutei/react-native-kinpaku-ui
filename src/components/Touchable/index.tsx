@@ -6,12 +6,10 @@ import {
   NonExistent,
 } from '../../types';
 import {
-  TouchableAllSizeProps,
+  TouchableSizeProps,
   TouchableFactoryProps,
   TouchableProps as Props,
-  TouchableSizeProps,
   TouchableShapeVariation,
-  TouchableVerHorSizeProps,
 } from './types';
 import {
   DEFAULT_TOUCHABLE_ALIGN,
@@ -19,6 +17,9 @@ import {
   DEFAULT_TOUCHABLE_SIZE,
   DefaultTouchableSize,
   TOUCHABLE_SHAPE_VARIATION_KEYS,
+  FILL,
+  OUTLINE,
+  CLEAR,
 } from './constants';
 import {colorResolverFactory} from '../../helper';
 import {GenericTheme, GenericAdditionalPalette} from '../../theme/types';
@@ -34,7 +35,7 @@ function touchableFactory<
   themes,
   sizes,
   additionalPalettes,
-  defaultType = 'fill',
+  defaultType = OUTLINE,
 }: TouchableFactoryProps<
   Themes,
   AdditionalPalettes,
@@ -96,13 +97,16 @@ function touchableFactory<
         additionalPalettes,
       });
 
+      // Type
+      const isFill = type === FILL;
+      const isClear = type === CLEAR;
+
       // Color
       const primaryColor = isDisabled
         ? currentTheme.disabled
         : colorResolver({color, defaultColor: currentTheme.primary});
       const borderColor = primaryColor;
-      const fillColor =
-        type === 'fill' ? primaryColor : currentTheme.background;
+      const fillColor = isFill ? primaryColor : currentTheme.background;
 
       // Size
       const touchableSizeProperty = sizes
@@ -111,12 +115,6 @@ function touchableFactory<
             TouchableSizeProps
           >)[size as UnionDefaultKey<keyof TouchableSize>]
         : DEFAULT_TOUCHABLE_SIZE[size as UnionDefaultKey<DefaultTouchableSize>];
-
-      // BorderStyles
-      const borderStyles = {
-        borderColor: borderColor,
-        borderWidth: DEFAULT_TOUCHABLE_BORDER_WIDTH,
-      };
 
       // Border Radius
       const borderRadius = (() => {
@@ -129,26 +127,25 @@ function touchableFactory<
         }
       })();
 
-      const touchablePaddingVertical =
-        (touchableSizeProperty &&
-          (touchableSizeProperty as TouchableVerHorSizeProps)
-            .paddingVertical) ||
-        (touchableSizeProperty as TouchableAllSizeProps).padding;
-      const touchablePaddingHorizontal =
-        (touchableSizeProperty &&
-          (touchableSizeProperty as TouchableVerHorSizeProps)
-            .paddingHorizontal) ||
-        (touchableSizeProperty as TouchableAllSizeProps).padding;
+      // Border Width
+      const borderWidth = isClear
+        ? {}
+        : {borderWidth: DEFAULT_TOUCHABLE_BORDER_WIDTH};
+
+      // BorderStyles
+      const borderStyles = {
+        borderColor: borderColor,
+        borderRadius: borderRadius,
+        ...borderWidth,
+      };
 
       const touchableStyle = {
         alignSelf: !isStretched ? align : ('stretch' as FlexAlignType),
         alignItems: 'center' as FlexAlignType,
-        borderRadius,
         backgroundColor: fillColor,
-        paddingHorizontal:
-          touchablePaddingHorizontal || DEFAULT_TOUCHABLE_SIZE.default.padding,
-        paddingVertical:
-          touchablePaddingVertical || DEFAULT_TOUCHABLE_SIZE.default.padding,
+        ...(touchableSizeProperty.touchableSpacing
+          ? touchableSizeProperty.touchableSpacing
+          : {}),
         ...borderStyles,
         ..._customStyle,
       };
