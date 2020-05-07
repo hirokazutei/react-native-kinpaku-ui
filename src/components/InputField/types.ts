@@ -134,6 +134,7 @@ type InputFieldProps<
   maxLength?: number;
   onBlur?: (args: any) => any;
   onChange?: (args: any) => any;
+  onChangeText?: (args: any) => any;
   onEndEditing?: (args: any) => any;
   onFocus?: (args: any) => any;
   onKeyPress?: (args: any) => any;
