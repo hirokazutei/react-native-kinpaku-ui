@@ -15,7 +15,14 @@ type Themes<ThemeObject> = Record<
 >;
 
 type GenericTheme = Record<UnionDefaultKey<string | string>, ThemePalette>;
+type DefaultTheme = Record<'default', ThemePalette>;
 
 type GenericAdditionalPalette = Record<string, Color>;
 
-export {GenericAdditionalPalette, GenericTheme, Themes, ThemePalette};
+export {
+  GenericAdditionalPalette,
+  DefaultTheme,
+  GenericTheme,
+  Themes,
+  ThemePalette,
+};

@@ -18,19 +18,13 @@ import {
 } from '../../src/components/RadioButton/constants';
 import {selectColor} from '../knobs';
 
-const {Sharp, Round, Circular} = radioButtonFactory<
-  typeof themes,
-  null,
-  null,
-  null
->({
+const {Sharp, Round, Circular} = radioButtonFactory<typeof themes>({
   themes,
 });
 
 type StoryRadioButtonProps = RadioButtonProps<
   null,
-  typeof DEFAULT_RADIO_BUTTON_SIZE,
-  null
+  typeof DEFAULT_RADIO_BUTTON_SIZE
 >;
 
 const RADIO_BUTTON_SHAPES = [Sharp, Round, Circular];

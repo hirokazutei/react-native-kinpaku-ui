@@ -15,20 +15,11 @@ import {
 } from '../../src/components/CheckBox/constants';
 import {selectColor} from '../knobs';
 
-const {Sharp, Round, Circular} = checkBoxFactory<
-  typeof themes,
-  null,
-  null,
-  null
->({
+const {Sharp, Round, Circular} = checkBoxFactory<typeof themes>({
   themes,
 });
 
-type StoryCheckBoxProps = CheckBoxProps<
-  null,
-  typeof DEFAULT_CHECK_BOX_SIZES,
-  null
->;
+type StoryCheckBoxProps = CheckBoxProps<null, typeof DEFAULT_CHECK_BOX_SIZES>;
 
 const CHECKBOX_SHAPES = [Sharp, Round, Circular];
 

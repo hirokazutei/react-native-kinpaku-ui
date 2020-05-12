@@ -10,7 +10,7 @@ type DefaultTextVariation =
 
 const DEFAULT_TEXT_VARIATION: Record<
   DefaultTextVariation,
-  TextVariationProps<null, null>
+  TextVariationProps
 > = {
   Title: {
     fontWeight: 'bold',

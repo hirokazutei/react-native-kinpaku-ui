@@ -13,20 +13,24 @@ import {
 } from './types';
 import {DEFAULT_TEXT_VARIATION, DefaultTextVariation} from './constants';
 import {TextSizeProps} from '../..';
-import {GenericAdditionalPalette, GenericTheme} from '../../theme/types';
+import {
+  GenericAdditionalPalette,
+  GenericTheme,
+  DefaultTheme,
+} from '../../theme/types';
 
 function textFactory<
-  Themes extends GenericTheme,
-  AdditionalPalettes extends GenericAdditionalPalette | NonExistent,
+  Themes extends GenericTheme = DefaultTheme,
+  AdditionalPalettes extends GenericAdditionalPalette | NonExistent = null,
   TextVariation extends
     | Record<
         string | string,
         TextVariationProps<FontSizeKey | null, AdditionalPalettes | null>
       >
-    | NonExistent,
-  FontSizeKey extends string | string | NonExistent,
-  EmphasisToggleable extends boolean | NonExistent,
-  AllowCustomProps extends boolean | NonExistent
+    | NonExistent = null,
+  FontSizeKey extends string | string | NonExistent = null,
+  EmphasisDisabled extends boolean | NonExistent = false,
+  AllowCustomProps extends boolean | NonExistent = false
 >({
   themes,
   additionalPalettes,
@@ -40,7 +44,7 @@ function textFactory<
     typeof DEFAULT_TEXT_VARIATION
   >,
   FontSizeKey,
-  EmphasisToggleable,
+  EmphasisDisabled,
   AllowCustomProps
 >): Record<
   keyof OptionalExistCondition<
@@ -49,14 +53,14 @@ function textFactory<
     typeof DEFAULT_TEXT_VARIATION
   >,
   React.FunctionComponent<
-    Props<AdditionalPalettes, FontSizeKey, EmphasisToggleable, AllowCustomProps>
+    Props<AdditionalPalettes, FontSizeKey, EmphasisDisabled, AllowCustomProps>
   >
 > {
   // Type
   type TextProps = Props<
     AdditionalPalettes,
     FontSizeKey,
-    EmphasisToggleable,
+    EmphasisDisabled,
     AllowCustomProps
   >;
 

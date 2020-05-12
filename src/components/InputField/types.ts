@@ -10,6 +10,7 @@ import {
   ThemePalette,
   GenericTheme,
   GenericAdditionalPalette,
+  DefaultTheme,
 } from '../../theme/types';
 import {PaddingSpacing} from '../../common/spacing';
 
@@ -75,13 +76,13 @@ type InputFieldVariationProps = {
 };
 
 type InputFieldFactoryProps<
-  Themes extends GenericTheme,
-  AdditionalPalettes extends GenericAdditionalPalette | NonExistent,
+  Themes extends GenericTheme = DefaultTheme,
+  AdditionalPalettes extends GenericAdditionalPalette | NonExistent = null,
   InputFieldSize extends
     | Record<string | string, InputFieldSizeProps>
-    | NonExistent,
+    | NonExistent = null,
   //@ts-ignore: TS6133 Unused Variable
-  AllowCustomProps extends boolean | NonExistent
+  AllowCustomProps extends boolean | NonExistent = null
 > = {
   themes: Record<UnionDefaultKey<keyof Themes>, ThemePalette>;
   additionalPalettes?: RequiredIfSpecified<
@@ -98,11 +99,11 @@ type InputFieldFactoryProps<
 };
 
 type InputFieldProps<
-  AdditionalPalettes extends GenericAdditionalPalette | NonExistent,
+  AdditionalPalettes extends GenericAdditionalPalette | NonExistent = null,
   InputFieldSize extends
     | Record<string | string, InputFieldSizeProps>
-    | NonExistent,
-  AllowCustomProps extends boolean | NonExistent
+    | NonExistent = null,
+  AllowCustomProps extends boolean | NonExistent = null
 > = {
   _customTextInputProps?: OptionalTrueCondition<
     AllowCustomProps,

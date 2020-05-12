@@ -30,13 +30,19 @@ import {
   FILL,
   OUTLINE,
 } from './constants';
-import {GenericTheme, GenericAdditionalPalette} from '../../theme/types';
+import {
+  DefaultTheme,
+  GenericTheme,
+  GenericAdditionalPalette,
+} from '../../theme/types';
 
 function buttonFactory<
-  Themes extends GenericTheme,
-  AdditionalPalettes extends GenericAdditionalPalette | NonExistent,
-  ButtonSize extends Record<string | string, ButtonSizeProps> | NonExistent,
-  AllowCustomProps extends boolean | NonExistent
+  Themes extends GenericTheme = DefaultTheme,
+  AdditionalPalettes extends GenericAdditionalPalette | NonExistent = null,
+  ButtonSize extends
+    | Record<string | string, ButtonSizeProps>
+    | NonExistent = null,
+  AllowCustomProps extends boolean | NonExistent = false
 >({
   themes,
   sizes,

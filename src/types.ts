@@ -22,7 +22,7 @@ type OptionalExistCondition<T, IfExist, IfNonExist> = T extends NonExistent
   ? IfNonExist
   : IfExist;
 
-type RequiredIfSpecified<T, RequiredType> = T extends NonExistent
+type RequiredIfSpecified<T, RequiredType = T> = T extends NonExistent
   ? never
   : Required<RequiredType>;
 

@@ -32,4 +32,4 @@ const selectTextColor: Array<keyof ThemePalette> = [
   'tertiary',
 ];
 
-export {selectAlign, selectColor, selectTextAlign, selectTextColor};
+export {AlignKeys, selectAlign, selectColor, selectTextAlign, selectTextColor};

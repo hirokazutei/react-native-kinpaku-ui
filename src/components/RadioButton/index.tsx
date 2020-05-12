@@ -20,15 +20,19 @@ import {
   REVERSE,
   FILL,
 } from './constants';
-import {GenericTheme, GenericAdditionalPalette} from '../../theme/types';
+import {
+  GenericTheme,
+  GenericAdditionalPalette,
+  DefaultTheme,
+} from '../../theme/types';
 
 function radioButtonFactory<
-  Themes extends GenericTheme,
-  AdditionalPalettes extends GenericAdditionalPalette | NonExistent,
+  Themes extends GenericTheme = DefaultTheme,
+  AdditionalPalettes extends GenericAdditionalPalette | NonExistent = null,
   RadioButtonSize extends
     | Record<string | string, RadioButtonSizeProps>
-    | NonExistent,
-  AllowCustomProps extends boolean | NonExistent
+    | NonExistent = null,
+  AllowCustomProps extends boolean | NonExistent = false
 >({
   themes,
   sizes,

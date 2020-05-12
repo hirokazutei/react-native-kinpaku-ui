@@ -22,15 +22,19 @@ import {
   CLEAR,
 } from './constants';
 import {colorResolverFactory} from '../../helper';
-import {GenericTheme, GenericAdditionalPalette} from '../../theme/types';
+import {
+  GenericTheme,
+  GenericAdditionalPalette,
+  DefaultTheme,
+} from '../../theme/types';
 
 function touchableFactory<
-  Themes extends GenericTheme,
-  AdditionalPalettes extends GenericAdditionalPalette | NonExistent,
+  Themes extends GenericTheme = DefaultTheme,
+  AdditionalPalettes extends GenericAdditionalPalette | NonExistent = null,
   TouchableSize extends
     | Record<string | string, TouchableSizeProps>
-    | NonExistent,
-  AllowCustomProps extends boolean | NonExistent
+    | NonExistent = null,
+  AllowCustomProps extends boolean | NonExistent = false
 >({
   themes,
   sizes,

@@ -17,6 +17,7 @@ import {
   Themes as ThemesType,
   GenericTheme,
   GenericAdditionalPalette,
+  DefaultTheme,
 } from '../../theme/types';
 import {PaddingSpacing} from '../../common/spacing';
 
@@ -32,11 +33,13 @@ type ButtonSizeProps = {
 };
 
 type ButtonFactoryProps<
-  Themes extends GenericTheme,
-  AdditionalPalettes extends GenericAdditionalPalette | NonExistent,
-  ButtonSize extends Record<string | string, ButtonSizeProps> | NonExistent,
+  Themes extends GenericTheme = DefaultTheme,
+  AdditionalPalettes extends GenericAdditionalPalette | NonExistent = null,
+  ButtonSize extends
+    | Record<string | string, ButtonSizeProps>
+    | NonExistent = null,
   //@ts-ignore: TS6133 Unused Variable
-  AllowCustomProps extends boolean | NonExistent
+  AllowCustomProps extends boolean | NonExistent = false
 > = {
   themes: ThemesType<Themes>;
   additionalPalettes?: RequiredIfSpecified<
@@ -52,9 +55,11 @@ type ButtonFactoryProps<
 };
 
 type ButtonProps<
-  AdditionalPalettes extends Record<string, Color> | NonExistent,
-  ButtonSize extends Record<string | string, ButtonSizeProps> | NonExistent,
-  AllowCustomProps extends boolean | NonExistent
+  AdditionalPalettes extends Record<string, Color> | NonExistent = null,
+  ButtonSize extends
+    | Record<string | string, ButtonSizeProps>
+    | NonExistent = null,
+  AllowCustomProps extends boolean | NonExistent = false
 > = {
   _customButtonProps?: OptionalTrueCondition<
     AllowCustomProps,
