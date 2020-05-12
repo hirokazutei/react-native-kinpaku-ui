@@ -18,15 +18,19 @@ import {
   REVERSE,
 } from './constants';
 import {colorResolverFactory} from '../../helper';
-import {GenericTheme, GenericAdditionalPalette} from '../../theme/types';
+import {
+  GenericTheme,
+  GenericAdditionalPalette,
+  DefaultTheme,
+} from '../../theme/types';
 import {OUTLINE} from './constants';
 import {FILL} from '../Button/constants';
 
 function checkBoxFactory<
-  Themes extends GenericTheme,
-  AdditionalPalettes extends GenericAdditionalPalette | NonExistent,
-  CheckBoxSize extends Record<string, CheckBoxSizeProps> | NonExistent,
-  AllowCustomProps extends boolean | NonExistent
+  Themes extends GenericTheme = DefaultTheme,
+  AdditionalPalettes extends GenericAdditionalPalette | NonExistent = null,
+  CheckBoxSize extends Record<string, CheckBoxSizeProps> | NonExistent = null,
+  AllowCustomProps extends boolean | NonExistent = false
 >({
   themes,
   sizes,

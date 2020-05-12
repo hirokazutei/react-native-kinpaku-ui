@@ -1,7 +1,7 @@
 /// <reference types="react" />
 import { TextStyle, TextInputProps, ViewProps, ViewStyle } from 'react-native';
 import { Color, OptionalTrueCondition, RequiredIfSpecified, NonExistent, UnionDefaultKey } from '../../types';
-import { ThemePalette, GenericTheme, GenericAdditionalPalette } from '../../theme/types';
+import { ThemePalette, GenericTheme, GenericAdditionalPalette, DefaultTheme } from '../../theme/types';
 import { PaddingSpacing } from '../../common/spacing';
 declare type InputFieldVariation = 'creditCardNumber' | 'decimal' | 'email' | 'freeField' | 'name' | 'number' | 'oneTimeNumberCode' | 'oneTimeCode' | 'paragraph' | 'passcode' | 'password' | 'phone' | 'url' | 'username';
 declare type InputFieldShape = 'sharp' | 'round' | 'circular';
@@ -44,7 +44,7 @@ declare type InputFieldVariationProps = {
     minimumFontScale?: number;
     textAlign?: TextStyle['textAlign'];
 };
-declare type InputFieldFactoryProps<Themes extends GenericTheme, AdditionalPalettes extends GenericAdditionalPalette | NonExistent, InputFieldSize extends Record<string | string, InputFieldSizeProps> | NonExistent, AllowCustomProps extends boolean | NonExistent> = {
+declare type InputFieldFactoryProps<Themes extends GenericTheme = DefaultTheme, AdditionalPalettes extends GenericAdditionalPalette | NonExistent = null, InputFieldSize extends Record<string | string, InputFieldSizeProps> | NonExistent = null, AllowCustomProps extends boolean | NonExistent = null> = {
     themes: Record<UnionDefaultKey<keyof Themes>, ThemePalette>;
     additionalPalettes?: RequiredIfSpecified<AdditionalPalettes, Record<keyof AdditionalPalettes, Color>>;
     sizes?: RequiredIfSpecified<InputFieldSize, Record<UnionDefaultKey<keyof InputFieldSize>, InputFieldSizeProps>>;
@@ -52,7 +52,7 @@ declare type InputFieldFactoryProps<Themes extends GenericTheme, AdditionalPalet
     defaultType?: InputFieldType;
     defaultColor?: keyof (ThemePalette & AdditionalPalettes);
 };
-declare type InputFieldProps<AdditionalPalettes extends GenericAdditionalPalette | NonExistent, InputFieldSize extends Record<string | string, InputFieldSizeProps> | NonExistent, AllowCustomProps extends boolean | NonExistent> = {
+declare type InputFieldProps<AdditionalPalettes extends GenericAdditionalPalette | NonExistent = null, InputFieldSize extends Record<string | string, InputFieldSizeProps> | NonExistent = null, AllowCustomProps extends boolean | NonExistent = null> = {
     _customTextInputProps?: OptionalTrueCondition<AllowCustomProps, TextInputProps, never>;
     _customTextInputStyle?: OptionalTrueCondition<AllowCustomProps, TextStyle, never>;
     _customWrapperProps?: OptionalTrueCondition<AllowCustomProps, ViewProps, never>;

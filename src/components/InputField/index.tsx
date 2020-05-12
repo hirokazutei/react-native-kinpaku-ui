@@ -28,15 +28,19 @@ import {
   UNDERLINE,
   FILL,
 } from './constants';
-import {GenericTheme, GenericAdditionalPalette} from '../../theme/types';
+import {
+  GenericTheme,
+  GenericAdditionalPalette,
+  DefaultTheme,
+} from '../../theme/types';
 
 function inputFieldFactory<
-  Themes extends GenericTheme,
-  AdditionalPalettes extends GenericAdditionalPalette | NonExistent,
+  Themes extends GenericTheme = DefaultTheme,
+  AdditionalPalettes extends GenericAdditionalPalette | NonExistent = null,
   InputFieldSize extends
     | Record<string | string, InputFieldSizeProps>
-    | NonExistent,
-  AllowCustomProps extends boolean | NonExistent
+    | NonExistent = null,
+  AllowCustomProps extends boolean | NonExistent = false
 >({
   themes,
   additionalPalettes,

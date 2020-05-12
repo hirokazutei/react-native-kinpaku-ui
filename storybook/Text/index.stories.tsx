@@ -10,17 +10,12 @@ import {TextProps} from '../../src/components/Text/types';
 import textFactory from '../../src/components/Text';
 
 const {Title, Heading, SubHeading, Body, Label, Quote} = textFactory<
-  typeof themes,
-  null,
-  null,
-  null,
-  true,
-  false
+  typeof themes
 >({
   themes,
 });
 
-type StoryTextProps = TextProps<null, null, true, false>;
+type StoryTextProps = TextProps;
 
 const DEFAULT_PROPS = {
   children: 'Sample Text',

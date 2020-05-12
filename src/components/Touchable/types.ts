@@ -10,6 +10,7 @@ import {
   ThemePalette,
   GenericTheme,
   GenericAdditionalPalette,
+  DefaultTheme,
 } from '../../theme/types';
 import {PaddingSpacing} from '../../common/spacing';
 
@@ -23,13 +24,13 @@ type TouchableSizeProps = {
 };
 
 type TouchableFactoryProps<
-  Themes extends GenericTheme,
-  AdditionalPalettes extends GenericAdditionalPalette | NonExistent,
+  Themes extends GenericTheme = DefaultTheme,
+  AdditionalPalettes extends GenericAdditionalPalette | NonExistent = null,
   TouchableSize extends
     | Record<string | string, TouchableSizeProps>
-    | NonExistent,
+    | NonExistent = null,
   //@ts-ignore: TS6133 Unused Variable
-  AllowCustomProps extends boolean | NonExistent
+  AllowCustomProps extends boolean | NonExistent = false
 > = {
   themes: Record<UnionDefaultKey<keyof Themes>, ThemePalette>;
   additionalPalettes?: RequiredIfSpecified<
@@ -44,11 +45,11 @@ type TouchableFactoryProps<
 };
 
 type TouchableProps<
-  AdditionalPalettes extends GenericAdditionalPalette | NonExistent,
+  AdditionalPalettes extends GenericAdditionalPalette | NonExistent = null,
   TouchableSize extends
     | Record<string | string, TouchableSizeProps>
-    | NonExistent,
-  AllowCustomProps extends boolean | NonExistent
+    | NonExistent = null,
+  AllowCustomProps extends boolean | NonExistent = null
 > = {
   _customProps?: OptionalTrueCondition<
     AllowCustomProps,

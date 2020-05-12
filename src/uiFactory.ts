@@ -27,35 +27,24 @@ const UIFactory = <
   >,
 ) => {
   const commonProps = {themes, additionalPalettes};
-  const Button = buttonFactory<Themes, AdditionalPalettes, null, true>({
+  const Button = buttonFactory<Themes, AdditionalPalettes>({
     ...commonProps,
   });
-  const CheckBox = checkBoxFactory<Themes, AdditionalPalettes, null, false>({
+  const CheckBox = checkBoxFactory<Themes, AdditionalPalettes>({
     themes,
   });
-  const InputField = inputFieldFactory<Themes, AdditionalPalettes, null, false>(
-    {
-      ...commonProps,
-    },
-  );
-  const RadioButton = radioButtonFactory<
-    Themes,
-    AdditionalPalettes,
-    null,
-    false
-  >({
+  const InputField = inputFieldFactory<Themes, AdditionalPalettes>({
     ...commonProps,
   });
-  const Touchable = touchableFactory<Themes, AdditionalPalettes, null, false>({
+  const RadioButton = radioButtonFactory<Themes, AdditionalPalettes>({
+    ...commonProps,
+  });
+  const Touchable = touchableFactory<Themes, AdditionalPalettes>({
     ...commonProps,
   });
   const {Title, Heading, SubHeading, Body, Label, Quote} = textFactory<
     Themes,
-    AdditionalPalettes,
-    null,
-    null,
-    true,
-    false
+    AdditionalPalettes
   >({
     ...commonProps,
   });

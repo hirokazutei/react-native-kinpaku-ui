@@ -1,8 +1,8 @@
 import { TextProps as RNTextProps, TextStyle } from 'react-native';
 import { Color, OptionalExistCondition, OptionalTrueCondition, RequiredIfSpecified, UnionDefaultKey, NonExistent } from '../../types';
-import { ThemePalette, GenericTheme, GenericAdditionalPalette } from '../../theme/types';
+import { ThemePalette, GenericTheme, GenericAdditionalPalette, DefaultTheme } from '../../theme/types';
 declare type TextSizeProps<FontSizeKey extends string | string> = Record<UnionDefaultKey<FontSizeKey>, number>;
-declare type TextVariationProps<FontSizeKey, AdditionalPalettes> = {
+declare type TextVariationProps<FontSizeKey = null, AdditionalPalettes = null> = {
     allowFontScaling?: boolean;
     defaultColor?: keyof (ThemePalette & AdditionalPalettes);
     fontFamily?: string;
@@ -16,22 +16,22 @@ declare type TextVariationProps<FontSizeKey, AdditionalPalettes> = {
     maxFontSizeMultiplier?: number;
     minimumFontScale?: number;
 };
-declare type TextFactoryProps<Themes extends GenericTheme, AdditionalPalettes extends GenericAdditionalPalette | NonExistent, TextVariation extends Record<string | string, TextVariationProps<FontSizeKey | null, AdditionalPalettes | null>> | NonExistent, FontSizeKey extends string | string | NonExistent, EmphasisToggleable extends boolean | NonExistent, AllowCustomProps extends boolean | NonExistent> = {
+declare type TextFactoryProps<Themes extends GenericTheme = DefaultTheme, AdditionalPalettes extends GenericAdditionalPalette | NonExistent = null, TextVariation extends Record<string | string, TextVariationProps<FontSizeKey | null, AdditionalPalettes | null>> | NonExistent = null, FontSizeKey extends string | string | NonExistent = null, EmphasisDisabled extends boolean | NonExistent = false, AllowCustomProps extends boolean | NonExistent = false> = {
     themes: Record<UnionDefaultKey<keyof Themes>, ThemePalette>;
     additionalPalettes?: RequiredIfSpecified<AdditionalPalettes, Record<keyof AdditionalPalettes, Color>>;
-    variation?: RequiredIfSpecified<TextVariation, TextVariation>;
+    variation?: RequiredIfSpecified<TextVariation>;
 };
-declare type TextProps<AdditionalPalettes extends GenericAdditionalPalette | NonExistent, FontSizeKey extends string | string | NonExistent, EmphasisToggleable extends boolean | NonExistent, AllowCustomProps extends boolean | NonExistent> = {
+declare type TextProps<AdditionalPalettes extends GenericAdditionalPalette | NonExistent = null, FontSizeKey extends string | string | NonExistent = null, EmphasisDisabled extends boolean | NonExistent = false, AllowCustomProps extends boolean | NonExistent = false> = {
     _customTextProps?: OptionalTrueCondition<AllowCustomProps, RNTextProps, never>;
     _customTextStyle?: OptionalTrueCondition<AllowCustomProps, TextStyle, never>;
     align?: TextStyle['textAlign'];
     color?: keyof (ThemePalette & AdditionalPalettes);
     children: string;
     ellipsizeMode?: RNTextProps['ellipsizeMode'];
-    isBold?: OptionalTrueCondition<EmphasisToggleable, boolean, never>;
-    isItalic?: OptionalTrueCondition<EmphasisToggleable, boolean, never>;
-    isLinethrough?: OptionalTrueCondition<EmphasisToggleable, boolean, never>;
-    isUnderline?: OptionalTrueCondition<EmphasisToggleable, boolean, never>;
+    isBold?: OptionalTrueCondition<EmphasisDisabled, never, boolean>;
+    isItalic?: OptionalTrueCondition<EmphasisDisabled, never, boolean>;
+    isLinethrough?: OptionalTrueCondition<EmphasisDisabled, never, boolean>;
+    isUnderline?: OptionalTrueCondition<EmphasisDisabled, never, boolean>;
     numberOfLines?: number;
     size?: OptionalExistCondition<FontSizeKey, FontSizeKey, number>;
 };

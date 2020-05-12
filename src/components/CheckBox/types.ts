@@ -11,6 +11,7 @@ import {
   Themes as ThemesType,
   GenericTheme,
   GenericAdditionalPalette,
+  DefaultTheme,
 } from '../../theme/types';
 
 type CheckBoxShapeVariation = 'Sharp' | 'Round' | 'Circular';
@@ -22,11 +23,11 @@ type CheckBoxSizeProps = {
 };
 
 type CheckBoxFactoryProps<
-  Themes extends GenericTheme,
-  AdditionalPalettes extends GenericAdditionalPalette | NonExistent,
-  CheckBoxSize extends Record<string, CheckBoxSizeProps> | NonExistent,
+  Themes extends GenericTheme = DefaultTheme,
+  AdditionalPalettes extends GenericAdditionalPalette | NonExistent = null,
+  CheckBoxSize extends Record<string, CheckBoxSizeProps> | NonExistent = null,
   //@ts-ignore: TS6133 Unused Variable
-  AllowCustomProps extends boolean | NonExistent
+  AllowCustomProps extends boolean | NonExistent = false
 > = {
   themes: ThemesType<Themes>;
   additionalPalettes?: RequiredIfSpecified<
@@ -42,9 +43,9 @@ type CheckBoxFactoryProps<
 };
 
 type CheckBoxProps<
-  AdditionalPalettes extends GenericAdditionalPalette | NonExistent,
-  CheckBoxSize extends Record<string, CheckBoxSizeProps> | NonExistent,
-  AllowCustomProps extends boolean | NonExistent
+  AdditionalPalettes extends GenericAdditionalPalette | NonExistent = null,
+  CheckBoxSize extends Record<string, CheckBoxSizeProps> | NonExistent = null,
+  AllowCustomProps extends boolean | NonExistent = false
 > = {
   _customOuterViewProps?: OptionalTrueCondition<
     AllowCustomProps,

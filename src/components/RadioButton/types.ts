@@ -10,6 +10,7 @@ import {
   ThemePalette,
   GenericTheme,
   GenericAdditionalPalette,
+  DefaultTheme,
 } from '../../theme/types';
 
 type RadioButtonShapeVariation = 'Sharp' | 'Round' | 'Circular';
@@ -23,13 +24,13 @@ type RadioButtonSizeProps = {
 };
 
 type RadioButtonFactoryProps<
-  Themes extends GenericTheme,
-  AdditionalPalettes extends GenericAdditionalPalette | NonExistent,
+  Themes extends GenericTheme = DefaultTheme,
+  AdditionalPalettes extends GenericAdditionalPalette | NonExistent = null,
   RadioButtonSize extends
     | Record<string | string, RadioButtonSizeProps>
-    | NonExistent,
+    | NonExistent = null,
   //@ts-ignore: TS6133 Unused Variable
-  AllowCustomProps extends boolean | NonExistent
+  AllowCustomProps extends boolean | NonExistent = false
 > = {
   themes: Record<UnionDefaultKey<keyof Themes>, ThemePalette>;
   additionalPalettes?: RequiredIfSpecified<
@@ -45,11 +46,11 @@ type RadioButtonFactoryProps<
 };
 
 type RadioButtonProps<
-  AdditionalPalettes extends GenericAdditionalPalette | NonExistent,
+  AdditionalPalettes extends GenericAdditionalPalette | NonExistent = null,
   RadioButtonSize extends
     | Record<string | string, RadioButtonSizeProps>
-    | NonExistent,
-  AllowCustomProps extends boolean | NonExistent
+    | NonExistent = null,
+  AllowCustomProps extends boolean | NonExistent = false
 > = {
   _customOuterViewProps?: OptionalTrueCondition<
     AllowCustomProps,

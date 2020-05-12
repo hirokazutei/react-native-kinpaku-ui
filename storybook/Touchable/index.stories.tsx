@@ -15,20 +15,11 @@ import {
   DEFAULT_TOUCHABLE_SIZE,
 } from '../../src/components/Touchable/constants';
 
-const {Sharp, Round, Circular} = touchableFactory<
-  typeof themes,
-  null,
-  null,
-  null
->({
+const {Sharp, Round, Circular} = touchableFactory<typeof themes>({
   themes,
 });
 
-type StoryTouchableProps = TouchableProps<
-  null,
-  typeof DEFAULT_TOUCHABLE_SIZE,
-  null
->;
+type StoryTouchableProps = TouchableProps<null, typeof DEFAULT_TOUCHABLE_SIZE>;
 
 const DEFAULT_PROPS = {
   children: <Text>Content</Text>,

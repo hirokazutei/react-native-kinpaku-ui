@@ -24,7 +24,7 @@ import {selectColor} from '../knobs';
 
 const INPUT_FIELD_SETTING_VARIATIONS = INPUT_FIELD_SHAPE.map(
   (shape: InputFieldShape) => {
-    return inputFieldFactory<typeof themes, null, null, null>({
+    return inputFieldFactory<typeof themes>({
       themes,
       shape,
     });
@@ -33,15 +33,14 @@ const INPUT_FIELD_SETTING_VARIATIONS = INPUT_FIELD_SHAPE.map(
 
 type StoryInputFieldProps = InputFieldProps<
   null,
-  typeof DEFAULT_INPUT_FIELD_SIZE,
-  null
+  typeof DEFAULT_INPUT_FIELD_SIZE
 >;
 
 const INPUT_FIELD_TYPES: Array<InputFieldType> = [
   'fill',
   'outline',
   'underline',
-  'blank',
+  'clear',
 ];
 
 const DEFAULT_PROPS = {

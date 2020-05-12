@@ -11,6 +11,7 @@ import {
   ThemePalette,
   GenericTheme,
   GenericAdditionalPalette,
+  DefaultTheme,
 } from '../../theme/types';
 
 type TextSizeProps<FontSizeKey extends string | string> = Record<
@@ -18,7 +19,7 @@ type TextSizeProps<FontSizeKey extends string | string> = Record<
   number
 >;
 
-type TextVariationProps<FontSizeKey, AdditionalPalettes> = {
+type TextVariationProps<FontSizeKey = null, AdditionalPalettes = null> = {
   allowFontScaling?: boolean;
   defaultColor?: keyof (ThemePalette & AdditionalPalettes);
   fontFamily?: string;
@@ -36,34 +37,34 @@ type TextVariationProps<FontSizeKey, AdditionalPalettes> = {
 };
 
 type TextFactoryProps<
-  Themes extends GenericTheme,
-  AdditionalPalettes extends GenericAdditionalPalette | NonExistent,
+  Themes extends GenericTheme = DefaultTheme,
+  AdditionalPalettes extends GenericAdditionalPalette | NonExistent = null,
   TextVariation extends
     | Record<
         string | string,
         TextVariationProps<FontSizeKey | null, AdditionalPalettes | null>
       >
-    | NonExistent,
+    | NonExistent = null,
   //@ts-ignore: TS6133 Unused Variable
-  FontSizeKey extends string | string | NonExistent,
+  FontSizeKey extends string | string | NonExistent = null,
   //@ts-ignore: TS6133 Unused Variable
-  EmphasisToggleable extends boolean | NonExistent,
+  EmphasisDisabled extends boolean | NonExistent = false,
   //@ts-ignore: TS6133 Unused Variable
-  AllowCustomProps extends boolean | NonExistent
+  AllowCustomProps extends boolean | NonExistent = false
 > = {
   themes: Record<UnionDefaultKey<keyof Themes>, ThemePalette>;
   additionalPalettes?: RequiredIfSpecified<
     AdditionalPalettes,
     Record<keyof AdditionalPalettes, Color>
   >;
-  variation?: RequiredIfSpecified<TextVariation, TextVariation>;
+  variation?: RequiredIfSpecified<TextVariation>;
 };
 
 type TextProps<
-  AdditionalPalettes extends GenericAdditionalPalette | NonExistent,
-  FontSizeKey extends string | string | NonExistent,
-  EmphasisToggleable extends boolean | NonExistent,
-  AllowCustomProps extends boolean | NonExistent
+  AdditionalPalettes extends GenericAdditionalPalette | NonExistent = null,
+  FontSizeKey extends string | string | NonExistent = null,
+  EmphasisDisabled extends boolean | NonExistent = false,
+  AllowCustomProps extends boolean | NonExistent = false
 > = {
   _customTextProps?: OptionalTrueCondition<
     AllowCustomProps,
@@ -75,10 +76,10 @@ type TextProps<
   color?: keyof (ThemePalette & AdditionalPalettes);
   children: string;
   ellipsizeMode?: RNTextProps['ellipsizeMode'];
-  isBold?: OptionalTrueCondition<EmphasisToggleable, boolean, never>;
-  isItalic?: OptionalTrueCondition<EmphasisToggleable, boolean, never>;
-  isLinethrough?: OptionalTrueCondition<EmphasisToggleable, boolean, never>;
-  isUnderline?: OptionalTrueCondition<EmphasisToggleable, boolean, never>;
+  isBold?: OptionalTrueCondition<EmphasisDisabled, never, boolean>;
+  isItalic?: OptionalTrueCondition<EmphasisDisabled, never, boolean>;
+  isLinethrough?: OptionalTrueCondition<EmphasisDisabled, never, boolean>;
+  isUnderline?: OptionalTrueCondition<EmphasisDisabled, never, boolean>;
   numberOfLines?: number;
   size?: OptionalExistCondition<FontSizeKey, FontSizeKey, number>;
 };

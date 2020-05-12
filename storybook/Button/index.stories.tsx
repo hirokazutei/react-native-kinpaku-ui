@@ -15,13 +15,11 @@ import {
   DEFAULT_BUTTON_SIZE,
 } from '../../src/components/Button/constants';
 
-const {Sharp, Round, Circular} = buttonFactory<typeof themes, null, null, null>(
-  {
-    themes,
-  },
-);
+const {Sharp, Round, Circular} = buttonFactory<typeof themes>({
+  themes,
+});
 
-type StoryButtonProps = ButtonProps<null, typeof DEFAULT_BUTTON_SIZE, null>;
+type StoryButtonProps = ButtonProps<null, typeof DEFAULT_BUTTON_SIZE>;
 
 const BUTTON_SHAPES = [Sharp, Round, Circular];
 
